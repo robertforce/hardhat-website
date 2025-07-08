@@ -651,8 +651,7 @@ const communityPlugins: IPlugin[] = [
     name: "@solarity/hardhat-migrate",
     author: "Distributed Lab",
     authorUrl: "https://distributedlab.com/",
-    description:
-      "Hardhat plugin to automate the deployment and verification of contracts",
+    description: "The simplest way to deploy smart contracts",
     tags: ["Deployment", "Verification", "Migration", "Solarity"],
   },
   {
@@ -971,7 +970,8 @@ const communityPlugins: IPlugin[] = [
     name: "@solarity/hardhat-zkit",
     author: "Distributed Lab",
     authorUrl: "https://distributedlab.com/",
-    description: "The ultimate environment for building with Circom",
+    description:
+      "The ultimate TypeScript environment for Circom development",
     tags: ["Circom", "zk", "SnarkJS", "environment", "Solarity"],
   },
   {
