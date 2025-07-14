@@ -37,6 +37,10 @@ Assert that a transaction reverted for any reason, without checking the cause of
 await expect(token.transfer(address, 0)).to.be.reverted;
 ```
 
+:::warning
+This is the only matcher that has to be used as a property. The rest of the matchers below are functions and need to be called.
+:::
+
 ### `.revertedWith`
 
 Assert that a transaction reverted with a specific reason string:
