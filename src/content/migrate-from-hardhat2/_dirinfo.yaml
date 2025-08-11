@@ -3,4 +3,4 @@ section-title: Migrating from Hardhat 2
 order:
   - title: Overview
     href: "#overview"
-  - /missing-plugins
+  - /ethers-based-projects
