@@ -13,4 +13,4 @@ fi
 
 cd websites-version-of-hardhat
 git fetch origin
-git reset --hard origin/main
+git reset --hard origin/v2
