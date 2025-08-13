@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 # cd into the root of the repository
 cd "$(dirname "$0")/.."
@@ -8,9 +9,9 @@ cd "$(dirname "$0")/.."
 cd ..
 
 if [ ! -d "websites-version-of-hardhat" ]; then
-  git clone --depth=1 https://github.com/nomiclabs/hardhat.git websites-version-of-hardhat
+  git clone https://github.com/nomiclabs/hardhat.git websites-version-of-hardhat
 fi
 
 cd websites-version-of-hardhat
 git fetch origin
-git reset --hard origin/v2
+git checkout v2
