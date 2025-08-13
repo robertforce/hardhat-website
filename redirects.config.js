@@ -14,6 +14,12 @@ const path = require("path");
  *
  */
 const customRedirects = [
+  // Redirect from the alpha to the new docs
+  {
+    source: "/hardhat3-alpha/:slug",
+    destination: "https:/hardhat.org/docs",
+    permanent: false,
+  },
   // shortlinks
   {
     source: "/config",
