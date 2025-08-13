@@ -163,4 +163,4 @@ Examples of suggested overrides are:
 - Linter integrations should override the `check` task.
 - Plugins generating intermediate files should override the `clean` task.
 
-For a list of all the built-in tasks and subtasks please take a look at [`task-names.ts`](https://github.com/NomicFoundation/hardhat/blob/main/packages/hardhat-core/src/builtin-tasks/task-names.ts)
+For a list of all the built-in tasks and subtasks please take a look at [`task-names.ts`](https://github.com/NomicFoundation/hardhat/blob/v2/packages/hardhat-core/src/builtin-tasks/task-names.ts)

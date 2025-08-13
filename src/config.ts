@@ -47,7 +47,7 @@ export const PLUGINS_PATH = path.join(
 );
 export const TEMP_PATH = path.join(process.cwd(), "temp/");
 export const REPO_URL =
-  "https://github.com/NomicFoundation/hardhat-website/edit/main/src/content/";
+  "https://github.com/NomicFoundation/hardhat-website/edit/v2/src/content/";
 
 // Regular expression to find tool in query string.
 export const toolRegExp = /tool=[A-Z_]+/;

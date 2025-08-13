@@ -364,7 +364,7 @@ export const getEditLink = (fileName: string): string => {
     "index.md"
   );
   if (fileName.endsWith(errorsFile)) {
-    return "https://github.com/NomicFoundation/hardhat/edit/main/packages/hardhat-core/src/internal/core/errors-list.ts";
+    return "https://github.com/NomicFoundation/hardhat/edit/v2/packages/hardhat-core/src/internal/core/errors-list.ts";
   }
 
   return fileName.replace(DOCS_PATH, REPO_URL);
