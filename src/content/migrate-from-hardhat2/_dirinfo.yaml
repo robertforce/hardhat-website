@@ -1,0 +1,7 @@
+section-type: group
+section-title: Migrating from Hardhat 2
+order:
+  - title: Overview
+    href: "#overview"
+  - title: Migrating Mocha tests
+    href: /mocha-tests

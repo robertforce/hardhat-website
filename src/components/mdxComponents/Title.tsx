@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { styled } from "linaria/react";
+import GithubSlugger from "github-slugger";
 import { media, tm, tmDark, tmSelectors } from "../../themes";
 import MDLink from "./MDLink";
 
@@ -15,6 +16,7 @@ const StyledH1 = styled.h1`
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
+  scroll-margin-top: 130px;
   & .hash {
     margin-left: -30px;
     margin-right: 7px;
@@ -52,11 +54,12 @@ const StyledH2 = styled.h2`
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
+  scroll-margin-top: 130px;
   & .hash {
     margin-left: -24px;
     opacity: 0;
     cursor: pointer;
-    color: ${tm(({ colors }) => colors.accent700)};
+    color: ${tm(({ colors }) => colors.accent900)};
   }
   &:hover .hash {
     opacity: 1;
@@ -84,12 +87,13 @@ const StyledH3 = styled.h3`
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
+  scroll-margin-top: 130px;
   & .hash {
     margin-left: -24px;
     margin-right: 8px;
     opacity: 0;
     cursor: pointer;
-    color: ${tm(({ colors }) => colors.accent700)};
+    color: ${tm(({ colors }) => colors.accent900)};
   }
   &:hover .hash {
     opacity: 1;
@@ -125,12 +129,13 @@ const StyledH4 = styled.h4`
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
+  scroll-margin-top: 130px;
   & .hash {
     margin-left: -16px;
     margin-right: 4px;
     opacity: 0;
     cursor: pointer;
-    color: ${tm(({ colors }) => colors.accent700)};
+    color: ${tm(({ colors }) => colors.accent900)};
   }
   &:hover .hash {
     opacity: 1;
@@ -155,12 +160,13 @@ const StyledH5 = styled.h5`
   line-height: 1.25;
   letter-spacing: 0.5px;
   color: ${tm(({ colors }) => colors.neutral800)};
+  scroll-margin-top: 130px;
   & .hash {
     margin-left: -16px;
     margin-right: 4px;
     opacity: 0;
     cursor: pointer;
-    color: ${tm(({ colors }) => colors.accent700)};
+    color: ${tm(({ colors }) => colors.accent900)};
   }
   &:hover .hash {
     opacity: 1;
@@ -179,24 +185,46 @@ const StyledH5 = styled.h5`
   }
 `;
 
+const slugger = new GithubSlugger();
 const buildIdFromChildren = function getId(
   children: string | ReactElement
 ): string {
   if (typeof children === "string") {
-    return children.toString().toLowerCase().replace(/\s+/g, "-");
+    slugger.reset();
+    return slugger.slug(children);
   }
+
   if (Array.isArray(children)) {
     return children
       .map((child) => {
         return getId(child);
       })
-      .join("-");
+      .join(" ");
+  }
+
+  const hrefOnlyChildren = children?.props?.href;
+
+  if (
+    hrefOnlyChildren !== undefined &&
+    typeof hrefOnlyChildren === "string" &&
+    hrefOnlyChildren.startsWith("#")
+  ) {
+    return getId(hrefOnlyChildren.replace(/^#/g, ""));
   }
 
   return getId(children.props.children);
 };
 
-const H1 = ({ children }: Props): JSX.Element => {
+const H1 = ({ children }: Props) => {
+  if (typeof children !== "string" && children.type === MDLink) {
+    return (
+      <StyledH1 id={buildIdFromChildren(children)}>
+        <span className="hash">#</span>
+        {children}
+      </StyledH1>
+    );
+  }
+
   return (
     <StyledH1 id={buildIdFromChildren(children)}>
       <a href={`#${buildIdFromChildren(children)}`}>
@@ -208,10 +236,20 @@ const H1 = ({ children }: Props): JSX.Element => {
 };
 
 const H2 = ({ children }: Props) => {
+  if (typeof children !== "string" && children.type === MDLink) {
+    return (
+      <StyledH2 id={buildIdFromChildren(children)}>
+        <span className="hash">#</span>
+        {children}
+      </StyledH2>
+    );
+  }
+
   return (
     <StyledH2 id={buildIdFromChildren(children)}>
       <a href={`#${buildIdFromChildren(children)}`}>
-        <span className="hash">#</span> {children}
+        <span className="hash">#</span>
+        {children}
       </a>
     </StyledH2>
   );
@@ -220,7 +258,7 @@ const H2 = ({ children }: Props) => {
 const H3 = ({ children }: Props) => {
   if (typeof children !== "string" && children.type === MDLink) {
     return (
-      <StyledH3 id={children.props.href.replace(/^#/g, "")}>
+      <StyledH3 id={buildIdFromChildren(children)}>
         <span className="hash">#</span>
         {children}
       </StyledH3>
@@ -238,6 +276,15 @@ const H3 = ({ children }: Props) => {
 };
 
 const H4 = ({ children }: Props) => {
+  if (typeof children !== "string" && children.type === MDLink) {
+    return (
+      <StyledH4 id={buildIdFromChildren(children)}>
+        <span className="hash">#</span>
+        {children}
+      </StyledH4>
+    );
+  }
+
   return (
     <StyledH4 id={buildIdFromChildren(children)}>
       <a href={`#${buildIdFromChildren(children)}`}>
@@ -249,6 +296,15 @@ const H4 = ({ children }: Props) => {
 };
 
 const H5 = ({ children }: Props) => {
+  if (typeof children !== "string" && children.type === MDLink) {
+    return (
+      <StyledH5 id={buildIdFromChildren(children)}>
+        <span className="hash">#</span>
+        {children}
+      </StyledH5>
+    );
+  }
+
   return (
     <StyledH5 id={buildIdFromChildren(children)}>
       <a href={`#${buildIdFromChildren(children)}`}>

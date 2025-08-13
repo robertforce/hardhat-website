@@ -4,8 +4,8 @@ export enum NavigationPagesPaths {
   HOME = "/",
   TOOLS = "/#tools",
   PLUGINS = "/plugins",
-  DOCUMENTATION = "/docs",
-  TUTORIAL = "/tutorial",
+  DOCUMENTATION = "/docs/getting-started",
+  TUTORIAL = "/get-started",
 }
 export interface MenuItemType {
   label: string;
@@ -47,9 +47,9 @@ export enum Tools {
   SOLIDITY = "SOLIDITY",
 }
 
-interface DefaultBannerContent {
+export interface DefaultBannerContent {
   text: string;
-  shortText: string;
+  shortText?: string;
   href: string;
 }
 export interface BannerProps {

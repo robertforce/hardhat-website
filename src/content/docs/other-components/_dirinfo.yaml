@@ -1,0 +1,9 @@
+section-type: group
+section-title: Other Hardhat components
+order:
+  - href: /../../../ignition/docs
+    title: Hardhat Ignition
+  - href: /../../../hardhat-vscode/docs
+    title: Hardhat VSCode
+  - href: /../../../hardhat-network-helpers/docs
+    title: Hardhat Network Helpers
