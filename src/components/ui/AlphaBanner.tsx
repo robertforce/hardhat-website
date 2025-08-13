@@ -71,12 +71,9 @@ const AlphaBanner = () => {
         <span className="braket">[</span>
         <span className="bannerContent">
           {isDesktop ? (
-            <>
-              <b>Hardhat 3 is out</b>: Rust rewrite, Solidity tests,
-              multi-chain, and more
-            </>
+            <b>Hardhat 3 is now in beta, and ready for production use!</b>
           ) : (
-            <>Try the Hardhat 3!</>
+            <b>Try Hardhat 3!</b>
           )}
         </span>
 
