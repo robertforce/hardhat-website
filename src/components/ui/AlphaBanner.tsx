@@ -66,17 +66,17 @@ const AlphaBanner = () => {
   const isDesktop = breakpoints.smd <= windowSize.width;
 
   return (
-    <Link href="/hardhat3-alpha" passHref>
+    <Link href="https://hardhat.org/docs/getting-started" passHref>
       <AlphaBannerContainer>
         <span className="braket">[</span>
         <span className="bannerContent">
           {isDesktop ? (
             <>
-              <b>Hardhat 3 alpha</b>: Rust rewrite, Solidity tests, multi-chain,
-              and more
+              <b>Hardhat 3 is out</b>: Rust rewrite, Solidity tests,
+              multi-chain, and more
             </>
           ) : (
-            <>Try the Hardhat 3 alpha release</>
+            <>Try the Hardhat 3!</>
           )}
         </span>
 
