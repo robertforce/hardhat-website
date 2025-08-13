@@ -970,8 +970,7 @@ const communityPlugins: IPlugin[] = [
     name: "@solarity/hardhat-zkit",
     author: "Distributed Lab",
     authorUrl: "https://distributedlab.com/",
-    description:
-      "The ultimate TypeScript environment for Circom development",
+    description: "The ultimate TypeScript environment for Circom development",
     tags: ["Circom", "zk", "SnarkJS", "environment", "Solarity"],
   },
   {
