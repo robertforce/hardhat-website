@@ -46,7 +46,7 @@ yarn add -D @nomicfoundation/hardhat-ignition-ethers ethers
 Then enable the plugin in your config file:
 
 ```typescript
-import HardhatIgnitionEthersPlugin '@nomicfoundation/hardhat-ignition-ethers'
+import HardhatIgnitionEthersPlugin from '@nomicfoundation/hardhat-ignition-ethers'
 
 export default {
   plugins: [
