@@ -202,7 +202,7 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
               </div>
             </Description>
             <CommunityPluginSubtitle>
-              Community plugins sorted by npm downloads:
+              Community plugins sorted by npm downloads
             </CommunityPluginSubtitle>
 
             {pluginsProp.communityPlugins.map((plugin: IPlugin) => {
