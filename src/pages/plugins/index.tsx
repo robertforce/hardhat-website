@@ -78,23 +78,9 @@ const SectionTitle = styled.h3`
   }
 `;
 
-const SectionTitleDescription = styled.span`
-  font-size: 16px;
-  color: ${tm(({ colors }) => colors.neutral700)};
+const CommunityPluginSubtitle = styled.h4`
   margin-top: 8px;
-  ${media.md} {
-    padding-left: 10px;
-  }
-
-  ${tmSelectors.dark} {
-    color: ${tmDark(({ colors }) => colors.neutral700)};
-  }
-
-  ${media.mqDark} {
-    ${tmSelectors.auto} {
-      color: ${tmDark(({ colors }) => colors.neutral700)};
-    }
-  }
+  margin-bottom: 24px;
 `;
 
 const Description = styled.div`
@@ -126,6 +112,28 @@ const Description = styled.div`
     }
   }
 
+  &.community-plugins {
+    ${tmSelectors.dark} {
+      color: ${tmDark(({ colors }) => colors.neutral700)};
+    }
+
+    ${media.mqDark} {
+      ${tmSelectors.auto} {
+        color: ${tmDark(({ colors }) => colors.neutral700)};
+      }
+    }
+
+    margin-bottom: 40px;
+
+    div {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: ${tm(({ colors }) => colors.accent700)};
+    }
+  }
+
   &.last {
     margin-bottom: 40px;
   }
@@ -147,6 +155,14 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
           Extend Hardhat&lsquo;s functionality with the plugins below.
         </Description>
 
+        <Description>
+          To learn how to create your own, check out our{" "}
+          <MDLink href="/plugin-development">
+            plugin development documentation
+          </MDLink>
+          .
+        </Description>
+
         <SectionTitleWrapper className="first">
           <SectionTitle id="official-plugins">Official plugins</SectionTitle>
         </SectionTitleWrapper>
@@ -161,34 +177,48 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
         })}
         <SectionTitleWrapper>
           <SectionTitle id="community-plugins">Community plugins</SectionTitle>
-          <SectionTitleDescription>
-            Sorted by npm downloads
-          </SectionTitleDescription>
         </SectionTitleWrapper>
+
         {pluginsProp.communityPlugins.length === 0 ? (
           <Description>
             <i>No community plugins yet.</i>
           </Description>
         ) : (
-          pluginsProp.communityPlugins.map((plugin: IPlugin) => {
-            return (
-              <PluginSnippet
-                key={plugin.name}
-                {...plugin}
-                href={`https://www.npmjs.com/package/${
-                  // eslint-disable-next-line
-                  plugin.npmPackage || plugin.name
-                }`}
-              />
-            );
-          })
+          <>
+            <Description className="community-plugins">
+              <div>
+                Community Plugins are developed and maintained by the Hardhat
+                community. They have not been written, reviewed, or endorsed by
+                Nomic Foundation, so please use them at your own risk.
+              </div>
+
+              <div>
+                If you believe a plugin in this list is malicious, please report
+                it to{" "}
+                <a href="mailto:security@nomicfoundation.com">
+                  security@nomicfoundation.com
+                </a>
+                .
+              </div>
+            </Description>
+            <CommunityPluginSubtitle>
+              Community plugins sorted by npm downloads
+            </CommunityPluginSubtitle>
+
+            {pluginsProp.communityPlugins.map((plugin: IPlugin) => {
+              return (
+                <PluginSnippet
+                  key={plugin.name}
+                  {...plugin}
+                  href={`https://www.npmjs.com/package/${
+                    // eslint-disable-next-line
+                    plugin.npmPackage || plugin.name
+                  }`}
+                />
+              );
+            })}
+          </>
         )}
-        <Description className="last">
-          <MDLink href="https://github.com/NomicFoundation/hardhat-website/blob/main/src/content/plugins/plugins.ts#L27">
-            Send a Pull Request
-          </MDLink>
-          to get yours listed here.
-        </Description>
       </div>
     </PluginsLayout>
   );
