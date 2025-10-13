@@ -116,7 +116,7 @@ const communityPlugins: IPlugin[] = [
     authorUrl: "https://github.com/olehmisar",
     description: "Use the reown.com supported wallets with Hardhat",
     tags: ["reown", "walletconnect"],
-  }
+  },
 ];
 
 const officialPlugins: IPlugin[] = [
