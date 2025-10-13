@@ -187,14 +187,14 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
           <>
             <Description className="community-plugins">
               <div>
-                Community plugins are developed and maintained by the Hardhat
+                Community Plugins are developed and maintained by the Hardhat
                 community. They have not been written, reviewed, or endorsed by
                 Nomic Foundation, so please use them at your own risk.
               </div>
 
               <div>
                 If you believe a plugin in this list is malicious, please report
-                it to security@nomicfoundation.com
+                it to{" "}
                 <a href="mailto:security@nomicfoundation.com">
                   security@nomicfoundation.com
                 </a>
