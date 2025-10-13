@@ -110,6 +110,13 @@ const communityPlugins: IPlugin[] = [
     description: "Verify contracts on Hashscan",
     tags: ["verification", "hashscan"],
   },
+  {
+    name: "hardhat-reown",
+    author: "olehmisar",
+    authorUrl: "https://github.com/olehmisar",
+    description: "Use the reown.com supported wallets with Hardhat",
+    tags: ["reown", "walletconnect"],
+  }
 ];
 
 const officialPlugins: IPlugin[] = [
