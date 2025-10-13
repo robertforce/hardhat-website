@@ -1,12 +1,12 @@
 import type { GetStaticProps, NextPage } from "next";
 import { styled } from "linaria/react";
-import Link from "next/link";
 import PluginsLayout from "../../components/PluginsLayout";
 import { media, tm, tmDark, tmSelectors } from "../../themes";
 
 import { plugins } from "../../content/plugins/plugins";
 import { IPlugin } from "../../model/types";
 import PluginSnippet from "../../components/PluginSnippet";
+import MDLink from "../../components/mdxComponents/MDLink";
 
 interface IPluginsPage {
   plugins: typeof plugins;
@@ -78,7 +78,7 @@ const SectionTitle = styled.h3`
   }
 `;
 
-const SectionTitleDescription = styled.h4`
+const CommunityPluginSubtitle = styled.h4`
   margin-top: 8px;
   margin-bottom: 24px;
 `;
@@ -123,14 +123,14 @@ const Description = styled.div`
       }
     }
 
-    a {
-      color: ${tm(({ colors }) => colors.accent700)};
-    }
-
     margin-bottom: 40px;
 
     div {
       margin-bottom: 16px;
+    }
+
+    a {
+      color: ${tm(({ colors }) => colors.accent700)};
     }
   }
 
@@ -195,15 +195,15 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
 
               <div>
                 To learn how to create your own, check out our{" "}
-                <Link href="/plugin-development">
+                <MDLink href="/plugin-development">
                   plugin development documentation
-                </Link>
+                </MDLink>
                 .
               </div>
             </Description>
-            <SectionTitleDescription>
+            <CommunityPluginSubtitle>
               Community plugins sorted by npm downloads:
-            </SectionTitleDescription>
+            </CommunityPluginSubtitle>
 
             {pluginsProp.communityPlugins.map((plugin: IPlugin) => {
               return (
