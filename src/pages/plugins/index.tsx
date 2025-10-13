@@ -155,6 +155,14 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
           Extend Hardhat&lsquo;s functionality with the plugins below.
         </Description>
 
+        <Description>
+          To learn how to create your own, check out our{" "}
+          <MDLink href="/plugin-development">
+            plugin development documentation
+          </MDLink>
+          .
+        </Description>
+
         <SectionTitleWrapper className="first">
           <SectionTitle id="official-plugins">Official plugins</SectionTitle>
         </SectionTitleWrapper>
@@ -179,25 +187,17 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
           <>
             <Description className="community-plugins">
               <div>
-                The plugins listed here are developed and maintained by the
-                community. They are not official Hardhat plugins and have not
-                been written, reviewed, or endorsed by Nomic Foundation. Use
-                them at your own risk.
+                Community plugins are developed and maintained by the Hardhat
+                community. They have not been written, reviewed, or endorsed by
+                Nomic Foundation, so please use them at your own risk.
               </div>
 
               <div>
-                If you believe a listed plugin is insecure, please contact us at{" "}
+                If you believe a plugin in this list is malicious, please report
+                it to security@nomicfoundation.com
                 <a href="mailto:security@nomicfoundation.com">
                   security@nomicfoundation.com
                 </a>
-                .
-              </div>
-
-              <div>
-                To learn how to create your own, check out our{" "}
-                <MDLink href="/plugin-development">
-                  plugin development documentation
-                </MDLink>
                 .
               </div>
             </Description>
