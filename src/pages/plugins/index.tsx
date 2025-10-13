@@ -1,12 +1,12 @@
 import type { GetStaticProps, NextPage } from "next";
 import { styled } from "linaria/react";
+import Link from "next/link";
 import PluginsLayout from "../../components/PluginsLayout";
 import { media, tm, tmDark, tmSelectors } from "../../themes";
 
 import { plugins } from "../../content/plugins/plugins";
 import { IPlugin } from "../../model/types";
 import PluginSnippet from "../../components/PluginSnippet";
-import MDLink from "../../components/mdxComponents/MDLink";
 
 interface IPluginsPage {
   plugins: typeof plugins;
@@ -78,23 +78,9 @@ const SectionTitle = styled.h3`
   }
 `;
 
-const SectionTitleDescription = styled.span`
-  font-size: 16px;
-  color: ${tm(({ colors }) => colors.neutral700)};
+const SectionTitleDescription = styled.h4`
   margin-top: 8px;
-  ${media.md} {
-    padding-left: 10px;
-  }
-
-  ${tmSelectors.dark} {
-    color: ${tmDark(({ colors }) => colors.neutral700)};
-  }
-
-  ${media.mqDark} {
-    ${tmSelectors.auto} {
-      color: ${tmDark(({ colors }) => colors.neutral700)};
-    }
-  }
+  margin-bottom: 24px;
 `;
 
 const Description = styled.div`
@@ -123,6 +109,28 @@ const Description = styled.div`
       ${tmSelectors.auto} {
         color: ${tmDark(({ colors }) => colors.neutral700)};
       }
+    }
+  }
+
+  &.community-plugins {
+    ${tmSelectors.dark} {
+      color: ${tmDark(({ colors }) => colors.neutral700)};
+    }
+
+    ${media.mqDark} {
+      ${tmSelectors.auto} {
+        color: ${tmDark(({ colors }) => colors.neutral700)};
+      }
+    }
+
+    a {
+      color: ${tm(({ colors }) => colors.accent700)};
+    }
+
+    margin-bottom: 40px;
+
+    div {
+      margin-bottom: 16px;
     }
   }
 
@@ -161,34 +169,56 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
         })}
         <SectionTitleWrapper>
           <SectionTitle id="community-plugins">Community plugins</SectionTitle>
-          <SectionTitleDescription>
-            Sorted by npm downloads
-          </SectionTitleDescription>
         </SectionTitleWrapper>
+
         {pluginsProp.communityPlugins.length === 0 ? (
           <Description>
             <i>No community plugins yet.</i>
           </Description>
         ) : (
-          pluginsProp.communityPlugins.map((plugin: IPlugin) => {
-            return (
-              <PluginSnippet
-                key={plugin.name}
-                {...plugin}
-                href={`https://www.npmjs.com/package/${
-                  // eslint-disable-next-line
-                  plugin.npmPackage || plugin.name
-                }`}
-              />
-            );
-          })
+          <>
+            <Description className="community-plugins">
+              <div>
+                The plugins listed here are developed and maintained by the
+                community. They are not official Hardhat plugins and have not
+                been written, reviewed, or endorsed by Nomic Foundation. Use
+                them at your own risk.
+              </div>
+
+              <div>
+                If you believe a listed plugin is insecure, please contact us at{" "}
+                <a href="mailto:security@nomicfoundation.com">
+                  security@nomicfoundation.com
+                </a>
+                .
+              </div>
+
+              <div>
+                To learn how to create your own, check out our{" "}
+                <Link href="/plugin-development">
+                  plugin development documentation
+                </Link>
+                .
+              </div>
+            </Description>
+            <SectionTitleDescription>
+              Community plugins sorted by npm downloads:
+            </SectionTitleDescription>
+
+            {pluginsProp.communityPlugins.map((plugin: IPlugin) => {
+              return (
+                <PluginSnippet
+                  key={plugin.name}
+                  {...plugin}
+                  href={`https://www.npmjs.com/package/${
+                    // eslint-disable-next-line
+                    plugin.npmPackage || plugin.name
+                  }`}
+                />
+              );
+            })}
+          </>
         )}
-        <Description className="last">
-          <MDLink href="https://github.com/NomicFoundation/hardhat-website/blob/main/src/content/plugins/plugins.ts#L27">
-            Send a Pull Request
-          </MDLink>
-          to get yours listed here.
-        </Description>
       </div>
     </PluginsLayout>
   );
