@@ -85,7 +85,8 @@ For deployments, the table shows:
 
 The deployment information reflects the last deployment of each contract, not an average or aggregate.
 
-### Only public functions called directly by tests
+### Statistics are limited to only public functions called directly by tests
+
 Gas statistics only include public functions that are called directly by your tests. If a public function is called by another function but not directly by a test, it won't be included in the statistics.
 
 For example, consider this contract:
