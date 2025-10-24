@@ -68,7 +68,8 @@ Output:
 
 The statistics are collected from the functions called by the tests you executed. This means that running `test solidity --gas-stats` will produce a different result than running `test nodejs --gas-stats`, because different tests will have been run.
 
-## Understanding the output
+## Understanding the Gas Statistics Table
+
 The gas statistics table shows the following information for each function:
 
  - *count*: Number of times the function was called
