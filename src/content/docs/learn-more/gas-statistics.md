@@ -66,7 +66,7 @@ Output:
 | add(uint256,bool)                   | 27186           | 27321    | 27321  | 27456 | 6      |
 ```
 
-The statistics are collected from the functions called by the tests you executed. This means that running `test solidity --gas-stats` will produce a different result than running `test nodejs --gas-stats`.
+The statistics are collected from the functions called by the tests you executed. This means that running `test solidity --gas-stats` will produce a different result than running `test nodejs --gas-stats`, because different tests will have been run.
 
 ## Understanding the output
 The gas statistics table shows the following information for each function:
