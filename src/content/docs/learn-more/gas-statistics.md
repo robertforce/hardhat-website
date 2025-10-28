@@ -83,8 +83,6 @@ For deployments, the table shows:
 - **gas**: Gas cost of executing the deployment
 - **size**: Size of the deployed bytecode in bytes
 
-The deployment information reflects the last deployment of each contract, not an average or aggregate.
-
 ### Functions included in gas statistics
 
 Gas statistics only include public functions that are called directly by your tests. If a public function is called by another function but not directly by a test, it won't be included in the statistics.
