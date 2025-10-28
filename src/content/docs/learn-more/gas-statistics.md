@@ -40,7 +40,7 @@ yarn hardhat test nodejs --gas-stats
 
 ::::
 
-Output:
+This prints a table like the following:
 
 ```bash
 | contracts/Calculator.sol:Calculator |                 |          |        |       |        |
