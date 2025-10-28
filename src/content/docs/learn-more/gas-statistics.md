@@ -142,7 +142,7 @@ contract CounterTest {
 
 The output will be:
 
-```bash
+```
 | Gas Usage Statistics          |                 |         |        |       |        |
 | ----------------------------- | --------------- | ------- | ------ | ----- | ------ |
 | contracts/Counter.sol:Counter |                 |         |        |       |        |
