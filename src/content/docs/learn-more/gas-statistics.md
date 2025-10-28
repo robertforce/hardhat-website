@@ -72,16 +72,16 @@ The statistics are collected from the functions called by the tests you executed
 
 The gas statistics table shows the following information for each function:
 
- - *count*: Number of times the function was called
- - *min*: Minimum gas consumed in a single call
- - *max*: Maximum gas consumed in a single call
- - *avg*: Average gas consumed across all calls
- - *median*: Median gas consumed across all calls
+- _count_: Number of times the function was called
+- _min_: Minimum gas consumed in a single call
+- _max_: Maximum gas consumed in a single call
+- _avg_: Average gas consumed across all calls
+- _median_: Median gas consumed across all calls
 
 For deployments, the table shows:
 
- - *gas*: Gas cost of executing the deployment
- - *size*: Size of the deployed bytecode in bytes
+- _gas_: Gas cost of executing the deployment
+- _size_: Size of the deployed bytecode in bytes
 
 The deployment information reflects the last deployment of each contract, not an average or aggregate.
 
