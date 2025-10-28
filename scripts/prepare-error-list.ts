@@ -86,13 +86,18 @@ using Hardhat and an explanation of each of them.`;
     for (const [rangeName, range] of Object.entries(
       packageCategories.CATEGORIES
     )) {
+      const errorDescriptors = ERRORS[packageName][rangeName];
+      if (errorDescriptors === undefined) {
+        continue;
+      }
+
       content += `
 
 ### ${range.websiteSubTitle}
 `;
 
       for (const errorDescriptor of Object.values<ErrorDescriptor>(
-        ERRORS[packageName][rangeName]
+        errorDescriptors
       )) {
         const errorCode = `hhe${errorDescriptor.number}`;
         const title = `${errorCode.toUpperCase()}: ${
