@@ -1,6 +1,6 @@
 ## Overview
 
-Hardhat will show statistics on the gas consumed by your contract's public functions, if you pass the `--gas-stats` flag to the `test` tasks.
+Hardhat can optionally show statistics on the gas consumed by your contracts' public functions during a test run. Use the `--gas-stats` flag when running your tests to display this information.
 
 ## Getting gas statistics from your tests
 
