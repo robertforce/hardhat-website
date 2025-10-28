@@ -4,7 +4,7 @@ Hardhat can optionally show statistics on the gas consumed by your contracts' pu
 
 ## Getting gas statistics from your tests
 
-You can pass the `--gas-stats` flag to either the `test` task or to one of the specific subtasks (e.g. `test solidity`):
+You can pass the `--gas-stats` flag to either the `test` task or to one of its subtasks (e.g., `test solidity`):
 
 ::::tabsgroup{options=npm,pnpm,yarn}
 
