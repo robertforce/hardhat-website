@@ -156,4 +156,4 @@ The output will be:
 | incBy                         | 43938           | 43938   | 43938  | 43938 | 1      |
 ```
 
-The statistics include `inc()` and `incBy()` because they're called directly by the tests. The `reset()` function doesn't appear because it's never called by the tests. The `_incInternal()` function doesn't appear because it's private and only called by `inc()`, not directly by the tests.
+The statistics include `inc` and `incBy` because they're called directly by the tests. The `reset()` function doesn't appear because it's never called by the tests. The `_incInternal()` function doesn't appear because it's private and only called by `inc()`, not directly by the tests.
