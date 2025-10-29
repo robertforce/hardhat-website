@@ -195,8 +195,8 @@ const Plugins: NextPage<IPluginsPage> = ({ plugins: pluginsProp }) => {
               <div>
                 If you believe a plugin in this list is malicious, please report
                 it to{" "}
-                <a href="mailto:security@nomicfoundation.com">
-                  security@nomicfoundation.com
+                <a href="mailto:security@nomic.foundation">
+                  security@nomic.foundation
                 </a>
                 .
               </div>
