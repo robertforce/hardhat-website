@@ -7,6 +7,8 @@ order:
     href: /beta-status
   - title: Writing Solidity tests
     href: /writing-solidity-tests
+  - title: Getting gas statistics from your tests
+    href: /gas-statistics
   - title: Using viem
     href: /using-viem
   - title: Deploying contracts
