@@ -227,7 +227,7 @@ describe("Demo Proxy", async function () {
   const { ignition, viem } = await hre.network.connect();
 
   describe("Proxy interaction", function () {
-    it("Should be interactable via proxy", async function () {
+    it("Should be usable via proxy", async function () {
       const [, otherAccount] = await viem.getWalletClients();
 
       const { demo } = await ignition.deploy(DemoModule);

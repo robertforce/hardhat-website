@@ -39,6 +39,14 @@ import Install from "@hh/Install.astro";
 <Install packages="hardhat" />
 ```
 
+### Spell checking
+
+We use [cspell](https://cspell.org/#documentation) as a spell checker. It's run as part of `pnpm lint`, or as `pnpm spellcheck`.
+
+If if reports a typo for a word that you kwnow is correct (e.g. a technical term), please add it to `cspell-dictionary.txt`.
+
+Note that cspell doesn't autofix your typos.
+
 ### Adding a new page
 
 In most cases, if you place a new `.md` file in a folder within the [`src/content`](./src/content) directory, it will be automatically added to the website. You can validate if it does by running the website locally and checking if it appears in its section's sidebar.
