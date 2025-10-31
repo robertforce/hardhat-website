@@ -293,7 +293,7 @@ This are proper nouns that are used in Hardhat 3, which need to be capitalized i
 
 ## cspell dictionary
 
-There's a cspell dictionary in cspell-dictionary.txt. These aren't necessarly proper nouns, and the casing in that fil shouldn't necessarly be reflected in the docs.
+There's a cspell dictionary in cspell-dictionary.txt. These aren't necessarily proper nouns, and the casing in that file shouldn't necessarily be reflected in the docs.
 
 ### Proper nouns in code blocks
 
