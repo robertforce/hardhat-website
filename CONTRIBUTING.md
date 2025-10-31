@@ -24,7 +24,7 @@ The most interesting ones are:
 - [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the file system structure
 - [`Steps`](https://starlight.astro.build/components/steps/): For ordered steps that the user should follow
 
-FileTree and Steps should be used whenever it makes sense. Code only when the triple backticks aren't enough.
+`FileTree` and `Steps` should be used whenever it makes sense. `Code` only when the triple backticks aren't enough.
 
 Note that the triple backticks in Starlight are more powerful than usual, as they are backed by ExpressiveCode. See:
 
@@ -34,6 +34,17 @@ Note that the triple backticks in Starlight are more powerful than usual, as the
 - https://expressive-code.com/key-features/text-markers/
 - https://expressive-code.com/key-features/word-wrap/
 - https://expressive-code.com/key-features/code-component/
+
+To use the `FileTree` component, you MUST add a `prettier-ignore` comment above, otherwise it will break when autoformatting the document. This is how it should look like:
+
+```mdx
+{/* prettier-ignore */}
+<FileTree>
+- file
+- dir
+  - file2
+</FileTree>
+```
 
 #### Custom components
 
