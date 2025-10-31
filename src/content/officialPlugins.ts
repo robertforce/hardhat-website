@@ -4,6 +4,7 @@ import { z } from "astro:schema";
 
 import { pluginsConfig } from "../config";
 import { officialPluginsList } from "./officialPluginList";
+import { getNpmPackageReadme } from "../utils/getNpmPackageReadme";
 
 const officialPluginsCollectionSchema = z.object({
   id: z.string(),
@@ -17,17 +18,10 @@ const officialPluginsCollectionSchema = z.object({
 });
 
 async function fetchReadme(npmPackage: string): Promise<string> {
-  const readmeUrl = `https://unpkg.com/${npmPackage}@${pluginsConfig.officialPluginsNpmTag}/README.md`;
-
-  const res = await fetch(readmeUrl, { redirect: "follow" });
-
-  if (!res.ok) {
-    throw new Error(
-      `Error fetching readme for ${npmPackage} — ${res.statusText}`,
-    );
-  }
-
-  const readme = await res.text();
+  const readme = await getNpmPackageReadme(
+    npmPackage,
+    pluginsConfig.officialPluginsNpmTag,
+  );
 
   // Remove the H1 because Starlight already renders it
   const readmeWithoutH1 = readme.replace(/^\s*#\s*.*$/m, "");
