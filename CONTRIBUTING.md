@@ -24,8 +24,6 @@ You can use:
   - [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the structure of a directory with file icons and collapsible sub-directories
   - [`Steps`](https://starlight.astro.build/components/steps/): To style a numbered list of tasks to create step-by-step guides
 
-To use MDX, just change the extension of the file from `.md` to `.mdx`, and `import` the components you need right after the frontmatter.
-
 For example:
 
 ```mdx
@@ -49,7 +47,7 @@ Note that cspell doesn't autofix your typos.
 
 ### Adding a new page
 
-In most cases, if you place a new `.md` file in a folder within the [`src/content`](./src/content) directory, it will be automatically added to the website. You can validate if it does by running the website locally and checking if it appears in its section's sidebar.
+In most cases, if you place a new `.mdx` file in a folder within the [`src/content`](./src/content) directory, it will be automatically added to the website. You can validate if it does by running the website locally and checking if it appears in its section's sidebar.
 
 If it doesn't, you may need to edit the [`src/content.config.ts`](./src/content.config.ts) file to add it to the sidebar. We use [`starlight-sidebar-topics`](https://starlight-sidebar-topics.netlify.app/docs/getting-started/) to manage the different section's/topic's sidebars, so please refer to its documentation for more information.
 
