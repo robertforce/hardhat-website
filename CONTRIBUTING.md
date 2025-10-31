@@ -39,7 +39,7 @@ import Install from "@hh/Install.astro";
 
 ### Spell checking
 
-We use [cspell](https://cspell.org/#documentation) as a spell checker. It's run as part of `pnpm lint`, or as `pnpm spellcheck`.
+We use [cspell](https://cspell.org/#documentation) as a spell checker. It runs as part of `pnpm lint`, or as `pnpm spellcheck`.
 
 If if reports a typo for a word that you know is correct (e.g. a technical term), please add it to `cspell-dictionary.txt`.
 
