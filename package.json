@@ -36,7 +36,6 @@
     "starlight-links-validator": "^0.18.0",
     "starlight-markdown-blocks": "^0.1.0",
     "starlight-sidebar-topics": "^0.6.1",
-    "starlight-sidebar-topics-dropdown": "^0.5.1",
     "tar-stream": "^3.1.7",
     "typescript": "5.9.3",
     "undici": "^7.16.0"
