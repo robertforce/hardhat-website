@@ -21,7 +21,7 @@ You can use Starlight MDX components by following this guide: https://starlight.
 The most interesting ones are:
 
 - [`Code`](https://starlight.astro.build/components/code/): When the triple backticks syntax is not enough
-- [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the file system srtucture
+- [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the file system structure
 - [`Steps`](https://starlight.astro.build/components/steps/): For ordered steps that the user should follow
 
 FileTree and Steps should be used whenever it makes sense. Code only when the triple backticks aren'y enough.
