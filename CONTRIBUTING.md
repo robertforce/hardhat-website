@@ -24,7 +24,7 @@ The most interesting ones are:
 - [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the file system structure
 - [`Steps`](https://starlight.astro.build/components/steps/): For ordered steps that the user should follow
 
-FileTree and Steps should be used whenever it makes sense. Code only when the triple backticks aren'y enough.
+FileTree and Steps should be used whenever it makes sense. Code only when the triple backticks aren't enough.
 
 Note that the triple backticks in Starlight are more powerful than usual, as they are backed by ExpressiveCode. See:
 
