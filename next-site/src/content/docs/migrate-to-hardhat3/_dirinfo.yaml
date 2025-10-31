@@ -1,5 +1,0 @@
-section-type: group
-section-title: Migrate to Hardhat 3
-order:
-  - href: /../../../migrate-from-hardhat2
-    title: From Hardhat 2
