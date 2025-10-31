@@ -18,7 +18,7 @@ A Hardhat 3 plugin is a TypeScript object with the `HardhatPlugin` type. It can 
 
 Importing it shouldn't generate any side effects at runtime or import anything other than Hardhat and the plugin's [Type Extensions](/docs/plugin-development/explanations/type-extensions). All the actual behavior must be in separate files that are loaded dynamically.
 
-For example, the `index.ts` file of the [Hardhat 3 plugin template](https://github.com/NomicFoundation/hardhat3-plugin-template/blob/tutorial/packages/plugin/src/index.ts) looks like this:
+For example, the `index.ts` file of the [Hardhat 3 plugin template](https://github.com/NomicFoundation/hardhat3-plugin-template/blob/main/packages/plugin/src/index.ts) looks like this:
 
 ```ts
 import { task } from "hardhat/config";
