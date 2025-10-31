@@ -1,10 +1,10 @@
 # Claude Code Configuration
 
-This folder contains shared Claude Code configurations for documentation review.
+This folder contains shared [Claude Code](https://www.claude.com/product/claude-code) configurations for documentation review.
 
 ## Setup
 
-1. Install Claude Code in your terminal
+1. Install Claude Code in your terminal by following [this instructions](https://www.claude.com/product/claude-code)
 
 ## Folder Structure
 
