@@ -52,7 +52,7 @@ export const officialPluginsList: OfficialPlugin[] = [
   {
     npmPackage: "@nomicfoundation/hardhat-ledger",
     description:
-      "A plugin that allow to interact with Ledger hardware wallets.",
+      "A plugin that allows to interact with Ledger hardware wallets.",
     tags: ["Ledger", "Hardware-wallet"],
   },
   {
