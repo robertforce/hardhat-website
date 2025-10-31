@@ -220,14 +220,15 @@ Some formatting rules:
 
 ### Asides
 
-You can use ::: syntax to create asides. There are different types of asides, like note, tip, caution, danger.
+You can use `:::` syntax to create asides. There are different types of asides, like `note`, `tip`, `caution`, `danger`.
 
 Example:
 
-````md
+```md
 :::tip
 This is a tip
 :::
+```
 
 Learn more at: https://starlight.astro.build/guides/authoring-content/#asides
 
@@ -237,7 +238,7 @@ Please read the CONTRIBUTING.md file to learn about how to use Starlight and our
 
 ### Frontmatter
 
-Every document must have a frontmatter section at the top. The frontmatter MUST include a `title` and a `description` field. The `title` MUST match the first heading in the document.
+Every document must have a frontmatter section at the top. The frontmatter MUST include a `title` and a `description` field. No H1 header should be added, as the `title` from the frontmatter will automatically be used.
 
 Example:
 
@@ -247,11 +248,21 @@ title: Hardhat plugin development
 description: How to build Hardhat 3 plugins to extend and customize its behavior
 ---
 
-# Hardhat plugin development
-
 Welcome to the Hardhat plugin development documentation....
 ```
-````
+
+If the title is too long for the sidebar, you should add an alternative label to it.
+
+```md
+---
+title: Doing something that requires a long tile
+description: How to do some thing that requires a title
+sidebar:
+  label: Doing something
+---
+
+...
+```
 
 ## Proper nouns in Hardhat 3
 
