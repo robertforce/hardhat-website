@@ -53,7 +53,7 @@ If it doesn't, you may need to edit the [`src/content.config.ts`](./src/content.
 
 ### Moving a page
 
-To move a page from one URL to another one, you have to do two thing:
+To move a page from one URL to another one, you have to do two things:
 
 1. Move the `.mdx` file.
 2. Create an entry in `src/redirects/moved-pages.ts`
