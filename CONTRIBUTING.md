@@ -14,17 +14,32 @@ You don't need to learn about Starlight to be able to edit the content.
 
 In MDX you can use an Astro component by importing it right below the frontmatter and then using it inline.
 
-You can use:
+#### Starlight MDX components
 
-- Our custom MDX components:
-  - `@hh/Install.astro`: Which shows how to install npm packages with the different package managers (e.g. `pnpm add --save-dev foo`)
-  - `@hh/Run.astro`: Which shows how to run an npm binary with the different package managers (e.g. `pnpm hardhat test`)
-  - `@hh/RunRemote.astro`: Which shows how to run a remote binary with the different package managers (e.g. `pnpm dlx hardhat --init`)
-- Some advaned Starlight components:
-  - [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the structure of a directory with file icons and collapsible sub-directories
-  - [`Steps`](https://starlight.astro.build/components/steps/): To style a numbered list of tasks to create step-by-step guides
+You can use Starlight MDX components by following this guide: https://starlight.astro.build/components/using-components/#using-a-component-in-mdx
 
-For example:
+The most interesting ones are:
+
+- [`Code`](https://starlight.astro.build/components/code/): When the triple backticks syntax is not enough
+- [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the file system srtucture
+- [`Steps`](https://starlight.astro.build/components/steps/): For ordered steps that the user should follow
+
+FileTree and Steps should be used whenever it makes sense. Code only when the triple backticks aren'y enough.
+
+Note that the triple backticks in Starlight are more powerful than usual, as they are backed by ExpressiveCode. See:
+
+- https://starlight.astro.build/guides/authoring-content/#code-blocks
+- https://expressive-code.com/key-features/syntax-highlighting/
+- https://expressive-code.com/key-features/frames/
+- https://expressive-code.com/key-features/text-markers/
+- https://expressive-code.com/key-features/word-wrap/
+- https://expressive-code.com/key-features/code-component/
+
+#### Custom components
+
+- `@hh/Install.astro`: Which shows how to install npm packages with the different package managers (e.g. `pnpm add --save-dev foo`). Receives `packages` as prop.
+- `@hh/Run.astro`: Which shows how to run an npm binary with the different package managers (e.g. `pnpm hardhat test`). Receives `command` as prop (array or string of arrays), and an optional `prefix`.
+- `@hh/RunRemote.astro`: Which shows how to run a remote binary with the different package managers (e.g. `pnpm dlx hardhat --init`). Receives `command` as prop.
 
 ```mdx
 ---

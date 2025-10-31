@@ -206,9 +206,7 @@ Warm and conversational:
 
 ## Markdown formatting guidelines
 
-The documentation is written using GitHub Flavored Markdown, with some minor extensions.
-
-The extensions use `:::` blocks. If you don't recognize the syntax, ask about it instead of messing it up.
+The documentation is written using GitHub Flavored Markdown, using mdx, with some minor extensions.
 
 Some formatting rules:
 
@@ -219,6 +217,23 @@ Some formatting rules:
 - Don't use word wrapping. One line per paragraph.
 - Leave a blank line between paragraphs.
 - Everything is autoformatted by prettier.
+
+### Asides
+
+You can use ::: syntax to create asides. There are different types of asides, like note, tip, caution, danger.
+
+Example:
+
+````md
+:::tip
+This is a tip
+:::
+
+Learn more at: https://starlight.astro.build/guides/authoring-content/#asides
+
+### MDX Components
+
+Please read the CONTRIBUTING.md file to learn about how to use Starlight and our custom MDX components, and when to use them.
 
 ### Frontmatter
 
@@ -236,6 +251,7 @@ description: How to build Hardhat 3 plugins to extend and customize its behavior
 
 Welcome to the Hardhat plugin development documentation....
 ```
+````
 
 ## Proper nouns in Hardhat 3
 
@@ -263,6 +279,10 @@ This are proper nouns that are used in Hardhat 3, which need to be capitalized i
 - Task Action
 - Mocha
 - Configuration Variable
+
+## cspell dictionary
+
+There's a cspell dictionary in cspell-dictionary.txt. These aren't necessarly proper nouns, and the casing in that fil shouldn't necessarly be reflected in the docs.
 
 ### Proper nouns in code blocks
 
