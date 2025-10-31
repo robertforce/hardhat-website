@@ -113,8 +113,8 @@ This means that a build may modify your `package.json` lockfile, but please revi
 
 ## Linting
 
-We use `prettier`, `astro check`, and `starlight-links-validator` to lint/validate the website.
+We use `prettier`, `astro check`, `cspell`, and `starlight-links-validator` to lint/validate the website.
 
-The first two can be run with `pnpm run lint` and `pnpm run lint:fix`. The latter only runs on `pnpm build`.
+The first two can be run with `pnpm run lint` and `pnpm run lint:fix`. `cspell` only with `pnpm lint` and `pnpm spellcheck`, as it doesn't fix typos automatically. The latter only runs on `pnpm build`.
 
 Note that `pnpm lint` ignores the community plugins list json, so that we don't get PRs adding plugins unecessarily blocked by the CI.
