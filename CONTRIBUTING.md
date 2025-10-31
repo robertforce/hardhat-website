@@ -1,199 +1,92 @@
-# Hardhat documentation website
+# Contributing to Hardhat's website
 
-This is a NextJS-based application for the Hardhat documentation website. This app utilizes SSG for creating pages during the build step. It is developed with best practices in mind, including accessibility, SEO, performance optimizations, and scalability.
+Thanks for your interest in contributing to Hardhat's website!
 
-The app mainly provides two types of pages:
+This website is built using [Astro](https://astro.build), and [Starlight](https://starlight.astro.build).
 
-- Landing pages (see home page)
-- Documentation pages (see documentation section)
+## Editing content
 
-Landing pages are composed of reusable blocks and separate content files. Blocks are full-width React Components that can be stacked to compose a page. Blocks output content passed to them via props.
+The website's content is located in the [`src/content`](./src/content) directory, and written in GitHub Flavored Markdown in MDX files.
 
-Documentation pages are generated from markdown files located in the `src/content` folder. This folder has a nesting structure that is mapped to the page URLs on the website.
+You don't need to learn about Starlight to be able to edit the content.
 
-It is assumed that the app will be hosted on the Vercel platform, which is highly optimized for SSG apps.
+### Using Astro components in MDX files
 
-We consider two directions for the follow-up application growth:
+In MDX you can use an Astro component by importing it right below the frontmatter and then using it inline.
 
-- Creating and editing new content
-- Adding new features to the app
+You can use:
 
-The first one can be provided by working with human-friendly file formats located in the content folder (MD and YAML). Only minimal tech knowledge is needed for that. The second way requires developers' efforts.
+- Our custom MDX components:
+  - `@hh/Install.astro`: Which shows how to install npm packages with the different package managers (e.g. `pnpm add --save-dev foo`)
+  - `@hh/Run.astro`: Which shows how to run an npm binary with the different package managers (e.g. `pnpm hardhat test`)
+  - `@hh/RunRemote.astro`: Which shows how to run a remote binary with the different package managers (e.g. `pnpm dlx hardhat --init`)
+- Some advaned Starlight components:
+  - [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the structure of a directory with file icons and collapsible sub-directories
+  - [`Steps`](https://starlight.astro.build/components/steps/): To style a numbered list of tasks to create step-by-step guides
 
-## Adding content
+To use MDX, just change the extension of the file from `.md` to `.mdx`, and `import` the components you need right after the frontmatter.
 
-Website content is located in `*.md` files within `src/content` folder. It's written in Markdown syntax. Folders structure in `content` is reflected on the website.
+For example:
 
-To adjust page behavior and appearance, also use optional `*.yaml` files with additional configurations.
-
-To preview content locally, launch the app with `pnpm dev` and open http://127.0.0.1:3000 in your browser. See details in [Development](#development) section.
-
-### Layouts
-
-All content is organized by hierarchy levels and the top-level entries are layouts. The layout represents a set of folders and provides navigation within them. Currently, a folder should belong to one of the layouts. In terms of UI, the layout is equivalent to a sidebar navigation menu with two-level items. Layout settings can be found in the `src/content/layouts.yaml` file. It contains all layouts (currently "documentation" and "tutorial"). Each layout can have the following settings:
-
-- title (optional)
-- folders - the list of folders that should be included in this layout
-
-### Folders
-
-The next level is a folder. It can contain nesting folders and `*.md` files. Each `*.md` file represents a single documentation page. Folders usually are represented in a sidebar as a group of items with a common title - each item in this group opens a separate file in the folder. Folders can be nested but it only affects the page's path on the website, sidebar navigation is always of two levels. To configure folders we're using `_dirinfo.yaml` files which can contain the following settings:
-
-**section-title**: the title of a group in the sidebar. It's optional, if skipped the folder name will be used.
-
-**section-type**: this setting controls the appearance of the group in the sidebar. It can be:
-
-- group - a regular group with a title and list of items
-- single - good for groups with a single item
-- hidden - the folder won't be shown in the sidebar but when you open a page from this group sidebar is present.
-- plugins - the "special" group which is generated not from the `*.md` files located in the content folder, but from README.md files from plugin packages
-
-**order**: an array of items in the order they should appear in the sidebar group. This is optional but if it's not specified the order will be based on file names. This array can contain two types of items:
-
-- simple href strings (which are the same as a path to a file without a file extension. e.g. `/explanation/mining-modes`). Note it shouldn't contain the group folder name in the path. In this case, the title of the item will be generated automatically and will be the same as a page title.
-- objects with `href` and `title` keys. In this case, href can be any valid relative link. The title specifies the title of that item in the sidebar. Note: this allows to specify anchor links e.g. `"#quick-start"` or an "index" links - `/`.
-
-### MD Files
-
-All documentation content is represented by `*.md` files with Markdown syntax. Besides the base Markdown syntax, we support the following features:
-
-- MD Directives. Used to represent _Admonition_ components (currently `Tip` and `Warning`).
-- Code syntax highlighting
-- Line highlighting in code blocks.
-- Code tabs with alternative languages
-
-<!-- (// TODO: add md syntax examples) -->
-
-### Redirects
-
-Redirects allow you to redirect an incoming request path to a different destination path. Redirects settings are located in `redirects.config.js` file. It exports an array of objects. Each object represents a single redirect option. We utilize [NextJS Redirects](https://nextjs.org/docs/app/api-reference/config/next-config-js/redirects) API for that.
-
-### Tabs
-
-We use the plugin `remark-directive` in order to provide tabs functionality.
-
-#### Use
-
-#### `tabsgroup` and `tab`
-
-`tabsgroup` is a wrapper that wraps a group of tabs and sets all possible values of tabs.
-
-`tab` is a wrapper that wraps a codeblock (or some other element).
-
-#### Example:
-
-```
-::::tabsgroup{options=npm,yarn}
-    :::tab{value=npm}
-        // codeblock or some other element
-    :::
-
-    :::tab{value=yarn}
-        // codeblock or some other element
-    :::
-::::
-```
-
-#### Parameters
-
-Parameters are passed in curly braces.
-
-`options-list` - required parameter. Comma separated strings, which is provided in tabs' `value` parameter.
-
-`value` - required parameter. It should be provided as an option in `options-list` in `tabsgroup`.
-
-You can use `space` symbol in parameters by wrapping `options/value` in quotes(`""`). Examples: `options="npm 7+,yarn"` / `value="npm 7"`.
-
-### Front Matter
-
-The front matter must be the first thing in the markdown file and must take the form of valid YAML set between triple-dashed lines. Here is an example:
-
-```
+```mdx
 ---
-title: Overview
-description: Hardhat | Ethereum development environment for professionals
-prev: false
-next: false
+title: Example
+description: An example of MDX
 ---
+
+import Install from "@hh/Install.astro";
+
+<Install packages="hardhat" />
 ```
 
-You can specify `title`, `description` for SEO manually or disable `prev` and `next` links for Footer Navigation by using Front Matter.
+### Adding a new page
 
-## Development
+In most cases, if you place a new `.md` file in a folder within the [`src/content`](./src/content) directory, it will be automatically added to the website. You can validate if it does by running the website locally and checking if it appears in its section's sidebar.
 
-This website is an SSG application based on Next.js. To learn more about Next.js, take a look at the following resources:
+If it doesn't, you may need to edit the [`src/content.config.ts`](./src/content.config.ts) file to add it to the sidebar. We use [`starlight-sidebar-topics`](https://starlight-sidebar-topics.netlify.app/docs/getting-started/) to manage the different section's/topic's sidebars, so please refer to its documentation for more information.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Internal links
 
-First, install dependencies:
+All internal links should be absolute, starting from the root of the website. For example, if you want to link to the "Getting started" page, you should use `/docs/getting-started`.
 
-```sh
-cd docs
+Internal links, including `#hashes`, are validated when you run `pnpm build`.
+
+## Running the website locally
+
+To run the website locally, you'll need to install the dependencies:
+
+```bash
 pnpm install
 ```
 
-Then, run the development server:
+Then, you can run the development server:
 
 ```bash
-pnpm dev
+pnpm run dev
 ```
 
-Open [http://127.0.0.1:3000](http://127.0.0.1:3000) with your browser to see the result.
+If you are running in a devcontainer you will have to run this instead:
 
-You can start editing the page by modifying `src/pages/...`. The page auto-updates as you edit the file.
+```bash
+pnpm run dev --host
+```
 
-### Folder structure
+## `@nomicfoundation/hardhat-errors` updates
 
-When developing the application you might need these main folders
+To keep the list of errors updated, we render it using the latest version of `@nomicfoundation/hardhat-errors`.
 
-- src/components - React Components for rendering pages
-- src/components/landingBlocks - "Building blocks" for creating landing pages
-- src/components/mdxComponents - Components used to render markdown content
-- src/components/ui - common UI components
-- src/hooks - common React hooks
-- src/model - business logic files
-- src/pages - NextJS pages. `[...docPath].tsx` means multiple pages will be generated. Page routes are based on the relative paths
-- src/styles - global CSS styles
-- src/config.ts - keep main information about the app.
-- public/ - static files
-- next.config.js - NextJS config
-- redirects.config.js - Custom redirects
+We do this by installing the latest version of the package in the `errors` pnpm script and generating the `src/content/docs/docs/reference/errors.md` file.
 
-## Content generating technical details
+The generated markdown file shouldn't be committed to the repository, and is ignored by git.
 
-There are two relatively independent processes in the build step:
+The `errors` script is run by the `prebuild` script of the `package.json` file.
 
-1. Generating pages themselves. We get page paths directly from the files located in the content folder. Their paths are mapped to the page routes. Layout settings don't affect page existence.
-2. Generating layouts and mapping layouts to pages. For that, we're checking which folders belong to what layout and assigning that layout to a page
+This means that a build may modify your `package.json` lockfile, but please review these changes before committing them.
 
-Page paths are generated in the `getStaticPaths` functions in files of the `page` folder. The result of these functions is an array of page paths. Page props are generated with the `getStaticProps` function, which is executed once per page with a page path passed as an argument and returns all required page props.
+## Linting
 
-Execution of `getStaticPaths` and `getStaticProps` is handled by NextJS on a build step and it runs them in isolation (which means we can't share common calculated parameters within them). To optimize building time, we store an intermediate config in a temporary file on the `getStaticPaths` execution and read it from `getStaticProps` functions. It contains layout settings and a map of pages with specific props.
+We use `prettier`, `astro check`, and `starlight-links-validator` to lint/validate the website.
 
-## Styling
+The first two can be run with `pnpm run lint` and `pnpm run lint:fix`. The latter only runs on `pnpm build`.
 
-We utilize [Linaria](https://github.com/callstack/linaria) for styling components. It has the "Styled Components" syntax but generates css without runtime which works fine with SSG sites.
-
-## Theming
-
-The documentation section is Themeable. A user can switch between light, dark and high contrast themes for their convenience. There is also an "Auto" setting when theme is selected based on a user system settings.
-
-Theming solution provides abilities to switch themes, keep the selected value in user's local storage, seamlessly keep selected page on navigating and page refreshing.
-
-We manage themes by applying a CSS class to the HTML body. Each component has special selectors in its CSS to reflect change color depending on selected theme. To support themes, components should provide styles for all app themes (add selectors and specify colors).
-
-Landing pages don't support themes.
-
-## Creating new landings
-
-Landing pages contain special "blocks" see src/components/landingBlocks. To create a new landing page start from copying `/pages/index.tsx` and `src/content/home.ts`. You can create another page by reordering existing blocks and passing another content to them. If necessary create new landing blocks.
-
-## CI/CD
-
-We use two CI/CD providers:
-
-- Github actions for launching code checks
-- Vercel to deploy app
-
-Each branch triggers its own process on CI/CD so you can see code check details on Github and preview the current branch on Vercel.
+Note that `pnpm lint` ignores the community plugins list json, so that we don't get PRs adding plugins unecessarily blocked by the CI.

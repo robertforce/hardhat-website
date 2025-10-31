@@ -1,48 +1,33 @@
 name: CI
 
 on:
+  merge_group:
   push:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: CI
+  CI:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          path: website
-      - name: Clone Hardhat's repo
-        uses: actions/checkout@v4
+          version: 10.18.2
+      - uses: actions/setup-node@v6
         with:
-          repository: NomicFoundation/hardhat
-          path: websites-version-of-hardhat
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
-          run_install: false
-      - uses: actions/setup-node@v4
-        id: setup-node
-        with:
-          node-version: "22"
+          node-version: 24
           cache: "pnpm"
-          cache-dependency-path: |
-            website/pnpm-lock.yaml
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
-        working-directory: website
-      - name: Lint the docs
+      - name: Lint
         run: pnpm lint
-        working-directory: website
-      - name: Build the docs
+      - name: Build
         run: pnpm build
-        working-directory: website
-        env:
-          NEXT_GHOST_CMS_API_KEY: ${{ secrets.NEXT_GHOST_CMS_API_KEY }}
-          NEXT_GHOST_CMS_CONTENT_URL: ${{ secrets.NEXT_GHOST_CMS_CONTENT_URL }}

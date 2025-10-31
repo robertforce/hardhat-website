@@ -1,152 +1,79 @@
-import * as fs from "fs";
-import * as path from "path";
+import { writeFile, readFile, mkdir } from "node:fs/promises";
+import path from "node:path";
+import { getErrors } from "../src/content/hardhat-errors.ts";
 
-const HARDHAT_ERRORS_TAG = "latest";
-const ERROR_DESCRIPTORS_URL = `https://unpkg.com/@nomicfoundation/hardhat-errors@${HARDHAT_ERRORS_TAG}/dist/src/descriptors.js`;
-const ERROR_DESCRIPTORS_FILE = path.join(
-  __dirname,
-  "../temp/error-descriptors.js"
+const ERROR_LIST_MD_PATH = path.resolve(
+  import.meta.dirname,
+  "../src/content/docs/docs/reference/errors.md",
 );
 
-interface Redirect {
-  source: string;
-  destination: string;
-  permanent: boolean;
-}
+const MANUALLY_FIXED_LIST_MD_PATH = path.resolve(
+  import.meta.dirname,
+  "manually-fixed.md",
+);
 
-interface ErrorDescriptor {
-  number: number;
-  websiteTitle: string;
-  websiteDescription: string;
-}
+async function generateErrorListMarkdown(): Promise<string> {
+  // First try to read the manually fixed list of errors
+  try {
+    const manuallyFixedList = await readFile(
+      MANUALLY_FIXED_LIST_MD_PATH,
+      "utf8",
+    );
 
-interface ErrorCategories {
-  [packageName: string]: {
-    min: number;
-    max: number;
-    pluginId: string | undefined;
-    websiteTitle: string;
-    CATEGORIES: {
-      [categoryName: string]: {
-        min: number;
-        max: number;
-        websiteSubTitle: string;
-      };
-    };
-  };
-}
+    console.warn();
+    console.warn("WARNING: USING MANUALLY FIXED ERROR LIST");
+    console.warn(
+      "TO SWITCH TO THE GENERATED ERROR LIST, RENAME scripts/manually-fixed.md TO scripts/manually-fixed.ignore.md",
+    );
+    console.warn();
 
-interface ErrorsDescriptors {
-  [packageName: string]: {
-    [categoryName: string]: {
-      [errorName: string]: ErrorDescriptor;
-    };
-  };
-}
-
-async function downloadErrorDescriptors() {
-  const res = await fetch(ERROR_DESCRIPTORS_URL, { redirect: "follow" });
-  if (!res.ok) {
-    throw new Error(`Failed to download error descriptors`);
+    return manuallyFixedList;
+  } catch (error: any) {
+    if (error.code !== "ENOENT") {
+      throw error;
+    }
   }
 
-  const content = await res.text();
+  const errors = await getErrors();
 
-  fs.writeFileSync(ERROR_DESCRIPTORS_FILE, content, "utf-8");
-}
-
-async function loadErrorDescriptors(): Promise<{
-  ERROR_CATEGORIES: ErrorCategories;
-  ERRORS: ErrorsDescriptors;
-}> {
-  return await import(ERROR_DESCRIPTORS_FILE);
-}
-
-async function main() {
-  console.log("Downloading error descriptors...");
-  await downloadErrorDescriptors();
-  const { ERROR_CATEGORIES, ERRORS } = await loadErrorDescriptors();
-
-  console.log("Preparing errors markdown and redirects...");
-
-  let content = `# Hardhat errors
+  let content = `---
+title: Hardhat 3 errors
+description: This section contains a list of all the possible errors you may encounter when using Hardhat and an explanation of each of them
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 3
+editUrl: false
+next: false
+prev: false
+---
 
 This section contains a list of all the possible errors you may encounter when
 using Hardhat and an explanation of each of them.`;
 
-  const errorRedirects: Redirect[] = [];
-
-  for (const [packageName, packageCategories] of Object.entries(
-    ERROR_CATEGORIES
-  )) {
+  for (const packageErrors of errors) {
     content += `
 
-## ${packageCategories.websiteTitle} errors`;
+## ${packageErrors.subtitle}
+`;
 
-    for (const [rangeName, range] of Object.entries(
-      packageCategories.CATEGORIES
-    )) {
-      const errorDescriptors = ERRORS[packageName][rangeName];
-      if (errorDescriptors === undefined) {
-        continue;
-      }
-
+    for (const category of packageErrors.categories) {
       content += `
 
-### ${range.websiteSubTitle}
+### ${category.subtitle}
 `;
 
-      for (const errorDescriptor of Object.values<ErrorDescriptor>(
-        errorDescriptors
-      )) {
-        const errorCode = `hhe${errorDescriptor.number}`;
-        const title = `${errorCode.toUpperCase()}: ${
-          errorDescriptor.websiteTitle
-        }`;
-
+      for (const error of category.errors) {
+        console.log(`hhe${error.code} -> /docs/reference/errors#${error.slug}`);
         content += `
-#### [${title}](#${errorCode})
-${errorDescriptor.websiteDescription}
+#### ${error.title}
+${error.description}
 `;
-
-        const shortLink = errorCode;
-        const anchor = shortLink;
-
-        errorRedirects.push({
-          source: `/${shortLink}`,
-          destination: `/docs/reference/errors/#${anchor}`,
-          permanent: false,
-        });
-        errorRedirects.push({
-          source: `/${shortLink.toLowerCase()}`,
-          destination: `/docs/reference/errors/#${anchor}`,
-          permanent: false,
-        });
       }
     }
   }
 
-  // We use this alternative file when we accdidentally published an error
-  // dsecriptor with invalid mardkwon in websiteTitle or websiteDescription.
-  // content = fs.readFileSync(
-  //   path.join(__dirname, "manually-fixed-error-list"),
-  //   "utf-8"
-  // );
-
-  fs.writeFileSync(
-    path.join(__dirname, "../src/content/docs/reference/errors/index.md"),
-    content,
-    "utf-8"
-  );
-  fs.writeFileSync(
-    path.join(__dirname, "../temp/error-redirects.json"),
-    JSON.stringify(errorRedirects, undefined, 2),
-    "utf-8"
-  );
-  console.log();
+  return content;
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+await mkdir(path.dirname(ERROR_LIST_MD_PATH), { recursive: true });
+await writeFile(ERROR_LIST_MD_PATH, await generateErrorListMarkdown(), "utf8");

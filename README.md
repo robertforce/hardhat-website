@@ -1,5 +1,7 @@
 # Hardhat website
 
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+
 This is Hardhat's, which is available at [hardhat.org](https://hardhat.org).
 
 ## Contributing
