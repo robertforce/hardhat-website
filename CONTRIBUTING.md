@@ -41,7 +41,7 @@ import Install from "@hh/Install.astro";
 
 We use [cspell](https://cspell.org/#documentation) as a spell checker. It's run as part of `pnpm lint`, or as `pnpm spellcheck`.
 
-If if reports a typo for a word that you kwnow is correct (e.g. a technical term), please add it to `cspell-dictionary.txt`.
+If if reports a typo for a word that you know is correct (e.g. a technical term), please add it to `cspell-dictionary.txt`.
 
 Note that cspell doesn't autofix your typos.
 
