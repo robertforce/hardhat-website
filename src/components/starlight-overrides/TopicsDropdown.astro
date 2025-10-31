@@ -1,9 +1,13 @@
 ---
+// Imported from:
+//  https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown/blob/ef378bcf3ae37a46eb0457c9d49d6d163ca2e2b5/packages/starlight-sidebar-topics-dropdown/components/TopicsDropdown.astro
+// LICENSE: https://github.com/trueberryless-org/starlight-sidebar-topics-dropdown/blob/main/LICENSE
+
 import { Badge, Icon } from "@astrojs/starlight/components";
 import type { ComponentProps } from "astro/types";
 
 const { topics } = Astro.locals.starlightSidebarTopics;
-const currentTopic = topics.find((topic) => topic.isCurrent);
+const currentTopic = topics.find((topic) => topic.isCurrent) ?? topics[0]!;
 ---
 
 <div class="starlight-sidebar-topics-dropdown-dropdown">
@@ -91,7 +95,7 @@ const currentTopic = topics.find((topic) => topic.isCurrent);
   .starlight-sidebar-topics-dropdown-dropdown {
     position: relative;
     display: block;
-    width: calc(100% - 2 * 2px);
+    width: calc(100% - 1 * 2px);
     margin-inline: 2px;
     margin-top: 4px;
   }
@@ -108,11 +112,23 @@ const currentTopic = topics.find((topic) => topic.isCurrent);
     width: 100%;
   }
 
+  :root[data-theme="light"] .starlight-sidebar-topics-dropdown-button {
+    background-color: var(--sl-color-black);
+  }
+
+  .starlight-sidebar-topics-dropdown-button:hover {
+    background-color: var(--sl-color-gray-5);
+  }
+
+  :root[data-theme="light"] .starlight-sidebar-topics-dropdown-button:hover {
+    background-color: var(--sl-color-gray-6);
+  }
+
   .starlight-sidebar-topics-dropdown-button::before {
     content: "";
     background-color: var(--sl-color-gray-5);
     border-radius: 0.25rem;
-    inset: -2px;
+    inset: -1px;
     position: absolute;
     z-index: -1;
   }
@@ -191,11 +207,14 @@ const currentTopic = topics.find((topic) => topic.isCurrent);
     margin-top: 0.5rem;
     width: 100%;
     background-color: var(--sl-color-gray-6);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     min-width: 200px;
-    padding: 0.5rem;
     border-radius: 0.25rem;
     z-index: 1000000;
+  }
+
+  :root[data-theme="light"] .starlight-sidebar-topics-dropdown-menu {
+    background-color: var(--sl-color-black);
   }
 
   .starlight-sidebar-topics-dropdown-menu[hidden] {
@@ -209,6 +228,7 @@ const currentTopic = topics.find((topic) => topic.isCurrent);
     color: var(--sl-color-white);
     text-decoration: none;
     font-weight: 600;
+    padding: 0.5rem;
   }
 
   .starlight-sidebar-topics-dropdown-icon {
@@ -239,6 +259,14 @@ const currentTopic = topics.find((topic) => topic.isCurrent);
     background-color: var(--sl-color-text-accent);
     border-color: var(--sl-color-text-accent);
     color: var(--sl-color-text-invert);
+  }
+
+  .starlight-sidebar-topics-dropdown-item:hover {
+    background-color: var(--sl-color-gray-5);
+  }
+
+  :root[data-theme="light"] .starlight-sidebar-topics-dropdown-item:hover {
+    background-color: var(--sl-color-gray-6);
   }
 
   .starlight-sidebar-topics-dropdown-badge {
