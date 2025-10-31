@@ -206,7 +206,7 @@ Warm and conversational:
 
 ## Markdown formatting guidelines
 
-The documentation is written using GitHub Flavored Markdown, using mdx, with some minor extensions.
+The documentation is written using GitHub Flavored Markdown, using MDX, with some minor extensions.
 
 Some formatting rules:
 
