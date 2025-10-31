@@ -53,6 +53,13 @@ In most cases, if you place a new `.md` file in a folder within the [`src/conten
 
 If it doesn't, you may need to edit the [`src/content.config.ts`](./src/content.config.ts) file to add it to the sidebar. We use [`starlight-sidebar-topics`](https://starlight-sidebar-topics.netlify.app/docs/getting-started/) to manage the different section's/topic's sidebars, so please refer to its documentation for more information.
 
+### Moving a page
+
+To move a page from one URL to another one, you have to do two thing:
+
+1. Move the `.mdx` file.
+2. Create an entry in `src/redirects/moved-pages.ts`
+
 ### Internal links
 
 All internal links should be absolute, starting from the root of the website. For example, if you want to link to the "Getting started" page, you should use `/docs/getting-started`.
