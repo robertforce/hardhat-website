@@ -14,17 +14,43 @@ You don't need to learn about Starlight to be able to edit the content.
 
 In MDX you can use an Astro component by importing it right below the frontmatter and then using it inline.
 
-You can use:
+#### Starlight MDX components
 
-- Our custom MDX components:
-  - `@hh/Install.astro`: Which shows how to install npm packages with the different package managers (e.g. `pnpm add --save-dev foo`)
-  - `@hh/Run.astro`: Which shows how to run an npm binary with the different package managers (e.g. `pnpm hardhat test`)
-  - `@hh/RunRemote.astro`: Which shows how to run a remote binary with the different package managers (e.g. `pnpm dlx hardhat --init`)
-- Some advaned Starlight components:
-  - [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the structure of a directory with file icons and collapsible sub-directories
-  - [`Steps`](https://starlight.astro.build/components/steps/): To style a numbered list of tasks to create step-by-step guides
+You can use Starlight MDX components by following this guide: https://starlight.astro.build/components/using-components/#using-a-component-in-mdx
 
-For example:
+The most interesting ones are:
+
+- [`Code`](https://starlight.astro.build/components/code/): When the triple backticks syntax is not enough
+- [`FileTree`](https://starlight.astro.build/components/file-tree/): To display the file system structure
+- [`Steps`](https://starlight.astro.build/components/steps/): For ordered steps that the user should follow
+
+`FileTree` and `Steps` should be used whenever it makes sense. `Code` only when the triple backticks aren't enough.
+
+Note that the triple backticks in Starlight are more powerful than usual, as they are backed by ExpressiveCode. See:
+
+- https://starlight.astro.build/guides/authoring-content/#code-blocks
+- https://expressive-code.com/key-features/syntax-highlighting/
+- https://expressive-code.com/key-features/frames/
+- https://expressive-code.com/key-features/text-markers/
+- https://expressive-code.com/key-features/word-wrap/
+- https://expressive-code.com/key-features/code-component/
+
+To use the `FileTree` component, you MUST add a `prettier-ignore` comment above, otherwise it will break when autoformatting the document. This is how it should look like:
+
+```mdx
+{/* prettier-ignore */}
+<FileTree>
+- file
+- dir
+  - file2
+</FileTree>
+```
+
+#### Custom components
+
+- `@hh/Install.astro`: Which shows how to install npm packages with the different package managers (e.g. `pnpm add --save-dev foo`). Receives `packages` as prop.
+- `@hh/Run.astro`: Which shows how to run an npm binary with the different package managers (e.g. `pnpm hardhat test`). Receives `command` as prop (array or string of arrays), and an optional `prefix`.
+- `@hh/RunRemote.astro`: Which shows how to run a remote binary with the different package managers (e.g. `pnpm dlx hardhat --init`). Receives `command` as prop.
 
 ```mdx
 ---
@@ -64,6 +90,12 @@ All internal links should be absolute, starting from the root of the website. Fo
 
 Internal links, including `#hashes`, are validated when you run `pnpm build`.
 
+### Style guide
+
+There's a STYLE.md guide explaning the style that the documentation should follow. It's based on Microsoft's, with tweaks to adapt it to our style, and to force Claude Code to not overindex on the some parts of it.
+
+You can use Claude Code to help you follow the style guide. Read a few sections below to learn how.
+
 ## Running the website locally
 
 To run the website locally, you'll need to install the dependencies:
@@ -98,8 +130,14 @@ This means that a build may modify your `package.json` lockfile, but please revi
 
 ## Linting
 
-We use `prettier`, `astro check`, and `starlight-links-validator` to lint/validate the website.
+We use `prettier`, `astro check`, `cspell`, and `starlight-links-validator` to lint/validate the website.
 
-The first two can be run with `pnpm run lint` and `pnpm run lint:fix`. The latter only runs on `pnpm build`.
+The first two can be run with `pnpm run lint` and `pnpm run lint:fix`. `cspell` only with `pnpm lint` and `pnpm spellcheck`, as it doesn't fix typos automatically. The latter only runs on `pnpm build`.
 
 Note that `pnpm lint` ignores the community plugins list json, so that we don't get PRs adding plugins unecessarily blocked by the CI.
+
+## Using Claude Code as a copy editor
+
+This repository has a shared setup of Claude Code that let's you use it as a [copy editor](https://en.wikipedia.org/wiki/Copy_editing), to improve the writing, and make apply the styleguide to the text.
+
+Take a look at `.claude/README.md` to learn how to use it.
