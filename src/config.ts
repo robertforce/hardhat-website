@@ -11,8 +11,7 @@ export const globalConfig: GlobalConfig = {
 
 export const landing: LandingConfig = {
   head: {
-    title:
-      "Hardhat | Ethereum development environment for professionals by Nomic Foundation",
+    title: "Hardhat 3",
     description:
       "Hardhat is an Ethereum development environment. Compile your contracts and run them on a development network. Get Solidity stack traces, console.log and more.",
     canonicalUrl: globalConfig.url,
