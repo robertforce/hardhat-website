@@ -1,7 +1,7 @@
 ---
 import "../styles/landing.css";
 
-import { landing } from "../config";
+import { globalConfig, landing } from "../config";
 import Banner from "../components/landing/Banner.astro";
 import EmailForm from "../components/landing/EmailForm.astro";
 import Footer from "../components/landing/Footer.astro";
@@ -25,7 +25,7 @@ import WhyHardhat from "../components/landing/WhyHardhat/WhyHardhat.astro";
     <meta name="generator" content={Astro.generator} />
 
     <meta property="og:url" content={landing.head.canonicalUrl} />
-    <meta property="og:image" content="/thumbnail.png" />
+    <meta property="og:image" content={globalConfig.url + "/thumbnail.png"} />
     <meta property="og:title" content={landing.head.title} />
     <meta property="og:description" content={landing.head.description} />
 
