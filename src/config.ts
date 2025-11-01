@@ -1,8 +1,13 @@
 import type {
   CookiePopupConfig,
+  GlobalConfig,
   LandingConfig,
   PluginsConfig,
 } from "./configTypes";
+
+export const globalConfig: GlobalConfig = {
+  url: "https://hardhat.org",
+};
 
 export const landing: LandingConfig = {
   head: {
@@ -10,7 +15,7 @@ export const landing: LandingConfig = {
       "Hardhat | Ethereum development environment for professionals by Nomic Foundation",
     description:
       "Hardhat is an Ethereum development environment. Compile your contracts and run them on a development network. Get Solidity stack traces, console.log and more.",
-    canonicalUrl: "https://hardhat.org",
+    canonicalUrl: globalConfig.url,
   },
   banner: {
     text: "Hardhat 3 is now production ready. Migrate now",
