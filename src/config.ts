@@ -28,7 +28,6 @@ export const landing: LandingConfig = {
       alt: "Hardhat",
     },
     menu: [
-      { label: "home", url: "/" },
       {
         label: "documentation",
         url: "/docs/getting-started",
