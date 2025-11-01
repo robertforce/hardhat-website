@@ -1,3 +1,7 @@
+export interface GlobalConfig {
+  url: string;
+}
+
 export interface LandingConfig {
   head: {
     title: string;

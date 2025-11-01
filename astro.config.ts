@@ -5,6 +5,7 @@ import starlightLinksValidator from "starlight-links-validator";
 import partytown from "@astrojs/partytown";
 import vercel from "@astrojs/vercel";
 import { setGlobalDispatcher, Agent } from "undici";
+import { globalConfig } from "./src/config";
 
 import redirects from "./src/redirects";
 import { officialPluginsList } from "./src/content/officialPluginList";
@@ -15,7 +16,7 @@ import { officialPluginsList } from "./src/content/officialPluginList";
 setGlobalDispatcher(new Agent({ connect: { family: 4 } }));
 
 export default defineConfig({
-  site: "https://hardhat.org/",
+  site: globalConfig.url + "/",
   adapter: vercel({}),
   integrations: [
     starlight({
@@ -36,7 +37,7 @@ export default defineConfig({
           tag: "meta",
           attrs: {
             property: "og:image",
-            content: "/thumbnail.png",
+            content: globalConfig.url + "/thumbnail.png",
           },
         },
       ],
