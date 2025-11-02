@@ -51,6 +51,7 @@ When you publish your plugin as a separate package, follow these two steps:
 This lets users import your plugin like this:
 
 ```ts {2,5}
+// hardhat.config.ts
 import { defineConfig } from "hardhat/config";
 import myPlugin from "my-plugin";
 
@@ -66,6 +67,7 @@ You can also publish a single package with multiple plugins. Each plugin will be
 Your users will import each plugin with a different import path, like this:
 
 ```ts {2,3,6}
+// hardhat.config.ts
 import { defineConfig } from "hardhat/config";
 import myPlugin1 from "my-package/my-plugin1";
 import myPlugin2 from "my-package/my-plugin2";
