@@ -20,14 +20,15 @@ The first thing you need is an API key from Etherscan. To get one, go to [their 
 Open your Hardhat config and add the API key you just created as a configuration variable:
 
 ```ts
-import { configVariable } from "hardhat/config";
+// hardhat.config.ts
+import { configVariable, defineConfig } from "hardhat/config";
 
-export default {
+export default defineConfig({
   // ...rest of the config...
   etherscan: {
     apiKey: configVariable("ETHERSCAN_API_KEY"),
   },
-};
+});
 ```
 
 :::tip
@@ -41,7 +42,8 @@ You can find more info about using Hardhat configuration variables in the [confi
 We are going to use the [Sepolia testnet](https://ethereum.org/en/developers/docs/networks/#sepolia) to deploy and verify our Ignition module, so you need to add this network in your Hardhat config. Here we are using [Alchemy](https://alchemy.com/) to connect to the network.
 
 ```ts
-import { configVariable } from "hardhat/config";
+// hardhat.config.ts
+import { configVariable, defineConfig } from "hardhat/config";
 
 // Go to https://alchemy.com, sign up, create a new App in
 // its dashboard, and set the Hardhat configuration variable
@@ -56,7 +58,7 @@ const ALCHEMY_RPC_URL = configVariable("ALCHEMY_RPC_URL");
 // Beware: NEVER put real Ether into testing accounts
 const SEPOLIA_PRIVATE_KEY = configVariable("SEPOLIA_PRIVATE_KEY");
 
-export default {
+export default defineConfig({
   // ...rest of your config...
   networks: {
     sepolia: {
@@ -64,7 +66,7 @@ export default {
       accounts: [SEPOLIA_PRIVATE_KEY],
     },
   },
-};
+});
 ```
 
 To deploy on Sepolia you need to send some Sepolia ether to the address that's going to be making the deployment. You can get testnet ether from a faucet, a service that distributes testing-ETH for free. Here is one for Sepolia:

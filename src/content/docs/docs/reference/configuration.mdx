@@ -26,7 +26,10 @@ The config options available will depend on the Hardhat plugins you have install
 The following options are available even if you don't include any plugins:
 
 ```ts
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   paths: {
     sources: "./contracts",
     tests: "./test",
@@ -61,7 +64,7 @@ export default {
       // other solidity tests options
     },
   },
-};
+});
 ```
 
 :::tip
@@ -105,14 +108,17 @@ The `solidity` config is an optional field that can be one of the following:
 The default EVM version changes based on the compiler version. To specify a different EVM version, modify your `hardhat.config.ts`:
 
 ```js
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   solidity: {
     version: "0.8.21",
     settings: {
       evmVersion: "shanghai",
     },
   },
-};
+});
 ```
 
 ### Network configuration
@@ -185,7 +191,10 @@ To use an [HD Wallet](https://github.com/ethereumbook/ethereumbook/blob/develop/
 For example:
 
 ```ts
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   networks: {
     sepolia: {
       type: "http",
@@ -202,21 +211,24 @@ export default {
       },
     },
   },
-};
+});
 ```
 
 ### Solidity tests configuration
 
 By default, Hardhat includes support for tests written in Solidity to test your contracts. You can use the `test.solidity` entry to configure how they behave. For example, the following config enables `isolate` mode:
 
-```js
-const config = {
+```ts
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   test: {
     solidity: {
       isolate: true,
     },
   },
-};
+});
 ```
 
 The following options are available for configuring Solidity tests:
@@ -285,13 +297,16 @@ Both toolboxes include the `hardhat-ignition` and `hardhat-verify` plugins, and 
 The Viem toolbox makes the [Node.js test runner](https://nodejs.org/api/test.html) available for use in your Hardhat project. You can tell Hardhat where your tests are located by setting the `paths.tests.nodejs` field in your config:
 
 ```ts
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   paths: {
     tests: {
       nodejs: "./paths/to/your/tests",
     },
   },
-};
+});
 ```
 
 ## Ethers Toolbox options
@@ -299,25 +314,31 @@ export default {
 The Ethers toolbox makes the [Mocha test runner](https://mochajs.org/) available for use in your Hardhat project. You can tell Hardhat where your tests are located by setting the `paths.tests.mocha` field in your config:
 
 ```ts
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   paths: {
     tests: {
       mocha: "./paths/to/your/tests",
     },
   },
-};
+});
 ```
 
 Additionally, you can configure Mocha itself by providing an object to the `test.mocha` field, like this:
 
 ```ts
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   test: {
     mocha: {
       timeout: 20_000, // Set the timeout for tests to 20 seconds
     },
   },
-};
+});
 ```
 
 :::tip
@@ -331,7 +352,10 @@ All options available in Mocha can be used here. You can find more information i
 The Ethers toolbox comes with Typechain support out of the box. You can configure it by providing an object to the `typechain` field in your config, like this:
 
 ```ts
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   typechain: {
     /**
      * The absolute path to the folder where the generated types will be stored.
@@ -366,5 +390,5 @@ export default {
      */
     tsNocheck: false,
   },
-};
+});
 ```

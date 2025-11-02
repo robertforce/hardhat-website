@@ -32,14 +32,12 @@ The `package.json` can be fairly simple and should look something like this:
 The `hardhat.config.ts` can define whichever config you want, but it must import your plugin. Here's an example from `packages/plugin/test/fixture-projects/base-project/hardhat.config.ts`:
 
 ```ts
-import { HardhatUserConfig } from "hardhat/config";
+import { defineConfig } from "hardhat/config";
 import MyPlugin from "../../../src/index.js";
 
-const config: HardhatUserConfig = {
+export default defineConfig({
   plugins: [MyPlugin],
-};
-
-export default config;
+});
 ```
 
 Finally, your tests would look something like this:

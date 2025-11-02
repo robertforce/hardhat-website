@@ -13,7 +13,9 @@ You can use the `ignition` field in the Hardhat config to customize how Hardhat 
 
 ```ts
 // hardhat.config.ts
-export default {
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   ignition: {
     blockPollingInterval: 1_000,
     timeBeforeBumpingFees: 3 * 60 * 1_000,
@@ -21,7 +23,7 @@ export default {
     requiredConfirmations: 5,
     disableFeeBumping: false,
   },
-};
+});
 ```
 
 These are the different options you can add to your Hardhat config file.
@@ -68,7 +70,9 @@ You can use the `ignition` field under specific network configurations to custom
 
 ```ts
 // hardhat.config.ts
-export default {
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   networks: {
     sepolia: {
       // ...
@@ -83,7 +87,7 @@ export default {
       // ...
     },
   },
-};
+});
 ```
 
 These are the different options you can add to the per-network `ignition` config.

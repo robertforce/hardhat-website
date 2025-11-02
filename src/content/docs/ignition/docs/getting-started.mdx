@@ -53,12 +53,14 @@ Once you have a Hardhat project ready, open a terminal in its root directory, an
 Finally, add this to your config file to enable the plugin:
 
 ```ts
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
 import hardhatIgnitionViemPlugin from "@nomicfoundation/hardhat-ignition-viem";
 
-export default {
+export default defineConfig({
   plugins: [hardhatIgnitionViemPlugin],
   // ... rest of your config
-};
+});
 ```
 
 ## Quick start

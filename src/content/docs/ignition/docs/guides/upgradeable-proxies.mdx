@@ -62,14 +62,17 @@ In addition to updating the version string, this contract also adds a `name` sta
 Finally, because we'll be using the OpenZeppelin proxy contracts in our Ignition modules, we need to tell Hardhat to compile them. To do this, we need to edit our `hardhat.config.ts` (or `hardhat.config.js` if you're using JavaScript) file to include the OpenZeppelin contracts in our compilation process. Add the following `npmFilesToBuild` field to your existing Hardhat configuration:
 
 ```ts
-export default {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   solidity: {
     npmFilesToBuild: [
       "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol",
       "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol",
     ],
   },
-};
+});
 ```
 
 ## Writing our Ignition modules
