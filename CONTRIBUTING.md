@@ -161,7 +161,3 @@ See:
 This repository has a shared setup of Claude Code that let's you use it as a [copy editor](https://en.wikipedia.org/wiki/Copy_editing), to improve the writing, and make apply the styleguide to the text.
 
 Take a look at `.claude/README.md` to learn how to use it.
-
-```
-
-```
