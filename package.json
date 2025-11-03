@@ -5,8 +5,8 @@
   "version": "0.0.1",
   "packageManager": "pnpm@10.18.2",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
     "build": "astro build --force",
     "prebuild": "pnpm errors",
     "preview": "astro preview",
