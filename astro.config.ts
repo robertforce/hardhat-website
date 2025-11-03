@@ -59,7 +59,7 @@ export default defineConfig({
         },
       ],
       plugins: [
-        // While we use this multi-sidebar plugin, each iteam of the array of
+        // While we use this multi-sidebar plugin, each item of the array of
         // sidebars is configured like a normal Starlight sidebar.
         // See: https://starlight.astro.build/guides/sidebar/
         starlightSidebarTopics(
