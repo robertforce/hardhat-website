@@ -97,6 +97,11 @@ export default defineConfig({
                   items: [
                     {
                       label: "Official plugins",
+                      // This is a hack because:
+                      //  1. If we use #official-plugins we take the user to
+                      //     below the pagefold, missing some content.
+                      //  2. If we don't add any #hash this item will be
+                      //     highlighted, even when community plugins is clicked
                       link: "/docs/plugins#_top",
                     },
                     {
@@ -105,6 +110,8 @@ export default defineConfig({
                     },
                     {
                       label: "Plugin development docs",
+                      // We have to use the full URL here because this is
+                      // treated as a link to a different sidebar topic
                       link: "https://hardhat.org/docs/plugin-development",
                     },
                   ],
