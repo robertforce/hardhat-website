@@ -85,7 +85,7 @@ To verify a contract, run the `verify` task with the contract's address and the 
 
 <Run command="hardhat verify --network sepolia 0x1234567890..." />
 
-While Sourcify verification works without passing constructor arguments, Etherscan and Blockscout need them to verify the contract. In order to verify on Etherscan and Blockscout, you have to pass the values that were used during deployment, if your contract has constructor arguments. For example, if the contract received a `string` and a `uint` as constructor parameters:
+If your contract has constructor arguments, you have to also pass the values that were used during deployment. For example, if the contract received a `string` and a `uint` as constructor parameters:
 
 <Run command='hardhat verify --network sepolia 0x1234567890... "Hello" 1000' />
 
