@@ -5,10 +5,13 @@ import starlightLinksValidator from "starlight-links-validator";
 import partytown from "@astrojs/partytown";
 import vercel from "@astrojs/vercel";
 import { setGlobalDispatcher, Agent } from "undici";
-import { globalConfig } from "./src/config";
+import { unwatchFile, watchFile } from "node:fs";
+import { glob, utimes } from "node:fs/promises";
 
+import { globalConfig } from "./src/config";
 import redirects from "./src/redirects";
 import { officialPluginsList } from "./src/content/officialPluginList";
+import path from "node:path";
 
 // We set this up to prefer IPv4 connections to IPv6 connections
 // as otherwise the Vercel deployments were failing when trying to access
@@ -223,8 +226,40 @@ export default defineConfig({
   vite: {
     server: {
       watch: {
-        ignored: ["**/.vercel/**", "**/.vscode/**"],
+        ignored: [
+          "./.vercel/**",
+          "./.vscode/**",
+          "./dist/**",
+          "./git/**",
+          "**/node_modules/**",
+        ],
       },
     },
+    plugins: [
+      {
+        name: "custom-watcher",
+        async configureServer(_server) {
+          const files = await Array.fromAsync(
+            glob(path.join(import.meta.dirname, "src", "**", "*.{json,ts,js}")),
+          );
+
+          for await (const file of files) {
+            watchFile(file, { interval: 1000 }, async (curr, prev) => {
+              if (curr.mtimeMs === prev.mtimeMs) {
+                return;
+              }
+
+              for (const fileToRemove of files) {
+                unwatchFile(fileToRemove);
+              }
+
+              console.log("File modified", file);
+              const now = new Date();
+              await utimes(import.meta.filename, now, now);
+            });
+          }
+        },
+      },
+    ],
   },
 });
