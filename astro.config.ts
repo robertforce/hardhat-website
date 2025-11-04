@@ -255,6 +255,7 @@ export default defineConfig({
 
               console.log("File modified", file);
               const now = new Date();
+              // We `touch` the config so that astro does its thing
               await utimes(import.meta.filename, now, now);
             });
           }
