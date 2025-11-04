@@ -3,7 +3,15 @@ import { TabItem, Tabs } from "@astrojs/starlight/components";
 import { Code } from "@astrojs/starlight/components";
 
 interface Props {
+  /**
+   * The command to run with the package manager.
+   * If an array is provided, each of them will be run in a new line.
+   */
   command: string | string[];
+  /**
+   * A prefix to be added to each command.
+   * This is helpful to define env variables.
+   */
   prefix?: string;
 }
 

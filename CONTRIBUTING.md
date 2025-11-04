@@ -136,6 +136,26 @@ The first two can be run with `pnpm run lint` and `pnpm run lint:fix`. `cspell` 
 
 Note that `pnpm lint` ignores the community plugins list json, so that we don't get PRs adding plugins unecessarily blocked by the CI.
 
+### Prettier and MDX limitations
+
+Prettier doesn't have support for the latest version of MDX, so it doesn't support multi-line comments with `{/* */}`.
+
+As a workaround, you can use this syntax:
+
+```mdx
+{
+//
+//
+//
+//
+}
+```
+
+See:
+
+- https://github.com/prettier/prettier/issues/15163
+- https://github.com/prettier/prettier/issues/12209
+
 ## Using Claude Code as a copy editor
 
 This repository has a shared setup of Claude Code that let's you use it as a [copy editor](https://en.wikipedia.org/wiki/Copy_editing), to improve the writing, and make apply the styleguide to the text.
