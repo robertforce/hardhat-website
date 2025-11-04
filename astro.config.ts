@@ -243,7 +243,7 @@ export default defineConfig({
             glob(path.join(import.meta.dirname, "src", "**", "*.{json,ts,js}")),
           );
 
-          for await (const file of files) {
+          for (const file of files) {
             watchFile(file, { interval: 1000 }, async (curr, prev) => {
               if (curr.mtimeMs === prev.mtimeMs) {
                 return;
