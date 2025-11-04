@@ -23,17 +23,17 @@ If you want to add the plugin manually:
 2. Add it to the list of plugins in your Hardhat configuration:
 
    ```ts
+   // hardhat.config.ts
+   import { defineConfig } from "hardhat/config";
    import hardhatViem from "@nomicfoundation/hardhat-viem";
 
-   const config: HardhatUserConfig = {
+   export default defineConfig({
      plugins: [
        hardhatViem,
        // ...other plugins...
      ],
      // ...other config...
-   };
-
-   export default config;
+   });
    ```
 
 ## Connecting to networks

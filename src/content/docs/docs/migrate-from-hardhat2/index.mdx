@@ -87,11 +87,10 @@ With your npm project ready, you can start setting up Hardhat 3.
    Create a `hardhat.config.ts` file with the following content:
 
    ```ts
-   import type { HardhatUserConfig } from "hardhat/config";
+   // hardhat.config.ts
+   import { defineConfig } from "hardhat/config";
 
-   const config: HardhatUserConfig = {};
-
-   export default config;
+   export default defineConfig({});
    ```
 
 3. **Run the help command**
@@ -111,11 +110,14 @@ Let's start with the minimal settings required to compile your contracts.
    Copy the `solidity` entry from your old config as-is. The format is backwards-compatible in Hardhat 3, so it should just work:
 
    ```ts
-   const config: HardhatUserConfig = {
+   // hardhat.config.ts
+   import { defineConfig } from "hardhat/config";
+
+   export default defineConfig({
      solidity: {
        /* your solidity config */
      },
-   };
+   });
    ```
 
 2. **Compile your contracts**
@@ -139,15 +141,16 @@ This section assumes that your Hardhat 2 project uses Mocha as its tests runner,
    Then in your Hardhat config, import the plugin and add it to the list of plugins:
 
    ```ts
-   import type { HardhatUserConfig } from "hardhat/config";
+   // hardhat.config.ts
+   import { defineConfig } from "hardhat/config";
    import hardhatToolboxMochaEthers from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
 
-   const config: HardhatUserConfig = {
+   export default defineConfig({
      plugins: [hardhatToolboxMochaEthers],
      solidity: {
        /* your solidity config */
      },
-   };
+   });
    ```
 
    Notice that, unlike Hardhat 2, it's not enough to just import the plugin in the config. You also have to add it to the list of plugins.

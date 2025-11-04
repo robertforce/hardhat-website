@@ -26,17 +26,17 @@ If you want to add the plugin manually:
 2. Add it to the list of plugins in your Hardhat configuration:
 
    ```ts
+   // hardhat.config.ts
+   import { defineConfig } from "hardhat/config";
    import hardhatVerify from "@nomicfoundation/hardhat-verify";
 
-   const config: HardhatUserConfig = {
+   export default defineConfig({
      plugins: [
        hardhatVerify,
        // ...other plugins...
      ],
      // ...other config...
-   };
-
-   export default config;
+   });
    ```
 
 ## Configuration
@@ -46,14 +46,17 @@ The `hardhat-verify` plugin adds a `verify` object to the Hardhat configuration.
 To verify contracts on Etherscan, you need to set an API key in your Hardhat configuration:
 
 ```ts
-const config: HardhatUserConfig = {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   // ...
   verify: {
     etherscan: {
       apiKey: "YOUR_ETHERSCAN_API_KEY",
     },
   },
-};
+});
 ```
 
 You can get an Etherscan API key by following [this guide](https://docs.etherscan.io/etherscan-v2/getting-an-api-key).
@@ -69,14 +72,17 @@ To verify contracts on Blockscout, you don't need to set an API key, nor any con
 You can also disable a block explorer by setting its `enabled` property to `false`. For example, you can disable Blockscout verification like this:
 
 ```ts
-const config: HardhatUserConfig = {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   // ...
   verify: {
     blockscout: {
       enabled: false,
     },
   },
-};
+});
 ```
 
 ## Verifying a contract
@@ -127,7 +133,10 @@ If you want to verify a contract on a block explorer of a network that isn't nat
 Adding a chain descriptor for a network called "ExampleChain", with chain id `123456`, would look like this:
 
 ```ts
-const config: HardhatUserConfig = {
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
   // ...
   chainDescriptors: {
     // Example chain
@@ -143,7 +152,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-};
+});
 ```
 
 ## Troubleshooting

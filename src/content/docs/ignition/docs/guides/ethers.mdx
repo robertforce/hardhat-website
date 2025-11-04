@@ -29,12 +29,14 @@ From the root directory of your Hardhat project run:
 Then enable the plugin in your config file:
 
 ```ts
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
 import HardhatIgnitionEthersPlugin from "@nomicfoundation/hardhat-ignition-ethers";
 
-export default {
+export default defineConfig({
   plugins: [HardhatIgnitionEthersPlugin],
   // ... rest of your config
-};
+});
 ```
 
 :::tip
