@@ -110,12 +110,6 @@ Then, you can run the development server:
 pnpm run dev
 ```
 
-If you are running in a devcontainer you will have to run this instead:
-
-```bash
-pnpm run dev --host
-```
-
 ## `@nomicfoundation/hardhat-errors` updates
 
 To keep the list of errors updated, we render it using the latest version of `@nomicfoundation/hardhat-errors`.
