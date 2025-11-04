@@ -230,7 +230,7 @@ export default defineConfig({
           "./.vercel/**",
           "./.vscode/**",
           "./dist/**",
-          "./git/**",
+          "./.git/**",
           "**/node_modules/**",
         ],
       },
