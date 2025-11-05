@@ -25,11 +25,11 @@ For example:
 
 ```ts
 // hardhat.config.ts
-
+import { defineConfig } from "hardhat/config";
 import hardhatLedgerPlugin from "@nomicfoundation/hardhat-ledger";
 import { configVariable } from "hardhat/config";
 
-export default {
+export default defineConfig({
   plugins: [hardhatLedgerPlugin],
   networks: {
     sepolia: {
@@ -44,7 +44,7 @@ export default {
       ],
     },
   },
-};
+});
 ```
 
 To deploy on Sepolia you need to send some Sepolia ether to the address that's going to be making the deployment. You can get testnet ether from a faucet, a service that distributes testing-ETH for free. Here are a few options for Sepolia:
