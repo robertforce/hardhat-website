@@ -26,16 +26,11 @@ For example:
 ```ts
 // hardhat.config.ts
 
-// ...rest of your imports...
 import hardhatLedgerPlugin from "@nomicfoundation/hardhat-ledger";
 import { configVariable } from "hardhat/config";
 
 export default {
-  // ...rest of your config...
-  plugins: [
-    // ...rest of your plugins...
-    hardhatLedgerPlugin,
-  ],
+  plugins: [hardhatLedgerPlugin],
   networks: {
     sepolia: {
       type: "http",
