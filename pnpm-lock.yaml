@@ -38,6 +38,9 @@ importers:
       gsap:
         specifier: ^3.13.0
         version: 3.13.0
+      p-limit:
+        specifier: ^7.2.0
+        version: 7.2.0
       prettier:
         specifier: 3.6.2
         version: 3.6.2
@@ -2228,6 +2231,10 @@ packages:
   p-limit@6.2.0:
     resolution: {integrity: sha512-kuUqqHNUqoIWp/c467RI4X6mmyuojY5jGutNU0wVTmEOOfcuwLqyMVoAi9MKi2Ak+5i9+nhmrK4ufZE8069kHA==}
     engines: {node: '>=18'}
+
+  p-limit@7.2.0:
+    resolution: {integrity: sha512-ATHLtwoTNDloHRFFxFJdHnG6n2WUeFjaR8XQMFdKIv0xkXjrER8/iG9iu265jOM95zXHAfv9oTkqhrfbIzosrQ==}
+    engines: {node: '>=20'}
 
   p-queue@8.1.1:
     resolution: {integrity: sha512-aNZ+VfjobsWryoiPnEApGGmf5WmNsCo9xu8dfaYamG5qaLP7ClhLN6NgsFe6SwJ2UbLEBK5dv9x8Mn5+RVhMWQ==}
@@ -5662,6 +5669,10 @@ snapshots:
       regex-recursion: 6.0.2
 
   p-limit@6.2.0:
+    dependencies:
+      yocto-queue: 1.2.1
+
+  p-limit@7.2.0:
     dependencies:
       yocto-queue: 1.2.1
 

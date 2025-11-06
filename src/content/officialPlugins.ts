@@ -2,9 +2,12 @@ import type { Loader } from "astro/loaders";
 import { defineCollection } from "astro:content";
 import { z } from "astro:schema";
 
+import { styleText } from "node:util";
+
 import { pluginsConfig } from "../config";
 import { officialPluginsList } from "./officialPluginList";
 import { getNpmPackageReadme } from "../utils/getNpmPackageReadme";
+import pLimit from "p-limit";
 
 const officialPluginsCollectionSchema = z.object({
   id: z.string(),
@@ -18,6 +21,13 @@ const officialPluginsCollectionSchema = z.object({
 });
 
 async function fetchReadme(npmPackage: string): Promise<string> {
+  console.log(
+    styleText(
+      ["green", "bold"],
+      `Fetching readme of official plugin ${npmPackage}`,
+    ),
+  );
+
   const readme = await getNpmPackageReadme(
     npmPackage,
     pluginsConfig.officialPluginsNpmTag,
@@ -33,12 +43,14 @@ export function officialPluginsLoader(): Loader {
   return {
     name: "official-plugins-loader",
     async load({ renderMarkdown, store }) {
+      const limit = pLimit(3);
+
       const resolvedPlugins = await Promise.all(
         officialPluginsList.map(async (plugin) => {
           const name = plugin.npmPackage;
           const shortName = name.replace(/^@nomicfoundation\//, "");
           const slug = plugin.slug;
-          const readme = await fetchReadme(plugin.npmPackage);
+          const readme = await limit(() => fetchReadme(plugin.npmPackage));
 
           return {
             id: slug,
