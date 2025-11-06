@@ -2,6 +2,7 @@ import { defineCollection } from "astro:content";
 import { z } from "astro:schema";
 
 import communityPluginsJson from "./community-plugins.json";
+import { styleText } from "node:util";
 
 const communityPluginsJsonSchema = z.object({
   plugins: z.array(
@@ -51,11 +52,21 @@ export const communityPlugins = defineCollection({
   loader: async () => {
     const pluginsFile = communityPluginsJsonSchema.parse(communityPluginsJson);
 
-    const resolvedPlugins = await Promise.all(
-      pluginsFile.plugins.map(async (plugin) => ({
+    const resolvedPlugins = [];
+    for (const plugin of pluginsFile.plugins) {
+      const npmPackage = plugin.npmPackage ?? plugin.name;
+
+      console.log(
+        styleText(
+          ["cyan", "bold"],
+          `Fetching downloads of community plugin ${npmPackage}`,
+        ),
+      );
+
+      resolvedPlugins.push({
         id: plugin.name,
         name: plugin.name,
-        npmPackage: plugin.npmPackage ?? plugin.name,
+        npmPackage,
         website:
           plugin.website ??
           `https://www.npmjs.com/package/${plugin.npmPackage ?? plugin.name}`,
@@ -66,8 +77,8 @@ export const communityPlugins = defineCollection({
         downloads: await getLastMonthDownloads(
           plugin.npmPackage ?? plugin.name,
         ),
-      })),
-    );
+      });
+    }
 
     const sortedPlugins = resolvedPlugins.sort(
       (a, b) => b.downloads - a.downloads,
