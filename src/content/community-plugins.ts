@@ -37,6 +37,14 @@ async function getLastMonthDownloads(pluginName: string) {
     return 0;
   }
 
+  if (res.status === 429) {
+    const retryAfter = res.headers.get("retry-after");
+
+    console.error(
+      `Too many requests when hitting ${endpoint}. retry-after: ${retryAfter}`,
+    );
+  }
+
   if (!res.ok) {
     throw new Error(
       `Error fetching npm downloads of plugin ${pluginName} — ${res.statusText}`,
