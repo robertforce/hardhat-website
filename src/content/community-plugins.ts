@@ -1,8 +1,11 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro:schema";
 
-import communityPluginsJson from "./community-plugins.json";
 import { styleText } from "node:util";
+import path from "node:path";
+import fs from "node:fs/promises";
+
+import communityPluginsJson from "./community-plugins.json";
 
 const communityPluginsJsonSchema = z.object({
   plugins: z.array(
@@ -29,7 +32,83 @@ const communityPluginsCollectionSchema = z.object({
   downloads: z.number(),
 });
 
+const MAX_MS_NPM_DOWNLOADS_CACHE = 24 * 60 * 60 * 1000;
+
+async function getCachedDownloadsIfValid(
+  cachedResultPath: string,
+): Promise<number | undefined> {
+  try {
+    const content = await fs.readFile(cachedResultPath, "utf-8");
+    const json = JSON.parse(content);
+
+    const dateStoredValueOf = json.dateStoredValueOf;
+    const downloads = json.downloads;
+
+    if (
+      typeof dateStoredValueOf !== "number" ||
+      typeof downloads !== "number"
+    ) {
+      return undefined;
+    }
+
+    const now = new Date().valueOf();
+    const diff = now - dateStoredValueOf;
+
+    if (diff > MAX_MS_NPM_DOWNLOADS_CACHE) {
+      return undefined;
+    }
+
+    return downloads;
+  } catch {
+    return undefined;
+  }
+}
+
+async function saveCachedDownalods(
+  cachedResultPath: string,
+  downloads: number,
+) {
+  const now = new Date().valueOf();
+
+  const json = {
+    dateStoredValueOf: now,
+    downloads,
+  };
+
+  fs.writeFile(cachedResultPath, JSON.stringify(json, null, 2), "utf-8");
+}
+
+function getPluginDownloadsCachedPath(pluginName: string) {
+  const cachedResultPath = path.join(
+    import.meta.dirname,
+    "../../cache/",
+    `${pluginName.replace(/[@\/\\]/g, "")}.json`,
+  );
+
+  return cachedResultPath;
+}
+
 async function getLastMonthDownloads(pluginName: string) {
+  const cachedResultPath = getPluginDownloadsCachedPath(pluginName);
+  const cached = await getCachedDownloadsIfValid(cachedResultPath);
+
+  if (cached !== undefined) {
+    console.log(
+      styleText(
+        ["cyan", "bold"],
+        `Using cached downloads of community plugin ${pluginName}`,
+      ),
+    );
+    return cached;
+  }
+
+  console.log(
+    styleText(
+      ["magenta", "bold"],
+      `Fetching downloads of community plugin ${pluginName}`,
+    ),
+  );
+
   const endpoint = `https://api.npmjs.org/downloads/point/last-month/${pluginName}`;
   const res = await fetch(endpoint);
 
@@ -53,7 +132,11 @@ async function getLastMonthDownloads(pluginName: string) {
 
   const json = (await res.json()) as { downloads: number };
 
-  return json.downloads;
+  const downloads = json.downloads;
+
+  await saveCachedDownalods(cachedResultPath, downloads);
+
+  return downloads;
 }
 
 export const communityPlugins = defineCollection({
@@ -63,13 +146,6 @@ export const communityPlugins = defineCollection({
     const resolvedPlugins = [];
     for (const plugin of pluginsFile.plugins) {
       const npmPackage = plugin.npmPackage ?? plugin.name;
-
-      console.log(
-        styleText(
-          ["cyan", "bold"],
-          `Fetching downloads of community plugin ${npmPackage}`,
-        ),
-      );
 
       resolvedPlugins.push({
         id: plugin.name,
