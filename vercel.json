@@ -19,18 +19,18 @@
   "framework": "astro",
   "redirects": [
     {
-      "source": "/HHE:path",
-      "destination": "/hhe:path",
+      "source": "/HHE:number(\\d+)",
+      "destination": "/hhe:number",
       "permanent": false
     },
     {
-      "source": "/HH:path",
-      "destination": "https://v2.hardhat.org/hh:path",
+      "source": "/HH:number(\\d+)",
+      "destination": "https://v2.hardhat.org/hh:number",
       "permanent": false
     },
     {
-      "source": "/hh:path",
-      "destination": "https://v2.hardhat.org/hh:path",
+      "source": "/hh:number(\\d+)",
+      "destination": "https://v2.hardhat.org/hh:number",
       "permanent": false
     },
     {
