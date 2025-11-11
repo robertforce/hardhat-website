@@ -91,6 +91,13 @@
       "authorUrl": "https://github.com/olehmisar",
       "description": "Use the reown.com supported wallets with Hardhat",
       "tags": ["reown", "walletconnect"]
+    },
+    {
+      "name": "hardhat-contract-signatures",
+      "author": "Axel Loupias",
+      "authorUrl": "https://github.com/AxelLoupias",
+      "description": "Display different signatures that have the methods, events and errors of your contracts by console",
+      "tags": ["function", "error", "event", "tooling", "selector"]
     }
   ]
 }
