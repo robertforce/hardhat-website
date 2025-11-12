@@ -9,22 +9,28 @@ sidebar:
 Some projects need to compile different files with different Solidity versions. Hardhat lets you define multiple compiler configurations using an extended format of the `solidity` property, which has a `compilers` array with different compiler configurations.
 
 ```ts
-solidity: {
-  compilers: [
-    {
-      version: "0.7.6"
-    },
-    {
-      version: "0.8.11"
-    },
-    {
-      version: "0.8.29",
-      settings: {
-        optimizer: { enabled: true }
-      }
-    }
-  ]
-},
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  // ...
+  solidity: {
+    compilers: [
+      {
+        version: "0.7.6",
+      },
+      {
+        version: "0.8.11",
+      },
+      {
+        version: "0.8.29",
+        settings: {
+          optimizer: { enabled: true },
+        },
+      },
+    ],
+  },
+});
 ```
 
 Hardhat compiles each Solidity file in your project using the **highest configured Solidity version** that's compatible with the version pragma of the file and its dependencies.
