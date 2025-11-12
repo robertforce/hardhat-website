@@ -7,14 +7,22 @@ sidebar:
 
 import Run from "@hh/Run.astro";
 
-The toolbox includes functionality to measure the coverage of your tests. This helps you identify parts of your code that aren't being tested.
+The toolbox includes functionality to measure the coverage of your tests, helping you identify parts of your code that aren't being tested.
 
-Run the `test` task with the `--coverage` flag to get a coverage report:
+Run the following command to generate a coverage report for your Solidity tests:
+
+<Run command="hardhat test solidity --coverage" />
+
+The output will show you a summary of the coverage at the end.
+
+Similarly, you can measure the coverage of your TypeScript tests by running:
+
+<Run command="hardhat test nodejs --coverage" />
+
+To get combined coverage for both Solidity and TypeScript tests, use the main `test` task:
 
 <Run command="hardhat test --coverage" />
 
-The output will show you a summary of the coverage. You can also open the `coverage/index.html` file in your browser to see a more detailed HTML report.
-
 :::tip
-To learn more about writing tests using TypeScript and viem, check out [our guide](/docs/guides/testing/using-viem).
+Check our [coverage guide](/docs/guides/testing/code-coverage) for more details on test coverage.
 :::
