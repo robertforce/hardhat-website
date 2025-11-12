@@ -1,0 +1,86 @@
+---
+title: Deploying a contract
+description: Hardhat 3 Tutorial - Deploying a contract with Hardhat Ignition
+sidebar:
+  order: 8
+---
+
+import Run from "@hh/Run.astro";
+
+Now that we've written and tested our contract, it's time to deploy it. To do that, we are going to use [Hardhat Ignition](https://hardhat.org/ignition), our official deployment plugin.
+
+## Writing a deployment
+
+The main concept in Ignition is modules: Typescript files that use a simple API to describe a deployment.
+
+Let's write an Ignition module that deploys our `Counter` contract and then calls `incBy` on it. Create a new file at `ignition/modules/Counter.ts` with the following content:
+
+```ts
+import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
+
+export default buildModule("CounterModule", (m) => {
+  const counter = m.contract("Counter");
+
+  m.call(counter, "incBy", [5n]);
+
+  return { counter };
+});
+```
+
+Here you're defining a module that deploys an instance of `Counter` and calls `incBy(5)` once it's deployed. These functions don't actually execute the deployment or the call. They just describe what should be done. Ignition then takes these modules and executes the deployment steps in the right order, taking care of dependencies and ensuring everything is done correctly.
+
+Let's check that the deployment module runs without errors by running it in a locally simulated network, similar to how you ran the Typescript tests:
+
+<Run command="hardhat ignition deploy ignition/modules/Counter.ts" />
+
+To deploy your contracts in a persistent local network, use Hardhat's `node` task. First, run the node task in one terminal:
+
+<Run command="hardhat node" />
+
+Then, in another terminal, run the deployment with `--network localhost`, which will execute the Ignition module against the local node:
+
+<Run command="hardhat ignition deploy ignition/modules/Counter.ts --network localhost" />
+
+Ignition remembers the state of the deployment, so if you run the deployment in the node again, you'll see that nothing will be done the second time because the module was already executed.
+
+## Deploying to a live network
+
+Now you're ready to deploy your contract to a live network. You'll use Sepolia for this example. Make sure you have an RPC URL and an account with some Sepolia ETH in it.
+
+The first step is to add the Sepolia network to your config. Update your `hardhat.config.ts`:
+
+```ts ins={9-16}
+import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  plugins: [hardhatToolboxViemPlugin],
+  solidity: {
+    version: "0.8.28",
+  },
+  networks: {
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+      url: "<SEPOLIA_RPC_URL>",
+      accounts: ["<SEPOLIA_PRIVATE_KEY>"],
+    },
+  },
+});
+```
+
+Replace `<SEPOLIA_RPC_URL>` with your Sepolia RPC URL and `<SEPOLIA_PRIVATE_KEY>` with the private key of an account that has Sepolia ETH.
+
+:::caution
+Putting sensitive information like private keys directly in the config file is _not_ recommended. In the next section, you'll learn how to use Configuration Variables to keep this information secure.
+:::
+
+:::tip
+You can use a service like [Alchemy](https://www.alchemy.com/) to get a Sepolia RPC URL and [their faucet](https://www.alchemy.com/faucets/ethereum-sepolia) to get some Sepolia ETH.
+:::
+
+Now run the Ignition deployment module targeting the Sepolia network:
+
+<Run command="hardhat ignition deploy ignition/modules/Counter.ts --network sepolia" />
+
+If everything goes well, you should see output indicating that the contract was deployed successfully. You can then go to [Etherscan](https://sepolia.etherscan.io/) and check that the contract is indeed deployed at the address shown in the output.

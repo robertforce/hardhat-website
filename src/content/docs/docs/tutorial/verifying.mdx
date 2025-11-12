@@ -1,0 +1,52 @@
+---
+title: Verifying a contract
+description: Hardhat 3 Tutorial - Verifying a contract on Etherscan
+sidebar:
+  order: 10
+---
+
+import Run from "@hh/Run.astro";
+
+When you deployed the `Counter` contract to the Sepolia network, Etherscan only showed you the raw bytecode of the contract. To see its source code, you need to verify it.
+
+:::note
+If you deploy a contract with a source that has already been verified on Etherscan, the contract will be automatically verified upon deployment. That's why we added a comment with a random nonce at the end of the `Counter.sol` file: to make sure the source code is unique for verification purposes.
+:::
+
+Before you can verify the contract, add an Etherscan API key to your configuration. If you don't have one, learn how to obtain it [here](https://docs.etherscan.io/getting-an-api-key). Add the API key as a Configuration Variable in your keystore:
+
+```ts ins={18-22}
+import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
+import { defineConfig } from "hardhat/config";
+import { configVariable, defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  plugins: [hardhatToolboxViemPlugin],
+  solidity: {
+    version: "0.8.28",
+  },
+  networks: {
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+      url: configVariable("SEPOLIA_RPC_URL"),
+      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+    },
+  },
+  verify: {
+    etherscan: {
+      apiKey: configVariable("ETHERSCAN_API_KEY"),
+    },
+  },
+});
+```
+
+As you did before, add the `ETHERSCAN_API_KEY` variable to your keystore:
+
+<Run command="hardhat keystore set ETHERSCAN_API_KEY" />
+
+Now execute the Ignition module again, but this time with the `--verify` flag. Since you've already deployed the contracts, this won't re-deploy them, but it will submit the source code to Etherscan for verification:
+
+<Run command="hardhat ignition deploy ignition/modules/Counter.ts --network sepolia --verify" />
+
+If everything goes well, you should see output indicating that the verification was successful and a link to the verified contract on Etherscan.

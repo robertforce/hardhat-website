@@ -1,0 +1,83 @@
+---
+title: Hardhat 3 Tutorial
+description: Hardhat 3 Tutorial - Writing TypeScript tests
+sidebar:
+  label: Writing TypeScript tests
+  order: 7
+---
+
+import Run from "@hh/Run.astro";
+
+Solidity tests are great for unit testing, but sometimes you need more complex tests that interact with multiple contracts or simulate real-world scenarios. For that, use Typescript tests.
+
+## Writing integration tests with TypeScript
+
+Let's create a simple TypeScript test that interacts with our `Counter` contract. Create a new file at `test/Counter.ts` with the following content:
+
+```ts {"1": 11} {"2": 15-17} {"3": 19-25} {"4": 33}
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+
+import { network } from "hardhat";
+
+describe("Counter", async function () {
+  const { viem, networkHelpers } = await network.connect();
+  const publicClient = await viem.getPublicClient();
+
+  it("The sum of the Increment events should match the current value", async function () {
+    const counter = await viem.deployContract("Counter");
+    const deploymentBlockNumber = await publicClient.getBlockNumber();
+
+    // run a series of increments
+    for (let i = 1n; i <= 10n; i++) {
+      await counter.write.incBy([i]);
+    }
+
+    const events = await publicClient.getContractEvents({
+      address: counter.address,
+      abi: counter.abi,
+      eventName: "Increment",
+      fromBlock: deploymentBlockNumber,
+      strict: true,
+    });
+
+    // check that the aggregated events match the current value
+    let total = 0n;
+    for (const event of events) {
+      total += event.args.by;
+    }
+
+    assert.equal(total, await counter.read.x());
+  });
+});
+```
+
+Here you're:
+
+1. Deploying an instance of the `Counter` contract.
+2. Calling the `inc` function multiple times.
+3. Getting all the events emitted by the contract during those calls.
+4. Checking that the sum of the `by` arguments in the `Increment` events matches the current value of `x` in the contract.
+
+Let's run our TypeScript tests:
+
+<Run command="hardhat test nodejs" />
+
+Besides being written in TypeScript, there are two important differences between these tests and the Solidity tests you wrote earlier:
+
+- These tests use a test runner from the TypeScript ecosystem. Hardhat can be used with any test runner. In this case, you're using the built-in [`node:test`](https://nodejs.org/api/test.html) module.
+- While Solidity tests run directly on the EVM, Typescript tests run on top of a locally simulated network. This means each test starts with a fresh blockchain state, and any changes made during the test are discarded at the end. This is useful for integration tests, where you want a more realistic environment with proper blocks and transactions.
+
+You can run both Solidity and Typescript tests together by using the main `test` task:
+
+<Run command="hardhat test" />
+
+## Measuring test coverage
+
+The toolbox includes functionality to measure the coverage of your tests. This helps you identify parts of your code that aren't being tested.
+
+Run the `test` task with the `--coverage` flag to get a coverage report:
+
+<Run command="hardhat test --coverage" />
+
+The output will show you a summary of the coverage. You can also open the `coverage/index.html` file in your browser to see a more detailed HTML report.

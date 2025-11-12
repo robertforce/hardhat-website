@@ -1,0 +1,51 @@
+---
+title: Using Configuration Variables
+description: Hardhat 3 Tutorial - Using Configuration Variables
+sidebar:
+  order: 9
+---
+
+import Run from "@hh/Run.astro";
+
+In the previous section you added your private key and the RPC URL (which has a secret API key) directly in the config file. This isn't a good practice, as it can lead to accidental exposure of sensitive information. To avoid this, Hardhat supports **Configuration Variables**.
+
+Replace the `sepolia` network configuration in your `hardhat.config.ts` with the following:
+
+```diff lang=ts
+import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
+-import { defineConfig } from "hardhat/config";
++import { configVariable, defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  plugins: [hardhatToolboxViemPlugin],
+  solidity: {
+    version: "0.8.28",
+  },
+  networks: {
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+-      url: "<SEPOLIA_RPC_URL>",
+-      accounts: ["<SEPOLIA_PRIVATE_KEY>"],
++      url: configVariable("SEPOLIA_RPC_URL"),
++      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+    },
+  },
+});
+```
+
+Here you're using `configVariable` to indicate that the values for the RPC URL and the private key should be obtained from Configuration Variables named `SEPOLIA_RPC_URL` and `SEPOLIA_PRIVATE_KEY`. Hardhat includes a plugin to securely store and retrieve these variables in a local keystore.
+
+Let's add these variables to the keystore. Run the following commands in your terminal:
+
+<Run command="hardhat keystore set SEPOLIA_RPC_URL" />
+
+You'll be prompted to enter the password of the keystore (or to set one, if this is the first time you're using it) and then to enter the value for the variable. Paste your Sepolia RPC URL as the value. Then run the command again to add the private key:
+
+<Run command="hardhat keystore set SEPOLIA_PRIVATE_KEY" />
+
+Once you've added both variables, you can run the deployment command again:
+
+<Run command="hardhat ignition deploy ignition/modules/Counter.ts --network sepolia" />
+
+This time, you'll have to enter the keystore password to retrieve the Configuration Variables, but you won't have to put any sensitive information in your config file. Since we've already deployed the contract, you should see that nothing is done this time.
