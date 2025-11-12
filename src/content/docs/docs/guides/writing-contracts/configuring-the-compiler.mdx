@@ -51,51 +51,6 @@ The `settings` property accepts the same options supported by the chosen compile
 You can also configure multiple Solidity versions in the same project. Check [our cookbook recipe](/docs/cookbook/multiple-solidity-versions) to learn how.
 :::
 
-## Overriding configured compilers
-
-Some projects need to compile specific files using a different compiler version than Hardhat's default choice. You can handle this with the `overrides` property:
-
-```ts
-solidity: {
-  compilers: [
-    /* configured compilers */
-  ],
-  overrides: {
-    "contracts/Foo.sol": {
-      version: "0.8.11"
-    }
-  }
-},
-```
-
-In this case, `Foo.sol` will always be compiled with solc 0.8.11, regardless of the versions defined in `solidity.compilers`.
-
-Each entry in the `overrides` object maps a file to a custom compiler configuration. Just like the main configuration, only the `version` field is mandatory.
-
-You can use overrides even if you are using a single solc version, but you still need to use the extended format of the `solidity` property. For example, you can enable the optimizer only for a single file:
-
-```ts
-solidity: {
-  compilers: [
-    {
-      version: "0.8.29",
-    }
-  ],
-  overrides: {
-    "contracts/Foo.sol": {
-      version: "0.8.29",
-      settings: {
-        optimizer: {
-          enabled: true
-        }
-      }
-    }
-  }
-},
-```
-
-{/* ## Using remappings -- TODO—blocked until dependency resolution is finalized. */}
-
 ## Using a custom compiler
 
 Hardhat supports custom compilers like [solx](https://solx.zksync.io). You need to manually download the compiler binary (e.g. [solx releases page](https://github.com/matter-labs/solx/releases)) and reference it in the Solidity settings of the `hardhat.config.ts` file.
