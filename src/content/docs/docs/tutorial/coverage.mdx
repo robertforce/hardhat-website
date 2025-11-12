@@ -1,0 +1,20 @@
+---
+title: Measuring test coverage
+description: Hardhat 3 Tutorial - Measuring test coverage
+sidebar:
+  order: 7.5
+---
+
+import Run from "@hh/Run.astro";
+
+The toolbox includes functionality to measure the coverage of your tests. This helps you identify parts of your code that aren't being tested.
+
+Run the `test` task with the `--coverage` flag to get a coverage report:
+
+<Run command="hardhat test --coverage" />
+
+The output will show you a summary of the coverage. You can also open the `coverage/index.html` file in your browser to see a more detailed HTML report.
+
+:::tip
+To learn more about writing tests using TypeScript and viem, check out [our guide](/docs/guides/testing/using-viem).
+:::

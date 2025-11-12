@@ -1,16 +1,13 @@
 ---
-title: Hardhat 3 Tutorial
+title: Writing TypeScript tests
 description: Hardhat 3 Tutorial - Writing TypeScript tests
 sidebar:
-  label: Writing TypeScript tests
   order: 7
 ---
 
 import Run from "@hh/Run.astro";
 
 Solidity tests are great for unit testing, but sometimes you need more complex tests that interact with multiple contracts or simulate real-world scenarios. For that, use Typescript tests.
-
-## Writing integration tests with TypeScript
 
 Let's create a simple TypeScript test that interacts with our `Counter` contract. Create a new file at `test/Counter.ts` with the following content:
 
@@ -72,17 +69,3 @@ Besides being written in TypeScript, there are two important differences between
 You can run both Solidity and Typescript tests together by using the main `test` task:
 
 <Run command="hardhat test" />
-
-## Measuring test coverage
-
-The toolbox includes functionality to measure the coverage of your tests. This helps you identify parts of your code that aren't being tested.
-
-Run the `test` task with the `--coverage` flag to get a coverage report:
-
-<Run command="hardhat test --coverage" />
-
-The output will show you a summary of the coverage. You can also open the `coverage/index.html` file in your browser to see a more detailed HTML report.
-
-:::tip
-To learn more about writing tests using TypeScript and viem, check out [our guide](/docs/guides/testing/using-viem).
-:::
