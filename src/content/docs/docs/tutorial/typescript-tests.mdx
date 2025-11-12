@@ -55,7 +55,7 @@ describe("Counter", async function () {
 
 Here you're:
 
-1. Deploying an instance of the `Counter` contract.
+1. Deploying an instance of the `Counter` contract using [Viem](https://viem.sh/).
 2. Calling the `inc` function multiple times.
 3. Getting all the events emitted by the contract during those calls.
 4. Checking that the sum of the `by` arguments in the `Increment` events matches the current value of `x` in the contract.
@@ -82,3 +82,7 @@ Run the `test` task with the `--coverage` flag to get a coverage report:
 <Run command="hardhat test --coverage" />
 
 The output will show you a summary of the coverage. You can also open the `coverage/index.html` file in your browser to see a more detailed HTML report.
+
+:::tip
+To learn more about writing tests using TypeScript and viem, check out [our guide](/docs/guides/testing/using-viem).
+:::
