@@ -11,11 +11,11 @@ In the previous section you added your private key and the RPC URL (which has a 
 
 Replace the `sepolia` network configuration in your `hardhat.config.ts` with the following:
 
-```diff lang=ts
+```ts del={3,15-16} ins={4,17-18}
 // hardhat.config.ts
 import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
--import { defineConfig } from "hardhat/config";
-+import { configVariable, defineConfig } from "hardhat/config";
+import { defineConfig } from "hardhat/config";
+import { configVariable, defineConfig } from "hardhat/config";
 
 export default defineConfig({
   plugins: [hardhatToolboxViemPlugin],
@@ -26,10 +26,10 @@ export default defineConfig({
     sepolia: {
       type: "http",
       chainType: "l1",
--      url: "<SEPOLIA_RPC_URL>",
--      accounts: ["<SEPOLIA_PRIVATE_KEY>"],
-+      url: configVariable("SEPOLIA_RPC_URL"),
-+      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+      url: "<SEPOLIA_RPC_URL>",
+      accounts: ["<SEPOLIA_PRIVATE_KEY>"],
+      url: configVariable("SEPOLIA_RPC_URL"),
+      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
     },
   },
 });
