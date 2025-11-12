@@ -16,6 +16,7 @@ If you deploy a contract with a source that has already been verified on Ethersc
 Before you can verify the contract, add an Etherscan API key to your configuration. If you don't have one, learn how to obtain it [here](https://docs.etherscan.io/getting-an-api-key). Add the API key as a Configuration Variable in your keystore:
 
 ```ts ins={18-22}
+// hardhat.config.ts
 import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 import { defineConfig } from "hardhat/config";
 import { configVariable, defineConfig } from "hardhat/config";

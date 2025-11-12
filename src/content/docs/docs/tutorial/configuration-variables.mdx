@@ -12,6 +12,7 @@ In the previous section you added your private key and the RPC URL (which has a 
 Replace the `sepolia` network configuration in your `hardhat.config.ts` with the following:
 
 ```diff lang=ts
+// hardhat.config.ts
 import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 -import { defineConfig } from "hardhat/config";
 +import { configVariable, defineConfig } from "hardhat/config";

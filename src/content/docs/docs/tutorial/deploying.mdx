@@ -16,6 +16,7 @@ The main concept in Ignition is modules: Typescript files that use a simple API 
 Let's write an Ignition module that deploys our `Counter` contract and then calls `incBy` on it. Create a new file at `ignition/modules/Counter.ts` with the following content:
 
 ```ts
+// ignition/modules/Counter.ts
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
 export default buildModule("CounterModule", (m) => {
@@ -50,6 +51,7 @@ Now you're ready to deploy your contract to a live network. You'll use Sepolia f
 The first step is to add the Sepolia network to your config. Update your `hardhat.config.ts`:
 
 ```ts ins={9-16}
+// hardhat.config.ts
 import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 import { defineConfig } from "hardhat/config";
 

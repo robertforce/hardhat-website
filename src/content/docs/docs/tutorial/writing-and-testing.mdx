@@ -44,6 +44,7 @@ contract Counter {
 {/* prettier-ignore-end */}
 
 <CodeWithClientSideRandomNumber
+  title="contracts/Counter.sol"
   placeholder="000000000"
   lang="solidity"
   code={counterContractCode}
@@ -64,6 +65,7 @@ With our contract compiled, let's add some tests. In Hardhat 3, you can run Soli
 Create a new file at `contracts/Counter.t.sol` with the following content:
 
 ```solidity
+// contracts/Counter.t.sol
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
@@ -109,6 +111,7 @@ The stack trace of the failed test tells us which line reverted. In this simple 
 Fix the problem in `contracts/Counter.sol`:
 
 ```diff lang=solidity collapse={1-7,15-20}
+// contracts/Counter.sol
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 

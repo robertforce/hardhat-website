@@ -17,6 +17,7 @@ Let's install the `forge-std` library, which provides useful testing utilities:
 Once it's installed, let's modify `Counter.t.sol` to use `forge-std`:
 
 ```diff lang=solidity collapse={11-27}
+// contracts/Counter.t.sol
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
@@ -50,6 +51,7 @@ import { Counter} from "./Counter.sol";
 Now let's add a new test that checks that the correct event is emitted when we call `inc`:
 
 ```solidity collapse={1-5,10-26} ins={28-33}
+// contracts/Counter.t.sol
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 

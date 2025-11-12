@@ -20,13 +20,14 @@ interface Props {
   placeholder: string;
   lang: string;
   code: string;
+  title: string;
 }
 
-const { lang, code, placeholder } = Astro.props;
+const { lang, code, placeholder, title } = Astro.props;
 ---
 
 <astro-code-with-client-side-random-number data-placeholder={placeholder}>
-  <Code lang={lang} code={code} />
+  <Code lang={lang} code={code} title={title} />
 </astro-code-with-client-side-random-number>
 
 <script>
@@ -68,6 +69,10 @@ const { lang, code, placeholder } = Astro.props;
         "data-code",
         buttonDataCode.replace(placeholder, randomValue.toString()),
       );
+
+      // replace the container with its content to get proper styling
+      const container = this;
+      container.replaceWith(...container.childNodes);
     }
   }
 
