@@ -1,6 +1,7 @@
 import type { Redirects } from "./types";
 
 export default [
+  ["/config", "/docs/reference/configuration"],
   ["/chaining-async-matchers", "/docs/plugins/hardhat-ethers-chai-matchers"], //#limitations TODO: missing section
   ["/console-log", "/docs/reference/console-log"],
   [
