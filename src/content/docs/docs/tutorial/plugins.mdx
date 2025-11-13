@@ -8,15 +8,15 @@ sidebar:
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
 
-Everything you've done so far uses Hardhat's built-in features. But you can extend Hardhat's functionality with plugins.
+So far, you've been using Hardhat's built-in features. Now let's extend Hardhat's functionality with plugins.
 
-Let's install the `hardhat-toolbox-viem` plugin, which adds many features we'll use in the rest of the tutorial.
+We'll install the `hardhat-toolbox-viem` plugin, which adds many features you'll need for the rest of the tutorial.
 
 Run this command to install with other dependencies it interacts with:
 
 <Install packages="@nomicfoundation/hardhat-toolbox-viem @nomicfoundation/hardhat-ignition viem" />
 
-Import the plugin in your `hardhat.config.ts` file and add it to the list of plugins:
+Import the plugin in your `hardhat.config.ts` file and add it to the plugins list:
 
 ```ts ins={2,6}
 // hardhat.config.ts
@@ -31,7 +31,7 @@ export default defineConfig({
 });
 ```
 
-Run the help command again to verify that the plugin was loaded:
+With the plugin installed, run the help command to verify it was loaded:
 
 <Run command="hardhat -h" />
 
