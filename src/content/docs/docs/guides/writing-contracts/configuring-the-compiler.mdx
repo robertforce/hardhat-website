@@ -114,25 +114,3 @@ export default defineConfig({
 });
 ```
 
-## Generating artifacts from npm dependencies
-
-By default, Hardhat generates compilation artifacts for all the contracts in your project, but not for those in the project's npm dependencies. If you want to generate artifacts for a specific file in a dependency, you can use the `npmFilesToBuild` property:
-
-```ts
-// hardhat.config.ts
-import { defineConfig } from "hardhat/config";
-
-export default defineConfig({
-  // ...
-  solidity: {
-    version: "0.8.29",
-    npmFilesToBuild: ["some-dependency/contracts/SomeContract.sol"],
-  },
-});
-```
-
-Artifacts can be used to deploy contracts or to obtain their ABIs, among other things. For example, once you've configured Hardhat to generate artifacts for `some-dependency/contracts/SomeContract.sol`, you can use that contract in a TypeScript test:
-
-```ts
-const someContract = await viem.deployContract("SomeContract");
-```
