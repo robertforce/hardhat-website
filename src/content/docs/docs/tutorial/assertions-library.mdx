@@ -8,13 +8,13 @@ sidebar:
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
 
-The tests you've written so far are simple. They call functions and check that the contract's state is what you expect. But what if you want to do something more complex, like checking that the correct event was emitted? Solidity doesn't have a built-in way to do that, so you'll need to use an assertions library.
+The tests you've written so far are simple. They call functions and check that the contract's state is what you expect. For more complex testing, like checking that the correct event was emitted, you'll need an assertions library. Solidity doesn't have a built-in way to do that.
 
-Let's install the `forge-std` library, which provides useful testing utilities:
+Install the `forge-std` library, which provides useful testing utilities:
 
 <Install packages={`"foundry-rs/forge-std#v1.11.0"`} />
 
-Once it's installed, let's modify `Counter.t.sol` to use `forge-std`:
+Now that it's installed, modify `Counter.t.sol` to use `forge-std`:
 
 ```solidity ins={6,9} del={8} collapse={12-28}
 // contracts/Counter.t.sol
@@ -48,11 +48,11 @@ contract CounterTest is Test {
 }
 ```
 
-By extending the `Test` contract we get access to the functions declared in the assertion library.
+By extending the `Test` contract, you get access to the assertion library's functions.
 
 ## Adding a more complex test
 
-Now let's add a new test that checks that the correct event is emitted when we call `inc`:
+Add a new test that checks the correct event is emitted when you call `inc`:
 
 ```solidity collapse={1-5,10-26} ins={29-34}
 // contracts/Counter.t.sol
@@ -92,20 +92,22 @@ contract CounterTest is Test {
 }
 ```
 
-Here, the combination of `vm.expectEmit()` and `emit Increment(1);` tells the test framework that the next call (`counter.inc()`) should emit an `Increment` event with the argument `1`. The test will fail if the event isn't emitted or if it's emitted with different arguments.
+The combination of `vm.expectEmit()` and `emit Increment(1);` tells the test framework that the next call (`counter.inc()`) should emit an `Increment` event with the argument `1`. The test will fail if the event isn't emitted or is emitted with different arguments.
 
 :::note
-In the previous example, `vm.expectEmit()` is a **cheatcode**.
+`vm.expectEmit()` is a **cheatcode**, a special function that manipulates the runtime environment of your tests. Cheatcodes are only available in tests and aren't part of the Solidity language itself.
 
-Cheatcodes are special functions that manipulate the runtime environment of your tests. They're only available in the context of tests and aren't part of the Solidity language itself.
-
-You can see a full list of cheatcodes supported by `forge-std` <a href="https://getfoundry.sh/reference/cheatcodes/overview" target="_blank" rel="noopener noreferrer">here</a>.
+See the <a href="https://getfoundry.sh/reference/cheatcodes/overview" target="_blank" rel="noopener noreferrer">full list of cheatcodes supported by `forge-std`</a>.
 :::
 
-Run the tests again to verify that everything works:
+Run the tests again to verify everything works:
 
 <Run command="hardhat test solidity" />
 
+All tests should pass, including your new event emission test.
+
 :::tip
-To learn more about Solidity dependencies in Hardhat, check out [our guide](/docs/guides/writing-contracts/dependencies).
+To learn more about Solidity dependencies in Hardhat, check out [the dependencies guide](/docs/guides/writing-contracts/dependencies).
 :::
+
+You've learned how to use an assertions library to write more sophisticated tests. Next, you'll explore testing with TypeScript.
