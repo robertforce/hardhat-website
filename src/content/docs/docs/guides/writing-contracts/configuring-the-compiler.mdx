@@ -9,7 +9,7 @@ Solidity compilation in Hardhat is fully customizable. This guide explains the m
 
 ## Configuring the compiler version and settings
 
-The simplest way to configure compilation is to specify the solc compiler version and, optionally, its settings:
+The simplest way to configure compilation is to specify the Solidity compiler version and, optionally, its settings:
 
 ```ts {"Optional settings:": 8-11}
 // hardhat.config.ts
@@ -29,7 +29,7 @@ export default defineConfig({
 
 ### Enabling the optimizer
 
-One common use of settings is enabling optimizations. You can also define the number of runs, which affects how the optimizer balances code size and execution cost:
+One common use of settings is enabling optimizations. You can also define the number of runs, which affects how the optimizer balances between code size and execution cost:
 
 ```ts
 // hardhat.config.ts
@@ -72,6 +72,11 @@ export default defineConfig({
 
 The `settings` property accepts the same options supported by the chosen compiler version. For the full details, check [solc's documentation](https://docs.soliditylang.org/en/latest/).
 
-:::tip
-You can also configure multiple Solidity versions in the same project. Check [our cookbook recipe](/docs/cookbook/multiple-solidity-versions) to learn how.
-:::
+## Learn more
+
+This guide covers the basics of configuring the compiler. To learn more, you can read the [Solidity Configuration reference](/docs/reference/configuration#solidity-configuration) or the following recipes from the cookbook:
+
+- [Using multiple versions of Solidity in a single project](/docs/cookbook/multiple-solidity-versions)
+- [Customizing the settings for a subset of your files](/docs/cookbook/multiple-solidity-versions#using-overrides-without-multiple-versions-of-solidity)
+- [Generating artifacts from npm dependencies](/docs/cookbook/npm-artifacts)
+- [Using a custom Solidity compiler](/docs/cookbook/custom-solidity-compiler)
