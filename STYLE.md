@@ -185,7 +185,7 @@ Warm and conversational:
 
 - **Oxford comma**: Always use in lists
 - **One space**: After periods, colons, question marks
-- **Never use em dashes**: Don't use em dashes (—), use commas instead. Using em dashes looks bad, as only LLMs use them. THIS IS EXTREMELLY IMPORTANT!
+- **Never use em dashes**: Don't use em dashes (—), use commas instead. Using em dashes looks bad, as only LLMs use them. THIS IS EXTREMELY IMPORTANT!
 - **Don't split sentences with semicolons**: That also looks like text written by an LLM that most people will never use.
 - **Minimal end punctuation**: Skip in headings and short list items
 
