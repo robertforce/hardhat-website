@@ -8,7 +8,7 @@ sidebar:
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
 
-Hardhat 3 supports fuzz tests in Solidity. These tests run the same function many times with random inputs, which Hardhat automatically generates. To create one, you only need to write a test function that takes parameters.
+Hardhat 3 supports fuzz tests in Solidity. These tests run the same function many times with random inputs that Hardhat automatically generates. To create one, write a test function that takes parameters.
 
 Let's add a fuzz test to our `Counter.t.sol` file:
 
@@ -58,8 +58,8 @@ contract CounterTest is Test {
 }
 ```
 
-When you run your tests, the `testFuzz_Inc` function will be called multiple times with values that fit in a `uint8` (between 0 and 255). This tests the `inc` function with a wide range of inputs.
+When you run your tests, the `testFuzz_Inc` function will be called multiple times with values that fit in a `uint8` (0 to 255). This tests the `inc` function with a wide range of inputs.
 
-Run your tests again and check that everything passes:
+Run your tests again to verify everything passes:
 
 <Run command="hardhat test solidity" />
