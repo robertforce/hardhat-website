@@ -9,7 +9,7 @@ import CodeWithClientSideRandomNumber from "@hh/CodeWithClientSideRandomNumber.a
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
 
-Now that your project is set up, let's write, compile, and test a contract.
+Now that your project is set up, you'll write, compile, and test a contract.
 
 ## Writing a smart contract
 
@@ -50,9 +50,9 @@ contract Counter {
   code={counterContractCode}
 />
 
-This code has an intentional bug. Don't worry about it, we'll fix it in the next section when we test the contract. Ignore the comment at the end too. We'll explain it when we get to contract verification.
+This contract has an intentional bug that you'll fix in the next section when you test it. You can ignore the comment at the end for now—you'll learn about it when you get to contract verification.
 
-Now let's compile the contract:
+Now compile the contract:
 
 <Run command="hardhat build" />
 
@@ -60,7 +60,7 @@ If everything went well, you should see an output saying that one Solidity file 
 
 ## Writing unit tests in Solidity
 
-With our contract compiled, let's add some tests. In Hardhat 3, you can run Solidity-based tests without any dependency.
+With your contract compiled, you'll add some tests. In Hardhat 3, you can run Solidity-based tests without any dependency.
 
 Create a new file at `contracts/Counter.t.sol` with the following content:
 
@@ -94,17 +94,17 @@ contract CounterTest {
 }
 ```
 
-Solidity tests are just regular Solidity files. Hardhat interprets any file ending with `.t.sol`, or any Solidity file inside the test directory, as a test file. Each public function whose name starts with `test` is executed as a test. If it finishes without reverting, the test passes. If it reverts, the test fails.
+Solidity tests are regular Solidity files. Hardhat treats any file ending with `.t.sol`, or any Solidity file inside the test directory, as a test file. Each public function starting with `test` runs as a test. If it completes without reverting, the test passes. If it reverts, it fails.
 
-Let's run all the tests in your project like this:
+Run all the tests in your project:
 
 <Run command="hardhat test" />
 
-One of our tests fails, as expected.
+One of your tests fails, as expected.
 
 :::tip
 
-The stack trace of the failed test tells us which line reverted. In this simple test it's obvious what happened, but in more complex tests the stack trace can help you identify which assertion failed.
+The stack trace shows which line reverted. In this simple test it's obvious what happened, but in more complex tests the stack trace helps you identify which assertion failed.
 
 :::
 
@@ -136,12 +136,14 @@ contract Counter {
 }
 ```
 
-And run the tests again. This time, we'll use a different command, that only runs Solidity tests.
+Run the tests again. This time, you'll use a different command that only runs Solidity tests:
 
 <Run command="hardhat test solidity" />
 
-They should all pass this time.
+All tests should pass this time.
 
 :::tip
-Check our [Solidity tests guide](/docs/guides/testing/using-solidity) to learn more about writing tests in Solidity with Hardhat 3.
+Check the [Solidity tests guide](/docs/guides/testing/using-solidity) to learn more about writing tests in Solidity with Hardhat 3.
 :::
+
+Great! You've successfully written, compiled, and tested your first smart contract with Hardhat 3.
