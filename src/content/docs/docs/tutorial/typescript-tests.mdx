@@ -19,7 +19,7 @@ import { describe, it } from "node:test";
 import { network } from "hardhat";
 
 describe("Counter", async function () {
-  const { viem, networkHelpers } = await network.connect();
+  const { viem } = await network.connect();
   const publicClient = await viem.getPublicClient();
 
   it("The sum of the Increment events should match the current value", async function () {
@@ -64,7 +64,7 @@ Let's run our TypeScript tests:
 Besides being written in TypeScript, there are two important differences between these tests and the Solidity tests you wrote earlier:
 
 - These tests use a test runner from the TypeScript ecosystem. Hardhat can be used with any test runner. In this case, you're using the built-in [`node:test`](https://nodejs.org/api/test.html) module.
-- While Solidity tests run directly on the EVM, Typescript tests run on top of a locally simulated network. This means each test starts with a fresh blockchain state, and any changes made during the test are discarded at the end. This is useful for integration tests, where you want a more realistic environment with proper blocks and transactions.
+- While Solidity tests run directly on the EVM, Typescript tests run on top of a locally simulated network. This means each time a test calls `network.connect()` it gets a fresh blockchain state, and any changes made during the test are discarded at the end. This is useful for integration tests, where you want a more realistic environment with proper blocks and transactions.
 
 You can run both Solidity and Typescript tests together by using the main `test` task:
 

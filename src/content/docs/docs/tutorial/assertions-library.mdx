@@ -48,6 +48,10 @@ contract CounterTest is Test {
 }
 ```
 
+By extending the `Test` contract we get access to the functions declared in the assertion library.
+
+## Adding a more complex test
+
 Now let's add a new test that checks that the correct event is emitted when we call `inc`:
 
 ```solidity collapse={1-5,10-26} ins={29-34}

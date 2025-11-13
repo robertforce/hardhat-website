@@ -13,7 +13,11 @@ When you deployed the `Counter` contract to the Sepolia network, Etherscan only 
 If you deploy a contract with a source that has already been verified on Etherscan, the contract will be automatically verified upon deployment. That's why we added a comment with a random nonce at the end of the `Counter.sol` file: to make sure the source code is unique for verification purposes.
 :::
 
-Before you can verify the contract, add an Etherscan API key to your configuration. If you don't have one, learn how to obtain it [here](https://docs.etherscan.io/getting-an-api-key). Add the API key as a Configuration Variable in your keystore:
+## Getting an Etherscan API key
+
+Before you can verify the contract, add an Etherscan API key to your configuration. If you don't have one, learn how to obtain it [here](https://docs.etherscan.io/getting-an-api-key).
+
+You need to add the API key to your config using a Configuration Variable:
 
 ```ts ins={18-22}
 // hardhat.config.ts
@@ -45,6 +49,8 @@ As you did before, add the `ETHERSCAN_API_KEY` variable to your keystore:
 
 <Run command="hardhat keystore set ETHERSCAN_API_KEY" />
 
+## Verifying your contract with Hardhat Ignition
+
 Now execute the Ignition module again, but this time with the `--verify` flag. Since you've already deployed the contracts, this won't re-deploy them, but it will submit the source code to Etherscan for verification:
 
 <Run command="hardhat ignition deploy ignition/modules/Counter.ts --network sepolia --verify" />
@@ -52,5 +58,5 @@ Now execute the Ignition module again, but this time with the `--verify` flag. S
 If everything goes well, you should see output indicating that the verification was successful and a link to the verified contract on Etherscan.
 
 :::tip
-To learn more about contract verification with Hardhat, check out [our guide](/docs/guides/smart-contract-verification) and the [`hardhat-verify` plugin docs](/docs/plugins/hardhat-verify).
+To learn more about contract verification with Hardhat, check out [our guide](/docs/guides/smart-contract-verification) and the [`hardhat-verify` plugin docs](/docs/plugins/hardhat-verify), which also supports Blockscout and Sourcify.
 :::

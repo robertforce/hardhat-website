@@ -11,7 +11,7 @@ In the previous section you added your private key and the RPC URL (which has a 
 
 Replace the `sepolia` network configuration in your `hardhat.config.ts` with the following:
 
-```ts del={3,15-16} ins={4,17-18}
+```ts del={3,14-15} ins={4,16-17}
 // hardhat.config.ts
 import hardhatToolboxViemPlugin from "@nomicfoundation/hardhat-toolbox-viem";
 import { defineConfig } from "hardhat/config";
@@ -25,7 +25,6 @@ export default defineConfig({
   networks: {
     sepolia: {
       type: "http",
-      chainType: "l1",
       url: "<SEPOLIA_RPC_URL>",
       accounts: ["<SEPOLIA_PRIVATE_KEY>"],
       url: configVariable("SEPOLIA_RPC_URL"),
@@ -36,6 +35,8 @@ export default defineConfig({
 ```
 
 Here you're using `configVariable` to indicate that the values for the RPC URL and the private key should be obtained from Configuration Variables named `SEPOLIA_RPC_URL` and `SEPOLIA_PRIVATE_KEY`. Hardhat includes a plugin to securely store and retrieve these variables in a local keystore.
+
+## Using `hardhat-keystore`
 
 Let's add these variables to the keystore. Run the following commands in your terminal:
 
@@ -49,7 +50,9 @@ Once you've added both variables, you can run the deployment command again:
 
 <Run command="hardhat ignition deploy ignition/modules/Counter.ts --network sepolia" />
 
-This time, you'll have to enter the keystore password to retrieve the Configuration Variables, but you won't have to put any sensitive information in your config file. Since we've already deployed the contract, you should see that nothing is done this time.
+This time, you'll have to enter the keystore password to retrieve the Configuration Variables, but you won't have to put any sensitive information in your config file.
+
+Since we've already deployed the contract, you should see that nothing new needs to be deployed this time.
 
 :::tip
 Check [our guide](/docs/guides/configuration-variables) to learn more about Configuration Variables and how to use them effectively. You can also read our [Configuration Variables explanation](/docs/explanations/configuration-variables) for a deeper understanding of this feature.

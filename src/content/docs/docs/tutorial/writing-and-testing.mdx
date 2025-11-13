@@ -94,11 +94,11 @@ contract CounterTest {
 }
 ```
 
-Solidity tests are just regular Solidity files. Hardhat interprets any file ending with `.t.sol`, or any Solidity file inside the test directory, as a test file. Each public function whose name starts with `test` is executed during the run. If it finishes without reverting, the test passes. If it reverts, the test fails.
+Solidity tests are just regular Solidity files. Hardhat interprets any file ending with `.t.sol`, or any Solidity file inside the test directory, as a test file. Each public function whose name starts with `test` is executed as a test. If it finishes without reverting, the test passes. If it reverts, the test fails.
 
-Let's run our tests:
+Let's run all the tests in your project like this:
 
-<Run command="hardhat test solidity" />
+<Run command="hardhat test" />
 
 One of our tests fails, as expected.
 
@@ -107,6 +107,8 @@ One of our tests fails, as expected.
 The stack trace of the failed test tells us which line reverted. In this simple test it's obvious what happened, but in more complex tests the stack trace can help you identify which assertion failed.
 
 :::
+
+## Fixing the bug we just found
 
 Fix the problem in `contracts/Counter.sol`:
 
@@ -134,7 +136,7 @@ contract Counter {
 }
 ```
 
-And run the tests again:
+And run the tests again. This time, we'll use a different command, that only runs Solidity tests.
 
 <Run command="hardhat test solidity" />
 

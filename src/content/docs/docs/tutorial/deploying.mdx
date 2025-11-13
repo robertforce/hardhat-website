@@ -30,9 +30,13 @@ export default buildModule("CounterModule", (m) => {
 
 Here you're defining a module that deploys an instance of `Counter` and calls `incBy(5)` once it's deployed. These functions don't actually execute the deployment or the call. They just describe what should be done. Ignition then takes these modules and executes the deployment steps in the right order, taking care of dependencies and ensuring everything is done correctly.
 
+## Trying out your deployment module
+
 Let's check that the deployment module runs without errors by running it in a locally simulated network, similar to how you ran the Typescript tests:
 
 <Run command="hardhat ignition deploy ignition/modules/Counter.ts" />
+
+## Deploying to a local development node
 
 To deploy your contracts in a persistent local network, use Hardhat's `node` task. First, run the node task in one terminal:
 
@@ -42,11 +46,15 @@ Then, in another terminal, run the deployment with `--network localhost`, which 
 
 <Run command="hardhat ignition deploy ignition/modules/Counter.ts --network localhost" />
 
-Ignition remembers the state of the deployment, so if you run the deployment in the node again, you'll see that nothing will be done the second time because the module was already executed.
+Ignition remembers the state of the deployment, so if you run the deployment in the node again, you'll see that nothing will be done the second time because the module was already executed. Try it out by rerunning the previous command.
 
 ## Deploying to a live network
 
-Now you're ready to deploy your contract to a live network. You'll use Sepolia for this example. Make sure you have an RPC URL and an account with some Sepolia ETH in it.
+Now you're ready to deploy your contract to a live network. You'll use Sepolia for this example. Make sure you have an RPC URL (you can get one [here](https://chainlist.org/chain/11155111)) and an account with some Sepolia ETH in it.
+
+:::tip
+You can use a service like [Alchemy](https://www.alchemy.com/) to get a Sepolia RPC URL and [their faucet](https://www.alchemy.com/faucets/ethereum-sepolia) to get some Sepolia ETH.
+:::
 
 The first step is to add the Sepolia network to your config. Update your `hardhat.config.ts`:
 
@@ -63,7 +71,6 @@ export default defineConfig({
   networks: {
     sepolia: {
       type: "http",
-      chainType: "l1",
       url: "<SEPOLIA_RPC_URL>",
       accounts: ["<SEPOLIA_PRIVATE_KEY>"],
     },
@@ -73,19 +80,15 @@ export default defineConfig({
 
 Replace `<SEPOLIA_RPC_URL>` with your Sepolia RPC URL and `<SEPOLIA_PRIVATE_KEY>` with the private key of an account that has Sepolia ETH.
 
-:::caution
+:::danger
 Putting sensitive information like private keys directly in the config file is _not_ recommended. In the next section, you'll learn how to use Configuration Variables to keep this information secure.
-:::
-
-:::tip
-You can use a service like [Alchemy](https://www.alchemy.com/) to get a Sepolia RPC URL and [their faucet](https://www.alchemy.com/faucets/ethereum-sepolia) to get some Sepolia ETH.
 :::
 
 Now run the Ignition deployment module targeting the Sepolia network:
 
 <Run command="hardhat ignition deploy ignition/modules/Counter.ts --network sepolia" />
 
-If everything goes well, you should see output indicating that the contract was deployed successfully. You can then go to [Etherscan](https://sepolia.etherscan.io/) and check that the contract is indeed deployed at the address shown in the output.
+If everything goes well, you should see output indicating that the contract was deployed successfully. You can then go to [Sepolia Etherscan](https://sepolia.etherscan.io/) and check that the contract is indeed deployed at the address shown in the output.
 
 :::tip
 Learn more about Hardhat Ignition in [its docs](/ignition/docs).

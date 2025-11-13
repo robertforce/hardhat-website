@@ -7,7 +7,9 @@ sidebar:
 
 import Run from "@hh/Run.astro";
 
-The toolbox includes functionality to measure the coverage of your tests, helping you identify parts of your code that aren't being tested.
+Hardhat 3 comes built-in with functionality to measure the coverage of your tests, helping you identify parts of your code that aren't being tested. Without any plugin it works with Solidity tests, but with the `hardhat-toolbox-viem` that you installed, it will work with TypeScript tests too.
+
+## Getting the code coverage of Solidity tests
 
 Run the following command to generate a coverage report for your Solidity tests:
 
@@ -15,9 +17,13 @@ Run the following command to generate a coverage report for your Solidity tests:
 
 The output will show you a summary of the coverage at the end.
 
+## Getting the code coverage of TypesScript tests
+
 Similarly, you can measure the coverage of your TypeScript tests by running:
 
 <Run command="hardhat test nodejs --coverage" />
+
+## Getting the combined code coverage
 
 To get combined coverage for both Solidity and TypeScript tests, use the main `test` task:
 
