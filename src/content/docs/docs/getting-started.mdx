@@ -11,19 +11,19 @@ import Run from "@hh/Run.astro";
 
 :::tip
 
-Hardhat 3 is production-ready and you can migrate today! We'll keep it in beta status as we work on missing features and stabilize it in the near future.
+Hardhat 3 is production-ready and you can migrate today. We'll keep it in beta status as we work on missing features and stabilize it.
 
 :::
 
-Hardhat is a flexible and extensible development environment for Ethereum software. It helps you write, test, debug and deploy your smart contracts with ease, whether you're building a simple prototype or a complex production system.
+Hardhat is a flexible and extensible development environment for Ethereum software. It helps you write, test, debug, and deploy your smart contracts with ease, whether you're building a simple prototype or a complex production system.
 
-This guide will walk you through the installation of our recommended setup, but as most of Hardhat's functionality comes from plugins, you are free to customize it or choose a completely different path.
+This guide will walk you through installing our recommended setup, but since most of Hardhat's functionality comes from plugins, you're free to customize it or choose a completely different path.
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) v22 or later installed on your system
-- A package manager such as [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), or [yarn](https://yarnpkg.com/). We strongly recommend using pnpm.
-- Text editor - We recommend [VS Code](https://code.visualstudio.com/) with our [Official Hardhat extension](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity).
+- [Node.js](https://nodejs.org/) v22 or later
+- A package manager like [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), or [yarn](https://yarnpkg.com/) (we strongly recommend pnpm)
+- A text editor (we recommend [VS Code](https://code.visualstudio.com/) with our [Official Hardhat extension](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity))
 
 ## Installation
 
@@ -40,9 +40,9 @@ Once that's done, initialize your Hardhat project by running:
 
 This command will prompt you with a few configuration options. You can accept the default answers to quickly create a working setup.
 
-Using the defaults will initialize the project in the current directory, and automatically install all of its required dependencies. You can learn more about that's included in your sample project by reading the [`hardhat-toolbox-viem`](/docs/plugins/hardhat-toolbox-viem) documentation, which is the recommended setup you are using.
+Using the defaults will initialize the project in the current directory and automatically install all required dependencies.
 
-After the setup is complete, you'll have a fully working Hardhat 3 project with everything you need to get started. Run the Hardhat help to verify the project was set up correctly:
+After the setup completes, you'll have a fully working Hardhat 3 project. To verify everything's set up correctly, run:
 
 <Run command="hardhat --help" />
 
@@ -56,36 +56,42 @@ The Hardhat project initialization from the previous section creates the followi
 
 {/* prettier-ignore */}
 <FileTree>
-- hardhat.config.ts
-- contracts
-  - Counter.sol
-  - Counter.t.sol
-- test
-  - Counter.ts
-- ignition
-  - modules
+- hardhat-example
+  - package.json
+  - hardhat.config.ts
+  - contracts
+    - Counter.sol
+    - Counter.t.sol
+  - test
     - Counter.ts
-- scripts
-  - send-op-tx.ts
+  - ignition
+    - modules
+      - Counter.ts
+  - scripts
+    - send-op-tx.ts
 </FileTree>
 
-Here's a quick overview of these files and directories:
+Here's what each file and directory does:
 
-- `hardhat.config.ts`: The main configuration file for your project. It defines settings like the Solidity compiler version, network configurations, and the plugins and tasks your project uses.
+- `package.json`: Your npm package file where Hardhat and its plugins are installed.
 
-- `contracts`: Contains your project's Solidity contracts. You can also include Solidity test files here by using the `.t.sol` extension.
+- `hardhat.config.ts`: Your project's main configuration file. It defines the Solidity compiler version, network configurations, plugins, and tasks.
 
-- `test`: Used for TypeScript integration tests. You can also include Solidity test files here.
+- `contracts`: Contains your Solidity contracts. You can also include Solidity test files here using the `.t.sol` extension.
 
-- `ignition`: Holds your [Hardhat Ignition](/ignition) deployment modules, which describe how your contracts should be deployed. Learn more about them [here](/docs/guides/deployment/using-ignition).
+- `test`: Contains TypeScript and Solidity tests. Solidity test files in this folder can use either `.sol` or `.t.sol`.
 
-- `scripts`: A place for any custom scripts that automate parts of your workflow. Scripts have full access to Hardhat's runtime and can use plugins, connect to networks, deploy contracts, and more.
+- `ignition`: Contains [Hardhat Ignition](/ignition) deployment modules that describe how to deploy your contracts. Learn more [here](/docs/guides/deployment/using-ignition).
+
+- `scripts`: Contains custom scripts that automate parts of your workflow. Scripts have full access to Hardhat's runtime and can use plugins, connect to networks, and deploy contracts.
+
+You can learn more about what's included in your sample project by reading the [`hardhat-toolbox-viem` documentation](/docs/plugins/hardhat-toolbox-viem), which is the recommended setup you're using.
 
 ## Learn more
 
-To learn more about Hardhat, we recommend you reading the [tutorial](/docs/tutorial) next.
+To learn more about Hardhat, we recommend reading the [tutorial](/docs/tutorial) next.
 
-If you finished reading it, or want to smaller guides instead, you can start with these guides:
+Once you've finished the tutorial, or if you prefer smaller focused guides, check out:
 
 - [What's new in Hardhat 3](/docs/hardhat3/whats-new)
 - [Writing Solidity tests](/docs/guides/testing/using-solidity)
@@ -95,4 +101,4 @@ If you finished reading it, or want to smaller guides instead, you can start wit
 - [Getting gas statistics of your test runs](/docs/guides/testing/gas-statistics)
 - [Computing the code coverage of your tests](/docs/guides/testing/code-coverage)
 
-> Join our [Hardhat 3](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group to share feedback and stay updated on new releases.
+Join our [Hardhat 3](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group to share feedback and stay updated on new releases.
