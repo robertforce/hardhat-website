@@ -20,8 +20,9 @@ Hardhat is a flexible and extensible development environment for Ethereum softwa
 This guide will walk you through the installation of our recommended setup, but as most of Hardhat's functionality comes from plugins, you are free to customize it or choose a completely different path.
 
 ## Prerequisites
+
 - [Node.js](https://nodejs.org/) v22 or later installed on your system
-- A package manager such as [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/)
+- A package manager such as [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), or [yarn](https://yarnpkg.com/). We strongly recommend using pnpm.
 - Text editor - We recommend [VS Code](https://code.visualstudio.com/) with our [Official Hardhat extension](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity).
 
 ## Installation
@@ -37,17 +38,17 @@ Once that's done, initialize your Hardhat project by running:
 
 <RunRemote command="hardhat --init" />
 
-This command will prompt you with a few configuration options. You can accept the default answers to quickly scaffold a working setup.
+This command will prompt you with a few configuration options. You can accept the default answers to quickly create a working setup.
 
-Using the defaults will:
-
-- Initialize the project in the current directory.
-- Use the sample project that includes the [Node.js test runner](https://nodejs.org/api/test.html) and [viem](https://viem.sh/).
-- Automatically install all the required dependencies.
+Using the defaults will initialize the project in the current directory, and automatically install all of its required dependencies. You can learn more about that's included in your sample project by reading the [`hardhat-toolbox-viem`](/docs/plugins/hardhat-toolbox-viem) documentation, which is the recommended setup you are using.
 
 After the setup is complete, you'll have a fully working Hardhat 3 project with everything you need to get started. Run the Hardhat help to verify the project was set up correctly:
 
 <Run command="hardhat --help" />
+
+To try out a complete test run of your project, run:
+
+<Run command="hardhat test" />
 
 ## Project structure
 
@@ -76,18 +77,22 @@ Here's a quick overview of these files and directories:
 
 - `test`: Used for TypeScript integration tests. You can also include Solidity test files here.
 
-- `ignition`: Holds your [Hardhat Ignition](/ignition) deployment modules, which describe how your contracts should be deployed.
+- `ignition`: Holds your [Hardhat Ignition](/ignition) deployment modules, which describe how your contracts should be deployed. Learn more about them [here](/docs/guides/deployment/using-ignition).
 
 - `scripts`: A place for any custom scripts that automate parts of your workflow. Scripts have full access to Hardhat's runtime and can use plugins, connect to networks, deploy contracts, and more.
 
 ## Learn more
 
-To learn more about Hardhat, check out these other guides:
+To learn more about Hardhat, we recommend you reading the [tutorial](/docs/tutorial) next.
+
+If you finished reading it, or want to smaller guides instead, you can start with these guides:
 
 - [What's new in Hardhat 3](/docs/hardhat3/whats-new)
 - [Writing Solidity tests](/docs/guides/testing/using-solidity)
-- [Using Viem with Hardhat](/docs/guides/testing/using-viem)
+- [Using Viem with Hardhat to test in TypeScript](/docs/guides/testing/using-viem)
 - [Deploying contracts](/docs/guides/deployment)
 - [Configuring the compiler](/docs/guides/writing-contracts/configuring-the-compiler)
+- [Getting gas statistics of your test runs](/docs/guides/testing/gas-statistics)
+- [Computing the code coverage of your tests](/docs/guides/testing/code-coverage)
 
-and join our [Hardhat 3](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group to share feedback and stay updated on new releases.
+> Join our [Hardhat 3](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group to share feedback and stay updated on new releases.
