@@ -23,4 +23,11 @@ export default [
     "/report-bug",
     "https://github.com/NomicFoundation/hardhat/issues/new/choose",
   ],
+  [
+    "/hardhat-network-helpers-fixtures",
+    "/docs/plugins/hardhat-network-helpers", //#fixtures TODO: missing section
+  ],
+  ["/ethers-library-linking", "/docs/plugins/hardhat-ethers#library-linking"],
+  ["/hd-wallet-config", "/docs/reference/configuration#hd-wallet-config"],
+  ["/getting-started-v3", "/docs/getting-started"],
 ] satisfies Redirects;
