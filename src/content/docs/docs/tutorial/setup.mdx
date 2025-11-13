@@ -5,62 +5,19 @@ sidebar:
   order: 2
 ---
 
-import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
 import Run from "@hh/Run.astro";
+import RunRemote from "@hh/RunRemote.astro";
 
 Before we start, make sure you have [Node.js](https://nodejs.org/) and a package manager (such as `npm` or `pnpm`) installed:
 
-<Tabs syncKey="package-manager">
-  <TabItem label="npm" icon="npm">
-    <Code
-      code={`node -v\nnpm -v`}
-      lang="sh"
-      frame="terminal"
-    />
-  </TabItem>
-
-  <TabItem label="pnpm" icon="pnpm">
-    <Code
-      code={`node -v\npnpm -v`}
-      lang="sh"
-      frame="terminal"
-    />
-  </TabItem>
-  <TabItem label="Yarn" icon="seti:yarn">
-    <Code
-      code={`node -v\nyarn -v`}
-      lang="sh"
-      frame="terminal"
-    />
-  </TabItem>
-</Tabs>
+<Run preCommand="node --version" command="--version" />
 
 Let's start by creating an empty directory and initializing a Hardhat project inside it:
 
-<Tabs syncKey="package-manager">
-  <TabItem label="npm" icon="npm">
-    <Code
-      code={`mkdir hardhat-tutorial && cd hardhat-tutorial\nnpx hardhat --init`}
-      lang="sh"
-      frame="terminal"
-    />
-  </TabItem>
-
-  <TabItem label="pnpm" icon="pnpm">
-    <Code
-      code={`mkdir hardhat-tutorial && cd hardhat-tutorial\npnpm dlx hardhat --init`}
-      lang="sh"
-      frame="terminal"
-    />
-  </TabItem>
-  <TabItem label="Yarn" icon="seti:yarn">
-    <Code
-      code={`mkdir hardhat-tutorial && cd hardhat-tutorial\nyarn dlx hardhat --init`}
-      lang="sh"
-      frame="terminal"
-    />
-  </TabItem>
-</Tabs>
+<RunRemote
+  preCommand={["mkdir hardhat-tutorial", "cd hardhat-tutorial"]}
+  command="hardhat --init"
+/>
 
 You'll be prompted to select a few options. Use the defaults for everything except the project type:
 
@@ -71,7 +28,7 @@ You'll be prompted to select a few options. Use the defaults for everything exce
 
 Once the setup is complete, verify that everything is working with the following command:
 
-<Run command="hardhat -h" />
+<Run command="hardhat --help" />
 
 You should see Hardhat's help printed in your terminal.
 
