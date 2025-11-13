@@ -29,5 +29,5 @@ export default [
   ],
   ["/ethers-library-linking", "/docs/plugins/hardhat-ethers#library-linking"],
   ["/hd-wallet-config", "/docs/reference/configuration#hd-wallet-config"],
-  ["/getting-started-v3", "/docs/getting-started"],
+  ["/getting-started", "/docs/getting-started"],
 ] satisfies Redirects;

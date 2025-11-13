@@ -15,7 +15,7 @@ export default [
     "https://v2.hardhat.org/custom-hardfork-history",
   ],
   ["/docs-landing", "https://v2.hardhat.org/docs-landing"],
-  ["/getting-started", "https://v2.hardhat.org/getting-started"],
+  ["/getting-started-v2", "https://v2.hardhat.org/getting-started"],
   ["/guides/create-plugin", "https://v2.hardhat.org/guides/create-plugin"],
   ["/guides/mainnet-forking", "https://v2.hardhat.org/guides/mainnet-forking"],
   ["/hardhat-network", "https://v2.hardhat.org/hardhat-network"],
