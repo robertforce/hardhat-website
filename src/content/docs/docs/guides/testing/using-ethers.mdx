@@ -146,7 +146,7 @@ it("Should allow the owner to increment and revert for non-owners", async functi
 
 Here we are using `.to.be.revertedWith`, which asserts that a transaction reverts, and that the reason string of the revert is equal to the given string. The `.to.be.revertedWith` matcher is not part of Chai itself; instead, like `.to.emit`, it's added by the [`hardhat-ethers-chai-matchers`](/docs/plugins/hardhat-ethers-chai-matchers) plugin.
 
-Additionally, we are using some [`hardhat-network-helpers`](/docs/plugins/hardhat-network-helpers) to assist us in testing our function with a non-default account. We use `impersonateAccount` to tell Hardhat to allow us to send transactions from that address, and `setBalance` to give it some ETH so it can pay for gas. Finally, we use `ethers.getSigner` to get a signer object for that address, which we use to connect to the contract and call the `inc()` function.
+Additionally, we are using some [`hardhat-network-helpers`](/docs/plugins/hardhat-network-helpers) features to assist us in testing our function with a non-default account. We use `impersonateAccount` to tell Hardhat to allow us to send transactions from that address, and `setBalance` to give it some ETH so it can pay for gas. Finally, we use `ethers.getSigner` to get a signer object for that address, which we use to connect to the contract and call the `inc()` function.
 
 ### Using fixtures
 
@@ -173,7 +173,7 @@ However, there are two problems with this approach:
 - If you have to deploy many contracts, your tests will be slower because each one has to send multiple transactions as part of its setup.
 - Sharing the variables like this between the `beforeEach` hook and your tests doesn't look good and is error-prone.
 
-The `loadFixture` helper in the Hardhat Network Helpers fixes both of these problems. This helper receives a _fixture_, a function that sets up the chain to some desired state. The first time `loadFixture` is called, the fixture is executed. But the second time, instead of executing the fixture again, `loadFixture` will reset the state of the network to the point where it was right after the fixture was executed. This is faster, and it undoes any state changes done by the previous test.
+The `loadFixture` helper in the `hardhat-network-helpers` plugin fixes both of these problems. This helper receives a _fixture_, a function that sets up the chain to some desired state. The first time `loadFixture` is called, the fixture is executed. But the second time, instead of executing the fixture again, `loadFixture` will reset the state of the network to the point where it was right after the fixture was executed. This is faster, and it undoes any state changes done by the previous test.
 
 This is what our tests look like when a fixture is used:
 
