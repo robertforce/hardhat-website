@@ -102,6 +102,8 @@ Warm and conversational:
 - Let's start by adding a `myAccount` property to the `NetworkConnection` object returned by `network.connect()`.
 - The first step is adding the `myAccount` property to the `NetworkConnection` object returned by `network.connect()`.
 
+Note that this is really important, and key to our branding. We don't want our documentation to bee perceived too cold/direct just to be slightly more concise.
+
 #### Sentence Structure
 
 - **Write short, simple sentences**: If a sentence has more than a few commas, consider breaking it up
