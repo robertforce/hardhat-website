@@ -177,7 +177,7 @@ The `loadFixture` helper in the Hardhat Network Helpers fixes both of these prob
 
 This is what our tests look like when a fixture is used:
 
-```ts ins={8-11,15,22,47} del={14,21,46}
+```ts {8-11,14,20,44}
 // test/Counter.ts
 import { expect } from "chai";
 import { network } from "hardhat";
@@ -191,14 +191,12 @@ describe("Counter", function () {
   }
 
   it("Should emit the Increment event when calling the inc() function", async function () {
-    const counter = await ethers.deployContract("Counter");
     const { counter } = await networkHelpers.loadFixture(deployCounterFixture);
 
     await expect(counter.inc()).to.emit(counter, "Increment").withArgs(1n);
   });
 
   it("The sum of the Increment events should match the current value", async function () {
-    const counter = await ethers.deployContract("Counter");
     const { counter } = await networkHelpers.loadFixture(deployCounterFixture);
     const deploymentBlockNumber = await ethers.provider.getBlockNumber();
 
@@ -223,7 +221,6 @@ describe("Counter", function () {
   });
 
   it("Should allow the owner to increment and revert for non-owners", async function () {
-    const counter = await ethers.deployContract("Counter");
     const { counter } = await networkHelpers.loadFixture(deployCounterFixture);
 
     const nonOwnerAddress = "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
