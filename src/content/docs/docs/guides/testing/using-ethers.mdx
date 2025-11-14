@@ -77,7 +77,7 @@ First we import the things we are going to use: the [`expect`](https://www.chaij
 
 The test itself is what's inside the callback argument to the `it` function. First we deploy our `Counter` contract using the `ethers` instance returned by our `hre.network.connect()` call.
 
-Finally, we call the `inc()` function of the contract and assert that the `Increment` event is emitted with the correct argument. The `.to.emit` matcher is provided by the [Hardhat Ethers Chai Matchers](/docs/plugins/hardhat-ethers-chai-matchers) plugin.
+Finally, we call the `inc()` function of the contract and assert that the `Increment` event is emitted with the correct argument. The `.to.emit` matcher is provided by the [`hardhat-ethers-chai-matchers`](/docs/plugins/hardhat-ethers-chai-matchers) plugin.
 
 ### Testing a function that reverts
 
@@ -144,9 +144,9 @@ it("Should allow the owner to increment and revert for non-owners", async functi
 });
 ```
 
-Here we are using `.to.be.revertedWith`, which asserts that a transaction reverts, and that the reason string of the revert is equal to the given string. The `.to.be.revertedWith` matcher is not part of Chai itself; instead, like `.to.emit`, it's added by the [Hardhat Chai Matchers](/docs/plugins/hardhat-ethers-chai-matchers) plugin.
+Here we are using `.to.be.revertedWith`, which asserts that a transaction reverts, and that the reason string of the revert is equal to the given string. The `.to.be.revertedWith` matcher is not part of Chai itself; instead, like `.to.emit`, it's added by the [`hardhat-ethers-chai-matchers`](/docs/plugins/hardhat-ethers-chai-matchers) plugin.
 
-Additionally, we are using some [Hardhat Network Helpers](/docs/plugins/hardhat-network-helpers) to assist us in testing our function with a non-default account. We use `impersonateAccount` to tell Hardhat to allow us to send transactions from that address, and `setBalance` to give it some ETH so it can pay for gas. Finally, we use `ethers.getSigner` to get a signer object for that address, which we use to connect to the contract and call the `inc()` function.
+Additionally, we are using some [`hardhat-network-helpers`](/docs/plugins/hardhat-network-helpers) to assist us in testing our function with a non-default account. We use `impersonateAccount` to tell Hardhat to allow us to send transactions from that address, and `setBalance` to give it some ETH so it can pay for gas. Finally, we use `ethers.getSigner` to get a signer object for that address, which we use to connect to the contract and call the `inc()` function.
 
 ### Using fixtures
 
