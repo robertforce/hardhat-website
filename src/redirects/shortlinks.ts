@@ -18,4 +18,10 @@ export default [
   ["/docs", "/docs/getting-started"],
   ["/ignition", "/ignition/docs"],
   ["/ignition/docs", "/ignition/docs/getting-started"],
+  // This is a temporary workaround because the link validator can't
+  // find the #hashes of plugins and fail
+  [
+    "/network-helpers-fixtures-reference",
+    "/docs/plugins/hardhat-network-helpers#fixtures",
+  ],
 ] satisfies Redirects;
