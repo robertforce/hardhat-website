@@ -7,7 +7,7 @@ interface Props {
    * Any command that needs to be run before the one using the package manager.
    * This is not affected by the prefix.
    */
-  preCommand: string | string[];
+  preCommand?: string | string[];
   /**
    * The command to run with the package manager.
    * If an array is provided, each of them will be run in a new line.
@@ -23,7 +23,12 @@ interface Props {
 const { preCommand, command } = Astro.props;
 const prefix = Astro.props.prefix ? `${Astro.props.prefix.trimEnd()} ` : "";
 const commands = Array.isArray(command) ? command : [command];
-const preCommands = Array.isArray(preCommand) ? preCommand : [preCommand];
+const preCommands =
+  preCommand === undefined
+    ? []
+    : Array.isArray(preCommand)
+      ? preCommand
+      : [preCommand];
 
 function getCode(packageManagerName: string): string {
   return [
