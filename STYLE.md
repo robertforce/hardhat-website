@@ -102,6 +102,8 @@ Warm and conversational:
 - Let's start by adding a `myAccount` property to the `NetworkConnection` object returned by `network.connect()`.
 - The first step is adding the `myAccount` property to the `NetworkConnection` object returned by `network.connect()`.
 
+Note that this is really important, and key to our branding. We don't want our documentation to be perceived too cold/direct just to be slightly more concise.
+
 #### Sentence Structure
 
 - **Write short, simple sentences**: If a sentence has more than a few commas, consider breaking it up
@@ -185,7 +187,7 @@ Warm and conversational:
 
 - **Oxford comma**: Always use in lists
 - **One space**: After periods, colons, question marks
-- **Never use em dashes**: Don't use em dashes (—), use commas instead. Using em dashes looks bad, as only LLMs use them.
+- **Never use em dashes**: Don't use em dashes (—), use commas instead. Using em dashes looks bad, as only LLMs use them. THIS IS EXTREMELY IMPORTANT!
 - **Don't split sentences with semicolons**: That also looks like text written by an LLM that most people will never use.
 - **Minimal end punctuation**: Skip in headings and short list items
 

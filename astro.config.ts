@@ -254,9 +254,12 @@ export default defineConfig({
           },
         ),
         starlightLinksValidator({
-          exclude: Object.keys(redirects).concat(
-            officialPluginsList.map((p) => `/docs/plugins/${p.slug}`),
-          ),
+          exclude: Object.keys(redirects)
+            .concat(officialPluginsList.map((p) => `/docs/plugins/${p.slug}`))
+            .concat([
+              "/docs/plugins/official-plugins",
+              "/docs/plugins/community-plugins",
+            ]),
         }),
       ],
       customCss: ["./src/styles/custom-starlight-theme.css"],
