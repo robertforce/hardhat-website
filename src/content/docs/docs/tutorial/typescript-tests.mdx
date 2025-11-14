@@ -7,9 +7,9 @@ sidebar:
 
 import Run from "@hh/Run.astro";
 
-Solidity tests are great for unit testing, but sometimes you need more complex tests that interact with multiple contracts or simulate real-world scenarios. For that, use Typescript tests.
+Solidity tests are great for unit testing, but sometimes you need more complex tests that interact with multiple contracts or simulate real-world scenarios. For that, use TypeScript tests.
 
-Let's create a simple TypeScript test that interacts with our `Counter` contract. Create a new file at `test/Counter.ts` with the following content:
+Create a new file at `test/Counter.ts` with the following content to write a simple TypeScript test that interacts with the `Counter` contract:
 
 ```ts {"1": 12} {"2": 16-18} {"3": 20-26} {"4": 34}
 // test/Counter.ts
@@ -50,26 +50,26 @@ describe("Counter", async function () {
 });
 ```
 
-Here you're:
+This test:
 
-1. Deploying an instance of the `Counter` contract using [Viem](https://viem.sh/).
-2. Calling the `incBy` function multiple times.
-3. Getting all the events emitted by the contract during those calls.
-4. Checking that the sum of the `by` arguments in the `Increment` events matches the current value of `x` in the contract.
+1. Deploys an instance of the `Counter` contract using [Viem](https://viem.sh/).
+2. Calls the `incBy` function multiple times.
+3. Gets all the events emitted by the contract during those calls.
+4. Checks that the sum of the `by` arguments in the `Increment` events matches the current value of `x` in the contract.
 
-Let's run our TypeScript tests:
+Run the TypeScript tests:
 
 <Run command="hardhat test nodejs" />
 
 Besides being written in TypeScript, there are two important differences between these tests and the Solidity tests you wrote earlier:
 
-- These tests use a test runner from the TypeScript ecosystem. Hardhat can be used with any test runner. In this case, you're using the built-in [`node:test`](https://nodejs.org/api/test.html) module.
-- While Solidity tests run directly on the EVM, Typescript tests run on top of a locally simulated network. This means each time a test calls `network.connect()` it gets a fresh blockchain state, and any changes made during the test are discarded at the end. This is useful for integration tests, where you want a more realistic environment with proper blocks and transactions.
+- TypeScript tests use a test runner from the TypeScript ecosystem. Hardhat works with any test runner. In this case, you're using the built-in [`node:test`](https://nodejs.org/api/test.html) module.
+- While Solidity tests run directly on the EVM, TypeScript tests run on a locally simulated network. Each time a test calls `network.connect()`, it gets a fresh blockchain state, and any changes made during the test are discarded at the end. This is useful for integration tests, where you want a more realistic environment with proper blocks and transactions.
 
-You can run both Solidity and Typescript tests together by using the main `test` task:
+You can run both Solidity and TypeScript tests together by using the main `test` task:
 
 <Run command="hardhat test" />
 
 :::tip
-To learn more about writing tests using TypeScript and viem, check out [our guide](/docs/guides/testing/using-viem).
+Learn more about writing tests with TypeScript and viem in [our guide](/docs/guides/testing/using-viem).
 :::
