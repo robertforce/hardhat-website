@@ -24,3 +24,5 @@ frontmatter
 `prebuild`
 Diátaxis
 Sourcify
+offchain
+onchain
