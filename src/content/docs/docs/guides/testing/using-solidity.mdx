@@ -119,11 +119,17 @@ You can configure how Solidity tests are executed in your Hardhat configuration.
 By default, Hardhat treats every Solidity file in the `test/` directory as a test file. To use a different location, set the `paths.tests.solidity` field:
 
 ```ts
-paths: {
-  tests: {
-    solidity: "./solidity-tests"
-  }
-},
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  /// ... other config ...
+  paths: {
+    tests: {
+      solidity: "./solidity-tests",
+    },
+  },
+});
 ```
 
 ### Configuring the tests execution
@@ -133,19 +139,31 @@ To configure how Solidity tests are executed, use the `test.solidity` object in 
 For example, the `ffi` cheatcode is disabled by default for security reasons, but you can enable it:
 
 ```ts
-test: {
-  solidity: {
-    ffi: true,
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  /// ... other config ...
+  test: {
+    solidity: {
+      ffi: true,
+    },
   },
-},
+});
 ```
 
 It's also possible to modify the execution environment of the tests. For example, you can modify the address that is returned by `msg.sender`:
 
 ```ts
-test: {
-  solidity: {
-    sender: "0x1234567890123456789012345678901234567890",
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  /// ... other config ...
+  test: {
+    solidity: {
+      sender: "0x1234567890123456789012345678901234567890",
+    },
   },
-},
+});
 ```
