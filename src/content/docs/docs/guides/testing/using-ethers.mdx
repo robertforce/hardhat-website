@@ -155,6 +155,18 @@ Here we are using `.to.be.revertedWith`, which asserts that a transaction revert
 
 Additionally, we are using some [`hardhat-network-helpers`](/docs/plugins/hardhat-network-helpers) features to assist us in testing our function with a non-default account. We use `impersonateAccount` to tell Hardhat to allow us to send transactions from that address, and `setBalance` to give it some ETH so it can pay for gas. Finally, we use `ethers.getSigner` to get a signer object for that address, which we use to connect to the contract and call the `inc()` function.
 
+:::note
+
+You can get other default accounts of the simulated blockchain which already have ETH.
+
+You can do this with:
+
+```ts
+const [defaultSigner, nonOwnerSigner] = await ethers.getSigners();
+```
+
+:::
+
 ### Using fixtures
 
 So far we've deployed the `Counter` contract in each test. This means that at the beginning of each test we have to get the contract factory and then deploy the contract. This might be fine for a single contract but, if you have a more complicated setup, each test will have several lines at the beginning just to set up the desired state, and most of the time these lines will be the same.
