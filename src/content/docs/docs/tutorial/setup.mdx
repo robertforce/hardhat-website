@@ -13,6 +13,8 @@ Before you start, make sure you have [Node.js](https://nodejs.org/) 22+ and a pa
 
 <Run preCommand="node --version" command="--version" />
 
+If you don't have Node.js installed, or you have an older version, you can follow [this guide](https://www.nvmnode.com/guide/download.html) to install it using the Node Version Manager or `nvm`.
+
 ## Creating your project
 
 You'll create an empty directory and initialize a Hardhat project inside it:
@@ -22,14 +24,14 @@ You'll create an empty directory and initialize a Hardhat project inside it:
   command="hardhat --init"
 />
 
-You'll be prompted to select a few options. Use the defaults for everything **except the project type**:
+You'll be prompted to select a few options. Accept the defaults for everything, **except the project type**:
 
 1. Version: "Hardhat 3 Beta"
 2. Directory: current directory (`"."`)
 3. **Project type: "A minimal Hardhat project"** <Badge text="not default" variant="caution" />
 4. Install dependencies: yes
 
-Once the setup is complete, verify that everything is working with the following command:
+Once the setup is complete, let's verify that everything is working:
 
 <Run command="hardhat --help" />
 
