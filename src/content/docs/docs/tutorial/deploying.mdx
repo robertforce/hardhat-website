@@ -28,7 +28,7 @@ export default buildModule("CounterModule", (m) => {
 });
 ```
 
-This module deploys an instance of `Counter` and calls `incBy(5)` once it's deployed. These functions don't execute the deployment transactions or function call immediately. They describe what should be done. Ignition then executes the deployment steps in the right order, handling dependencies, recovering from errors, and ensuring everything runs correctly.
+This module deploys an instance of `Counter` and calls `incBy(5)` once it's deployed. These functions don't execute the deployment transactions or contract calls immediately. They describe what should be done. Ignition then executes the deployment steps in the right order, handling dependencies, recovering from errors, and ensuring everything runs correctly.
 
 ## Trying out your deployment module
 
