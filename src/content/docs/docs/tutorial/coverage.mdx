@@ -7,28 +7,28 @@ sidebar:
 
 import Run from "@hh/Run.astro";
 
-Hardhat 3 comes built-in with functionality to measure the coverage of your tests, helping you identify parts of your code that aren't being tested. Without any plugin it works with Solidity tests, but with the `hardhat-toolbox-viem` that you installed, it will work with TypeScript tests too.
+Hardhat 3 has built-in test coverage functionality to help you identify untested code. It works with Solidity tests by default, and with the `hardhat-toolbox-viem` plugin you installed, it also works with TypeScript tests.
 
-## Getting the code coverage of Solidity tests
+## Getting code coverage for Solidity tests
 
-Run the following command to generate a coverage report for your Solidity tests:
+Generate a coverage report for your Solidity tests:
 
 <Run command="hardhat test solidity --coverage" />
 
-The output will show you a summary of the coverage at the end.
+The output shows a coverage summary at the end.
 
-## Getting the code coverage of TypesScript tests
+## Getting code coverage for TypeScript tests
 
-Similarly, you can measure the coverage of your TypeScript tests by running:
+Generate a coverage report for your TypeScript tests:
 
 <Run command="hardhat test nodejs --coverage" />
 
-## Getting the combined code coverage
+## Getting combined code coverage
 
-To get combined coverage for both Solidity and TypeScript tests, use the main `test` task:
+Get combined coverage for both Solidity and TypeScript tests:
 
 <Run command="hardhat test --coverage" />
 
 :::tip
-Check our [coverage guide](/docs/guides/testing/code-coverage) for more details on test coverage.
+Learn more about test coverage in [our coverage guide](/docs/guides/testing/code-coverage).
 :::
