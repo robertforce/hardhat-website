@@ -7,7 +7,7 @@ sidebar:
 
 import Run from "@hh/Run.astro";
 
-In the previous section you added your private key and the RPC URL (which has a secret API key) directly in the config file. This isn't a good practice, as it can lead to accidental exposure of sensitive information. To avoid this, Hardhat supports **Configuration Variables**.
+In the previous section, you added your private key and RPC URL (which contains an API key) directly to the config file. This isn't a good practice because it can expose sensitive information. To avoid this, Hardhat supports Configuration Variables.
 
 Replace the `sepolia` network configuration in your `hardhat.config.ts` with the following:
 
@@ -34,26 +34,30 @@ export default defineConfig({
 });
 ```
 
-Here you're using `configVariable` to indicate that the values for the RPC URL and the private key should be obtained from Configuration Variables named `SEPOLIA_RPC_URL` and `SEPOLIA_PRIVATE_KEY`. Hardhat includes a plugin to securely store and retrieve these variables in a local keystore.
+This uses `configVariable` to create Configuration Variables named `SEPOLIA_RPC_URL` and `SEPOLIA_PRIVATE_KEY` and use them in your config. Hardhat includes a plugin to securely store and retrieve these values in a local keystore.
 
 ## Using `hardhat-keystore`
 
-Let's add these variables to the keystore. Run the following commands in your terminal:
+Add these variables to the keystore by running the following command:
 
 <Run command="hardhat keystore set SEPOLIA_RPC_URL" />
 
-You'll be prompted to enter the password of the keystore (or to set one, if this is the first time you're using it) and then to enter the value for the variable. Paste your Sepolia RPC URL as the value. Then run the command again to add the private key:
+You'll be prompted to enter the keystore password (or set one if this is your first time) and then enter the variable value. Paste your Sepolia RPC URL as the value.
+
+Run the command again to add the private key:
 
 <Run command="hardhat keystore set SEPOLIA_PRIVATE_KEY" />
 
-Once you've added both variables, you can run the deployment command again:
+After adding both variables, run the deployment command again:
 
 <Run command="hardhat ignition deploy ignition/modules/Counter.ts --network sepolia" />
 
-This time, you'll have to enter the keystore password to retrieve the Configuration Variables, but you won't have to put any sensitive information in your config file.
+This time, you'll need to enter the keystore password to retrieve the Configuration Variable values, but you won't need to put any sensitive information in your config file.
 
-Since we've already deployed the contract, you should see that nothing new needs to be deployed this time.
+Since you've already deployed the contract, you'll see that nothing new needs to be deployed.
 
 :::tip
-Check [our guide](/docs/guides/configuration-variables) to learn more about Configuration Variables and how to use them effectively. You can also read our [Configuration Variables explanation](/docs/explanations/configuration-variables) for a deeper understanding of this feature.
+Learn more about Configuration Variables and how to use them effectively in [our guide](/docs/guides/configuration-variables).
+
+For a deeper understanding, read the [Configuration Variables explanation](/docs/explanations/configuration-variables).
 :::
