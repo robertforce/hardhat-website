@@ -9,7 +9,7 @@ import Run from "@hh/Run.astro";
 
 In the previous section, you added your private key and RPC URL (which contains an API key) directly to the config file. This isn't a good practice because it can expose sensitive information. To avoid this, Hardhat supports Configuration Variables.
 
-Replace the `sepolia` network configuration in your `hardhat.config.ts` with the following:
+Update the `sepolia` network configuration in your `hardhat.config.ts` like this:
 
 ```ts del={3,14-15} ins={4,16-17}
 // hardhat.config.ts
