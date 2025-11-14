@@ -64,7 +64,7 @@ export default defineConfig({
 
 :::danger
 
-In the example above we wrote a the API key in a config file for learning purposes. This is a security risk, and you should avoid it.
+In the example above we wrote the API key in a config file for learning purposes. This is a security risk, and you should avoid it.
 
 Take a look at [this guide](/docs/guides/configuration-variables) to handle sensitive information in your config safely.
 
@@ -100,7 +100,7 @@ If your contract has constructor arguments, you have to also pass the values tha
 
 <Run command='hardhat verify --network sepolia 0x1234567890... "Hello" 1000' />
 
-If the arguments are too complex to pass directly in the shell—for example, an array of numbers—you can define them in a TypeScript or JavaScript file:
+If the arguments are too complex to pass directly in the shell, for example an array of numbers, you can define them in a TypeScript or JavaScript file:
 
 ```ts
 // constructor-args.ts
@@ -164,7 +164,7 @@ export default defineConfig({
 
 Your verification might fail for a variety of reasons. Here are some common issues and how to fix them:
 
-- **Verifying immediately after deploying**. Your contracts may not have been indexed by the block explorer yet, causing the verification to fail. Normally, waiting a minute is enough for it to work.
-- **Wrong constructor arguments**. Double-check that your constructor arguments are correct.
-- **Using code that is different from the one used for deployment**. If you are trying to verify a contract that you have deployed weeks ago, then chances are that the code has changed in the meantime. Double-check that you are using the correct code.
-- **Using a different build profile**. If you are using a different build profile than the one used for deployment, then the bytecode will be different, causing the verification to fail. Try using `--build-profile` with other profiles to verify your contract, beginning with `default`. You may also need to run `hardhat build` with the same build profile to generate the correct artifacts.
+- **Verifying immediately after deploying**: Your contracts may not have been indexed by the block explorer yet, causing the verification to fail. Normally, waiting a minute is enough for it to work
+- **Wrong constructor arguments**: Double-check that your constructor arguments are correct
+- **Using code that is different from the one used for deployment**: If you are trying to verify a contract that you have deployed weeks ago, then chances are that the code has changed in the meantime. Double-check that you are using the correct code
+- **Using a different build profile**: If you are using a different build profile than the one used for deployment, then the bytecode will be different, causing the verification to fail. Try using `--build-profile` with other profiles to verify your contract, beginning with `default`. You may also need to run `hardhat build` with the same build profile to generate the correct artifacts
