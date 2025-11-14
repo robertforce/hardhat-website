@@ -73,7 +73,14 @@ describe("Counter", function () {
 });
 ```
 
-First we import the things we are going to use: the [`expect`](https://www.chaijs.com/api/bdd/) function from `chai` to write our assertions, the [Hardhat Runtime Environment](/docs/explanations/hardhat-runtime-environment) (`hre`), and the [network helpers](/docs/plugins/hardhat-network-helpers) to interact with the Hardhat Network. After that we use the `describe` and `it` functions, which are global Mocha functions used to describe and group your tests. (You can read more about Mocha [here](https://mochajs.org/#getting-started).)
+First we import the things we are going to use:
+
+- The [`expect`](https://www.chaijs.com/api/bdd/) function from `chai` to write our assertions
+- The [Hardhat Runtime Environment](/docs/explanations/hardhat-runtime-environment), or `hre`, which exposes all of Hardhat's functionality
+
+Then, we use the `hre.network.connect()` to create a new local simulation of an Ethereum blockchain to run our test on. It returns an object with an instance of `ethers` and `networkHelpers` already connected to that simulation.
+
+After that we use the `describe` and `it` functions, which are global Mocha functions used to describe and group your tests. You can read more about Mocha [here](https://mochajs.org/#getting-started).
 
 The test itself is what's inside the callback argument to the `it` function. First we deploy our `Counter` contract using the `ethers` instance returned by our `hre.network.connect()` call.
 
