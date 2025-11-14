@@ -6,6 +6,7 @@ sidebar:
   order: 4
 ---
 
+import { Steps } from "@astrojs/starlight/components";
 import Install from "@hh/Install.astro";
 
 This guide explains an approach for testing contracts in Hardhat using [Ethers](https://docs.ethers.org/v6/) and [Mocha](https://mochajs.org/). It also uses our custom [Chai matchers](/docs/plugins/hardhat-ethers-chai-matchers) and our [Hardhat Network Helpers](/docs/plugins/hardhat-network-helpers) to make it easier to write clean test code.
@@ -14,18 +15,21 @@ This guide explains an approach for testing contracts in Hardhat using [Ethers](
 
 If you have already initialized an ethers-based project using `hardhat --init`, you don't need to do anything else.
 
-If you want to add the plugin manually:
+If you want to add the required plugins manually follow these steps:
 
-1. Install the plugin:
+<Steps>
 
-   <Install packages="@nomicfoundation/hardhat-ethers @nomicfoundation/hardhat-mocha @nomicfoundation/hardhat-ethers-chai-matchers @nomicfoundation/hardhat-network-helpers" />
+1. Install the packages:
+
+   <Install packages="@nomicfoundation/hardhat-ethers @nomicfoundation/hardhat-typechain @nomicfoundation/hardhat-mocha @nomicfoundation/hardhat-ethers-chai-matchers @nomicfoundation/hardhat-network-helpers ethers mocha @types/mocha chai @types/chai" />
 
 2. Add them to the list of plugins in your Hardhat configuration:
 
    ```ts
    // hardhat.config.ts
-   import { defineConfig } from "hardhat/config";
+   // ... other imports...
    import hardhatEthers from "@nomicfoundation/hardhat-ethers";
+   import hardhatTypechain from "@nomicfoundation/hardhat-typechain";
    import hardhatMocha from "@nomicfoundation/hardhat-mocha";
    import hardhatEthersChaiMatchers from "@nomicfoundation/hardhat-ethers-chai-matchers";
    import hardhatNetworkHelpers from "@nomicfoundation/hardhat-network-helpers";
@@ -33,6 +37,7 @@ If you want to add the plugin manually:
    export default defineConfig({
      plugins: [
        hardhatEthers,
+       hardhatTypechain,
        hardhatMocha,
        hardhatEthersChaiMatchers,
        hardhatNetworkHelpers,
@@ -41,6 +46,8 @@ If you want to add the plugin manually:
      // ...other config...
    });
    ```
+
+</Steps>
 
 ### A simple test
 
