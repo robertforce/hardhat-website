@@ -5,6 +5,7 @@ sidebar:
   label: Verifying contracts
 ---
 
+import { Steps } from "@astrojs/starlight/components";
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
 
@@ -17,6 +18,8 @@ In this guide, you'll learn how to verify your contracts using the `hardhat-veri
 If you initialized your project using `hardhat --init`, you don’t need to do anything: `hardhat-verify` is already included as part of the template project.
 
 If you want to add the plugin manually:
+
+<Steps>
 
 1. Install the plugin:
 
@@ -37,6 +40,7 @@ If you want to add the plugin manually:
      // ...other config...
    });
    ```
+</Steps>
 
 ## Configuration
 
