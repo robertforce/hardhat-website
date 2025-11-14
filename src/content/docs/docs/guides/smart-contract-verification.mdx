@@ -58,13 +58,15 @@ export default defineConfig({
 });
 ```
 
-You can get an Etherscan API key by following [this guide](https://docs.etherscan.io/etherscan-v2/getting-an-api-key).
+:::danger
 
-:::tip
+In the example above we wrote a the API key in a config file for learning purposes. This is a security risk, and you should avoid it.
 
-In the previous version of the Etherscan API, you needed a different API key for each chain. With Etherscan V2, a single API key works across all networks.
+Take a look at [this guide](/docs/guides/configuration-variables) to handle sensitive information in your config safely.
 
 :::
+
+You can get an Etherscan API key by following [this guide](https://docs.etherscan.io/etherscan-v2/getting-an-api-key). This plugin uses Etherscan's API v2, so it only requires a single API key, which works with every supported chain.
 
 To verify contracts on Blockscout and Sourcify, you don't need to set an API key, nor any config.
 
