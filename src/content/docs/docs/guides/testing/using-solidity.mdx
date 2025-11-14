@@ -16,7 +16,7 @@ Hardhat has built-in support for Solidity tests. You don't need to install any p
 A Solidity file is considered a **test file** if:
 
 - It's inside the `test/` directory
-- It's inside the `contracts/` directory and ends with `.t.sol`.
+- It's inside the `contracts/` directory and ends with `.t.sol`
 
 Both of these directories can be changed in your Hardhat [configuration](/docs/reference/configuration), but these are the default ones.
 
@@ -50,7 +50,7 @@ contract CounterTest {
 }
 ```
 
-### Assertion libraries
+### Using assertion libraries
 
 In the previous example, the error message doesn't show the actual value of `by` that made the test fail. That's because interpolating the value into the string isn't straightforward in Solidity. To get better error messages, plus other useful functionality, you can use an assertion library like [forge-std](https://github.com/foundry-rs/forge-std).
 
@@ -168,4 +168,4 @@ export default defineConfig({
 });
 ```
 
-To read about learn more about how to configure your Solidity tests you can read [their Configuration reference](/docs/reference/configuration#solidity-tests-configuration).
+To learn more about how to configure your Solidity tests, read [the Solidity tests Configuration reference](/docs/reference/configuration#solidity-tests-configuration).
