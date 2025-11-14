@@ -9,7 +9,7 @@ sidebar:
 import { Steps } from "@astrojs/starlight/components";
 import Install from "@hh/Install.astro";
 
-This guide explains an approach for testing contracts in Hardhat using [Ethers](https://docs.ethers.org/v6/) and [Mocha](https://mochajs.org/). It also uses our custom [Chai matchers](/docs/plugins/hardhat-ethers-chai-matchers) and our [Hardhat Network Helpers](/docs/plugins/hardhat-network-helpers) to make it easier to write clean test code.
+This guide explains an approach for testing contracts in Hardhat using [Ethers](https://docs.ethers.org/v6/) and [Mocha](https://mochajs.org/). It also uses our custom [Chai matchers](/docs/plugins/hardhat-ethers-chai-matchers) and our [`hardhat-network-helpers`](/docs/plugins/hardhat-network-helpers) plugin to make it easier to write clean test code.
 
 ## Setup
 
@@ -248,6 +248,4 @@ The fixture function can return anything you want, and the `loadFixture` helper 
 
 ### Other tests
 
-There are several other things you can test, like checking the balance of an account, verifying that a contract was deployed at a specific address, or making sure that a certain storage slot has the expected value. Check out the [Hardhat Ethers Chai Matchers](/docs/plugins/hardhat-ethers-chai-matchers) and [Hardhat Network Helpers](/docs/plugins/hardhat-network-helpers) docs to see all the available helpers you can use in your tests.
-
-The Hardhat Toolbox also includes plugins to help with [Solidity code coverage](/docs/guides/testing/code-coverage), [gas usage metrics](/docs/guides/testing/gas-statistics), and more.
+There are several other things you can test, like checking the balance of an account, verifying that a contract was deployed at a specific address, or making sure that a certain storage slot has the expected value. Check out the [`hardhat-ethers-chai-matchers`](/docs/plugins/hardhat-ethers-chai-matchers) and [`hardhat-network-helpers`](/docs/plugins/hardhat-network-helpers) docs to see all the available helpers you can use in your tests.
