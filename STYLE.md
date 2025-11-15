@@ -296,6 +296,8 @@ This are proper nouns that are used in Hardhat 3, which need to be capitalized i
 - Network Manager
 - Network Connection
 - Network Config
+- Build Profile
+- Isolated Build
 
 Note: Hardhat can also be called Hardhat 3, but never Hardhat v3.
 
