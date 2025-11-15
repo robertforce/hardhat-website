@@ -9,7 +9,7 @@ import Run from "@hh/Run.astro";
 
 Writing Solidity smart contracts in Hardhat is as simple as writing a `.sol` file in your `contracts/` folder.
 
-For example, you could write create the file `contracts/HelloWorld.sol`:
+For example, you could create the file `contracts/HelloWorld.sol`:
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -21,7 +21,7 @@ contract HelloWorld {
 }
 ```
 
-and all you need to build it is running:
+To build it, run:
 
 <Run command="hardhat build" />
 
@@ -45,11 +45,11 @@ contract HelloWorld is BaseContract {
 }
 ```
 
-This default behavior is intentional, as it ensures that your modules are better support by different tools, prevents accidental clashes with unscoped remappings, and ensures that your code behaves correctly when distributed through npm and/or git submodules. To learn how to customize it, see the next section.
+This default behavior is intentional, as it ensures that your modules are better supported by different tools, prevents accidental clashes with unscoped remappings, and ensures that your code behaves correctly when distributed through npm and/or git submodules. To learn how to customize this behavior, check the guides in the next section.
 
 ## Learn more
 
 - To learn how to use a folder other than `contracts/` for your sources, check the [Configuration reference](/docs/reference/configuration#path-configuration)
-- To learn about how to use files from dependencies in your Hardhat 3 project, read [this guide](/docs/guides/writing-contracts/dependencies)
-- To learn how to use remappings, read [this guide](/docs/guides/writing-contracts/remappings)
-- To learn how to use absolute imports for your local files, read [this guide](/docs/cookbook/absolute-imports)
+- To learn how to use files from dependencies in your Hardhat 3 project, read the [Dependencies guide](/docs/guides/writing-contracts/dependencies)
+- To learn how to use remappings, read the [Remappings guide](/docs/guides/writing-contracts/remappings)
+- To learn how to use absolute imports for your local files, read the [Absolute imports recipe](/docs/cookbook/absolute-imports)
