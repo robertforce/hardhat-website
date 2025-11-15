@@ -1,0 +1,59 @@
+---
+title: Build profiles
+description: How to use build profiles in Hardhat 3
+sidebar:
+  order: 5
+---
+
+import Run from "@hh/Run.astro";
+
+Hardhat 3 has support for different build profiles. Each of them is a different configuration of Solidity, that you can use for different use cases.
+
+For example, you may want to have a specific build profile to run your solidity tests, and a different one for deployment. Each task can choose which build profile to use by default.
+
+## Configuring a build profile
+
+To configure a build profile, all you have to do is using an extended version of the `solidity` settings in your config
+
+```ts {"Optional setting outside of 'profiles':": 12-15}
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  //...
+  solidity: {
+    profiles: {
+      myProfile: {
+        // This is a normal solidity config, like explained in the previous guide
+      }
+    }
+
+    npmFilesToBuild: [
+      // ... npm files to build and emit artifacts
+    ]
+  },
+});
+```
+
+Each build profile can use the full [compiler configuration](/docs/reference/configuration#solidity-configuration).
+
+## Built-in build profiles
+
+Hardhat 3 always defines two build profiles:
+
+- `default`: which is used if the user doesn't specify any, with settings optimized for development time
+- `production`: which is recommended for deployments, and has the optimizer enabled by default.
+
+## Using a `solidity` config without defining profiles
+
+If you define your Solidity config without defining a profile, you are actually configuring the `default` profile.
+
+## Choosing a build profile
+
+Every time you run Hardhat you can use the `--build-profile` argument to choose one.
+
+For example, you can run your tests in production mode with
+
+<Run command="hardhat test --build-profile production" />
+
+If you don't provide any, most tasks will use `default`, but they are free to pick the default that it's best for their workflow. For example, when run a deployment with [Hardhat Ignition](/ignition) it will use `production` by default.

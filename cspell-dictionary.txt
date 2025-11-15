@@ -26,3 +26,6 @@ Diátaxis
 Sourcify
 offchain
 onchain
+IERC
+ERC
+EIP

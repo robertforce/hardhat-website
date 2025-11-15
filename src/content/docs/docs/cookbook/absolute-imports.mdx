@@ -5,4 +5,36 @@ sidebar:
   order: 5
 ---
 
-TODO
+import { FileTree } from "@astrojs/starlight/components";
+
+By default, Hardhat 3 only supports relative imports to local files. For example, if you have this project:
+
+{/* prettier-ignore */}
+<FileTree>
+- my-project/
+  - package.json
+  - hardhat.config.ts
+  - contracts/
+    - Foo.sol
+  - test/
+    - Foo.t.sol
+</FileTree>
+
+The test `test/Foo.t.sol` will have to import `Foo.sol` using `"../contracts/Foo.sol"`. We recommend you use this style of imports, as it's compatible with every tool.
+
+## Using remappings for absolute imports
+
+If you still want to use absolute imports, and be able to write `"contracts/Foo.sol"` instead, you can use a remapping.
+
+To do it, add `remappings.txt` file to directory where you want to use absolute imports. For example, if you only want them for test files, you can add this:
+
+```txt
+// test/remappings.txt
+contracts/=../contracts/
+```
+
+By adding the `remapping.txt` to the directory where it's needed, you avoid polluting other source files, and keep your project compatible with more tools.
+
+## Learn more
+
+To learn more about remappings in Hardhat 3, read [this guide](/docs/guides/writing-contracts/remappings)
