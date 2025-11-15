@@ -1,19 +1,18 @@
 ---
-title: Build profiles
-description: How to use build profiles in Hardhat 3
+title: Build Profiles
+description: How to use Build Profiles in Hardhat 3
 sidebar:
+  label: Build profiles
   order: 5
 ---
 
 import Run from "@hh/Run.astro";
 
-Hardhat 3 has support for different build profiles. Each of them is a different configuration of Solidity, that you can use for different use cases.
+Build Profiles let you use different Solidity compiler configurations for different use cases. For example, you might use one Build Profile for running tests and another for deployment, each with settings optimized for that workflow.
 
-For example, you may want to have a specific build profile to run your solidity tests, and a different one for deployment. Each task can choose which build profile to use by default.
+## Configuring a Build Profile
 
-## Configuring a build profile
-
-To configure a build profile, all you have to do is using an extended version of the `solidity` settings in your config
+To configure a Build Profile, use this extended version of the `solidity` settings in your config:
 
 ```ts {"Optional setting outside of 'profiles':": 12-15}
 // hardhat.config.ts
@@ -24,7 +23,7 @@ export default defineConfig({
   solidity: {
     profiles: {
       myProfile: {
-        // This is a normal solidity config, like explained in the previous guide
+        // This is a normal Solidity config, as explained in the previous guide
       }
     }
 
@@ -35,25 +34,26 @@ export default defineConfig({
 });
 ```
 
-Each build profile can use the full [compiler configuration](/docs/reference/configuration#solidity-configuration).
+Each Build Profile can use the full [compiler configuration](/docs/reference/configuration#solidity-configuration).
 
-## Built-in build profiles
+## Built-in Build Profiles
 
-Hardhat 3 always defines two build profiles:
+Hardhat 3 always defines two Build Profiles:
 
-- `default`: which is used if the user doesn't specify any, with settings optimized for development time
-- `production`: which is recommended for deployments, and has the optimizer enabled by default.
+- `default`: used by most tasks when you don't specify a profile, with settings optimized for development speed and experience
+- `production`: recommended for deployments, with the optimizer enabled by default
 
-## Using a `solidity` config without defining profiles
+## Using a `solidity` config without defining Build Profiles
 
-If you define your Solidity config without defining a profile, you are actually configuring the `default` profile.
+If you define your Solidity config without explicitly defining Build Profiles, you're actually configuring the `default` profile. This means the configuration shown in the [previous guide](/docs/guides/writing-contracts/configuring-the-compiler) applies to the `default` profile.
 
-## Choosing a build profile
+## Choosing a Build Profile
 
-Every time you run Hardhat you can use the `--build-profile` argument to choose one.
+You can use the `--build-profile` argument to choose which Build Profile to use when running Hardhat.
 
-For example, you can run your tests in production mode with
+For example, to run your tests with the production profile:
 
 <Run command="hardhat test --build-profile production" />
 
-If you don't provide any, most tasks will use `default`, but they are free to pick the default that it's best for their workflow. For example, when run a deployment with [Hardhat Ignition](/ignition) it will use `production` by default.
+If you don't specify a profile, most tasks will use `default`, but each task can choose the profile that works best for its workflow. For example, when you deploy with [Hardhat Ignition](/ignition), it uses `production` by default.
+
