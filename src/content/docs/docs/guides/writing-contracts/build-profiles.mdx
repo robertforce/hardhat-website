@@ -3,7 +3,7 @@ title: Build Profiles
 description: How to use Build Profiles in Hardhat 3
 sidebar:
   label: Build profiles
-  order: 5
+  order: 6
 ---
 
 import Run from "@hh/Run.astro";
@@ -41,7 +41,7 @@ Each Build Profile can use the full [compiler configuration](/docs/reference/con
 Hardhat 3 always defines two Build Profiles:
 
 - `default`: used by most tasks when you don't specify a profile, with settings optimized for development speed and experience
-- `production`: recommended for deployments, with the optimizer enabled by default
+- `production`: recommended for deployments, with the optimizer and [Isolated Builds](/docs/guides/writing-contracts/isolated-builds) enabled by default
 
 ## Using a `solidity` config without defining Build Profiles
 
@@ -56,4 +56,3 @@ For example, to run your tests with the production profile:
 <Run command="hardhat test --build-profile production" />
 
 If you don't specify a profile, most tasks will use `default`, but each task can choose the profile that works best for its workflow. For example, when you deploy with [Hardhat Ignition](/ignition), it uses `production` by default.
-
