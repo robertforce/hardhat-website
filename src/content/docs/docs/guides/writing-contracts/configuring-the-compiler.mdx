@@ -29,7 +29,7 @@ export default defineConfig({
 
 ### Enabling the optimizer
 
-One common use of settings is enabling optimizations. When you enable the optimizer, you can also define the number of runs, which affects how it balances between code size and execution cost:
+One common use of settings is enabling the optimizer. When you enable it, you can also define the number of runs, which affects how the compiler balances between deployment cost and execution cost:
 
 ```ts
 // hardhat.config.ts
@@ -51,7 +51,7 @@ export default defineConfig({
 
 ### Enabling `viaIR`
 
-You can also enable the [IR-based code generator](https://docs.soliditylang.org/en/latest/ir-breaking-changes.html). While this compilation mode can be slower, it enables more powerful optimizations:
+You can also enable the [IR-based code generator](https://docs.soliditylang.org/en/latest/ir-breaking-changes.html). While this compilation mode is slower, it enables more powerful optimizations:
 
 ```ts
 // hardhat.config.ts
@@ -70,13 +70,14 @@ export default defineConfig({
 
 ### Other settings
 
-The `settings` property accepts the same options supported by the chosen compiler version. For the full details, check [solc's documentation](https://docs.soliditylang.org/en/latest/).
+The `settings` property accepts the same options supported by the chosen compiler version. For the full details, see the [Solidity compiler documentation](https://docs.soliditylang.org/en/latest/).
 
 ## Next steps
 
-You now know how to configure the Solidity compiler version, enable optimizations, and adjust compiler settings. For more advanced configuration options, check out the [Solidity Configuration reference](/docs/reference/configuration#solidity-configuration) or these cookbook recipes:
+You now know how to configure the Solidity compiler version, enable the optimizer, and adjust compiler settings. For more advanced configuration options, see the [Solidity Configuration reference](/docs/reference/configuration#solidity-configuration) or these guides:
 
-- [Using build profiles to configure Solidity differently for each use case](/docs/guides/writing-contracts/build-profiles)
+- [Using Isolated Builds for deployments](/docs/guides/writing-contracts/isolated-builds)
+- [Using Build Profiles to configure Solidity differently for each use case](/docs/guides/writing-contracts/build-profiles)
 - [Using multiple versions of Solidity in a single project](/docs/cookbook/multiple-solidity-versions)
 - [Customizing the settings for a subset of your files](/docs/cookbook/multiple-solidity-versions#using-overrides-without-multiple-versions-of-solidity)
 - [Generating artifacts from npm dependencies](/docs/cookbook/npm-artifacts)
