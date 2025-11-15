@@ -178,7 +178,7 @@ With these changes, our previous test will still pass because by default the con
 
 However, we should also add a test to check that calling `inc()` from a non-owner address causes the transaction to revert. Here's how:
 
-```ts collapse={1-18, 44-45}
+```ts collapse={1-18,44-45}
 // test/Counter.ts
 import { describe, it } from "node:test";
 import hre from "hardhat";
@@ -278,7 +278,7 @@ The first time `loadFixture` is called, the fixture is executed. But the second 
 
 This is what our tests look like when a fixture is used:
 
-```ts ins={8-11,14,25}
+```ts {8-11,14,25}
 // test/Counter.ts
 import { describe, it } from "node:test";
 import { network } from "hardhat";
