@@ -30,3 +30,7 @@ onchain
 IERC
 ERC
 EIP
+DELEGATECALL
+predeployed
+predeploys
+automining
