@@ -1,0 +1,36 @@
+---
+title: Running Hardhat with debug logs
+description: How to run Hardhat with debug logs
+sidebar:
+  order: 7
+---
+
+import Run from "@hh/Run.astro";
+
+If you are having a problem with Hardhat, you can run it with debug logs enabled.
+
+For example, this runs the build process with debug logs:
+
+<Run prefix="DEBUG='hardhat*'" command="hardhat build" />
+
+## Filtering logs
+
+You can filter which logs to display by adding a longer prefix to the `DEBUG` env variable.
+
+For example, this runs the build process only with logs coming from Hardhat's Solidity integration:
+
+<Run prefix="DEBUG='hardhat:core:solidity:*'" command="hardhat build" />
+
+## Sharing debug logs and privacy
+
+The debug logs printed by Hardhat can include information that you may consider somewhat private.
+
+These can include the following, and potentially more private pieces of data:
+
+- Your operating system user name
+- The absolute path to your Hardhat project
+- Your telemetry ID (this is a random number, but posting it online associates it to your identity)
+- The name of your contracts, if you consider those private
+- Potentially an RPC URL (we anonymize them whenever possible though)
+
+Please review what you are posting online before doing so, and redact whatever you want to keep private.

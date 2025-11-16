@@ -1,0 +1,249 @@
+---
+title: The Network Manager API
+description: How to use the Network Manager of Hardhat 3
+sidebar:
+  label: Network Manager
+  order: 2
+tableOfContents:
+  maxHeadingLevel: 5
+---
+
+import Run from "@hh/Run.astro";
+
+The [Hardhat Runtime Environment](/docs/explanations/hardhat-runtime-environment) comes with a `NetworkManager` object available as its `network` property.
+
+This section has reference documentation to work with its APIs. To learn more about Network Management in general, read [this explanation](/docs/explanations/network-management).
+
+## Importing the Network Manager
+
+You can access the Network Manager by importing Hardhat:
+
+```ts
+// script/example.ts
+import hre from "hardhat";
+
+const networkManager = hre.network;
+```
+
+Or you can import it directly:
+
+```ts
+// script/example.ts
+import { network } from "hardhat";
+```
+
+## The `NetworkManager` object
+
+The `NetworkManager` object only has two methods:
+
+- `network.create()`: To connect to remote networks and create local blockchain simulations.
+- `network.createServer()`: To create a local blockchain simulation and expose it through an HTTP-based JSON-RPC server.
+
+The majority of this documentation will focus on `network.create()`, as `network.createServer()` can be considered a wrapper around it.
+
+### The `network.create()` method
+
+When you call the `network.create()` method, Hardhat creates a new `NetworkConnection` object.
+
+The connection can either be an HTTP Network Connection connected to an external node through JSON-RPC, or an in-process connection to a new EDR-based simulated blockchain. In either case, every connection you create is independent from one another.
+
+Both types offer the same API, so you can easily swap between them.
+
+#### Calling it without parameters
+
+The simplest way to create a new `NetworkConnection` is without any parameter:
+
+```ts
+// script/no-params-example.ts
+import { network } from "hardhat";
+
+const connection = await network.connect();
+console.log(connection.networkName);
+```
+
+By default, this will create a `NetworkConnection` based on the `"default"` Network Config of your Hardhat configuration. This Network Config is always defined, and by default it has an [`edr-simulated` type](/docs/explanations/network-management#edr-simulated-network-configs), so it creates a new blockchain simulation every time it's called.
+
+You can also control which Network Config is used when none is provided by using the `network` [Global Option](/docs/explanations/global-options). For example, running that same script like this will use the `localhost` Network Config:
+
+<Run command="hardhat run script/no-params-example.ts --network localhost" />
+
+#### Choosing a Network Config
+
+You can also choose a Network Config by providing its name as a string, or as part of its options object:
+
+```ts
+// script/with-name-example.ts
+import { network } from "hardhat";
+
+const connection = await network.connect("localhost");
+
+const connectionWithOptions = await network.connect({ network: "localhost" });
+```
+
+#### Network Config overrides
+
+When you use the second option from the ones shown above, you can also use an `override` parameter. When you use it, the Network Config is read from the `HardhatUserConfig`, and the provided values overridden. Then it goes through the config validation process and resolution, and if successful, its result is used to create the connection.
+
+For example, this script creates a Network Connection with logging enabled, and mines a block, whose results are printed to the terminal:
+
+```ts
+// script/with-overrides-example.ts
+import { network } from "hardhat";
+
+const { networkHelpers } = await network.connect({
+  override: { loggingEnabled: true },
+});
+
+await networkHelpers.mine();
+```
+
+#### Providing a Chain Type option
+
+You can also provide a `chainType` in the options object. For example:
+
+```ts
+import { network } from "hardhat";
+
+const { viem } = await network.connect({
+  network: "hardhatOp",
+  chainType: "op",
+});
+```
+
+When you do this, the `NetworkConnection` is created with `op` as its type parameter. This has several implications:
+
+- If you are using a plugin with multichain support, like `hardhat-viem`, it can extend the type of the `NetworkConnection<"op">`, adding new functionality in the form of new fields and methods.
+- Multichain plugins and HTTP Network Connections in general can also change how they behave at runtime. For example, estimating gas differently depending on the Chain Type you are using.
+- Network Connections to simulated networks will change how they work, running a higher-fidelity simulation.
+
+You can learn more about these concepts in the [Multichain support explanation](/docs/explanations/multichain-support).
+
+##### Defining a Chain Type in your Network Config
+
+You can define a `chainType` property in each Network Config. For example:
+
+```ts ins={9}
+// hardhat.config.ts
+// ... imports ...
+
+export default defineConfig({
+  // ... other config ...
+  networks: {
+    hardhatMainnet: {
+      type: "edr-simulated",
+      chainType: "l1",
+    },
+    // ... other networks ...
+  },
+});
+```
+
+When you do this, you get most of the benefits of providing it as an option, except for the type-level extensions that a plugin can provide.
+
+If you provide a Chain Type both as an option and as part of your Network Config, Hardhat will validate that they're the same.
+
+{
+
+// Commented out because of this issue: https://github.com/NomicFoundation/hardhat/issues/7700
+
+// ##### Changing the default Chain Type
+
+// By default, the default Chain Type that's used when neither a Network Config nor the `network.connect()` options provide one is `generic`.
+
+// You can customize this with a [Type Extension](/docs/plugin-development/explanations/type-extension), and a config value. Like this:
+
+// ```ts ins={4-9,12}
+// // hardhat.config.ts
+// /// ... imports ...
+
+// import "hardhat/types/network";
+// declare module "hardhat/types/network" {
+// interface ChainTypeConfig {
+// defaultChainType: "op";
+// }
+// }
+
+// export default defineConfig({
+// defaultChainType: "op",
+// /// ... other config ...
+// networks: {
+// opHardhat: {},
+// },
+// });
+// ```
+
+// Note that the Type Extension and the config value must both be present and match, or your get a compilation error.
+
+// When you do that, the default Chain Type will be updated both at type-level and runtime. For example, this will worth the config above:
+
+// ```ts "publicClient.estimateL1Gas"
+// // scripts/example-op.ts
+// import { network } from "hardhat";
+
+// const { viem } = await network.connect();
+
+// const publicClient = await viem.getPublicClient();
+// const l1Gas = await publicClient.estimateL1Gas({
+// account: "0x1111111111111111111111111111111111111111",
+// to: "0x2222222222222222222222222222222222222222",
+// value: 1n,
+// });
+
+// console.log("l1Gas:", l1Gas);
+// ```
+
+// You can run it with:
+
+// <Run command="hardhat run scripts/example-op.ts" />
+
+}
+
+### The `network.createServer()` method
+
+If you need to create a network simulation and expose its JSON-RPC through HTTP, like `hardhat node` does, you can use the `network.createServer()` method. It takes the same arguments as `network.connect()`, plus two additional optional arguments:
+
+- `hostname`: The hostname of the network interface the server should use to listen for new connections. It defaults to `"127.0.0.1"` if not provided, and to `"0.0.0.0"` if running on a Docker container.
+- `port`: The port to use in the HTTP server. If not provided, your OS will assign an unused random port.
+
+Calling `await network.createServer()` returns a `JsonRpcServer` object, which has these methods:
+
+- `listen()`: To start the server and return the `hostname` and `port` being used.
+- `close()`: To stop the server.
+- `afterClosed()`: Which you can use to await for the server to be closed. This is helpful if the `close()` method is called from a different async context.
+
+To see a complete example, create a `scripts/server.ts` file with this content:
+
+```ts
+// scripts/server.ts
+import { network } from "hardhat";
+
+// Create a JsonRpcServer wrapping a blockchain simulation based on the
+// "default" Network Config, with `loggingEnabled` setting overridden to `true`
+const server = await network.createServer({
+  network: "default",
+  override: { loggingEnabled: true },
+});
+
+const { address, port } = await server.listen();
+console.log(`JSON-RPC running in: http://${address}:${port}`);
+
+// Example of closing the server from another async context
+console.log("Closing the server in 60 seconds");
+setTimeout(async () => {
+  await server.close();
+}, 60_000);
+
+// Wait for the server to close before printing a message
+await server.afterClosed();
+console.log("Server closed");
+```
+
+And you can run it with:
+
+<Run command="hardhat run scripts/server.ts" />
+
+## The `NetworkConnection<ChainTypeT>` object
+
+The `NetworkConnection` returned by `network.connect()` provides the basic functionality to interact with the network, and can be extended through plugins.
+
+To learn more about it, read [this explanation](/docs/explanations/network-management#the-networkconnection-object).

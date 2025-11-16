@@ -89,7 +89,7 @@ This style guide is based on the Microsoft Writing Style Guide principles for cr
 - **Use transitional phrases**: "Now that...", "With this in place...", "Here's how..."
 - **Mix instructional voice**: Use "you'll" for most instructions, but "Let's" occasionally for collaborative feel
 - **Acknowledge progress**: Recognize what the reader has accomplished
-- **Brief doesn't mean sterile**: Brief doesn't mean sterile. A sentence can be concise AND warm by adding small contextual hints about purpose or by using collaborative language.
+- **Brief doesn't mean sterile**: A sentence can be concise AND warm by adding small contextual hints about purpose or by using collaborative language.
 
 Examples:
 
@@ -101,6 +101,8 @@ Warm and conversational:
 
 - Let's start by adding a `myAccount` property to the `NetworkConnection` object returned by `network.connect()`.
 - The first step is adding the `myAccount` property to the `NetworkConnection` object returned by `network.connect()`.
+
+Note that this is really important, and key to our branding. We don't want our documentation to be perceived too cold/direct just to be slightly more concise.
 
 #### Sentence Structure
 
@@ -185,7 +187,8 @@ Warm and conversational:
 
 - **Oxford comma**: Always use in lists
 - **One space**: After periods, colons, question marks
-- **Never use em dashes**: Don't use em dashes (—), use commas instead. Using em dashes looks bad, as only LLMs use them.
+- **Never use em dashes**: Don't use em dashes (—), use commas instead. Using em dashes looks bad, as only LLMs use them. THIS IS EXTREMELY IMPORTANT!
+- **Don't split sentences with semicolons**: That also looks like text written by an LLM that most people will never use.
 - **Minimal end punctuation**: Skip in headings and short list items
 
 #### Lists
@@ -213,7 +216,7 @@ Some formatting rules:
 - Use simple backticks for file references. e.g. `src/foo.ts`.
 - When referring to a technical term, only use backticks if the term is used exactly like that in code, and not every time you refer to a concept. e.g. Hook Handlers, not `Hook Handlers` to talk about the concept, but `hookHandlers` to refer to the way to defined them in code.
 - Use triple backticks for code blocks. Always include the language name. Prefer `ts` over `js`.
-- Tripple backticks can have lines highlighted with brackets.
+- Triple backticks can have lines highlighted with brackets, collapsed sections, file names, languages, and more. See CONTRIBUTING.md for more info.
 - Don't use word wrapping. One line per paragraph.
 - Leave a blank line between paragraphs.
 - Everything is autoformatted by prettier.
@@ -255,8 +258,8 @@ If the title is too long for the sidebar, you should add an alternative label to
 
 ```md
 ---
-title: Doing something that requires a long tile
-description: How to do some thing that requires a title
+title: Doing something that requires a long title
+description: How to do something that requires a title
 sidebar:
   label: Doing something
 ---
@@ -266,7 +269,7 @@ sidebar:
 
 ## Proper nouns in Hardhat 3
 
-This are proper nouns that are used in Hardhat 3, which need to be capitalized in the documentation.
+These are proper nouns used in Hardhat 3 that need to be capitalized in the documentation.
 
 - Hardhat
 - Hardhat Runtime Environment
@@ -274,6 +277,7 @@ This are proper nouns that are used in Hardhat 3, which need to be capitalized i
 - Ethereum Mainnet
 - Ethereum Virtual Machine
 - Mainnet
+- Layer 2
 - Hook
 - Chained Hook
 - Parallel Hook
@@ -290,6 +294,28 @@ This are proper nouns that are used in Hardhat 3, which need to be capitalized i
 - Task Action
 - Mocha
 - Configuration Variable
+- Network Manager
+- Network Connection
+- Network Config
+- Build Profile
+- Isolated Build
+- Ignition Module
+- Ignition
+- Hardhat Ignition
+- Build Info
+- Build Info Output
+- Chain Type
+- Optimism
+- Optimism Collective
+- Optimism Superchain
+- optimism
+- OP Mainnet
+
+Note: Hardhat can also be called Hardhat 3, but never Hardhat v3.
+
+Note: Hardhat Ignition is called like that, but we may also call it Ignition to avoid being too repetitive.
+
+Note: We use capitalization to denote Hardhat 3 proper nouns, not bold text nor italics.
 
 ## cspell dictionary
 

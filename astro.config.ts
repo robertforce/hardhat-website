@@ -76,21 +76,79 @@ export default defineConfig({
                   slug: "docs/getting-started",
                 },
                 {
-                  label: "Guides",
-                  autogenerate: {
-                    directory: "docs/guides",
-                  },
-                },
-                {
                   label: "Hardhat 3",
                   autogenerate: {
                     directory: "docs/hardhat3",
                   },
                 },
                 {
+                  label: "Tutorial",
+                  collapsed: true,
+                  autogenerate: {
+                    directory: "docs/tutorial",
+                  },
+                },
+                {
+                  label: "Guides",
+                  items: [
+                    {
+                      label: "Writing Smart contracts",
+                      collapsed: true,
+                      autogenerate: {
+                        directory: "docs/guides/writing-contracts",
+                      },
+                    },
+                    {
+                      label: "Testing Smart contracts",
+                      collapsed: true,
+                      autogenerate: {
+                        directory: "docs/guides/testing",
+                      },
+                    },
+                    {
+                      label: "Deploying Smart contracts",
+                      collapsed: true,
+                      autogenerate: {
+                        directory: "docs/guides/deployment",
+                      },
+                    },
+                    { slug: "docs/guides/smart-contract-verification" },
+                    { slug: "docs/guides/configuration-variables" },
+                    { slug: "docs/guides/writing-tasks" },
+                    { slug: "docs/guides/writing-scripts" },
+                    // The "docs/guides/forking" document isn't ready on time,
+                    // so we use a link to another explanation that mentions
+                    // something similar
+                    {
+                      label: "Forking a network",
+                      link: "http://hardhat.org/docs/explanations/edr-simulated-networks#forking-mode",
+                    },
+                    // { slug: "docs/guides/forking" },
+                    // { slug: "docs/guides/hardhat-node" },
+                    // { slug: "docs/guides/hardhat-console" },
+                    // { slug: "docs/guides/command-line-completion" },
+                    { slug: "docs/guides/getting-help" },
+                  ],
+                },
+                {
+                  label: "Cookbook",
+                  collapsed: true,
+                  autogenerate: {
+                    directory: "docs/cookbook",
+                  },
+                },
+                {
                   label: "Reference",
+                  collapsed: true,
                   autogenerate: {
                     directory: "docs/reference",
+                  },
+                },
+                {
+                  label: "Explanations",
+                  collapsed: true,
+                  autogenerate: {
+                    directory: "docs/explanations",
                   },
                 },
                 {
@@ -100,16 +158,11 @@ export default defineConfig({
                   items: [
                     {
                       label: "Official plugins",
-                      // This is a hack because:
-                      //  1. If we use #official-plugins we take the user to
-                      //     below the pagefold, missing some content.
-                      //  2. If we don't add any #hash this item will be
-                      //     highlighted, even when community plugins is clicked
-                      link: "/docs/plugins#_top",
+                      link: "/docs/plugins/official-plugins",
                     },
                     {
                       label: "Community plugins",
-                      link: "/docs/plugins#community-plugins",
+                      link: "/docs/plugins/community-plugins",
                     },
                     {
                       label: "Plugin development docs",
@@ -199,14 +252,21 @@ export default defineConfig({
           ],
           {
             topics: {
-              hardhat: ["/docs/plugins", "/docs/plugins/*"],
+              hardhat: [
+                "/docs/plugins/official-plugins",
+                "/docs/plugins/community-plugins",
+                "/docs/plugins/*",
+              ],
             },
           },
         ),
         starlightLinksValidator({
-          exclude: Object.keys(redirects).concat(
-            officialPluginsList.map((p) => `/docs/plugins/${p.slug}`),
-          ),
+          exclude: Object.keys(redirects)
+            .concat(officialPluginsList.map((p) => `/docs/plugins/${p.slug}`))
+            .concat([
+              "/docs/plugins/official-plugins",
+              "/docs/plugins/community-plugins",
+            ]),
         }),
       ],
       customCss: ["./src/styles/custom-starlight-theme.css"],
