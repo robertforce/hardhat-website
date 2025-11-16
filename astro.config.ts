@@ -116,7 +116,7 @@ export default defineConfig({
                     { slug: "docs/guides/configuration-variables" },
                     { slug: "docs/guides/writing-tasks" },
                     { slug: "docs/guides/writing-scripts" },
-                    // The "docs/guides/forking" document isn't ready on type,
+                    // The "docs/guides/forking" document isn't ready on time,
                     // so we use a link to another explanation that mentions
                     // something similar
                     {
