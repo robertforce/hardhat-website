@@ -301,6 +301,8 @@ These are proper nouns used in Hardhat 3 that need to be capitalized in the docu
 - Ignition Module
 - Ignition
 - Hardhat Ignition
+- Build Info
+- Build Info Output
 
 Note: Hardhat can also be called Hardhat 3, but never Hardhat v3.
 
