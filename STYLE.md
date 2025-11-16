@@ -298,8 +298,13 @@ This are proper nouns that are used in Hardhat 3, which need to be capitalized i
 - Network Config
 - Build Profile
 - Isolated Build
+- Ignition Module
+- Ignition
+- Hardhat Ignition
 
 Note: Hardhat can also be called Hardhat 3, but never Hardhat v3.
+
+Note: Hardhat Ignition is called like that, bue we may also call it Ignition to avoid being too repetitive.
 
 ## cspell dictionary
 
