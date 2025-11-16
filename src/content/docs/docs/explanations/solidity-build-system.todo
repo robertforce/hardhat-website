@@ -2,7 +2,7 @@
 title: Understanding Hardhat's Solidity build system
 description: How Hardhat compiles and manages Solidity contracts and their artifacts
 sidebar:
-  order: 5
+  order: 7
 ---
 
 TODO
