@@ -277,6 +277,7 @@ These are proper nouns used in Hardhat 3 that need to be capitalized in the docu
 - Ethereum Mainnet
 - Ethereum Virtual Machine
 - Mainnet
+- Layer 2
 - Hook
 - Chained Hook
 - Parallel Hook
@@ -304,6 +305,11 @@ These are proper nouns used in Hardhat 3 that need to be capitalized in the docu
 - Build Info
 - Build Info Output
 - Chain Type
+- Optimism
+- Optimism Collective
+- Optimism Superchain
+- optimism
+- OP Mainnet
 
 Note: Hardhat can also be called Hardhat 3, but never Hardhat v3.
 

@@ -5,4 +5,81 @@ sidebar:
   order: 3
 ---
 
-TODO
+import Run from "@hh/Run.astro";
+
+Hardhat 3 was designed for the multichain world. When you use it with a supported chain, it'll precisely simulate that chain, giving you confidence in your test runs. This is a fundamental shift from earlier versions and other tools, where every test ran simulating Ethereum Mainnet, with the hope that it'd work on other chains.
+
+Beyond accurate simulation, Hardhat 3 makes it easy to encode tests and workflows that connect to multiple chains. Learn more in the [Network Management explanation](/docs/explanations/network-management).
+
+Hardhat 3 also allows plugins, like [`hardhat-viem`](/docs/plugins/hardhat-viem), to offer chain-specific capabilities in a seamless way, adapting their behavior based on the chain you're working with.
+
+## Understanding Chain Types
+
+Hardhat 3 introduced the concept of a Chain Type. It's a way to classify different blockchains according to their behavior.
+
+Two blockchains have the same Chain Type if they behave exactly the same. For example, Ethereum Mainnet and its testnets have the same Chain Type, while Ethereum Mainnet and Polygon PoS Chain don't, as they have slightly different behaviors.
+
+### Currently supported Chain Types
+
+Hardhat 3 supports three Chain Types at the moment:
+
+- `l1`: For Ethereum Mainnet and its testnets.
+- `op`: For OP Mainnet and its testnets.
+- `generic`: A permissive approximation of how Ethereum Mainnet and other EVM-compatible chains work. This is equivalent to how Hardhat 2 and other tools work.
+
+In the near future, we plan to add Chain Types for other Layer 2 chains, starting with other networks of the [Optimism Superchain](https://github.com/ethereum-optimism/superchain-registry).
+
+Mid-term, other chains should be able to define their own Chain Types with plugins.
+
+### How Chain Types work
+
+When using EDR with a certain Chain Type, it'll change its behavior to strictly mimic the actual blockchain. This can mean:
+
+- Changing gas costs of certain opcodes
+- Introducing new opcodes
+- Adding new precompiles
+- Adding predeployed contracts
+- Changing how gas and L1 gas (if applicable) are handled
+- Changing how some JSON-RPC methods work, like `eth_estimateGas`
+- Changing the response formats of some JSON-RPC methods to use the same ones as the actual chain
+
+You can specify a Chain Type when creating blockchain simulations with the Network Manager or when running Solidity tests. This lets you catch chain-specific errors early in development, ensuring your contracts work correctly on your target blockchain.
+
+## Chain Types and the Network Manager
+
+When you connect to a network using the [Network Manager](/docs/reference/network-manager) like this:
+
+```ts "publicClient.estimateL1Gas"
+// scripts/example-op.ts
+import { network } from "hardhat";
+
+const { viem } = await network.connect({
+  network: "hardhatOp",
+  chainType: "op",
+});
+
+const publicClient = await viem.getPublicClient();
+const l1Gas = await publicClient.estimateL1Gas({
+  account: "0x1111111111111111111111111111111111111111",
+  to: "0x2222222222222222222222222222222222222222",
+  value: 1n,
+});
+```
+
+The network simulation will be created using the `op` Chain Type and its simulation will be stricter.
+
+Moreover, the Chain Type information will be available to network-related plugins, both at runtime and at type-level. This allows them to modify their behavior and the result of `network.connect()` depending on the Chain Type, potentially adding more functionality.
+
+For example, the method highlighted in the snippet above is only available when you're using the `op` Chain Type.
+
+You can also define the Chain Type of a network in the config. To learn how to do it, read the [Network Manager reference](/docs/reference/network-manager).
+
+## Running Solidity tests with a Chain Type
+
+Solidity tests run by default with the `l1` Chain Type. To change it, run them like this:
+
+<Run command="hardhat test --chain-type op" />
+
+Or only the Solidity tests with:
+
+<Run command="hardhat test solidity --chain-type op" />
