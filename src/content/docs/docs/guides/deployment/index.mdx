@@ -1,90 +1,80 @@
 ---
 title: Deployment overview
-description: How to deploy a smart contract
+description: How to deploy a smart contract using Hardhat
 sidebar:
   order: 1
 ---
 
 import Run from "@hh/Run.astro";
 
-:::danger
+Hardhat's flexibility allows you to deploy your smart contracts in multiple ways. We also provide an official deployment solution: [**Hardhat Ignition**](/ignition), which we strongly recommend.
 
-TODO: I copied our previous guide here, but this should be just an overview. The contents should be moved to the other guides.
+In this section we'll prepare the common setup and config to deploy and initialize a contract to Sepolia in the next two guides:
+
+- First, [using Hardhat Ignition](/docs/guides/deployment/using-ignition)
+- Then, [using a script](/docs/guides/deployment/using-scripts)
+
+## Required setup
+
+Both guides assume you initialized a project based on viem or ethers using `hardhat --init`. If you didn't, follow the [Getting started](/getting-started) guide first.
+
+You'll need access to a Sepolia RPC URL and an account with Sepolia ETH. We'll set them up next.
+
+:::tip
+
+You can use a service like [Alchemy](https://www.alchemy.com/) to get a Sepolia RPC URL and [their faucet](https://www.alchemy.com/faucets/ethereum-sepolia) to get some Sepolia ETH.
 
 :::
 
-Hardhat comes with an official deployment solution: [**Hardhat Ignition**](https://hardhat.org/ignition), a declarative system for deploying smart contracts. It's already available in Hardhat 2 and has been adopted by many projects. The API hasn't changed in Hardhat 3: if you're familiar with it, you won't encounter any surprises.
+### Sepolia Network Config
 
-With Hardhat Ignition, you define the smart contract instances you want to deploy, along with any operations you want to perform on them. These definitions are grouped into Ignition Modules, which are then analyzed and executed in the most efficient way. This includes sending independent transactions in parallel, recovering from errors, and resuming interrupted deployments.
+If you followed the [Getting started](/getting-started) guide, your config should look something like this:
 
-The sample project includes an Ignition Module as an example. To learn more about how to write an Ignition module, please read [this document](https://hardhat.org/ignition/docs/guides/creating-modules).
+```ts {7-12}
+// ... some imports ...
 
-To deploy the example module in a simulated network, run the following command:
-
-<Run command="hardhat ignition deploy ignition/modules/Counter.ts" />
-
-This deployment is executed on the default network, which lasts only for the duration of the task. To simulate a deployment on a persistent network, follow these steps:
-
-1. Start a Hardhat node with:
-
-   <Run command="hardhat node" />
-
-2. Open another terminal and deploy the module to the Hardhat node:
-
-   <Run command="hardhat ignition deploy --network localhost ignition/modules/Counter.ts" />
-
-3. Run the same command again once the deployment finishes. Since the module has already been deployed, Ignition won't send any transactions.
-4. Without stopping the node, add the following line to the Ignition module in `ignition/modules/Counter.ts`:
-
-   ```ts {3}
-   // ignition/modules/Counter.ts
-   m.call(counter, "incBy", [5n]);
-
-   m.call(counter, "inc");
-
-   return { counter };
-   ```
-
-5. Run the command from step 2 once more. This time, only the new action runs.
-
-While Hardhat Ignition is our recommended approach for deploying contracts, you're free to use other tools. For example, you can use custom scripts for simple deployments or a deployment plugin from the community.
-
-## Managing secrets
-
-Hardhat 3 includes an encrypted secrets manager that makes it easier to handle sensitive information like private keys. This ensures you don't have to hardcode secrets in your source code or store them in plain text.
-
-The sepolia network configuration uses an encrypted secret for its RPC URL and private key:
-
-```js
-networks: {
-  sepolia: {
-    type: "http",
-    chainType: "l1",
-    url: configVariable("SEPOLIA_RPC_URL"),
-    accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+export default defineConfig({
+  // ... other config ...
+  networks: {
+    // ... other network config ...
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+      url: configVariable("SEPOLIA_RPC_URL"),
+      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
+    },
   },
-},
+});
 ```
 
-Run the following tasks to add these secrets:
+Make sure you have the `sepolia` section, highlighted above.
 
-<Run
-  command={[
-    "hardhat keystore set SEPOLIA_RPC_URL",
-    "hardhat keystore set SEPOLIA_PRIVATE_KEY",
-  ]}
-/>
+### Storing the required secrets in the Hardhat Keystore
 
-::::tip
+If you haven't done this while following another guide, store the values for `SEPOLIA_RPC_URL` and `SEPOLIA_PRIVATE_KEY` using the `hardhat-keystore` plugin to save them in an encrypted vault.
 
-If you don't have an RPC URL for Sepolia, you can use a public one like `https://sepolia.gateway.tenderly.co`. Keep in mind that public endpoints like this can be slower and less reliable.
+To do it, run:
 
-::::
+<Run command="hardhat keystore set SEPOLIA_RPC_URL" />
 
-Once the secrets are set, you can deploy the Ignition module to Sepolia:
+After entering your keystore password, you'll be able to set the RPC URL.
 
-<Run command="hardhat ignition deploy --network sepolia ignition/modules/Counter.ts" />
+Then run:
 
-Enter your password to decrypt the private key, confirm that you want to deploy to Sepolia, and wait until Hardhat Ignition finishes the deployment. After this, if you repeat the command, Ignition will detect that the module has already been deployed and won't send any new transactions.
+<Run command="hardhat keystore set SEPOLIA_PRIVATE_KEY" />
 
-Secrets are only decrypted when needed, which means you only need to enter the password if a Hardhat task actually uses a secret.
+to set a private key.
+
+:::caution
+
+Make sure you only use this private key for testnets and don't store any valuable assets with it.
+
+:::
+
+## Next steps
+
+With the setup in place, you can now:
+
+- Read [Using Hardhat Ignition](/docs/guides/deployment/using-ignition) for a brief introduction to Ignition.
+
+- Read [Using scripts](/docs/guides/deployment/using-scripts) to learn how to deploy using a script.
