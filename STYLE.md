@@ -89,7 +89,7 @@ This style guide is based on the Microsoft Writing Style Guide principles for cr
 - **Use transitional phrases**: "Now that...", "With this in place...", "Here's how..."
 - **Mix instructional voice**: Use "you'll" for most instructions, but "Let's" occasionally for collaborative feel
 - **Acknowledge progress**: Recognize what the reader has accomplished
-- **Brief doesn't mean sterile**: Brief doesn't mean sterile. A sentence can be concise AND warm by adding small contextual hints about purpose or by using collaborative language.
+- **Brief doesn't mean sterile**: A sentence can be concise AND warm by adding small contextual hints about purpose or by using collaborative language.
 
 Examples:
 
@@ -258,8 +258,8 @@ If the title is too long for the sidebar, you should add an alternative label to
 
 ```md
 ---
-title: Doing something that requires a long tile
-description: How to do some thing that requires a title
+title: Doing something that requires a long title
+description: How to do something that requires a title
 sidebar:
   label: Doing something
 ---
@@ -269,7 +269,7 @@ sidebar:
 
 ## Proper nouns in Hardhat 3
 
-This are proper nouns that are used in Hardhat 3, which need to be capitalized in the documentation.
+These are proper nouns used in Hardhat 3 that need to be capitalized in the documentation.
 
 - Hardhat
 - Hardhat Runtime Environment
@@ -301,10 +301,14 @@ This are proper nouns that are used in Hardhat 3, which need to be capitalized i
 - Ignition Module
 - Ignition
 - Hardhat Ignition
+- Build Info
+- Build Info Output
 
 Note: Hardhat can also be called Hardhat 3, but never Hardhat v3.
 
-Note: Hardhat Ignition is called like that, bue we may also call it Ignition to avoid being too repetitive.
+Note: Hardhat Ignition is called like that, but we may also call it Ignition to avoid being too repetitive.
+
+Note: We use capitalization to denote Hardhat 3 proper nouns, not bold text nor italics.
 
 ## cspell dictionary
 
