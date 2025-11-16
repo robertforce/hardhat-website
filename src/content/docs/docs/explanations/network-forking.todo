@@ -2,7 +2,7 @@
 title: Forking other networks
 description: How Hardhat simulates a fork of a network to run tests
 sidebar:
-  order: 7
+  order: 6
 ---
 
 TODO
