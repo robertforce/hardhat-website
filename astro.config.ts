@@ -117,7 +117,6 @@ export default defineConfig({
                     { slug: "docs/guides/writing-tasks" },
                     { slug: "docs/guides/writing-scripts" },
                     { slug: "docs/guides/forking" },
-                    // { slug: "docs/guides/forking" },
                     { slug: "docs/guides/hardhat-node" },
                     { slug: "docs/guides/hardhat-console" },
                     // { slug: "docs/guides/command-line-completion" },
