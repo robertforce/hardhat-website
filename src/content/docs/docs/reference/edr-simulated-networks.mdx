@@ -97,6 +97,12 @@ You can collect statistics about gas consumption during your test runs:
 
 This shows you the minimum, maximum, average, and median gas costs for each function in your contracts. Learn more in the [gas statistics guide](/docs/guides/testing/gas-statistics).
 
+### Development-only JSON-RPC methods
+
+EDR provides additional JSON-RPC methods that are useful for development and testing. These methods allow you to do things like manipulate the blockchain state or control mining behavior. You can read their reference documentation [in this section](/docs/reference/json-rpc).
+
+We don't recommend using these methods directly. Instead, use Hardhat's [network helpers](/docs/plugins/hardhat-network-helpers), which wrap them in a more user-friendly way.
+
 ## Initial blockchain state
 
 The initial state of a simulated network depends on whether you're using forking mode and your [Network Config](/docs/reference/configuration#network-configuration).
@@ -260,7 +266,3 @@ This is useful for recreating blocks from other networks where the transaction o
 ## Configuration
 
 To learn more about configuring simulated networks, read the [configuration reference](/docs/reference/configuration#network-configuration).
-
-## JSON-RPC API
-
-To learn more about the JSON-RPC API, read the [JSON-RPC reference](/docs/reference/json-rpc).
