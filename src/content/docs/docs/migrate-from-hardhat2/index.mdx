@@ -16,7 +16,7 @@ Hardhat 3 is production-ready and you can migrate today! We'll keep it in beta s
 
 :::
 
-Hardhat 3 is a complete rewrite of Hardhat 2. While many features are familiar, several fundamental changes mean the new version is not compatible with Hardhat 2 projects out of the box:
+Hardhat 3 is a complete rewrite of Hardhat 2. While many features are familiar, several fundamental changes mean the new version isn't directly compatible with Hardhat 2 projects:
 
 - **ESM-first**: Your Hardhat config must be an ES module. Scripts and JavaScript/TypeScript tests can still be CommonJS, but ESM is the default.
 - **Declarative config**: Plugins, tasks, and other extensions are configured explicitly in your config instead of being registered by side effects.
@@ -112,7 +112,7 @@ With your npm project ready, you can start setting up Hardhat 3.
 
 ## Progressively migrating your config
 
-With a minimal version of Hardhat 3 working, you can migrate your config bit by bit.
+With a minimal version of Hardhat 3 working, you can migrate your config step by step.
 
 Let's start with the minimal settings required to compile your contracts.
 
@@ -137,11 +137,11 @@ Let's start with the minimal settings required to compile your contracts.
 
    <Run command="hardhat build" />
 
-To learn more about the updated config format, and continue with your migration, please take a look at [this section](/docs/reference/configuration#solidity-configuration).
+To learn more about the updated config format and continue with your migration, see [this section](/docs/reference/configuration#solidity-configuration).
 
 ## Migrating tests
 
-This section assumes that your Hardhat 2 project uses Mocha as its tests runner, which is the default experience.
+This section assumes that your Hardhat 2 project uses Mocha as its test runner, which is the default.
 
 1. **Install the recommended toolbox for Mocha and Ethers.js**
 
@@ -164,11 +164,11 @@ This section assumes that your Hardhat 2 project uses Mocha as its tests runner,
    });
    ```
 
-   Notice that, unlike Hardhat 2, it's not enough to just import the plugin in the config. You also have to add it to the list of plugins.
+   Unlike Hardhat 2, you need to both import the plugin and add it to the list of plugins.
 
 2. **Update your test files**
 
-   This is usually the most involved part of the migration, and so it has [its own page](/docs/migrate-from-hardhat2/guides/mocha-tests) with the details.
+   Updating tests is usually the most involved part of the migration, so we've created [a dedicated page](/docs/migrate-from-hardhat2/guides/mocha-tests) with the details.
 
    You can start by migrating a single test and run it individually to verify that it works as expected:
 
