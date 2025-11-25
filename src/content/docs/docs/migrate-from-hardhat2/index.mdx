@@ -66,18 +66,18 @@ Before making any changes, prepare your project so that installing and running H
 
 5.  **Make your project ESM**
 
-{/* prettier-ignore */}
-  <Tabs syncKey="package-manager">
-    <TabItem label="npm" icon="npm">
-      <Code code="npm pkg set type=module" lang="sh" frame="terminal" />
-    </TabItem>
-    <TabItem label="pnpm" icon="pnpm">
-      <Code code="pnpm pkg set type=module" lang="sh" frame="terminal" />
-    </TabItem>
-    <TabItem label="Yarn" icon="seti:yarn">
-      <Code code={`# yarn doesn't have a command for this\nnpm pkg set type=module`} lang="sh" frame="terminal" />
-    </TabItem>
-  </Tabs>
+    {/* prettier-ignore */}
+    <Tabs syncKey="package-manager">
+      <TabItem label="npm" icon="npm">
+        <Code code="npm pkg set type=module" lang="sh" frame="terminal" />
+      </TabItem>
+      <TabItem label="pnpm" icon="pnpm">
+        <Code code="pnpm pkg set type=module" lang="sh" frame="terminal" />
+      </TabItem>
+      <TabItem label="Yarn" icon="seti:yarn">
+        <Code code={`# yarn doesn't have a command for this\nnpm pkg set type=module`} lang="sh" frame="terminal" />
+      </TabItem>
+    </Tabs>
 
 6.  **(Optional) Adapt your `tsconfig.json`**
 
