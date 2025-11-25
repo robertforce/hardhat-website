@@ -120,7 +120,7 @@ Let's start with the minimal settings required to compile your contracts.
 
    Copy the `solidity` entry from your old config as-is. The format is backwards-compatible in Hardhat 3, so it should just work:
 
-   ```ts
+   ```ts ins={5-7}
    // hardhat.config.ts
    import { defineConfig } from "hardhat/config";
 
@@ -151,7 +151,7 @@ This section assumes that your Hardhat 2 project uses Mocha as its tests runner,
 
    Then in your Hardhat config, import the plugin and add it to the list of plugins:
 
-   ```ts
+   ```ts ins={3,6}
    // hardhat.config.ts
    import { defineConfig } from "hardhat/config";
    import hardhatToolboxMochaEthers from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
