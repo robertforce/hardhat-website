@@ -5,6 +5,8 @@ sidebar:
   label: Overview
 ---
 
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+import { Code } from "@astrojs/starlight/components";
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
 
@@ -27,48 +29,59 @@ Because these changes are significant, this guide recommends starting with a cle
 
 Before making any changes, prepare your project so that installing and running Hardhat 3 won’t conflict with leftover dependencies, configs, or build artifacts from Hardhat 2.
 
-1. **Check node.js version**
+1.  **Check node.js version**
 
-   Make sure you are using Node.js v22.10.0 or later:
+    Make sure you are using Node.js v22.10.0 or later:
 
-   ```sh
-   node --version
-   ```
+    ```sh
+    node --version
+    ```
 
-2. **Clear caches and artifacts**
+2.  **Clear caches and artifacts**
 
-   Run the `clean` task to avoid issues with stale artifacts or caches:
+    Run the `clean` task to avoid issues with stale artifacts or caches:
 
-   <Run command="hardhat clean" />
+    <Run command="hardhat clean" />
 
-3. **Remove Hardhat 2 dependencies**
+3.  **Remove Hardhat 2 dependencies**
 
-   Start by removing these packages from your `package.json`:
-   - `hardhat`
-   - Any packages starting with `hardhat-`, `@nomicfoundation/`, or `@nomiclabs/`
-   - `solidity-coverage`
+    Start by removing these packages from your `package.json`:
+    - `hardhat`
+    - Any packages starting with `hardhat-`, `@nomicfoundation/`, or `@nomiclabs/`
+    - `solidity-coverage`
 
-   Then reinstall and check for remaining packages that depend on Hardhat:
+    Then reinstall and check for remaining packages that depend on Hardhat:
 
-   <Run command={["install", "why hardhat"]} />
+    <Run command={["install", "why hardhat"]} />
 
-   Repeat until no Hardhat-related dependencies remain.
+    Repeat until no Hardhat-related dependencies remain.
 
-4. **Rename your old config**
+4.  **Rename your old config**
 
-   Keep your old config for reference, but rename it so you can create a new one alongside it:
+    Keep your old config for reference, but rename it so you can create a new one alongside it:
 
-   ```sh
-   mv hardhat.config.js hardhat.config.old.js
-   ```
+    ```sh
+    mv hardhat.config.js hardhat.config.old.js
+    ```
 
-5. **Make your project ESM**
+5.  **Make your project ESM**
 
-   Add `"type": "module"` to your `package.json`.
+{/* prettier-ignore */}
+  <Tabs syncKey="package-manager">
+    <TabItem label="npm" icon="npm">
+      <Code code="npm pkg set type=module" lang="sh" frame="terminal" />
+    </TabItem>
+    <TabItem label="pnpm" icon="pnpm">
+      <Code code="pnpm pkg set type=module" lang="sh" frame="terminal" />
+    </TabItem>
+    <TabItem label="Yarn" icon="seti:yarn">
+      <Code code={`# yarn doesn't have a command for this\nnpm pkg set type=module`} lang="sh" frame="terminal" />
+    </TabItem>
+  </Tabs>
 
-6. **(Optional) Adapt your `tsconfig.json`**
+6.  **(Optional) Adapt your `tsconfig.json`**
 
-   If you have a `tsconfig.json` file, make sure that `compilerOptions.module` is set to an ESM-compatible value like `"node16"`.
+    If you have a `tsconfig.json` file, make sure that `compilerOptions.module` is set to an ESM-compatible value like `"node16"`.
 
 ## Setting up Hardhat 3
 
