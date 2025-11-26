@@ -16,7 +16,7 @@ The fuzzer will discard the current fuzz inputs and start a new fuzz run if next
 
 The test may fail if you hit the max number of rejects.
 
-You can configure the rejection thresholds by setting [`fuzz.max_test_rejects`][max-test-rejects] in your `foundry.toml` file.
+You can configure the rejection thresholds by setting `fuzz.maxTestRejects` in your [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
 
 ### Examples
 
@@ -34,4 +34,3 @@ function testSomething(uint256 amount) public {
     // [PASS]
 }
 ```
-

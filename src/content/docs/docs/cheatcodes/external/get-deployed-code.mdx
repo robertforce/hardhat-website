@@ -20,7 +20,7 @@ The calldata parameter can either be in the form `ContractFile.sol` (if the file
 >
 > `getDeployedCode` requires read permission for the output directory, see [file cheatcodes](/docs/cheatcodes/fs).
 >
-> To grant read access set `fs_permissions = [{ access = "read", path = "./out"}]` in your `foundry.toml`.
+> To grant read access set `fsPermissions: { readDirectory: ["./out"] }` in your [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
 
 ### Examples
 

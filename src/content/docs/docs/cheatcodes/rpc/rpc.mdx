@@ -15,22 +15,26 @@ function rpc(string calldata urlOrAlias, string calldata method, string calldata
 
 ### Description
 
-Provides cheatcodes to access all RPC endpoints configured in the `rpc_endpoints` object of the `foundry.toml`, and the ability to make `rpc` calls using the configured fork URL.
+Provides cheatcodes to access all RPC endpoints configured in the `forking.rpcEndpoints` object of the [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration), and the ability to make `rpc` calls using the configured fork URL.
 
 ### Examples
 
-The following `rpc_endpoints` in `foundry.toml` registers two RPC aliases:
+The following `rpcEndpoints` in [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration) registers two RPC aliases:
 
 - `optimism` references the URL directly
 - `mainnet` references the `RPC_MAINNET` environment value that is expected to contain the actual URL
 
 _Env variables need to be wrapped in `${}`_
 
-```toml
-# --snip--
-[rpc_endpoints]
-optimism = "https://optimism.alchemyapi.io/v2/..."
-mainnet = "${RPC_MAINNET}"
+```js
+// --snip--
+forking: {
+    // --snip--
+    rpcEndpoints: {
+        optimism: "https://optimism.alchemyapi.io/v2/...",
+        mainnet: "${RPC_MAINNET}",
+    }
+}
 ```
 
 ```solidity

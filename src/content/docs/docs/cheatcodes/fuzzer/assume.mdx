@@ -13,7 +13,7 @@ If the boolean expression evaluates to false, the fuzzer will discard the curren
 The `assume` cheatcode should mainly be used for very narrow checks.
 Broad checks will slow down tests as it will take a while to find valid values, and the test may fail if you hit the max number of rejects.
 
-You can configure the rejection thresholds by setting [`fuzz.max_test_rejects`][max-test-rejects] in your `foundry.toml` file.
+You can configure the rejection thresholds by setting `fuzz.maxTestRejects` in your [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
 
 For broad checks, such as ensuring a `uint256` falls within a certain range, you can bound your input with the modulo operator or Forge Standard's [`bound`][forge-std-bound] method.
 

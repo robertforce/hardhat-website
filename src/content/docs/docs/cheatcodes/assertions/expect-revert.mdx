@@ -101,15 +101,7 @@ If the **next call** does not revert with the expected data `message`, then `exp
 > ⚠️ **Usage**
 >
 > By default, `expectRevert*` cheatcodes work only for calls with greater depth than test depth.
-> Expecting reverts at the same depth as test depth can be enabled by setting `allow_internal_expect_revert` to `true` as follows:
->
-> Selectively by using an inline configuration entry where it is **DEEMED SAFE**:
->
-> Add `/// forge-config: default.allow_internal_expect_revert = true` above the test function.
->
-> Or globally, this is discouraged:
->
-> Add `allow_internal_expect_revert = true` to `foundry.toml`.
+> Expecting reverts at the same depth as test depth can be enabled by setting `allowInternalExpectRevert` to `true` in the [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
 
 As long as you are not using `vm.expectRevert` on multiple internal functions in a single test function body it is generally considered safe.
 

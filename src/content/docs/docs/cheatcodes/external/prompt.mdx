@@ -27,11 +27,7 @@ leak to the terminal.
 
 In order to prevent unwanted hangups, `vm.prompt` has a timeout configuration.
 
-In your `foundry.toml`:
-
-```toml
-prompt_timeout = 120
-```
+In your [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration), you can set it using `promptTimeout = 120`.
 
 Default value is `120` and values are in seconds.
 
@@ -82,12 +78,15 @@ catch (bytes memory) {
 
 Provide an option to choose the RPC/chain to run on.
 
-In your `foundry.toml` file:
+In your [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration):
 
-```toml
-[rpc_endpoints]
-mainnet = "https://eth.llamarpc.com"
-polygon = "https://polygon.llamarpc.com"
+```js
+forking: {
+    rpcEndpoints: {
+        mainnet: "https://eth.llamarpc.com",
+        polygon: "https://polygon.llamarpc.com",
+    }
+}
 ```
 
 In your script:
