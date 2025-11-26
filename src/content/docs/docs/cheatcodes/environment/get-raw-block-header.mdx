@@ -1,0 +1,12 @@
+## `getRawBlockHeader`
+
+### Signature
+
+```solidity
+function getRawBlockHeader(uint256 blockNumber) external view returns (bytes memory rlpHeader);
+```
+
+### Description
+
+Gets the RLP encoded block header for a given block number.
+Returns the block header in the same format as `cast block <block_number> --raw`.

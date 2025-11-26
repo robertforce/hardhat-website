@@ -1,0 +1,13 @@
+## `copyFile`
+
+### Signature
+
+```solidity
+function copyFile(string calldata from, string calldata to) external returns (uint64 copied);
+```
+
+### Description
+
+Copies the contents of one file to another. This function will **overwrite** the contents of `to`.
+On success, the total number of bytes copied is returned and it is equal to the length of the `to` file as reported by `metadata`.
+Both `from` and `to` are relative to the project root.
