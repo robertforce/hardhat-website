@@ -18,7 +18,7 @@ The argument `json` must be a JSON object in stringified form. For example:
 { "boolean": true, "number": 342, "object": { "title": "finally json serialization" } }
 ```
 
-This is usually built through [serializeJson](/reference/cheatcodes/serialize-json.mdx).
+This is usually built through [serializeJson](/docs/cheatcodes/serialize-json).
 
 The argument `path` is the path of the JSON file to write to.
 
@@ -28,7 +28,7 @@ If a `valueKey` is provided, then the file must already exist and be a valid JSO
 
 This is useful for replacing some values in a JSON file without having to first parse and then reserialize it. Note that if the specified key, or any of the intermediate ones in the JSON path, don't exist, they will be created.
 
-**Remember:** The file path `path` needs to be in the allowed paths. Read more in [File cheatcodes](/reference/cheatcodes/fs.mdx).
+**Remember:** The file path `path` needs to be in the allowed paths. Read more in [File cheatcodes](/docs/cheatcodes/fs).
 
 #### JSON Paths
 
@@ -146,4 +146,4 @@ vm.writeJson("13371337", "./output/example2.json", "..veryDeep");
 
 ### SEE ALSO
 
-- [serializeJson](/reference/cheatcodes/serialize-json.mdx)
+- [serializeJson](/docs/cheatcodes/serialize-json)

@@ -25,14 +25,14 @@ The `CallerMode` enum indicates if there is an active caller modification and th
 - If there is an active prank:
 
   - `callerMode` will be equal to:
-    - `CallerMode.Prank` if the prank has been set with [`prank`](/reference/cheatcodes/prank.mdx).
-    - `CallerMode.RecurrentPrank` if the prank has been set with [`startPrank`](/reference/cheatcodes/start-prank.mdx).
+    - `CallerMode.Prank` if the prank has been set with [`prank`](/docs/cheatcodes/prank).
+    - `CallerMode.RecurrentPrank` if the prank has been set with [`startPrank`](/docs/cheatcodes/start-prank).
 
 - If there is an active broadcast:
 
   - `callerMode` will be equal to:
-    - `CallerMode.Broadcast` if the broadcast has been set with [`broadcast`](/reference/cheatcodes/broadcast.mdx).
-    - `CallerMode.RecurrentBroadcast` if the broadcast has been set with [`startBroadcast`](/reference/cheatcodes/start-broadcast.mdx).
+    - `CallerMode.Broadcast` if the broadcast has been set with [`broadcast`](/docs/cheatcodes/broadcast).
+    - `CallerMode.RecurrentBroadcast` if the broadcast has been set with [`startBroadcast`](/docs/cheatcodes/start-broadcast).
 
 - If no caller modification is active:
   - `callerMode` will be equal to `CallerMode.None`.
@@ -74,7 +74,7 @@ assertEq(txOrigin, broadcastAddress);
 
 ### SEE ALSO
 
-- [prank](/reference/cheatcodes/prank.mdx)
-- [startPrank](/reference/cheatcodes/start-prank.mdx)
-- [broadcast](/reference/cheatcodes/broadcast.mdx)
-- [startBroadcast](/reference/cheatcodes/start-broadcast.mdx)
+- [prank](/docs/cheatcodes/prank)
+- [startPrank](/docs/cheatcodes/start-prank)
+- [broadcast](/docs/cheatcodes/broadcast)
+- [startBroadcast](/docs/cheatcodes/start-broadcast)
