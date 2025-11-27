@@ -3,13 +3,16 @@ title: makePersistent
 description: makePersistent cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
 function makePersistent(address account) external;
 function makePersistent(address account0, address account1) external;
-function makePersistent(address account0, address account1, address account2) external;
+function makePersistent(
+  address account0,
+  address account1,
+  address account2
+) external;
 function makePersistent(address[] calldata accounts) external;
 ```
 
@@ -26,43 +29,43 @@ Mark a new contract as persistent
 
 ```solidity
 contract SimpleStorageContract {
-    string public value;
+  string public value;
 
-    function set(uint256 _value) public {
-        value = _value;
-    }
+  function set(uint256 _value) public {
+    value = _value;
+  }
 }
 
 function testMarkPersistent() public {
-    // by default the `sender` and the contract itself are persistent
-    assert(cheats.isPersistent(msg.sender));
-    assert(cheats.isPersistent(address(this)));
+  // by default the `sender` and the contract itself are persistent
+  assert(cheats.isPersistent(msg.sender));
+  assert(cheats.isPersistent(address(this)));
 
-    // select a specific fork
-    cheats.selectFork(mainnetFork);
+  // select a specific fork
+  cheats.selectFork(mainnetFork);
 
-    // create a new contract that's stored in the `mainnetFork` storage
-    SimpleStorageContract simple = new SimpleStorageContract();
+  // create a new contract that's stored in the `mainnetFork` storage
+  SimpleStorageContract simple = new SimpleStorageContract();
 
-    // `simple` is not marked as persistent
-    assert(!cheats.isPersistent(address(simple)));
+  // `simple` is not marked as persistent
+  assert(!cheats.isPersistent(address(simple)));
 
-    // contract can be used
-    uint256 expectedValue = 99;
-    simple.set(expectedValue);
-    assertEq(simple.value(), expectedValue);
+  // contract can be used
+  uint256 expectedValue = 99;
+  simple.set(expectedValue);
+  assertEq(simple.value(), expectedValue);
 
-    // mark as persistent
-    cheats.makePersistent(address(simple));
+  // mark as persistent
+  cheats.makePersistent(address(simple));
 
-    // select a different fork
-    cheats.selectFork(optimismFork);
+  // select a different fork
+  cheats.selectFork(optimismFork);
 
-    // ensure contract is still persistent
-    assert(cheats.isPersistent(address(simple)));
+  // ensure contract is still persistent
+  assert(cheats.isPersistent(address(simple)));
 
-    // value is set as expected
-    assertEq(simple.value(), expectedValue);
+  // value is set as expected
+  assertEq(simple.value(), expectedValue);
 }
 ```
 

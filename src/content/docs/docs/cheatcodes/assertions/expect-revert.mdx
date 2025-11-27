@@ -3,7 +3,6 @@ title: expectRevert
 description: expectRevert cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
@@ -23,7 +22,11 @@ function expectRevert(bytes4 revertData, uint64 count) external;
 ```
 
 ```solidity
-function expectRevert(bytes4 revertData, address reverter, uint64 count) external;
+function expectRevert(
+  bytes4 revertData,
+  address reverter,
+  uint64 count
+) external;
 ```
 
 ```solidity
@@ -39,7 +42,11 @@ function expectRevert(bytes calldata revertData, uint64 count) external;
 ```
 
 ```solidity
-function expectRevert(bytes calldata revertData, address reverter, uint64 count) external;
+function expectRevert(
+  bytes calldata revertData,
+  address reverter,
+  uint64 count
+) external;
 ```
 
 ```solidity
@@ -90,11 +97,11 @@ The following example shows where the footgun occurs. There are two `vm.expectRe
 ```solidity
 // DO NOT IMPLEMENT AS FOLLOWS! THIS IS AN INCORRECT USE.
 function testMultipleReverts() public {
-    vm.expectRevert();
-    revert();
+  vm.expectRevert();
+  revert();
 
-    vm.expectRevert();
-    console2.log("Does not revert");
+  vm.expectRevert();
+  console2.log("Does not revert");
 }
 ```
 
@@ -138,7 +145,7 @@ and two signatures for `expectPartialRevert`:
 >
 > ```solidity
 > function count() public {
->     revert WrongNumber(0);
+>   revert WrongNumber(0);
 > }
 > ```
 >
@@ -170,9 +177,9 @@ and two signatures for `expectPartialRevert`:
 >
 > ```solidity
 > function testLowLevelCallRevert() public {
->     vm.expectRevert(bytes("error message"));
->     (bool revertsAsExpected, ) = address(myContract).call(myCalldata);
->     assertTrue(revertsAsExpected, "expectRevert: call did not revert");
+>   vm.expectRevert(bytes("error message"));
+>   (bool revertsAsExpected, ) = address(myContract).call(myCalldata);
+>   assertTrue(revertsAsExpected, "expectRevert: call did not revert");
 > }
 > ```
 
@@ -202,9 +209,9 @@ If you need to assert that a function reverts _without_ a message, you can do so
 
 ```solidity
 function testExpectRevertNoReason() public {
-    Reverter reverter = new Reverter();
-    vm.expectRevert(bytes(""));
-    reverter.revertWithoutReason();
+  Reverter reverter = new Reverter();
+  vm.expectRevert(bytes(""));
+  reverter.revertWithoutReason();
 }
 ```
 
@@ -214,7 +221,7 @@ If you need to assert that a function reverts a four character message, e.g. `AA
 
 ```solidity
 function testFourLetterMessage() public {
-    vm.expectRevert(bytes("AAAA"));
+  vm.expectRevert(bytes("AAAA"));
 }
 ```
 
@@ -224,11 +231,11 @@ Finally, you can also have multiple `expectRevert()` checks in a single test.
 
 ```solidity
 function testMultipleExpectReverts() public {
-    vm.expectRevert("INVALID_AMOUNT");
-    vault.send(user, 0);
+  vm.expectRevert("INVALID_AMOUNT");
+  vault.send(user, 0);
 
-    vm.expectRevert("INVALID_ADDRESS");
-    vault.send(address(0), 200);
+  vm.expectRevert("INVALID_ADDRESS");
+  vault.send(address(0), 200);
 }
 ```
 

@@ -3,13 +3,14 @@ title: assumeNoRevert
 description: assumeNoRevert cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
 function assumeNoRevert() external pure;
 function assumeNoRevert(PotentialRevert calldata potentialRevert) external pure;
-function assumeNoRevert(PotentialRevert[] calldata potentialReverts) external pure;
+function assumeNoRevert(
+  PotentialRevert[] calldata potentialReverts
+) external pure;
 ```
 
 ### Description
@@ -25,16 +26,19 @@ You can configure the rejection thresholds by setting `fuzz.maxTestRejects` in y
 ### Examples
 
 For a function that requires an amount in certain range:
+
 ```solidity
 function doSomething(uint256 amount) public {
-    require(amount > 100 ether && amount < 1_000 ether);
+  require(amount > 100 ether && amount < 1_000 ether);
 }
 ```
+
 reverts are discarded, resulting in test pass (or fail if max number of rejects hit):
+
 ```solidity
 function testSomething(uint256 amount) public {
-    vm.assumeNoRevert();
-    target.doSomething(amount);
-    // [PASS]
+  vm.assumeNoRevert();
+  target.doSomething(amount);
+  // [PASS]
 }
 ```

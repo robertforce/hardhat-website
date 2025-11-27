@@ -3,55 +3,56 @@ title: stopAndReturnStateDiff
 description: stopAndReturnStateDiff cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
 enum AccountAccessKind {
-    Call,
-    DelegateCall,
-    CallCode,
-    StaticCall,
-    Create,
-    SelfDestruct,
-    Resume,
-    Balance,
-    Extcodesize,
-    Extcodehash,
-    Extcodecopy
+  Call,
+  DelegateCall,
+  CallCode,
+  StaticCall,
+  Create,
+  SelfDestruct,
+  Resume,
+  Balance,
+  Extcodesize,
+  Extcodehash,
+  Extcodecopy
 }
 
 struct ChainInfo {
-    uint256 forkId;
-    uint256 chainId;
+  uint256 forkId;
+  uint256 chainId;
 }
 
 struct AccountAccess {
-    ChainInfo chainInfo;
-    AccountAccessKind kind;
-    address account;
-    address accessor;
-    bool initialized;
-    uint256 oldBalance;
-    uint256 newBalance;
-    bytes deployedCode;
-    uint256 value;
-    bytes data;
-    bool reverted;
-    StorageAccess[] storageAccesses;
-    uint64 depth;
+  ChainInfo chainInfo;
+  AccountAccessKind kind;
+  address account;
+  address accessor;
+  bool initialized;
+  uint256 oldBalance;
+  uint256 newBalance;
+  bytes deployedCode;
+  uint256 value;
+  bytes data;
+  bool reverted;
+  StorageAccess[] storageAccesses;
+  uint64 depth;
 }
 
 struct StorageAccess {
-    address account;
-    bytes32 slot;
-    bool isWrite;
-    bytes32 previousValue;
-    bytes32 newValue;
-    bool reverted;
+  address account;
+  bytes32 slot;
+  bool isWrite;
+  bytes32 previousValue;
+  bytes32 newValue;
+  bool reverted;
 }
 
-function stopAndReturnStateDiff() external returns (AccountAccess[] memory accesses);
+function stopAndReturnStateDiff()
+  external
+  returns (AccountAccess[] memory accesses);
 ```
 
 ### Description

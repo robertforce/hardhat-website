@@ -3,11 +3,12 @@ title: parseBytes
 description: parseBytes cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
-function parseBytes(string calldata stringifiedValue) external pure returns (bytes memory parsedValue);
+function parseBytes(
+  string calldata stringifiedValue
+) external pure returns (bytes memory parsedValue);
 ```
 
 ### Description
@@ -21,4 +22,3 @@ string memory bytesAsString = "0x00000000000000000000000000000000";
 bytes memory stringToBytes = vm.parseBytes(bytesAsString); // 0x00000000000000000000000000000000
 
 ```
-

@@ -3,23 +3,24 @@ title: isContext
 description: isContext cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
 enum ExecutionContext {
-    /// Test group execution context (test, coverage or snapshot).
-    TestGroup,
-    /// Test execution context.
-    Test,
-    /// Code coverage execution context.
-    Coverage,
-    /// Gas snapshot execution context.
-    Snapshot,
-    /// Unknown execution context.
-    Unknown
+  /// Test group execution context (test, coverage or snapshot).
+  TestGroup,
+  /// Test execution context.
+  Test,
+  /// Code coverage execution context.
+  Coverage,
+  /// Gas snapshot execution context.
+  Snapshot,
+  /// Unknown execution context.
+  Unknown
 }
-function isContext(ExecutionContext context) external view returns (bool result);
+function isContext(
+  ExecutionContext context
+) external view returns (bool result);
 ```
 
 ### Description

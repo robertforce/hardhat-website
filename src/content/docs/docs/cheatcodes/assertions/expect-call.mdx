@@ -3,7 +3,6 @@ title: expectCall
 description: expectCall cheatcode documentation
 ---
 
-
 ```solidity
 function expectCall(address callee, bytes calldata data) external;
 ```
@@ -14,27 +13,38 @@ function expectCall(address callee, bytes calldata data, uint64 count) external;
 
 ```solidity
 function expectCall(
-    address callee,
-    uint256 value,
-    bytes calldata data
+  address callee,
+  uint256 value,
+  bytes calldata data
 ) external;
 ```
 
 ```solidity
 function expectCall(
-    address callee,
-    uint256 value,
-    bytes calldata data,
-    uint64 count
+  address callee,
+  uint256 value,
+  bytes calldata data,
+  uint64 count
 ) external;
 ```
 
 ```solidity
-function expectCall(address callee, uint256 value, uint64 gas, bytes calldata data) external;
+function expectCall(
+  address callee,
+  uint256 value,
+  uint64 gas,
+  bytes calldata data
+) external;
 ```
 
 ```solidity
-function expectCall(address callee, uint256 value, uint64 gas, bytes calldata data, uint64 count) external;
+function expectCall(
+  address callee,
+  uint256 value,
+  uint64 gas,
+  bytes calldata data,
+  uint64 count
+) external;
 ```
 
 ### Description
@@ -72,7 +82,7 @@ token.transfer(alice, 10);
 // [PASS]
 ```
 
-Expect that `transfer` is called on a token `MyToken` *at least* two times:
+Expect that `transfer` is called on a token `MyToken` _at least_ two times:
 
 ```solidity
 address alice = makeAddr("alice");

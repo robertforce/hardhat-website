@@ -3,19 +3,18 @@ title: readCallers
 description: readCallers cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
 enum CallerMode {
-    None,
-    Prank,
-    RecurrentPrank
+  None,
+  Prank,
+  RecurrentPrank
 }
 
 function readCallers()
-external
-returns (CallerMode callerMode, address msgSender, address txOrigin);
+  external
+  returns (CallerMode callerMode, address msgSender, address txOrigin);
 ```
 
 ### Description
@@ -25,7 +24,6 @@ Reads the current `CallerMode`, `msg.sender`, and `tx.origin`.
 The `CallerMode` enum indicates if there is an active caller modification and the type.
 
 - If there is an active prank:
-
   - `callerMode` will be equal to:
     - `CallerMode.Prank` if the prank has been set with [`prank`](/docs/cheatcodes/prank).
     - `CallerMode.RecurrentPrank` if the prank has been set with [`startPrank`](/docs/cheatcodes/start-prank).

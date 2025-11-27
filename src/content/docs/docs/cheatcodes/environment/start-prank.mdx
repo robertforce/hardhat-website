@@ -3,7 +3,6 @@ title: startPrank
 description: startPrank cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
@@ -19,7 +18,11 @@ function startPrank(address msgSender, address txOrigin) external;
 ```
 
 ```solidity
-function startPrank(address msgSender, address txOrigin, bool delegateCall) external;
+function startPrank(
+  address msgSender,
+  address txOrigin,
+  bool delegateCall
+) external;
 ```
 
 ### Description
@@ -39,38 +42,46 @@ function startPrank(address msgSender, address txOrigin, bool delegateCall) exte
 
 ```solidity
 contract ImplementationTest {
-    uint public num;
-    address public sender;
+  uint public num;
+  address public sender;
 
-    function setNum(uint _num) public {
-        num = _num;
-    }
+  function setNum(uint _num) public {
+    num = _num;
+  }
 }
 
 contract ProxyTest {
-    uint public num;
-    address public sender;
+  uint public num;
+  address public sender;
 }
 
 contract CheatcodesIssue is Script {
-    function run() public {
-        ProxyTest proxy = new ProxyTest();
-        ImplementationTest impl = new ImplementationTest();
+  function run() public {
+    ProxyTest proxy = new ProxyTest();
+    ImplementationTest impl = new ImplementationTest();
 
-        vm.label(address(proxy), 'proxy');
-        vm.label(address(impl), 'Impl');
+    vm.label(address(proxy), "proxy");
+    vm.label(address(impl), "Impl");
 
-        uint num = 42;
-        vm.startPrank(address(proxy), true);
-        vm.startStateDiffRecording();
-        (bool successTwo,) = address(impl).delegatecall(abi.encodeWithSignature('setNum(uint256)', num));
+    uint num = 42;
+    vm.startPrank(address(proxy), true);
+    vm.startStateDiffRecording();
+    (bool successTwo, ) = address(impl).delegatecall(
+      abi.encodeWithSignature("setNum(uint256)", num)
+    );
 
-        Vm.AccountAccess[] memory accountAccesses = vm.stopAndReturnStateDiff();
-        console.log('accountAccesses.kind', uint8(accountAccesses[0].kind));
-        console.log('accountAccesses.accessor', vm.getLabel(accountAccesses[0].accessor));
-        console.log('accountAccesses.account', vm.getLabel(accountAccesses[0].account));
-        console.logBytes(accountAccesses[0].data);
-    }
+    Vm.AccountAccess[] memory accountAccesses = vm.stopAndReturnStateDiff();
+    console.log("accountAccesses.kind", uint8(accountAccesses[0].kind));
+    console.log(
+      "accountAccesses.accessor",
+      vm.getLabel(accountAccesses[0].accessor)
+    );
+    console.log(
+      "accountAccesses.account",
+      vm.getLabel(accountAccesses[0].account)
+    );
+    console.logBytes(accountAccesses[0].data);
+  }
 }
 ```
 

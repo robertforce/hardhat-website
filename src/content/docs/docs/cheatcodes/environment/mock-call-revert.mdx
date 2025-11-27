@@ -3,26 +3,33 @@ title: mockCallRevert
 description: mockCallRevert cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
-function mockCallRevert(address where, bytes calldata data, bytes calldata retdata) external;
-function mockCallRevert(address where, bytes4 data, bytes calldata retdata) external;
+function mockCallRevert(
+  address where,
+  bytes calldata data,
+  bytes calldata retdata
+) external;
+function mockCallRevert(
+  address where,
+  bytes4 data,
+  bytes calldata retdata
+) external;
 ```
 
 ```solidity
 function mockCallRevert(
-    address where,
-    uint256 value,
-    bytes calldata data,
-    bytes calldata retdata
+  address where,
+  uint256 value,
+  bytes calldata data,
+  bytes calldata retdata
 ) external;
 function mockCallRevert(
-    address where,
-    uint256 value,
-    bytes4 data,
-    bytes calldata retdata
+  address where,
+  uint256 value,
+  bytes4 data,
+  bytes calldata retdata
 ) external;
 ```
 
@@ -51,13 +58,13 @@ Reverting an exact call with a raw error message:
 
 ```solidity
 function testMockCallRevert() public {
-    vm.mockCallRevert(
-        address(0),
-        abi.encodeWithSelector(MyToken.balanceOf.selector, address(1)),
-        "REVERT_MESSAGE"
-    );
-    vm.expectRevert("REVERT_MESSAGE");
-    IERC20(address(0)).balanceOf(address(1));
+  vm.mockCallRevert(
+    address(0),
+    abi.encodeWithSelector(MyToken.balanceOf.selector, address(1)),
+    "REVERT_MESSAGE"
+  );
+  vm.expectRevert("REVERT_MESSAGE");
+  IERC20(address(0)).balanceOf(address(1));
 }
 ```
 
@@ -65,14 +72,17 @@ Reverting a call with a custom error:
 
 ```solidity
 function testMockCallRevertWithCustomError() public {
-    bytes memory customError = abi.encodeWithSelector(TestError.selector, "ERROR_MESSAGE");
-    vm.mockCallRevert(
-        address(0),
-        abi.encodeWithSelector(MyToken.balanceOf.selector, address(1)),
-        customError
-    );
-    vm.expectRevert(customError);
-    IERC20(address(0)).balanceOf(address(1));
+  bytes memory customError = abi.encodeWithSelector(
+    TestError.selector,
+    "ERROR_MESSAGE"
+  );
+  vm.mockCallRevert(
+    address(0),
+    abi.encodeWithSelector(MyToken.balanceOf.selector, address(1)),
+    customError
+  );
+  vm.expectRevert(customError);
+  IERC20(address(0)).balanceOf(address(1));
 }
 ```
 
@@ -80,16 +90,16 @@ Mocking a call with a given `msg.value`:
 
 ```solidity
 function testMockCallRevertWithValue() public {
-    assertEq(example.pay{value: 10}(1), 1);
-    assertEq(example.pay{value: 1}(2), 2);
-    vm.mockCallRevert(
-        address(example),
-        10,
-        abi.encodeWithSelector(example.pay.selector),
-        "ERROR_MESSAGE"
-    );
-    assertEq(example.pay{value: 1}(2), 2);
-    vm.expectRevert("ERROR_MESSAGE");
-    assertEq(example.pay{value: 10}(1), 99);
+  assertEq(example.pay{ value: 10 }(1), 1);
+  assertEq(example.pay{ value: 1 }(2), 2);
+  vm.mockCallRevert(
+    address(example),
+    10,
+    abi.encodeWithSelector(example.pay.selector),
+    "ERROR_MESSAGE"
+  );
+  assertEq(example.pay{ value: 1 }(2), 2);
+  vm.expectRevert("ERROR_MESSAGE");
+  assertEq(example.pay{ value: 10 }(1), 99);
 }
 ```

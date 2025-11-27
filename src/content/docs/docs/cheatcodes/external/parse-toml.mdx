@@ -3,7 +3,6 @@ title: parseToml
 description: parseToml cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
@@ -97,8 +96,8 @@ will be decoded into:
 
 ```solidity
 struct Json {
-    uint256 a;
-    string b;
+  uint256 a;
+  string b;
 }
 ```
 
@@ -106,8 +105,8 @@ As the values are returned as an abi-encoded tuple, the exact name of the attrib
 
 ```solidity
 struct Json {
-    uint256 apple;
-    string pineapple;
+  uint256 apple;
+  string pineapple;
 }
 ```
 
@@ -123,8 +122,8 @@ The above TOML would not be able to be decoded with the struct below:
 
 ```solidity
 struct Json {
-    uint256 b;
-    uint256 a;
+  uint256 b;
+  uint256 a;
 }
 ```
 
@@ -180,14 +179,14 @@ And Solidity structs defined as follows:
 
 ```solidity
 struct Apple {
-    string color;
-    uint8 sourness;
-    uint8 sweetness;
+  string color;
+  uint8 sourness;
+  uint8 sweetness;
 }
 
 struct FruitStall {
-    Apple[] apples;
-    string name;
+  Apple[] apples;
+  string name;
 }
 ```
 

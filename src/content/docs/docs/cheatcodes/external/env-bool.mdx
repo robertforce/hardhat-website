@@ -3,7 +3,6 @@ title: envBool
 description: envBool cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
@@ -11,7 +10,10 @@ function envBool(string calldata key) external returns (bool value);
 ```
 
 ```solidity
-function envBool(string calldata key, string calldata delimiter) external returns (bool[] memory values);
+function envBool(
+  string calldata key,
+  string calldata delimiter
+) external returns (bool[] memory values);
 ```
 
 ### Description
@@ -27,7 +29,9 @@ Read an environment variable as `bool` or `bool[]`.
 ### Examples
 
 #### Single Value
+
 With environment variable `BOOL_VALUE=true`,
+
 ```solidity
 string memory key = "BOOL_VALUE";
 bool expected = true;
@@ -36,7 +40,9 @@ assert(output == expected);
 ```
 
 #### Array
+
 With environment variable `BOOL_VALUES=true,false,True,False`,
+
 ```solidity
 string memory key = "BOOL_VALUES";
 string memory delimiter = ",";

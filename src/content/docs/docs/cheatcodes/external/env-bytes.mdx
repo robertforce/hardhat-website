@@ -3,7 +3,6 @@ title: envBytes
 description: envBytes cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
@@ -11,7 +10,10 @@ function envBytes(bytes calldata key) external returns (bytes value);
 ```
 
 ```solidity
-function envBytes(bytes calldata key, bytes calldata delimiter) external returns (bytes[] memory values);
+function envBytes(
+  bytes calldata key,
+  bytes calldata delimiter
+) external returns (bytes[] memory values);
 ```
 
 ### Description
@@ -25,7 +27,9 @@ Read an environment variable as `bytes` or `bytes[]`.
 ### Examples
 
 #### Single Value
+
 With environment variable `BYTES_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`;
+
 ```solidity
 bytes memory key = "BYTES_VALUE";
 bytes expected = hex"7109709ECfa91a80626fF3989D68f67F5b1DD12D";
@@ -34,7 +38,9 @@ assertEq(output, expected);
 ```
 
 #### Array
+
 With environment variable `BYTES_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D,0x00`;
+
 ```solidity
 bytes memory key = "BYTES_VALUES";
 bytes memory delimiter = ",";

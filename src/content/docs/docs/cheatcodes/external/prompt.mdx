@@ -3,13 +3,18 @@ title: prompt
 description: prompt cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
-function prompt(string calldata promptText) external returns (string memory input);
-function promptSecret(string calldata promptText) external returns (string memory input);
-function promptSecretUint(string calldata promptText) external returns (uint256);
+function prompt(
+  string calldata promptText
+) external returns (string memory input);
+function promptSecret(
+  string calldata promptText
+) external returns (string memory input);
+function promptSecretUint(
+  string calldata promptText
+) external returns (uint256);
 ```
 
 ### Description
@@ -44,14 +49,14 @@ following pattern:
 
 ```solidity
 contract Script {
-    function run() public {
-        uint256 myUint = vm.parseUint(vm.prompt("enter uint"));
-        run(myUint);
-    }
+  function run() public {
+    uint256 myUint = vm.parseUint(vm.prompt("enter uint"));
+    run(myUint);
+  }
 
-    function run(uint256 myUint) public {
-        // actual logic
-    }
+  function run(uint256 myUint) public {
+    // actual logic
+  }
 }
 ```
 

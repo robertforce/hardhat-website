@@ -22,13 +22,17 @@ function revertToState(uint256 snapshotId) external returns (bool success);
 /// Takes the snapshot ID to revert to.
 /// Returns `true` if the snapshot was successfully reverted and deleted.
 /// Returns `false` if the snapshot does not exist.
-function revertToStateAndDelete(uint256 snapshotId) external returns (bool success);
+function revertToStateAndDelete(
+  uint256 snapshotId
+) external returns (bool success);
 
 /// Removes the snapshot with the given ID created by `snapshot`.
 /// Takes the snapshot ID to delete.
 /// Returns `true` if the snapshot was successfully deleted.
 /// Returns `false` if the snapshot does not exist.
-function deleteStateSnapshot(uint256 snapshotId) external returns (bool success);
+function deleteStateSnapshot(
+  uint256 snapshotId
+) external returns (bool success);
 
 /// Removes _all_ snapshots previously created by `snapshot`.
 function deleteStateSnapshots() external;
@@ -44,41 +48,49 @@ function deleteStateSnapshots() external;
 
 ```solidity
 struct Storage {
-    uint slot0;
-    uint slot1;
+  uint slot0;
+  uint slot1;
 }
 
 contract SnapshotStateTest is Test {
-    Storage store;
-    uint256 timestamp;
+  Storage store;
+  uint256 timestamp;
 
-    function setUp() public {
-        store.slot0 = 10;
-        store.slot1 = 20;
-        vm.deal(address(this), 5 ether);            // balance = 5 ether
-        timestamp = block.timestamp;
-    }
+  function setUp() public {
+    store.slot0 = 10;
+    store.slot1 = 20;
+    vm.deal(address(this), 5 ether); // balance = 5 ether
+    timestamp = block.timestamp;
+  }
 
-    function testSnapshotState() public {
-        uint256 snapshot = vm.snapshotState();      // saves the state
+  function testSnapshotState() public {
+    uint256 snapshot = vm.snapshotState(); // saves the state
 
-        // let's change the state
-        store.slot0 = 300;
-        store.slot1 = 400;
-        vm.deal(address(this), 500 ether);
-        vm.warp(12345);                             // block.timestamp = 12345
+    // let's change the state
+    store.slot0 = 300;
+    store.slot1 = 400;
+    vm.deal(address(this), 500 ether);
+    vm.warp(12345); // block.timestamp = 12345
 
-        assertEq(store.slot0, 300);
-        assertEq(store.slot1, 400);
-        assertEq(address(this).balance, 500 ether);
-        assertEq(block.timestamp, 12345);
+    assertEq(store.slot0, 300);
+    assertEq(store.slot1, 400);
+    assertEq(address(this).balance, 500 ether);
+    assertEq(block.timestamp, 12345);
 
-        vm.revertToState(snapshot);                 // restores the state
+    vm.revertToState(snapshot); // restores the state
 
-        assertEq(store.slot0, 10, "snapshot revert for slot 0 unsuccessful");
-        assertEq(store.slot1, 20, "snapshot revert for slot 1 unsuccessful");
-        assertEq(address(this).balance, 5 ether, "snapshot revert for balance unsuccessful");
-        assertEq(block.timestamp, timestamp, "snapshot revert for timestamp unsuccessful");
-    }
+    assertEq(store.slot0, 10, "snapshot revert for slot 0 unsuccessful");
+    assertEq(store.slot1, 20, "snapshot revert for slot 1 unsuccessful");
+    assertEq(
+      address(this).balance,
+      5 ether,
+      "snapshot revert for balance unsuccessful"
+    );
+    assertEq(
+      block.timestamp,
+      timestamp,
+      "snapshot revert for timestamp unsuccessful"
+    );
+  }
 }
 ```

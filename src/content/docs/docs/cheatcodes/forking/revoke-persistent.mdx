@@ -3,7 +3,6 @@ title: revokePersistent
 description: revokePersistent cheatcode documentation
 ---
 
-
 ### Signature
 
 ```solidity
@@ -21,34 +20,34 @@ Revoke a persistent status of a contract
 
 ```solidity
 contract SimpleStorageContract {
-    string public value;
+  string public value;
 
-    function set(uint256 _value) public {
-        value = _value;
-    }
+  function set(uint256 _value) public {
+    value = _value;
+  }
 }
 
 function testRevokePersistent() public {
-    // select a specific fork
-    cheats.selectFork(mainnetFork);
+  // select a specific fork
+  cheats.selectFork(mainnetFork);
 
-    // create a new contract that's stored in the `mainnetFork` storage
-    SimpleStorageContract simple = new SimpleStorageContract();
+  // create a new contract that's stored in the `mainnetFork` storage
+  SimpleStorageContract simple = new SimpleStorageContract();
 
-    // `simple` is not marked as persistent
-    assert(!cheats.isPersistent(address(simple)));
+  // `simple` is not marked as persistent
+  assert(!cheats.isPersistent(address(simple)));
 
-    // make it persistent
-    cheats.makePersistent(address(simple));
+  // make it persistent
+  cheats.makePersistent(address(simple));
 
-    // ensure it is persistent
-    assert(cheats.isPersistent(address(simple)));
+  // ensure it is persistent
+  assert(cheats.isPersistent(address(simple)));
 
-    // revoke it
-    cheats.revokePersistent(address(simple));
+  // revoke it
+  cheats.revokePersistent(address(simple));
 
-    // contract no longer persistent
-    assert(!cheats.isPersistent(address(simple)));
+  // contract no longer persistent
+  assert(!cheats.isPersistent(address(simple)));
 }
 ```
 
