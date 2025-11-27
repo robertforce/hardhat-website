@@ -15,7 +15,7 @@ Broad checks will slow down tests as it will take a while to find valid values, 
 
 You can configure the rejection thresholds by setting `fuzz.maxTestRejects` in your [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
 
-For broad checks, such as ensuring a `uint256` falls within a certain range, you can bound your input with the modulo operator or Forge Standard's [`bound`][forge-std-bound] method.
+For broad checks, such as ensuring a `uint256` falls within a certain range, you can bound your input with the modulo operator or Forge Standard's [`bound`](https://getfoundry.sh/reference/forge-std/bound) method.
 
 More information on filtering via `assume` can be found [here][filtering-guide].
 
@@ -45,5 +45,4 @@ Forge Standard Library
 
 [`bound`](https://getfoundry.sh/reference/forge-std/bound)
 
-[max-test-rejects]: ../config/reference/testing.md#max_test_rejects
 [filtering-guide]: https://altsysrq.github.io/proptest-book/proptest/tutorial/filtering.html#filtering
