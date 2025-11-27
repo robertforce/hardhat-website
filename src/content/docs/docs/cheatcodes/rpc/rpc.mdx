@@ -10,6 +10,8 @@ description: RPC related cheatcodes documentation
 function rpcUrl(string calldata alias) external returns (string memory);
 // Returns all configured (alias, URL) pairs
 function rpcUrls() external returns(string[2][] memory);
+// Returns all rpc urls and their aliases as structs.
+function rpcUrlStructs() external view returns (Rpc[] memory urls);
 /// Performs an Ethereum JSON-RPC request to the current fork URL.
 function rpc(string calldata method, string calldata params) external returns (bytes memory data);
 /// Performs an Ethereum JSON-RPC request to the given endpoint.
