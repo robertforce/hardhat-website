@@ -6,10 +6,6 @@
 enum CallerMode {
     /// No caller modification is currently active.
     None,
-    /// A one time broadcast triggered by a `vm.broadcast()` call is currently active.
-    Broadcast,
-    /// A recurrent broadcast triggered by a `vm.startBroadcast()` call is currently active.
-    RecurrentBroadcast,
     /// A one time prank triggered by a `vm.prank()` call is currently active.
     Prank,
     /// A recurrent prank triggered by a `vm.startPrank()` call is currently active.

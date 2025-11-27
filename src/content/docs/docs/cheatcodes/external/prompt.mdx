@@ -95,15 +95,3 @@ In your script:
 string memory rpcEndpoint = vm.prompt("RPC endpoint");
 vm.createSelectFork(rpcEndpoint);
 ```
-
-#### Parse user input into native types
-
-We can use the string parsing cheatcodes to parse the responses from users:
-
-```solidity
-uint privateKey = vm.promptSecretUint("Private key");
-address to = vm.parseAddress(vm.prompt("Send to"));
-uint amount = vm.parseUint(vm.prompt("Amount (wei)"));
-vm.broadcast(privateKey);
-payable(to).transfer(amount);
-```
