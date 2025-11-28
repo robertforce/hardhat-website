@@ -138,9 +138,9 @@ The following control flow table illustrate how Resume AccountAccesses are recor
 | Resume execution               | (Return to A.alpha())         | [A.call[A.access], B.call[B.access]]                                                                            |
 | Access state                   |                               | [<br></br>&emsp;A.call[A.access], <br></br>&emsp;B.call[B.access], <br></br>&emsp;A.resume[A.access']<br></br>] |
 
-> ℹ️ **Note**
->
-> A Resumed AccountAccess is created only if storage accesses occurred after a context was resumed.
+:::note
+A Resumed AccountAccess is created only if storage accesses occurred after a context was resumed.
+:::
 
 ### Example: Recording storage state changes during a CREATE operation
 

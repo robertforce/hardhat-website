@@ -82,20 +82,23 @@ There are 2 varieties of `expectEmit`:
 
 If `count` is used, expect a the given number of logs with the provided parameters.
 
-> ℹ️ **Matching sequences**
->
-> In functions that emit a lot of events, it's possible to "skip" events and only match a specific sequence,
-> but this sequence must always be in order. As an example, let's say a
-> function emits events: `A, B, C, D, E, F, F, G`.
->
-> `expectEmit` will be able to match ranges with and without skipping events in between:
->
-> - `[A, B, C]` is valid.
-> - `[B, D, F]` is valid.
-> - `[G]` or any other single event combination is valid.
-> - `[B, A]` or similar out-of-order combinations are **invalid** (events must be in order).
-> - `[C, F, F]` is valid.
-> - `[F, F, C]` is **invalid** (out of order).
+:::tip
+**Matching sequences**
+
+In functions that emit a lot of events, it's possible to "skip" events and only match a specific sequence,
+but this sequence must always be in order. As an example, let's say a
+function emits events: `A, B, C, D, E, F, F, G`.
+
+`expectEmit` will be able to match ranges with and without skipping events in between:
+
+- `[A, B, C]` is valid.
+- `[B, D, F]` is valid.
+- `[G]` or any other single event combination is valid.
+- `[B, A]` or similar out-of-order combinations are **invalid** (events must be in order).
+- `[C, F, F]` is valid.
+- `[F, F, C]` is **invalid** (out of order).
+:::
+
 
 ### Examples
 

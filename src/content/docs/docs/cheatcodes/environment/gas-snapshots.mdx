@@ -55,15 +55,19 @@ function snapshotGasLastCall(
 
 ### Description
 
-> ⚠️ **Gas snapshots are not yet fully supported.**
+:::caution
+**Gas snapshots are not yet fully supported.**
+:::
 
 `snapshotGas*` cheatcodes allow you to capture gas usage in your tests. This can be useful to track how much gas your logic is consuming. You can capture the gas usage of the last call by name, capture an arbitrary numerical value by name, or start and stop a snapshot capture of the current gas usage by name.
 
-> ℹ️ **Isolated tests**
->
-> These cheatcodes are not accurate if not using isolated test mode.
->
-> You can enable isolation mode by setting `isolate` to `true` in [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
+:::note
+**Isolated tests**
+
+These cheatcodes are not accurate if not using isolated test mode.
+
+You can enable isolation mode by setting `isolate` to `true` in [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
+:::
 
 ### Examples
 

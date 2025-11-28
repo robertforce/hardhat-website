@@ -33,12 +33,11 @@ array values.
 See [`mockCall`](/docs/cheatcodes/environment/mock-call) for more information on mocking calls and
 matching precedence.
 
-> ℹ️ **Note**
->
-> Any invocation of the mocked call beyond the number of elements in `retdata`
-> will receive the last `retdata` element in response. `clearMockedCalls` can be
-> called to clear the mock
-
+:::note
+Any invocation of the mocked call beyond the number of elements in `retdata`
+will receive the last `retdata` element in response. `clearMockedCalls` can be
+called to clear the mock
+:::
 ### Examples
 
 Mocking multiple `balanceOf(address)` calls:

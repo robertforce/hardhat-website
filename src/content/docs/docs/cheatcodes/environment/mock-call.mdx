@@ -44,16 +44,18 @@ If a match is found, then `retdata` is returned from the call.
 
 Mocked calls are in effect until [`clearMockedCalls`](/docs/cheatcodes/environment/clear-mocked-calls) is called.
 
-> ℹ️ **Note**
->
-> Calls to mocked addresses may revert if there is no code on the address.
-> This is because Solidity inserts an `extcodesize` check before some contract calls.
->
-> To circumvent this, use the [`etch`](/docs/cheatcodes/environment/etch) cheatcode if the mocked address has no code.
+:::note
+Calls to mocked addresses may revert if there is no code on the address.
+This is because Solidity inserts an `extcodesize` check before some contract calls.
 
-> ℹ️ **Internal calls**
->
-> This cheatcode does not currently work on internal calls.
+To circumvent this, use the [`etch`](/docs/cheatcodes/environment/etch) cheatcode if the mocked address has no code.
+:::
+
+:::note
+**Internal calls**
+
+This cheatcode does not currently work on internal calls.
+:::
 
 ### Examples
 

@@ -73,13 +73,15 @@ function expectPartialRevert(bytes4 revertData, address reverter) external;
 
 ### Error
 
-> ❌ **Error**
->
-> If you see the following error:
->
-> `[FAIL: call didn't revert at a lower depth than cheatcode call depth]`
->
-> Carefully read the next sections!
+:::danger
+**Error**
+
+If you see the following error:
+
+`[FAIL: call didn't revert at a lower depth than cheatcode call depth]`
+
+Carefully read the next sections!
+:::
 
 To understand why you are getting this error you first have to understand what `call depth` means.
 
@@ -111,18 +113,20 @@ function testMultipleReverts() public {
 
 If the **next call** does not revert with the expected data `message`, then `expectRevert` will.
 
-> ⚠️ **Usage**
->
-> By default, `expectRevert*` cheatcodes work only for calls with greater depth than test depth.
-> Expecting reverts at the same depth as test depth can be enabled by setting `allowInternalExpectRevert` to `true` in the [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
+:::caution
+**Usage**
+
+By default, `expectRevert*` cheatcodes work only for calls with greater depth than test depth.
+Expecting reverts at the same depth as test depth can be enabled by setting `allowInternalExpectRevert` to `true` in the [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration).
+:::
 
 As long as you are not using `vm.expectRevert` on multiple internal functions in a single test function body it is generally considered safe.
 
 You are recommended to apply this rule in a similar manner one would when tagging assembly blocks as `memory-safe`.
 
-> **Note**
->
-> For a call like `stable.donate(sUSD.balanceOf(user))`, the next call expected to revert is `sUSD.balanceOf(user)` and not `stable.donate()`.
+:::note
+For a call like `stable.donate(sUSD.balanceOf(user))`, the next call expected to revert is `sUSD.balanceOf(user)` and not `stable.donate()`.
+:::
 
 After calling `expectRevert`, calls to other cheatcodes before the reverting call are ignored.
 
@@ -141,49 +145,51 @@ and two signatures for `expectPartialRevert`:
 - **`bytes4` message**: Asserts that the next call reverts and the specified 4 bytes match the first 4 bytes of revert data.
 - **`bytes4` message and reverter `address`**: Asserts that the next call is reverted by specified address and the specified 4 bytes match the first 4 bytes of revert data.
 
-> ℹ️ **Note:**
->
-> Custom errors can have arguments that sometimes are difficult to calculate in a testing environment or they may be unrelated to the test at hand (e.g. a value computed in the internal function of a third-party contract). In such cases, `expectPartialRevert` can be used to ignore arguments and match only on the selector of custom error. For example, testing a function that reverts with `WrongNumber(uint256 number)` custom error:
->
-> ```solidity
-> function count() public {
->   revert WrongNumber(0);
-> }
-> ```
->
-> should pass when using `expectPartialRevert`:
->
-> ```solidity
-> vm.expectPartialRevert(Counter.WrongNumber.selector);
-> counter.count();
-> ```
->
-> but fails if exact match expected:
->
-> ```solidity
-> vm.expectRevert(Counter.WrongNumber.selector);
-> counter.count();
-> ```
+:::note
+Custom errors can have arguments that sometimes are difficult to calculate in a testing environment or they may be unrelated to the test at hand (e.g. a value computed in the internal function of a third-party contract). In such cases, `expectPartialRevert` can be used to ignore arguments and match only on the selector of custom error. For example, testing a function that reverts with `WrongNumber(uint256 number)` custom error:
 
-> ⚠️ **Gotcha: Usage with low-level calls**
->
-> Normally, a call that succeeds returns a status of `true` (along with any return data) and a call that reverts returns `false`.
->
-> The Solidity compiler will insert checks that ensures that the call succeeded, and revert if it did not.
->
-> On low level calls, the `expectRevert` cheatcode works by making the `status` boolean returned by the low level call correspond to whether the `expectRevert` succeeded or not, NOT whether or not the low-level call succeeds. Therefore, `status` being false corresponds to the cheatcode failing.
->
-> Apart from this, `expectRevert` also mangles return data on low level calls, and is not usable.
->
-> See the following example. For clarity, `status` has been renamed to `revertsAsExpected`:
->
-> ```solidity
-> function testLowLevelCallRevert() public {
->   vm.expectRevert(bytes("error message"));
->   (bool revertsAsExpected, ) = address(myContract).call(myCalldata);
->   assertTrue(revertsAsExpected, "expectRevert: call did not revert");
-> }
-> ```
+```solidity
+function count() public {
+  revert WrongNumber(0);
+}
+```
+
+should pass when using `expectPartialRevert`:
+
+```solidity
+vm.expectPartialRevert(Counter.WrongNumber.selector);
+counter.count();
+```
+
+but fails if exact match expected:
+
+```solidity
+vm.expectRevert(Counter.WrongNumber.selector);
+counter.count();
+```
+:::
+
+:::caution
+**Gotcha: Usage with low-level calls**
+
+Normally, a call that succeeds returns a status of `true` (along with any return data) and a call that reverts returns `false`.
+
+The Solidity compiler will insert checks that ensures that the call succeeded, and revert if it did not.
+
+On low level calls, the `expectRevert` cheatcode works by making the `status` boolean returned by the low level call correspond to whether the `expectRevert` succeeded or not, NOT whether or not the low-level call succeeds. Therefore, `status` being false corresponds to the cheatcode failing.
+
+Apart from this, `expectRevert` also mangles return data on low level calls, and is not usable.
+
+See the following example. For clarity, `status` has been renamed to `revertsAsExpected`:
+
+```solidity
+function testLowLevelCallRevert() public {
+  vm.expectRevert(bytes("error message"));
+  (bool revertsAsExpected, ) = address(myContract).call(myCalldata);
+  assertTrue(revertsAsExpected, "expectRevert: call did not revert");
+}
+```
+:::
 
 ### Examples
 

@@ -15,12 +15,12 @@ function setEnv(string calldata key, string calldata value) external;
 
 Set an environment variable `key=value`.
 
-> ℹ️ **Note**
->
-> Environment variables set by a process are only accessible by itself and its child
-> processes. Thus, calling `setEnv` will only modify environment variables of the currently running
-> process, and won't affect the shell (parent process), i.e., they won't persist after the
-> current process exits.
+:::note
+Environment variables set by a process are only accessible by itself and its child
+processes. Thus, calling `setEnv` will only modify environment variables of the currently running
+process, and won't affect the shell (parent process), i.e., they won't persist after the
+current process exits.
+:::
 
 ### Tips
 
