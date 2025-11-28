@@ -10,13 +10,13 @@ description: File cheat codes documentation
 ```solidity
 // Reads the entire content of file to string, (path) => (data)
 function readFile(string calldata) external returns (string memory);
-/// Reads the entire content of file as binary. `path` is relative to the project root.
+// Reads the entire content of file as binary. `path` is relative to the project root.
 function readFileBinary(
   string calldata path
 ) external view returns (bytes memory data);
-/// Reads the directory at the given path recursively, up to `maxDepth`.
-/// `maxDepth` defaults to 1, meaning only the direct children of the given directory will be returned.
-/// Follows symbolic links if `followLinks` is true.
+// Reads the directory at the given path recursively, up to `maxDepth`.
+// `maxDepth` defaults to 1, meaning only the direct children of the given directory will be returned.
+// Follows symbolic links if `followLinks` is true.
 function readDir(
   string calldata path
 ) external view returns (DirEntry[] memory entries);
@@ -31,28 +31,59 @@ function readDir(
 ) external view returns (DirEntry[] memory entries);
 // Reads next line of file to string, (path) => (line)
 function readLine(string calldata) external returns (string memory);
-/// Reads a symbolic link, returning the path that the link points to.
-/// This cheatcode will revert in the following situations, but is not limited to just these cases:
-/// - `path` is not a symbolic link.
-/// - `path` does not exist.
+// Reads a symbolic link, returning the path that the link points to.
+// This cheatcode will revert in the following situations, but is not limited to just these cases:
+// - `path` is not a symbolic link.
+// - `path` does not exist.
 function readLink(
   string calldata linkPath
 ) external view returns (string memory targetPath);
 // Writes data to file, creating a file if it does not exist, and entirely replacing its contents if it does.
 // (path, data) => ()
-function writeFile(string calldata, string calldata) external;
+function writeFile(string calldata path, string calldata data) external;
+// Writes binary data to a file, creating a file if it does not exist, and entirely replacing its contents if it does.
+// `path` is relative to the project root.
+// (path, data) => ()
+function writeFileBinary(string calldata path, bytes calldata data) external;
 // Writes line to file, creating a file if it does not exist.
 // (path, data) => ()
 function writeLine(string calldata, string calldata) external;
 // Closes file for reading, resetting the offset and allowing to read it from beginning with readLine.
 // (path) => ()
 function closeFile(string calldata) external;
+// Copies the contents of one file to another. This function will **overwrite** the contents of `to`.
+// On success, the total number of bytes copied is returned and it is equal to the length of the `to` file as reported by `metadata`.
+// Both `from` and `to` are relative to the project root.
+// (from, to) => (copied)
+function copyFile(
+  string calldata from,
+  string calldata to
+) external returns (uint64 copied);
+// Creates a new, empty directory at the provided path.
+// This cheatcode will revert in the following situations, but is not limited to just these cases:
+//
+// - User lacks permissions to modify `path`.
+// - A parent of the given path doesn't exist and `recursive` is false.
+// - `path` already exists and `recursive` is false.
+//   `path` is relative to the project root.
+// (path, recursive) => ()
+function createDir(string calldata path, bool recursive) external;
 // Removes file. This cheatcode will revert in the following situations, but is not limited to just these cases:
 // - Path points to a directory.
 // - The file doesn't exist.
 // - The user lacks permissions to remove the file.
 // (path) => ()
 function removeFile(string calldata) external;
+// Removes a directory at the provided path.
+// This cheatcode will revert in the following situations, but is not limited to just these cases:
+//
+// - `path` doesn't exist.
+// - `path` isn't a directory.
+// - User lacks permissions to modify `path`.
+// - The directory is not empty and `recursive` is false.
+//   `path` is relative to the project root.
+// (path, recursive) => ()
+function removeDir(string calldata path, bool recursive) external;
 // Returns true if the given path points to an existing entity, else returns false
 // (path) => (bool)
 function exists(string calldata) external returns (bool);
@@ -66,7 +97,7 @@ function isDir(string calldata) external returns (bool);
 
 ### Description
 
-These cheatcodes provided by [forge-std](https://github.com/foundry-rs/forge-std) can be used for filesystem manipulation operations.
+These cheatcodes can be used for filesystem manipulation operations.
 
 By default, filesystem access is disallowed and requires the `fsPermissions` setting in [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration):
 
