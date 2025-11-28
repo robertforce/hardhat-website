@@ -3,6 +3,8 @@ title: writeToml
 description: writeToml cheatcode documentation
 ---
 
+{/* This document contains content copied/adapted from the Foundry Book (MIT licensed). See LICENSE in the parent directory.*/}
+
 ### Signature
 
 ```solidity
@@ -25,7 +27,7 @@ The argument `json` must be a JSON object in stringified form. For example:
 { "boolean": true, "number": 342, "object": { "title": "finally json serialization" } }
 ```
 
-This is usually built through [serializeJson](/docs/cheatcodes/serialize-json).
+This is usually built through [serializeJson](/docs/cheatcodes/external/serialize-json).
 
 The argument `path` is the path of the TOML file to write to.
 
@@ -35,7 +37,7 @@ If a `valueKey` is provided, then the file must already exist and be a valid TOM
 
 This is useful for replacing some values in a TOML file without having to first parse and then reserialize it. Note that if the specified key, or any of the intermediate ones in the JSON path, don't exist, they will be created.
 
-**Remember:** The file path `path` needs to be in the allowed paths. Read more in [File cheatcodes](/docs/cheatcodes/fs).
+**Remember:** The file path `path` needs to be in the allowed paths. Read more in [File cheatcodes](/docs/cheatcodes/file/fs).
 
 #### JSON Paths
 
@@ -149,4 +151,4 @@ vm.writeToml("13371337", "./output/example2.toml", "..veryDeep");
 
 ### SEE ALSO
 
-- [serializeJson](/docs/cheatcodes/serialize-json)
+- [serializeJson](/docs/cheatcodes/external/serialize-json)

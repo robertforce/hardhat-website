@@ -3,6 +3,8 @@ title: stopAndReturnStateDiff
 description: stopAndReturnStateDiff cheatcode documentation
 ---
 
+{/* This document contains content copied/adapted from the Foundry Book (MIT licensed). See LICENSE in the parent directory.*/}
+
 ### Signature
 
 ```solidity
@@ -57,7 +59,7 @@ function stopAndReturnStateDiff()
 
 ### Description
 
-Retrieves state changes recorded after a call to [`startStateDiffRecording`](/docs/cheatcodes/start-state-diff-recording). This function will consume the recorded state diffs when called and disable state diff recording. One may call `startStateDiffRecording` to resume recording.
+Retrieves state changes recorded after a call to [`startStateDiffRecording`](/docs/cheatcodes/environment/start-state-diff-recording). This function will consume the recorded state diffs when called and disable state diff recording. One may call `startStateDiffRecording` to resume recording.
 
 There are two types of state change records; account accesses and storage accesses represented as `AccountAccess` and `StorageAccess`.
 

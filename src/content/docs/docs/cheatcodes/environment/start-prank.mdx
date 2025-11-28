@@ -3,6 +3,8 @@ title: startPrank
 description: startPrank cheatcode documentation
 ---
 
+{/* This document contains content copied/adapted from the Foundry Book (MIT licensed). See LICENSE in the parent directory.*/}
+
 ### Signature
 
 ```solidity
@@ -27,10 +29,10 @@ function startPrank(
 
 ### Description
 
-- `startPrank(address msgSender)`: sets `msg.sender` **for all subsequent calls** until [`stopPrank`](/docs/cheatcodes/stop-prank) is called.
-- `startPrank(address msgSender, address txOrigin)`: sets `msg.sender` and `tx.origin` **for all subsequent calls** until [`stopPrank`](/docs/cheatcodes/stop-prank) is called.
-- `startPrank(address msgSender, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` **for all subsequent delegate calls** until [`stopPrank`](/docs/cheatcodes/stop-prank) is called.
-- `startPrank(address msgSender, address txOrigin, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` and `tx.origin` **for all subsequent delegate calls** until [`stopPrank`](/docs/cheatcodes/stop-prank) is called.
+- `startPrank(address msgSender)`: sets `msg.sender` **for all subsequent calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
+- `startPrank(address msgSender, address txOrigin)`: sets `msg.sender` and `tx.origin` **for all subsequent calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
+- `startPrank(address msgSender, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` **for all subsequent delegate calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
+- `startPrank(address msgSender, address txOrigin, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` and `tx.origin` **for all subsequent delegate calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
 
 > ℹ️ **Note**
 >

@@ -3,6 +3,8 @@ title: revokePersistent
 description: revokePersistent cheatcode documentation
 ---
 
+{/* This document contains content copied/adapted from the Foundry Book (MIT licensed). See LICENSE in the parent directory.*/}
+
 ### Signature
 
 ```solidity
@@ -12,7 +14,7 @@ function revokePersistent(address[] calldata) external;
 
 ### Description
 
-The counterpart of [`makePersistent`](/docs/cheatcodes/make-persistent), that makes the given contract not persistent across fork swaps
+The counterpart of [`makePersistent`](/docs/cheatcodes/forking/make-persistent), that makes the given contract not persistent across fork swaps
 
 ### Examples
 
@@ -53,7 +55,7 @@ function testRevokePersistent() public {
 
 ### SEE ALSO
 
-- [isPersistent](/docs/cheatcodes/is-persistent)
-- [revokePersistent](/docs/cheatcodes/revoke-persistent)
-- [createFork](/docs/cheatcodes/create-fork)
-- [selectFork](/docs/cheatcodes/select-fork)
+- [isPersistent](/docs/cheatcodes/forking/is-persistent)
+- [revokePersistent](/docs/cheatcodes/forking/revoke-persistent)
+- [createFork](/docs/cheatcodes/forking/create-fork)
+- [selectFork](/docs/cheatcodes/forking/select-fork)
