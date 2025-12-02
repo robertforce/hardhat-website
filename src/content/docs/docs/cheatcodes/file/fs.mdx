@@ -1,6 +1,6 @@
 ---
-title: File cheat codes
-description: File cheat codes documentation
+title: File cheatcodes
+description: File cheatcodes documentation
 ---
 
 {/* This document contains content copied/adapted from the Foundry Book (MIT licensed). See LICENSE in the parent directory. */}
@@ -14,6 +14,20 @@ function readFile(string calldata) external returns (string memory);
 function readFileBinary(
   string calldata path
 ) external view returns (bytes memory data);
+
+struct DirEntry {
+  /// The error message, if any.
+  string errorMessage;
+  /// The path of the entry.
+  string path;
+  /// The depth of the entry.
+  uint64 depth;
+  /// Whether the entry is a directory.
+  bool isDir;
+  /// Whether the entry is a symlink.
+  bool isSymlink;
+}
+
 // Reads the directory at the given path recursively, up to `maxDepth`.
 // `maxDepth` defaults to 1, meaning only the direct children of the given directory will be returned.
 // Follows symbolic links if `followLinks` is true.

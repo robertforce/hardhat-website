@@ -6,6 +6,14 @@ description: tryFfi cheatcode documentation
 ### Signature
 
 ```solidity
+struct FfiResult {
+  /// The exit code of the call.
+  int32 exitCode;
+  /// The optionally hex-decoded `stdout` data.
+  bytes stdout;
+  /// The `stderr` data.
+  bytes stderr;
+}
 function tryFfi(
   string[] calldata commandInput
 ) external returns (FfiResult memory result);

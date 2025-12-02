@@ -8,6 +8,12 @@ description: RPC related cheatcodes documentation
 ### Signature
 
 ```solidity
+struct Rpc {
+  /// The alias of the RPC URL.
+  string key;
+  /// The RPC URL.
+  string url;
+}
 // Returns the URL for a configured alias
 function rpcUrl(string calldata alias) external returns (string memory);
 // Returns all configured (alias, URL) pairs

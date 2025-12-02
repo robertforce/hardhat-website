@@ -8,6 +8,14 @@ description: assumeNoRevert cheatcode documentation
 ### Signature
 
 ```solidity
+struct PotentialRevert {
+  /// The allowed origin of the revert opcode; address(0) allows reverts from any address
+  address reverter;
+  /// When true, only matches on the beginning of the revert data, otherwise, matches on entire revert data
+  bool partialMatch;
+  /// The data to use to match encountered reverts
+  bytes revertData;
+}
 function assumeNoRevert() external pure;
 function assumeNoRevert(PotentialRevert calldata potentialRevert) external pure;
 function assumeNoRevert(

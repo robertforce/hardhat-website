@@ -9,9 +9,12 @@ description: readCallers cheatcode documentation
 
 ```solidity
 enum CallerMode {
-  None,
-  Prank,
-  RecurrentPrank
+    /// No caller modification is currently active.
+    None,
+    /// A one time prank triggered by a `vm.prank()` call is currently active.
+    Prank,
+    /// A recurrent prank triggered by a `vm.startPrank()` call is currently active.
+    RecurrentPrank,
 }
 
 function readCallers()
