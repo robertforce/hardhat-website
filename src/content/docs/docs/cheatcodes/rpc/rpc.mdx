@@ -32,12 +32,12 @@ Provides cheatcodes to access all RPC endpoints configured in the `forking.rpcEn
 
 ### Examples
 
-The following `rpcEndpoints` in [Solidity tests configuration](https://hardhat.org/docs/reference/configuration#solidity-tests-configuration) registers two RPC aliases:
+The following `rpcEndpoints` in [Solidity tests configuration](/docs/reference/configuration#solidity-tests-configuration) registers two RPC aliases:
 
 - `optimism` references the URL directly
-- `mainnet` references the `RPC_MAINNET` environment value that is expected to contain the actual URL
+- `mainnet` references the `RPC_MAINNET` configuration variable that is expected to contain the actual URL
 
-_Env variables need to be wrapped in `${}`_
+For more details on how to use configuration variables, see [Configuration Variables](/docs/explanations/configuration-variables).
 
 ```js
 // --snip--
@@ -45,7 +45,7 @@ forking: {
     // --snip--
     rpcEndpoints: {
         optimism: "https://optimism.alchemyapi.io/v2/...",
-        mainnet: "${RPC_MAINNET}",
+        mainnet: configVariable("MAINNET_URL"),
     }
 }
 ```
