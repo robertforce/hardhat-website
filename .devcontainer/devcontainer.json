@@ -1,0 +1,14 @@
+{
+	"name": "Hardhat Website",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "24"
+		}
+	},
+	"forwardPorts": [
+		4321
+	],
+	"postCreateCommand": "pnpm install --frozen-lockfile",
+	"waitFor": "postCreateCommand"
+}
