@@ -96,6 +96,32 @@ contract CounterTest {
 }
 ```
 
+### Using cheatcodes
+
+When writing Solidity tests in Hardhat, you can use [Solidity test cheatcodes](/docs/cheatcodes/cheatcodes-overview) to manipulate the EVM state and control the execution environment of your tests.
+
+For example, you can use the [`vm.prank`](/docs/cheatcodes/environment/prank) cheatcode to change the `msg.sender` for the next call:
+
+```solidity
+import { Test } from "forge-std/Test.sol";
+
+contract CounterTest is Test {
+  Counter counter;
+
+  function setUp() public {
+    counter = new Counter();
+  }
+
+  function testIncAsAlice() public {
+    address alice = address(0x123);
+    vm.prank(alice);
+    counter.inc();
+    assertEq(counter.count(), 1, "count should be 1");
+    assertEq(counter.lastCaller(), alice, "last caller should be alice");
+  }
+}
+```
+
 ## Running Solidity tests
 
 You can run all the tests in your Hardhat project using the `test` task:
