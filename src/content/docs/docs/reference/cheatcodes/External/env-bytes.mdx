@@ -8,13 +8,13 @@ description: envBytes cheatcode documentation
 ### Signature
 
 ```solidity
-function envBytes(bytes calldata key) external returns (bytes value);
+function envBytes(string calldata key) external returns (bytes value);
 ```
 
 ```solidity
 function envBytes(
-  bytes calldata key,
-  bytes calldata delimiter
+  string calldata key,
+  string calldata delimiter
 ) external returns (bytes[] memory values);
 ```
 
