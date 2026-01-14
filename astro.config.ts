@@ -140,16 +140,22 @@ export default defineConfig({
                 {
                   label: "Reference",
                   collapsed: true,
-                  autogenerate: {
-                    directory: "docs/reference",
-                  },
-                },
-                {
-                  label: "Solidity test cheatcodes",
-                  collapsed: true,
-                  autogenerate: {
-                    directory: "docs/cheatcodes",
-                  },
+                  items: [
+                    { slug: "docs/reference/configuration" },
+                    { slug: "docs/reference/network-manager" },
+                    { slug: "docs/reference/artifacts" },
+                    { slug: "docs/reference/console-log" },
+                    {
+                      label: "Solidity test cheatcodes",
+                      collapsed: true,
+                      autogenerate: {
+                        directory: "docs/reference/cheatcodes",
+                      },
+                    },
+                    { slug: "docs/reference/stability-guarantees" },
+                    { slug: "docs/reference/nodejs-support" },
+                    { slug: "docs/reference/errors" },
+                  ],
                 },
                 {
                   label: "Explanations",
