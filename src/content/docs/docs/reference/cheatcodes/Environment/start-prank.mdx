@@ -29,10 +29,10 @@ function startPrank(
 
 ### Description
 
-- `startPrank(address msgSender)`: sets `msg.sender` **for all subsequent calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
-- `startPrank(address msgSender, address txOrigin)`: sets `msg.sender` and `tx.origin` **for all subsequent calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
-- `startPrank(address msgSender, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` **for all subsequent delegate calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
-- `startPrank(address msgSender, address txOrigin, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` and `tx.origin` **for all subsequent delegate calls** until [`stopPrank`](/docs/cheatcodes/environment/stop-prank) is called.
+- `startPrank(address msgSender)`: sets `msg.sender` **for all subsequent calls** until [`stopPrank`](/docs/reference/cheatcodes/environment/stop-prank) is called.
+- `startPrank(address msgSender, address txOrigin)`: sets `msg.sender` and `tx.origin` **for all subsequent calls** until [`stopPrank`](/docs/reference/cheatcodes/environment/stop-prank) is called.
+- `startPrank(address msgSender, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` **for all subsequent delegate calls** until [`stopPrank`](/docs/reference/cheatcodes/environment/stop-prank) is called.
+- `startPrank(address msgSender, address txOrigin, bool delegateCall)`: if `delegateCall` value is `true` then sets `msg.sender` and `tx.origin` **for all subsequent delegate calls** until [`stopPrank`](/docs/reference/cheatcodes/environment/stop-prank) is called.
 
 :::note
 The delegate calls cannot be pranked from an EOA.

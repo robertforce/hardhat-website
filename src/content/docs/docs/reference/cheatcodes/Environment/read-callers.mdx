@@ -30,8 +30,8 @@ The `CallerMode` enum indicates if there is an active caller modification and th
 
 - If there is an active prank:
   - `callerMode` will be equal to:
-    - `CallerMode.Prank` if the prank has been set with [`prank`](/docs/cheatcodes/environment/prank).
-    - `CallerMode.RecurrentPrank` if the prank has been set with [`startPrank`](/docs/cheatcodes/environment/start-prank).
+    - `CallerMode.Prank` if the prank has been set with [`prank`](/docs/reference/cheatcodes/environment/prank).
+    - `CallerMode.RecurrentPrank` if the prank has been set with [`startPrank`](/docs/reference/cheatcodes/environment/start-prank).
 
 - If no caller modification is active:
   - `callerMode` will be equal to `CallerMode.None`.
@@ -66,5 +66,5 @@ assertEq(txOrigin, originPrankAddress);
 
 ### SEE ALSO
 
-- [prank](/docs/cheatcodes/environment/prank)
-- [startPrank](/docs/cheatcodes/environment/start-prank)
+- [prank](/docs/reference/cheatcodes/environment/prank)
+- [startPrank](/docs/reference/cheatcodes/environment/start-prank)

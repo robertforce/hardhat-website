@@ -42,13 +42,13 @@ If a match is found, then `retdata` is returned from the call.
 
 **Using the second signature** we can mock the calls with a specific `msg.value`. `Calldata` match takes precedence over `msg.value` in case of ambiguity.
 
-Mocked calls are in effect until [`clearMockedCalls`](/docs/cheatcodes/environment/clear-mocked-calls) is called.
+Mocked calls are in effect until [`clearMockedCalls`](/docs/reference/cheatcodes/environment/clear-mocked-calls) is called.
 
 :::note
 Calls to mocked addresses may revert if there is no code on the address.
 This is because Solidity inserts an `extcodesize` check before some contract calls.
 
-To circumvent this, use the [`etch`](/docs/cheatcodes/environment/etch) cheatcode if the mocked address has no code.
+To circumvent this, use the [`etch`](/docs/reference/cheatcodes/environment/etch) cheatcode if the mocked address has no code.
 :::
 
 :::note
