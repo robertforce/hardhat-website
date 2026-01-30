@@ -119,6 +119,13 @@
       "authorUrl": "https://distributedlab.com/",
       "description": "Hardhat plugin to generate customizable smart contracts documentation",
       "tags": ["Documentation", "NatSpec", "Markdown", "Solarity"]
+    },
+    {
+      "name": "hardhat-ignore-warnings",
+      "author": "@frangio",
+      "authorUrl": "https://github.com/frangio",
+      "description": "Hardhat plugin that adds ways to ignore Solidity warnings",
+      "tags": ["Solidity", "Warnings"]
     }
   ]
 }
