@@ -252,11 +252,11 @@ const signer = await ethers.getSigner("0x364d6D0333432C3Ac016Ca832fb8594A8cE43Ca
 signer.sendTransaction(...)
 ```
 
-Call [`hardhat_stopImpersonatingAccount`](#hardhat-stopimpersonatingaccount) to stop impersonating.
+Call [`hardhat_stopImpersonatingAccount`](#hardhat_stopimpersonatingaccount) to stop impersonating.
 
 ##### `hardhat_getAutomine`
 
-Returns `true` if automatic mining is enabled, and `false` otherwise. See [Mining Modes](../explanation/mining-modes.md) to learn more.
+Returns `true` if automatic mining is enabled, and `false` otherwise. See [Mining Modes](/docs/explanations/edr-simulated-networks#mining-modes) to learn more.
 
 ##### `hardhat_metadata`
 
@@ -433,7 +433,7 @@ The storage position index must not exceed 2^256, and the value to write must be
 
 ##### `hardhat_stopImpersonatingAccount`
 
-Use this method to stop impersonating an account after having previously used [`hardhat_impersonateAccount`](#hardhat-impersonateaccount), like:
+Use this method to stop impersonating an account after having previously used [`hardhat_impersonateAccount`](#hardhat_impersonateaccount), like:
 
 ```ts
 await provider.request({
@@ -458,13 +458,13 @@ Same as Ganache.
 
 ##### `evm_setAutomine`
 
-Enables or disables, based on the single boolean argument, the automatic mining of new blocks with each new transaction submitted to the network. You can use [`hardhat_getAutomine`](#hardhat-getautomine) to get the current value. See also [Mining Modes](../explanation/mining-modes.md).
+Enables or disables, based on the single boolean argument, the automatic mining of new blocks with each new transaction submitted to the network. You can use [`hardhat_getAutomine`](#hardhat_getautomine) to get the current value. See also [Mining Modes](/docs/explanations/edr-simulated-networks#mining-modes).
 
 ##### `evm_setBlockGasLimit`
 
 ##### `evm_setIntervalMining`
 
-Enables (with a numeric argument greater than 0) or disables (with a numeric argument equal to 0), the automatic mining of blocks at a regular interval of milliseconds, each of which will include all pending transactions. See also [Mining Modes](../explanation/mining-modes.md).
+Enables (with a numeric argument greater than 0) or disables (with a numeric argument equal to 0), the automatic mining of blocks at a regular interval of milliseconds, each of which will include all pending transactions. See also [Mining Modes](/docs/explanations/edr-simulated-networks#mining-modes).
 
 ##### `evm_setNextBlockTimestamp`
 
