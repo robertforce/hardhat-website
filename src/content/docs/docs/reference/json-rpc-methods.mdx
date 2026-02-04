@@ -232,10 +232,6 @@ Most of these methods can be used more easily through the [Hardhat Network Helpe
 
 Remove a transaction from the mempool
 
-{/* intentionally undocumented, internal method:
-##### `hardhat_getStackTraceFailuresCount`
-*/}
-
 ##### `hardhat_impersonateAccount`
 
 Hardhat Network allows you to send transactions impersonating specific account and contract addresses.
@@ -257,10 +253,6 @@ signer.sendTransaction(...)
 ```
 
 Call [`hardhat_stopImpersonatingAccount`](#hardhat-stopimpersonatingaccount) to stop impersonating.
-
-{/* intentionally undocumented, internal method:
-##### `hardhat_intervalMine`
-*/}
 
 ##### `hardhat_getAutomine`
 
@@ -313,10 +305,7 @@ For example:
 ```ts
 await provider.request({
   method: "hardhat_setBalance",
-  params: [
-    "0x0d2026b3EE6eC71FC6746ADb6311F6d3Ba1C000B",
-    "0x1000",
-  ],
+  params: ["0x0d2026b3EE6eC71FC6746ADb6311F6d3Ba1C000B", "0x1000"],
 });
 ```
 
@@ -331,10 +320,7 @@ For example:
 ```ts
 await provider.request({
   method: "hardhat_setCode",
-  params: [
-    "0x0d2026b3EE6eC71FC6746ADb6311F6d3Ba1C000B",
-    "0xa1a2a3...",
-  ],
+  params: ["0x0d2026b3EE6eC71FC6746ADb6311F6d3Ba1C000B", "0xa1a2a3..."],
 });
 ```
 
@@ -387,7 +373,9 @@ For example:
 ```ts
 await provider.request({
   method: "hardhat_setPrevRandao",
-  params: ["0x1234567812345678123456781234567812345678123456781234567812345678"],
+  params: [
+    "0x1234567812345678123456781234567812345678123456781234567812345678",
+  ],
 });
 ```
 
@@ -402,10 +390,7 @@ For example:
 ```ts
 await provider.request({
   method: "hardhat_setNonce",
-  params: [
-    "0x0d2026b3EE6eC71FC6746ADb6311F6d3Ba1C000B",
-    "0x21",
-  ],
+  params: ["0x0d2026b3EE6eC71FC6746ADb6311F6d3Ba1C000B", "0x21"],
 });
 ```
 
