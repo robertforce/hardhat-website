@@ -53,27 +53,36 @@ Rerun with the env variable FORCE_GITHUB_RELEASES=1
 
     const releases = z.array(githubRelaseApiSchema).parse(data);
 
-    return releases
-      .filter((release) => !release.draft && !release.prerelease)
-      .slice(0, 3)
-      .map((release) => {
-        const name =
-          release.name != null && release.name !== ""
-            ? release.name
-            : release.tag_name.replace(/^.*\//, "").replace(/@([^@]*)$/, " $1");
+    return (
+      releases
+        .filter((release) => !release.draft && !release.prerelease)
+        // We only show Hardhat 3 (core) releases in the landing, so we filter
+        // by tag_name, assuming that our release process is consistent with
+        // the `hardhat@3.x.y` format.
+        .filter((release) => release.tag_name.startsWith("hardhat@3."))
+        .slice(0, 3)
+        .map((release) => {
+          // We use the name if any, otherwise "hardhat x.y.z", based on the
+          // tag_name.
+          const name =
+            release.name != null && release.name !== ""
+              ? release.name
+              : release.tag_name.replace("@", " ");
 
-        const body =
-          release.body != null && release.body !== ""
-            ? release.body.split("###")[0]?.trim()
-            : "";
+          // We only keep the body until the first ### subtitle.
+          const body =
+            release.body != null && release.body !== ""
+              ? release.body.split("###")[0]?.trim()
+              : "";
 
-        return {
-          ...release,
-          id: `${release.id}`,
-          name,
-          body,
-        };
-      });
+          return {
+            ...release,
+            id: `${release.id}`,
+            name,
+            body,
+          };
+        })
+    );
   },
   schema: githubReleaseCollectionSchema,
 });
