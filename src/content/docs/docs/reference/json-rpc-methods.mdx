@@ -94,6 +94,8 @@ const trace = await provider.request({
 
 ##### `eth_accounts`
 
+##### `eth_blobBaseFee`
+
 ##### `eth_blockNumber`
 
 ##### `eth_call`
@@ -148,6 +150,8 @@ const result = await provider.request({
 
 ##### `eth_estimateGas`
 
+##### `eth_feeHistory`
+
 ##### `eth_gasPrice`
 
 ##### `eth_getBalance`
@@ -168,6 +172,8 @@ const result = await provider.request({
 
 ##### `eth_getLogs`
 
+##### `eth_getProof`
+
 ##### `eth_getStorageAt`
 
 ##### `eth_getTransactionByBlockHashAndIndex`
@@ -179,6 +185,8 @@ const result = await provider.request({
 ##### `eth_getTransactionCount`
 
 ##### `eth_getTransactionReceipt`
+
+##### `eth_maxPriorityFeePerGas`
 
 ##### `eth_newBlockFilter`
 
@@ -197,14 +205,6 @@ const result = await provider.request({
 ##### `eth_signTypedData_v4`
 
 ##### `eth_subscribe`
-
-##### `eth_blobBaseFee`
-
-##### `eth_feeHistory`
-
-##### `eth_getProof`
-
-##### `eth_maxPriorityFeePerGas`
 
 ##### `eth_syncing`
 
@@ -232,6 +232,10 @@ Most of these methods can be used more easily through the [Hardhat Network Helpe
 
 Remove a transaction from the mempool
 
+##### `hardhat_getAutomine`
+
+Returns `true` if automatic mining is enabled, and `false` otherwise. See [Mining Modes](/docs/explanations/edr-simulated-networks#mining-modes) to learn more.
+
 ##### `hardhat_impersonateAccount`
 
 Hardhat Network allows you to send transactions impersonating specific account and contract addresses.
@@ -253,10 +257,6 @@ signer.sendTransaction(...)
 ```
 
 Call [`hardhat_stopImpersonatingAccount`](#hardhat_stopimpersonatingaccount) to stop impersonating.
-
-##### `hardhat_getAutomine`
-
-Returns `true` if automatic mining is enabled, and `false` otherwise. See [Mining Modes](/docs/explanations/edr-simulated-networks#mining-modes) to learn more.
 
 ##### `hardhat_metadata`
 
@@ -364,23 +364,6 @@ await provider.request({
 
 This only affects the next block; the base fee will keep being updated in each subsequent block according to [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559).
 
-##### `hardhat_setPrevRandao`
-
-Sets the PREVRANDAO value of the next block.
-
-For example:
-
-```ts
-await provider.request({
-  method: "hardhat_setPrevRandao",
-  params: [
-    "0x1234567812345678123456781234567812345678123456781234567812345678",
-  ],
-});
-```
-
-This only affects the next block. The PREVRANDAO of the following blocks will continue to be computed as the keccak256 hash of the previous value.
-
 ##### `hardhat_setNonce`
 
 Modifies an account's nonce by overwriting it.
@@ -399,6 +382,23 @@ This will result in account `0x0d20...000B` having a nonce of 33.
 Throws an `InvalidInputError` if nonce is smaller than the current one. The reason for this restriction is to avoid collisions when deploying contracts using the same nonce more than once.
 
 You can only use this method to increase the nonce of an account; you can't set a lower value than the account's current nonce.
+
+##### `hardhat_setPrevRandao`
+
+Sets the PREVRANDAO value of the next block.
+
+For example:
+
+```ts
+await provider.request({
+  method: "hardhat_setPrevRandao",
+  params: [
+    "0x1234567812345678123456781234567812345678123456781234567812345678",
+  ],
+});
+```
+
+This only affects the next block. The PREVRANDAO of the following blocks will continue to be computed as the keccak256 hash of the previous value.
 
 ##### `hardhat_setStorageAt`
 
@@ -512,10 +512,10 @@ Snapshot the state of the blockchain at the current block. Takes no parameters. 
 
 ##### `eth_submitWork`
 
-##### `net_listening`
-
-##### `net_peerCount`
-
 ##### `hardhat_addCompilationResult`
 
 ##### `hardhat_reset`
+
+##### `net_listening`
+
+##### `net_peerCount`
