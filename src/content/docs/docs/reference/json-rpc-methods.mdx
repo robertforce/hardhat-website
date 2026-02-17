@@ -446,15 +446,9 @@ await provider.request({
 
 ##### `evm_increaseTime`
 
-Same as Ganache.
-
 ##### `evm_mine`
 
-Same as Ganache
-
 ##### `evm_revert`
-
-Same as Ganache.
 
 ##### `evm_setAutomine`
 
@@ -471,8 +465,6 @@ Enables (with a numeric argument greater than 0) or disables (with a numeric arg
 This method works like `evm_increaseTime`, but takes the exact timestamp that you want in the next block, and increases the time accordingly.
 
 ##### `evm_snapshot`
-
-Same as [Ganache](https://github.com/trufflesuite/ganache/blob/ef1858d5d6f27e4baeb75cccd57fb3dc77a45ae8/src/chains/ethereum/ethereum/RPC-METHODS.md#evm_snapshot).
 
 Snapshot the state of the blockchain at the current block. Takes no parameters. Returns the id of the snapshot that was created. A snapshot can only be reverted once. After a successful `evm_revert`, the same snapshot id cannot be used again. Consider creating a new snapshot after each `evm_revert` if you need to revert to the same point multiple times.
 
@@ -511,10 +503,6 @@ Snapshot the state of the blockchain at the current block. Takes no parameters. 
 ##### `eth_submitHashrate`
 
 ##### `eth_submitWork`
-
-##### `hardhat_addCompilationResult`
-
-##### `hardhat_reset`
 
 ##### `net_listening`
 
