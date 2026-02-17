@@ -36,6 +36,7 @@ predeployed
 predeploys
 automining
 Superchain
+seti
 footgun
 basefee
 blobbasefee
