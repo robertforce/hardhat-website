@@ -91,7 +91,7 @@ The `solidity` config is an optional field that can be one of the following:
 - An object which describes the configuration for a single compiler. It contains the following keys:
   - `version`: The solc version to use.
   - `settings`: An object with the same schema as the `settings` entry in the [Input JSON](https://docs.soliditylang.org/en/latest/using-the-compiler.html#input-description).
-  - `preferWasm`: If true, forces Hardhat to use the WebAssembly (wasm) build of solc instead of a native binary. This can improve build reproducibility across platforms, at the cost of slower compilation times.
+  - `preferWasm`: If true, forces Hardhat to use the WebAssembly (wasm) build of solc instead of a native binary. This can improve build reproducibility across platforms, at the cost of slower compilation times. This is automatically `true` for the compiler configuration objects in a `production` build profile if the version is lower than `0.8.31`; otherwise `false`.
   - `npmFilesToBuild`: A list of source names for which Hardhat should generate artifacts in addition to your project's own sources.
   - `path`: An optional path to a local Solidity compiler. If provided, this will be used instead of downloading a solc version.
 - An object which describes multiple compilers and their respective configurations. It contains the following:
@@ -102,6 +102,7 @@ The `solidity` config is an optional field that can be one of the following:
 - An object which describes multiple build profiles and their respective configurations. It contains the following:
   - `profiles`: A map of build profile names to compiler configuration objects like the one above.
   - `npmFilesToBuild`: See above.
+  - `preferWasm`: See above. Defaults to `false`. It has lower priority than the `preferWasm` field in the compiler configuration or override objects.
 
 #### Default EVM Version
 
@@ -156,7 +157,7 @@ The following options are specific to simulated networks:
   - `url`: a URL that points to a JSON-RPC node with state that you want to fork off. There's no default value for this field. It must be provided for the fork to work.
   - `blockNumber`: an optional number to pin which block to fork from. If no value is provided, the latest block is used.
   - `enabled`: an optional boolean to switch on or off the fork functionality. Default value: `true` if `url` is set, `false` otherwise.
-- `hardfork`: This setting changes how Hardhat Network works, to mimic Ethereum's mainnet at a given hardfork. It must be one of `"byzantium"`, `"constantinople"`, `"petersburg"`, `"istanbul"`, `"muirGlacier"`, `"berlin"`, `"london"`, `"arrowGlacier"`, `"grayGlacier"`, `"merge"`, `"shanghai"`, `"cancun"` and `"prague"`. Default value: `"prague"`.
+- `hardfork`: This setting changes how Hardhat Network works, to mimic Ethereum's mainnet at a given hardfork. It must be one of `"byzantium"`, `"constantinople"`, `"petersburg"`, `"istanbul"`, `"muirGlacier"`, `"berlin"`, `"london"`, `"arrowGlacier"`, `"grayGlacier"`, `"merge"`, `"shanghai"`, `"cancun"`, `"prague"`, and `"osaka"`. Default value: `"osaka"`.
 - `initialBaseFeePerGas`: The `baseFeePerGas` of the first block. Note that when forking a remote network, the "first block" is the one immediately after the block you forked from. This field must not be present if `hardfork` is not `"london"` or a later one. Default value: `"1000000000"` if not forking. When forking a remote network, if the remote network uses EIP-1559, the first local block will use the right baseFeePerGas according to the EIP, otherwise `"10000000000"` is used.
 - `initialDate`: An optional string setting the date of the blockchain. Valid values are [Javascript's date time strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse#Date_Time_String_Format). Default value: the current date and time if not forking another network. When forking another network, the timestamp of the block you forked from, plus one second, is used.
 - `loggingEnabled`: A boolean that controls if a simulated network logs every request or not. Default value: `false` for in-process simulated networks, `true` for the simulated network used by the `node` task.
@@ -233,7 +234,7 @@ export default defineConfig({
 
 The following options are available for configuring Solidity tests:
 
-:::warning
+:::caution
 
 Giving write access to configuration files, source files or executables in a project is considered dangerous, because it can be used by malicious Solidity dependencies to escape the EVM sandbox.
 It is therefore recommended to give write access to specific safe files only.
