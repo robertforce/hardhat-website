@@ -125,9 +125,9 @@ To use this, import the `Result` type from `hardhat/types/utils` and the helper 
 
 ```ts
 // tasks/accounts.ts
+import type { HardhatRuntimeEnvironment } from "hardhat/types/hre";
 import type { Result } from "hardhat/types/utils";
 import { successfulResult, errorResult } from "hardhat/utils/result";
-import { HardhatRuntimeEnvironment } from "hardhat/types/hre";
 
 interface AccountTaskArguments {}
 
@@ -148,8 +148,8 @@ export default async function (
 
 `Result<ValueT, ErrorT>` is a discriminated union:
 
-- `{ success: true; value: ValueT }` - a successful result, optionally carrying a value
-- `{ success: false; error: ErrorT }` - a failed result, optionally carrying error information
+- `{ success: true; value: ValueT }` - a successful result, carrying a value
+- `{ success: false; error: ErrorT }` - a failed result, carrying error information
 
 Use `successfulResult(value?)` and `errorResult(error?)` to create these objects. Both success and failure cases can carry data. This is useful when you want to return context regardless of the outcome, such as a test run summary.
 
