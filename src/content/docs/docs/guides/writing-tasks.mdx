@@ -117,4 +117,42 @@ If you're developing a plugin, you must use `setAction()` with lazy-loaded modul
 
 To learn more about how task actions are loaded, see the [Task Actions' lifecycle](/docs/plugin-development/explanations/lifecycle#task-actions-lifecycle) documentation.
 
+## Returning a result
+
+Task actions can optionally return a `Result` to signal success or failure to the CLI. When a task action returns a failed result, the CLI sets the process exit code to 1. This is useful when you want to indicate failure to scripts or CI pipelines without throwing an exception.
+
+To use this, import the `Result` type from `hardhat/types/utils` and the helper functions from `hardhat/utils/result`:
+
+```ts
+// tasks/accounts.ts
+import type { Result } from "hardhat/types/utils";
+import { successfulResult, errorResult } from "hardhat/utils/result";
+import { HardhatRuntimeEnvironment } from "hardhat/types/hre";
+
+interface AccountTaskArguments {}
+
+export default async function (
+  _taskArguments: AccountTaskArguments,
+  hre: HardhatRuntimeEnvironment,
+): Promise<Result<string[], string>> {
+  const { provider } = await hre.network.connect();
+  const accounts = await provider.request({ method: "eth_accounts" });
+
+  if (accounts.length === 0) {
+    return errorResult("No accounts found");
+  }
+
+  return successfulResult(accounts);
+}
+```
+
+`Result<ValueT, ErrorT>` is a discriminated union:
+
+- `{ success: true; value: ValueT }` - a successful result, optionally carrying a value
+- `{ success: false; error: ErrorT }` - a failed result, optionally carrying error information
+
+Use `successfulResult(value?)` and `errorResult(error?)` to create these objects. Both success and failure cases can carry data. This is useful when you want to return context regardless of the outcome, such as a test run summary.
+
+If a task action doesn't return a `Result` (for example, it returns `undefined` or any other value), the CLI exit code is left unchanged.
+
 {/* To learn more about tasks, please read [this guide](../advanced/create-task). */}
