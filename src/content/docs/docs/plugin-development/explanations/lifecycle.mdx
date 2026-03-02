@@ -259,6 +259,12 @@ Inline actions are loaded immediately when the configuration file is evaluated, 
 Plugins cannot use `setInlineAction()`. Attempting to do so will result in an error. Plugins must always use `setAction()` with lazy-loaded modules.
 :::
 
+### Returning a result
+
+The task action, either the inline callback you pass to `setInlineAction()`, or the `default` export of the module loaded via `setAction()`, can optionally return a `Result` value. If the action returns a result with `success: false`, the CLI sets the process exit code to 1.
+
+To learn more, see the [Returning a result](/docs/guides/writing-tasks#returning-a-result) section of the Writing Hardhat tasks guide.
+
 ## Configuration Variables' lifecycle
 
 There are two things that plugins can do with Configuration Variables:
