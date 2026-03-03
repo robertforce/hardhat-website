@@ -17,8 +17,10 @@ export const landing: LandingConfig = {
     canonicalUrl: globalConfig.url,
   },
   banner: {
-    text: "Hardhat 3 is now production ready. Migrate now",
-    href: "/docs",
+    // text: "Hardhat 3 is now production ready. Migrate now",
+    // href: "/docs",
+    text: "Please complete the 2026 Solidity Survey!",
+    href: "https://solidity.survey-research.net/solidity-survey",
   },
   header: {
     logo: {
