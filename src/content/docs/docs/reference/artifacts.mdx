@@ -82,17 +82,17 @@ Each artifact consists of a JSON with the following properties:
   - For local files, including those of git submodules, this is the path from the root of the project.
   - For [npm artifacts](/docs/cookbook/npm-artifacts), this is the npm module name as it would be used in an import in Node.js (e.g. before resolving `package.json#exports`), like `@openzeppelin/contracts/token/ERC20/ERC20.sol`.
 
-- `abi`: A [JSON description of the contract's ABI](https://solidity.readthedocs.io/en/latest/abi-spec.html#abi-json) as provided by `solc`.
+- `abi`: A [JSON description of the contract's ABI](https://docs.soliditylang.org/en/latest/abi-spec.html#abi-json) as provided by `solc`.
 
 - `bytecode`: A `"0x"`-prefixed hex string of the unlinked deployment bytecode. If the contract is not deployable, this has the string `"0x"`.
 
 - `deployedBytecode`: A `"0x"`-prefixed hex string of the unlinked runtime/deployed bytecode. If the contract is not deployable, this has the string `"0x"`.
 
-- `linkReferences`: The bytecode's link references object [as returned by `solc`](https://solidity.readthedocs.io/en/latest/using-the-compiler.html). If the contract doesn't need to be linked, this value contains an empty object. Note that the source names in this map are `inputSourceNames` (see below).
+- `linkReferences`: The bytecode's link references object [as returned by `solc`](https://docs.soliditylang.org/en/latest/using-the-compiler.html). If the contract doesn't need to be linked, this value contains an empty object. Note that the source names in this map are `inputSourceNames` (see below).
 
-- `deployedLinkReferences`: The deployed bytecode's link references object [as returned by `solc`](https://solidity.readthedocs.io/en/latest/using-the-compiler.html). If the contract doesn't need to be linked, this value contains an empty object. Note that the source names in this map are `inputSourceNames` (see below).
+- `deployedLinkReferences`: The deployed bytecode's link references object [as returned by `solc`](https://docs.soliditylang.org/en/latest/using-the-compiler.html). If the contract doesn't need to be linked, this value contains an empty object. Note that the source names in this map are `inputSourceNames` (see below).
 
-- `immutableReferences`: The map of immutable references in the deployed bytecode, [as returned by `solc`](https://solidity.readthedocs.io/en/latest/using-the-compiler.html).
+- `immutableReferences`: The map of immutable references in the deployed bytecode, [as returned by `solc`](https://docs.soliditylang.org/en/latest/using-the-compiler.html).
 
 - `inputSourceName`: The source name used to identify the file containing this contract in the `solc` input json used to build it.
   - For local files, including those of git submodules, this is the path from the root of the project, prefixed with `project/`.
