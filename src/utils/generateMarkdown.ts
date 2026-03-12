@@ -12,21 +12,14 @@ interface GenerateMarkdownOptions {
   body: string;
 }
 
-function stripImports(body: string): string {
-  const withoutImports = body.replace(/^import\s+.*?;?\s*$/gm, "");
-  // Collapse runs of 3+ newlines down to 2
-  return withoutImports.replace(/\n{3,}/g, "\n\n").trim();
-}
-
 export function generateMarkdown({
   title,
   description,
   id,
   body,
 }: GenerateMarkdownOptions): string {
-  const cleanBody = stripImports(body);
   const sourceUrl = `${REPO_BASE}${id}.mdx`;
-  const glossaryEntries = filterGlossary(cleanBody);
+  const glossaryEntries = filterGlossary(body);
   const glossaryBlock = formatGlossaryPreamble(glossaryEntries);
 
   const parts: string[] = [
