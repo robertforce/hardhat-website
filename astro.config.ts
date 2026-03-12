@@ -105,7 +105,10 @@ export default defineConfig({
           const existingUrls = new Set(
             [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]),
           );
-          const newUrls = mdFiles
+
+          const newFiles = [...mdFiles, path.join(distPath, "llms.txt")];
+
+          const newUrls = newFiles
             .filter((f) => {
               const relative = path.relative(distPath, f);
               return !existingUrls.has(`${siteUrl}/${relative}`);
@@ -117,7 +120,7 @@ export default defineConfig({
             .join("");
           sitemap = sitemap.replace("</urlset>", newUrls + "</urlset>");
           await writeFile(sitemapPath, sitemap);
-          logger.info(`Added ${mdFiles.length} .md URLs to sitemap`);
+          logger.info(`Added ${newFiles.length} .md URLs to sitemap`);
         },
       },
     },
