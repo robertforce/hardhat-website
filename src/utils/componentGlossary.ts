@@ -83,7 +83,7 @@ export function filterGlossary(source: string): GlossaryEntry[] {
 export function formatGlossaryPreamble(entries: GlossaryEntry[]): string {
   if (entries.length === 0) return "";
   const lines = entries.map((e) => `  - ${e.name}: ${e.description}`);
-  return `<!-- Components used in this page:\n${lines.join("\n")}\n-->`;
+  return `Components used in this page:\n${lines.join("\n")}`;
 }
 
 /**

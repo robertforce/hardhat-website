@@ -33,9 +33,11 @@ export function GET({ props }: { props: Props }) {
     "",
     props.description,
     "",
+    "<--",
     `npm: ${NPM_BASE}${props.name}`,
 
     `Source: ${GITHUB_REPO}/tree/main/v-next/${props.shortName}`,
+    "-->",
     "",
     props.readme.trim(),
     "",

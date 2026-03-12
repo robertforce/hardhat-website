@@ -27,6 +27,7 @@ export function generateMarkdown({
     "",
     description,
     "",
+    "<--",
     `Source: ${sourceUrl}`,
   ];
 
@@ -34,7 +35,9 @@ export function generateMarkdown({
     parts.push("", glossaryBlock);
   }
 
-  parts.push("", cleanBody, "");
+  parts.push("-->");
+
+  parts.push("", body, "");
 
   return parts.join("\n");
 }
