@@ -6,6 +6,7 @@ import errorRedirects from "./error-codes";
 import shortlinks from "./shortlinks";
 import inAppShortlinks from "./in-app-shortlinks";
 import movedPagesRedirects from "./moved-pages";
+import { globalConfig } from "../config";
 
 const redirects: Record<
   string,
@@ -41,6 +42,37 @@ How to resolve this error:
       destination: to,
       status: 302,
     };
+
+    // We apply .md redirections to all the internal astro redirections,
+    // otherwise the `.vercel.json` ones take priority and things like `/docs`
+    // end up redirecting to `/docs.md` instead of `/docs/getting-started.md`.
+    if (
+      !from.endsWith(".md") &&
+      !from.endsWith(".html") &&
+      !from.endsWith(".txt") &&
+      to.startsWith("/")
+    ) {
+      const urlString = `${globalConfig.url}${to}`;
+      const url = URL.parse(urlString);
+      if (url === null) {
+        throw new Error(`Invalid Astro redirect destination: ${to}
+
+It doesn't form a valid URL: ${urlString}`);
+      }
+
+      const fromMd = `${from}.md`;
+
+      if (redirects[fromMd] !== undefined) {
+        throw new Error(
+          `Adding a .md redirection for ${from} would overwrite an existing redirection: ${fromMd}`,
+        );
+      }
+
+      redirects[fromMd] = {
+        destination: `${url.pathname}.md${url.hash}`,
+        status: 302,
+      };
+    }
   }
 }
 

@@ -52,20 +52,44 @@
       "has": [
         {
           "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
+          "key": "Accept",
+          "value": "(?i).*text/markdown.*"
         }
       ],
       "destination": "/index.md",
       "permanent": false
     },
     {
-      "source": "/:path((?!.*\\.md$).*)",
+      "source": "/",
       "has": [
         {
           "type": "header",
-          "key": "accept",
-          "value": ".*text/markdown.*"
+          "key": "User-Agent",
+          "value": "(?i).*(claude|codex|opencode|gemini|copilot|cursor|antigravity|anthropic|openai|grok|gpt).*"
+        }
+      ],
+      "destination": "/index.md",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "Accept",
+          "value": "(?i).*text/markdown.*"
+        }
+      ],
+      "destination": "/:path.md",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "User-Agent",
+          "value": "(?i).*(claude|codex|opencode|gemini|copilot|cursor|antigravity|anthropic|openai|grok|gpt).*"
         }
       ],
       "destination": "/:path.md",
