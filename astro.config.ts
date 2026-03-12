@@ -6,7 +6,8 @@ import partytown from "@astrojs/partytown";
 import vercel from "@astrojs/vercel";
 import { setGlobalDispatcher, Agent } from "undici";
 import { unwatchFile, watchFile } from "node:fs";
-import { glob, utimes } from "node:fs/promises";
+import { glob, readFile, writeFile, utimes } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
 import { globalConfig } from "./src/config";
 import redirects from "./src/redirects";
@@ -87,6 +88,39 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
+    {
+      // The plugin @astrojs/sitemap doesn't generate entries for our .md files
+      // because it only does it for routes of `r.type === "page"`, and our
+      // .md files are not pages. We use a custom hook to fixup the sitemap.
+      name: "sitemap-md-urls",
+      hooks: {
+        "astro:build:done": async ({ dir, logger }) => {
+          const distPath = fileURLToPath(dir);
+          const mdFiles = await Array.fromAsync(
+            glob(path.join(distPath, "**", "*.md")),
+          );
+          const sitemapPath = path.join(distPath, "sitemap-0.xml");
+          let sitemap = await readFile(sitemapPath, "utf-8");
+          const siteUrl = globalConfig.url;
+          const existingUrls = new Set(
+            [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]),
+          );
+          const newUrls = mdFiles
+            .filter((f) => {
+              const relative = path.relative(distPath, f);
+              return !existingUrls.has(`${siteUrl}/${relative}`);
+            })
+            .map((f) => {
+              const relative = path.relative(distPath, f);
+              return `<url><loc>${siteUrl}/${relative}</loc></url>`;
+            })
+            .join("");
+          sitemap = sitemap.replace("</urlset>", newUrls + "</urlset>");
+          await writeFile(sitemapPath, sitemap);
+          logger.info(`Added ${mdFiles.length} .md URLs to sitemap`);
+        },
+      },
+    },
   ],
   trailingSlash: "never",
   redirects,
