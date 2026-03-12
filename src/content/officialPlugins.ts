@@ -22,7 +22,7 @@ const officialPluginsCollectionSchema = z.object({
   readmeMd: z.string(),
 });
 
-type officialPluginCollectionType = z.infer<
+type OfficialPluginCollectionType = z.infer<
   typeof officialPluginsCollectionSchema
 >;
 
@@ -143,7 +143,7 @@ export function officialPluginsLoader(): Loader {
             description: plugin.description,
             tags: plugin.tags,
             readmeMd: readme,
-          } satisfies officialPluginCollectionType;
+          } satisfies OfficialPluginCollectionType;
         }),
       );
 
