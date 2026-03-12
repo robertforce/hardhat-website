@@ -1,35 +1,127 @@
 import { getCollection } from "astro:content";
+import type { StarlightSidebarTopicsUserConfig } from "starlight-sidebar-topics";
+import { sidebarTopics } from "../sidebar";
 
-interface Section {
-  title: string;
-  filter: (id: string) => boolean;
+type SidebarTopic = StarlightSidebarTopicsUserConfig[number];
+
+// Sidebar items are a recursive union — Starlight types them via z.any(),
+// so we narrow with property checks at runtime.
+type SidebarItem = NonNullable<
+  Extract<SidebarTopic, { items: unknown }>["items"]
+>[number];
+
+interface DocEntry {
+  id: string;
+  data: { title: string; description: string; sidebar?: { order?: number } };
 }
 
-const sections: Section[] = [
-  {
-    title: "Hardhat",
-    filter: (id) =>
-      (id.startsWith("docs/") &&
-        !id.startsWith("docs/migrate-from-hardhat2") &&
-        !id.startsWith("docs/plugin-development")) ||
-      id === "hardhat2",
-  },
-  {
-    title: "Hardhat Ignition",
-    filter: (id) => id.startsWith("ignition/"),
-  },
-  {
-    title: "Migrate from Hardhat 2",
-    filter: (id) => id.startsWith("docs/migrate-from-hardhat2"),
-  },
-  {
-    title: "Plugin Development",
-    filter: (id) => id.startsWith("docs/plugin-development"),
-  },
-];
+/**
+ * Resolve a single sidebar item into an ordered list of doc entries.
+ * - slug items  → look up by id
+ * - autogenerate → find all docs in that directory, sorted by sidebar order then id
+ * - group items → recurse into children
+ * - link items  → skip (external / custom pages)
+ */
+function resolveItem(item: SidebarItem, docs: DocEntry[]): DocEntry[] {
+  // String shorthand — treated as a slug
+  if (typeof item === "string") {
+    const entry = docs.find((d) => d.id === item);
+    return entry ? [entry] : [];
+  }
+
+  if ("slug" in item) {
+    const entry = docs.find((d) => d.id === item.slug);
+    return entry ? [entry] : [];
+  }
+
+  if ("autogenerate" in item) {
+    const dir = item.autogenerate.directory.replace(/^\//, "");
+    return docs
+      .filter((d) => d.id === dir || d.id.startsWith(dir + "/"))
+      .sort((a, b) => {
+        const orderA = a.data.sidebar?.order ?? Infinity;
+        const orderB = b.data.sidebar?.order ?? Infinity;
+        if (orderA !== orderB) return orderA - orderB;
+        return a.id.localeCompare(b.id);
+      });
+  }
+
+  if ("items" in item) {
+    return item.items.flatMap((sub: SidebarItem) => resolveItem(sub, docs));
+  }
+
+  // link items — not in the docs collection
+  return [];
+}
+
+function formatEntry(entry: DocEntry): string {
+  const url = `https://hardhat.org/${entry.id}.md`;
+  return `- [${entry.data.title}](${url}): ${entry.data.description}`;
+}
+
+/** Markdown heading prefix for a given depth (## for 0, ### for 1, etc.) */
+function heading(depth: number): string {
+  return "#".repeat(depth + 2);
+}
+
+/**
+ * Recursively render sidebar items into markdown lines.
+ * Named groups become headings; slug/autogenerate items become list entries.
+ */
+function renderItems(
+  items: SidebarItem[],
+  docs: DocEntry[],
+  depth: number,
+  lines: string[],
+): void {
+  // Partition: render leaf items (slugs) first, then sub-groups after,
+  // so that sub-category headings don't split up the parent's direct entries.
+  const leafItems: SidebarItem[] = [];
+  const groupItems: SidebarItem[] = [];
+
+  for (const item of items) {
+    if (typeof item === "string" || "slug" in item) {
+      leafItems.push(item);
+    } else if ("label" in item && ("items" in item || "autogenerate" in item)) {
+      groupItems.push(item);
+    }
+    // link items are silently skipped
+  }
+
+  for (const item of leafItems) {
+    for (const entry of resolveItem(item, docs)) {
+      lines.push(formatEntry(entry));
+    }
+  }
+
+  for (const item of groupItems) {
+    if (typeof item === "string" || !("label" in item)) continue;
+
+    if ("autogenerate" in item) {
+      const entries = resolveItem(item, docs);
+      if (entries.length > 0) {
+        lines.push("", `${heading(depth)} ${item.label}`, "");
+        for (const entry of entries) {
+          lines.push(formatEntry(entry));
+        }
+      }
+    } else if ("items" in item) {
+      lines.push("", `${heading(depth)} ${item.label}`, "");
+      renderItems(item.items as SidebarItem[], docs, depth + 1, lines);
+    }
+  }
+}
+
+function renderTopic(topic: SidebarTopic, docs: DocEntry[]): string {
+  if (!("items" in topic)) return "";
+
+  const lines: string[] = [`## ${topic.label}`];
+  renderItems(topic.items as SidebarItem[], docs, 1, lines);
+  return lines.join("\n");
+}
 
 export async function GET() {
-  const docs = await getCollection("docs");
+  const docs = (await getCollection("docs")) as DocEntry[];
 
   const preamble = `# Hardhat 3
 
@@ -41,21 +133,9 @@ export async function GET() {
 > The docs are organized into sections: core Hardhat usage, Hardhat Ignition
 > (a declarative deployment system), migration guides from Hardhat 2,
 > and a plugin development guide.
-
 `;
 
-  const sectionBlocks = sections.map((section) => {
-    const entries = docs
-      .filter((entry) => section.filter(entry.id))
-      .sort((a, b) => a.id.localeCompare(b.id));
-
-    const lines = entries.map((entry) => {
-      const url = `https://hardhat.org/${entry.id}.md`;
-      return `- [${entry.data.title}](${url}): ${entry.data.description}`;
-    });
-
-    return `## ${section.title}\n\n${lines.join("\n")}`;
-  });
+  const sectionBlocks = sidebarTopics.map((topic) => renderTopic(topic, docs));
 
   const body = [preamble, ...sectionBlocks, ""].join("\n\n");
 
