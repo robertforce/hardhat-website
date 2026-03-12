@@ -122,6 +122,7 @@ function renderTopic(topic: SidebarTopic, docs: DocEntry[]): string {
 
 export async function GET() {
   const docs = (await getCollection("docs")) as DocEntry[];
+  const plugins = await getCollection("officialPlugins");
 
   const preamble = `# Hardhat 3
 
@@ -135,9 +136,19 @@ export async function GET() {
 > and a plugin development guide.
 `;
 
-  const sectionBlocks = sidebarTopics.map((topic) => renderTopic(topic, docs));
+  const sectionBlocks = sidebarTopics
+    // We filter out the "Plugins" topic because they are custom pages,
+    // and we list the plugins at the end of the file anyways
+    .filter((topic) => topic.label !== "Plugins")
+    .map((topic) => renderTopic(topic, docs));
 
-  const body = [preamble, ...sectionBlocks, ""].join("\n\n");
+  const pluginLines = plugins.map((p) => {
+    const url = `https://hardhat.org/docs/plugins/${p.data.slug}.md`;
+    return `- [${p.data.shortName}](${url}): ${p.data.description}`;
+  });
+  const pluginsSection = `## Official Plugins\n\n${pluginLines.join("\n")}`;
+
+  const body = [preamble, ...sectionBlocks, pluginsSection, ""].join("\n\n");
 
   return new Response(body, {
     headers: { "Content-Type": "text/plain; charset=utf-8" },
