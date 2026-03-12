@@ -154,7 +154,13 @@ export async function GET() {
   });
   const communitySection = `## Community Plugins\n\n${communityLines.join("\n")}`;
 
-  const body = [preamble, ...sectionBlocks, pluginsSection, communitySection, ""].join("\n\n");
+  const body = [
+    preamble,
+    ...sectionBlocks,
+    pluginsSection,
+    communitySection,
+    "",
+  ].join("\n\n");
 
   return new Response(body, {
     headers: { "Content-Type": "text/plain; charset=utf-8" },
