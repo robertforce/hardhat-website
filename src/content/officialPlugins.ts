@@ -22,6 +22,10 @@ const officialPluginsCollectionSchema = z.object({
   readmeMd: z.string(),
 });
 
+type officialPluginCollectionType = z.infer<
+  typeof officialPluginsCollectionSchema
+>;
+
 // We cache it for 24 hours. This may lead to some readmes being out synch with
 // `latest` from the npm registry, but only during development and the CI, and
 // not in vercel (neither production nor previews)
@@ -138,8 +142,8 @@ export function officialPluginsLoader(): Loader {
               plugin.linkToItsOwnWebsiteSection ?? `/docs/plugins/${slug}`,
             description: plugin.description,
             tags: plugin.tags,
-            markdown: readme,
-          };
+            readmeMd: readme,
+          } satisfies officialPluginCollectionType;
         }),
       );
 
@@ -147,7 +151,7 @@ export function officialPluginsLoader(): Loader {
         store.set({
           id: entry.id,
           data: entry,
-          rendered: await renderMarkdown(entry.markdown),
+          rendered: await renderMarkdown(entry.readmeMd),
         });
       }
     },
