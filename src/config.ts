@@ -159,7 +159,7 @@ export const landing: LandingConfig = {
           text: "Extend Hardhat with a composable ecosystem of plugins that add functionality and integrate your existing tools into a smooth workflow.",
           icon: "CCReverseIcon",
           cta: {
-            url: "/plugins",
+            url: "/docs/plugins/official-plugins",
             title: "Explore the plugin ecosystem",
           },
         },
