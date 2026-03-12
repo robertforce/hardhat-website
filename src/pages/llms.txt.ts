@@ -123,6 +123,7 @@ function renderTopic(topic: SidebarTopic, docs: DocEntry[]): string {
 export async function GET() {
   const docs = (await getCollection("docs")) as DocEntry[];
   const plugins = await getCollection("officialPlugins");
+  const communityPlugins = await getCollection("communityPlugins");
 
   const preamble = `# Hardhat 3
 
@@ -148,7 +149,12 @@ export async function GET() {
   });
   const pluginsSection = `## Official Plugins\n\n${pluginLines.join("\n")}`;
 
-  const body = [preamble, ...sectionBlocks, pluginsSection, ""].join("\n\n");
+  const communityLines = communityPlugins.map((p) => {
+    return `- [${p.data.name}](${p.data.website}): ${p.data.description}`;
+  });
+  const communitySection = `## Community Plugins\n\n${communityLines.join("\n")}`;
+
+  const body = [preamble, ...sectionBlocks, pluginsSection, communitySection, ""].join("\n\n");
 
   return new Response(body, {
     headers: { "Content-Type": "text/plain; charset=utf-8" },
