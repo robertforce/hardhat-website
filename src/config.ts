@@ -85,7 +85,7 @@ export const landing: LandingConfig = {
           text: "Deploy your contracts, run Solidity tests, and debug your code on Hardhat's new runtime written in Rust for outstanding performance.",
           icon: "CCIcon",
           cta: {
-            url: "#",
+            url: "/docs/guides/testing/using-solidity",
             title: "Learn more about writing Solidity tests",
           },
         },
@@ -94,7 +94,7 @@ export const landing: LandingConfig = {
           text: 'When transactions revert, Hardhat shows actionable errors like "Non-payable function was called with value 1," alongside detailed Solidity stack traces to pinpoint exactly where and why your code fails.',
           icon: "CAIcon",
           cta: {
-            url: "#",
+            url: "/docs/reference/edr-simulated-networks#developer-focused-features",
             title: "Learn more about debugging",
           },
         },
@@ -117,7 +117,7 @@ export const landing: LandingConfig = {
           text: "Write unit tests in Solidity for speed and conciseness, integration tests in TypeScript for expressiveness and complexity, or fuzzing tests to push the edges. Decide on a case by case basis.",
           icon: "CubIcon",
           cta: {
-            url: "/hardhat-network/#console.log",
+            url: "/docs/guides/testing",
             title: "Learn more about testing",
           },
         },
@@ -127,8 +127,8 @@ export const landing: LandingConfig = {
           text: "Manage multiple networks at the same time and confidently deploy on OP Stack knowing your code was tested on an accurate simulation.",
           icon: "DCDIcon",
           cta: {
-            url: "/hardhat-network/#console.log",
-            title: "Learn more about simulating Base",
+            url: "/docs/explanations/multichain-support",
+            title: "Learn more about multichain support",
           },
         },
       },
@@ -150,7 +150,7 @@ export const landing: LandingConfig = {
           text: "Define your contract instances, their operations, and Hardhat Ignition will drive the complex details and parallelize execution.",
           icon: "CDIcon",
           cta: {
-            url: "/hardhat-network/#console.log",
+            url: "/docs/guides/deployment/using-ignition",
             title: "Get started with Hardhat Ignition",
           },
         },
@@ -159,8 +159,8 @@ export const landing: LandingConfig = {
           text: "Extend Hardhat with a composable ecosystem of plugins that add functionality and integrate your existing tools into a smooth workflow.",
           icon: "CCReverseIcon",
           cta: {
-            url: "/hardhat-network/#console.log",
-            title: "Learn started about simulating Base",
+            url: "/docs/plugins/official-plugins",
+            title: "Explore the plugin ecosystem",
           },
         },
       },
@@ -182,7 +182,7 @@ export const landing: LandingConfig = {
           text: "A tooling platform designed to be extended, Hardhat has all the utilities you need to address your project-specific needs. Change anything you like. Even entire built-in tasks, or just parts of them.",
           icon: "LayoutIcon",
           cta: {
-            url: "/hardhat-network/#console.log",
+            url: "/docs/guides/writing-tasks",
             title: "Learn more about extending Hardhat",
           },
         },
@@ -191,8 +191,8 @@ export const landing: LandingConfig = {
           text: "From single hacker quickly iterating on a proof of concept to full blown engineering organization dealing with ad-hoc needs at scale, Hardhat adapts as your needs change",
           icon: "CCIcon",
           cta: {
-            url: "/hardhat-network/#console.log",
-            title: "Get started with plugins",
+            url: "/docs/plugin-development",
+            title: "Get started with Hardhat plugins",
           },
         },
       },
