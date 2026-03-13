@@ -9,6 +9,7 @@ export const globalConfig: GlobalConfig = {
   url: "https://hardhat.org",
   baseGitHubDeploymentBranchViewUrl:
     "https://github.com/NomicFoundation/hardhat-website/tree/main",
+  hardhatRepoUrl: "https://github.com/NomicFoundation/hardhat",
 };
 
 export const landing: LandingConfig = {
@@ -45,7 +46,7 @@ export const landing: LandingConfig = {
       { label: "hardhat 2", url: "/hardhat2" },
     ],
     socials: [
-      { name: "github", url: "https://github.com/NomicFoundation/hardhat" },
+      { name: "github", url: globalConfig.hardhatRepoUrl },
       { name: "x", url: "https://twitter.com/HardhatHQ" },
       { name: "discord", url: "https://hardhat.org/discord" },
     ],
