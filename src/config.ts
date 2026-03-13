@@ -7,6 +7,8 @@ import type {
 
 export const globalConfig: GlobalConfig = {
   url: "https://hardhat.org",
+  baseGitHubDeploymentBranchViewUrl:
+    "https://github.com/NomicFoundation/hardhat-website/tree/main",
 };
 
 export const landing: LandingConfig = {

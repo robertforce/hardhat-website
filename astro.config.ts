@@ -81,6 +81,8 @@ export default defineConfig({
       components: {
         Sidebar: "./src/components/starlight-overrides/Sidebar.astro",
         Header: "./src/components/starlight-overrides/Header.astro",
+        TableOfContents:
+          "./src/components/starlight-overrides/TableOfContents.astro",
       },
     }),
     partytown({

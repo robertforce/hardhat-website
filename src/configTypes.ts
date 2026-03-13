@@ -1,5 +1,6 @@
 export interface GlobalConfig {
   url: string;
+  baseGitHubDeploymentBranchViewUrl: string;
 }
 
 export interface LandingConfig {
