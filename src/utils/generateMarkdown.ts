@@ -28,6 +28,8 @@ export function generateMarkdown({
     description,
     "",
     "<--",
+    "This document was authored using MDX",
+    "",
     `Source: ${sourceUrl}`,
   ];
 
