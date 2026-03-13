@@ -2,7 +2,7 @@ const body = `# Hardhat 3
 
 Hardhat is a development environment for Ethereum and EVM-compatible blockchains. It helps developers compile, deploy, test, and debug Solidity smart contracts. Hardhat 3 is the latest major version, featuring a Rust-powered runtime for outstanding performance, comprehensive Solidity and TypeScript testing, multi-chain support (including OP Stack and Base simulation), and a powerful plugin ecosystem.
 
-This is a subset of the the different sections of the website. Explore the [lllms.txt](https://hardhat.org/llms.txt) file to find more.
+This is a subset of the different sections of the website. Explore the [lllms.txt](https://hardhat.org/llms.txt) file to find more.
 
 ## Getting Started
 
