@@ -70,9 +70,9 @@
       "source": "/",
       "has": [
         {
-          "type": "header",
-          "key": "User-Agent",
-          "value": "(?i).*(claude|codex|opencode|gemini|copilot|cursor|antigravity|anthropic|openai|grok|gpt).*"
+          "type": "query",
+          "key": "format",
+          "value": "md"
         }
       ],
       "destination": "/index.md",
@@ -94,9 +94,33 @@
       "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).*)",
       "has": [
         {
-          "type": "header",
-          "key": "User-Agent",
-          "value": "(?i).*(claude|codex|opencode|gemini|copilot|cursor|antigravity|anthropic|openai|grok|gpt).*"
+          "type": "query",
+          "key": "format",
+          "value": "md"
+        }
+      ],
+      "destination": "/:path.md",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "view",
+          "value": "source"
+        }
+      ],
+      "destination": "/index.md",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).*)",
+      "has": [
+        {
+          "type": "query",
+          "key": "view",
+          "value": "source"
         }
       ],
       "destination": "/:path.md",
