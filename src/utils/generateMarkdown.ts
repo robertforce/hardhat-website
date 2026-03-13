@@ -1,7 +1,7 @@
+import { globalConfig } from "../config";
 import { filterGlossary, formatGlossaryPreamble } from "./componentGlossary";
 
-const REPO_BASE =
-  "https://github.com/NomicFoundation/hardhat-website/blob/main/src/content/docs/";
+const DOCS_BASE_URL = `${globalConfig.baseGitHubDeploymentBranchViewUrl}/src/content/docs/`;
 
 interface GenerateMarkdownOptions {
   title: string;
@@ -10,6 +10,8 @@ interface GenerateMarkdownOptions {
   id: string;
   /** Raw MDX body (without frontmatter) */
   body: string;
+  /** Path to the source file */
+  filePath: string;
 }
 
 export function generateMarkdown({
@@ -17,29 +19,30 @@ export function generateMarkdown({
   description,
   id,
   body,
+  filePath,
 }: GenerateMarkdownOptions): string {
-  const sourceUrl = `${REPO_BASE}${id}.mdx`;
-  const glossaryEntries = filterGlossary(body);
-  const glossaryBlock = formatGlossaryPreamble(glossaryEntries);
+  const parts: string[] = [`# ${title}`, "", description, ""];
 
-  const parts: string[] = [
-    `# ${title}`,
-    "",
-    description,
-    "",
-    "<--",
-    "This document was authored using MDX",
-    "",
-    `Source: ${sourceUrl}`,
-  ];
+  if (filePath.endsWith(".mdx")) {
+    const sourceUrl = `${DOCS_BASE_URL}${id}.mdx`;
+    const glossaryEntries = filterGlossary(body);
+    const glossaryBlock = formatGlossaryPreamble(glossaryEntries);
+    parts.push(
+      ...[
+        "<--",
+        "This document was authored using MDX",
+        "",
+        `Source: ${sourceUrl}`,
+      ],
+    );
+    if (glossaryBlock) {
+      parts.push("", glossaryBlock);
+    }
 
-  if (glossaryBlock) {
-    parts.push("", glossaryBlock);
+    parts.push("-->", "");
   }
 
-  parts.push("-->");
-
-  parts.push("", body, "");
+  parts.push(body, "");
 
   return parts.join("\n");
 }

@@ -11,6 +11,7 @@ export const getStaticPaths = (async () => {
       description: entry.data.description,
       id: entry.id,
       body: entry.body ?? "",
+      filePath: entry.filePath,
     },
   }));
 }) satisfies GetStaticPaths;
@@ -20,6 +21,7 @@ type Props = {
   description: string;
   id: string;
   body: string;
+  filePath: string;
 };
 
 export function GET({ props }: { props: Props }) {
