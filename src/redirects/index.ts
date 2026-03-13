@@ -49,15 +49,20 @@ How to resolve this error:
     if (
       !from.endsWith(".md") &&
       !from.endsWith(".html") &&
-      !from.endsWith(".txt") &&
-      to.startsWith("/")
+      !from.endsWith(".txt")
     ) {
-      const urlString = `${globalConfig.url}${to}`;
-      const url = URL.parse(urlString);
-      if (url === null) {
-        throw new Error(`Invalid Astro redirect destination: ${to}
+      let destination = to;
+
+      if (to.startsWith("/")) {
+        const urlString = `${globalConfig.url}${to}`;
+        const url = URL.parse(urlString);
+        if (url === null) {
+          throw new Error(`Invalid Astro redirect destination: ${to}
 
 It doesn't form a valid URL: ${urlString}`);
+        }
+
+        destination = `${url.pathname}.md${url.hash}`;
       }
 
       const fromMd = `${from}.md`;
@@ -69,7 +74,7 @@ It doesn't form a valid URL: ${urlString}`);
       }
 
       redirects[fromMd] = {
-        destination: `${url.pathname}.md${url.hash}`,
+        destination,
         status: 302,
       };
     }

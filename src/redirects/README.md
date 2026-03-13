@@ -15,4 +15,4 @@ Astro redirects are more limited, redirecting fixed URLs, and case insensitive. 
 
 ## Redirects to `.md` versions
 
-We automatically apply `.md` redirections to all the internal Astro redirections, otherwise the `.vercel.json` ones take priority and things like `/docs` end up redirecting to `/docs.md` instead of `/docs/getting-started.md`.
+We automatically apply `.md` redirections to all the Astro redirections, otherwise the `.vercel.json` ones take priority and things like `/docs` end up redirecting to `/docs.md` instead of `/docs/getting-started.md`. The way we do this is that we add a redirect from `/docs.md` to `/docs/getting-started`, so that then the usual Astro redirection logic applies.
