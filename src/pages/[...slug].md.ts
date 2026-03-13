@@ -9,7 +9,6 @@ export const getStaticPaths = (async () => {
     props: {
       title: entry.data.title,
       description: entry.data.description,
-      id: entry.id,
       body: entry.body ?? "",
       filePath: entry.filePath,
     },
@@ -19,7 +18,6 @@ export const getStaticPaths = (async () => {
 type Props = {
   title: string;
   description: string;
-  id: string;
   body: string;
   filePath: string;
 };
