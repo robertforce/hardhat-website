@@ -65,9 +65,6 @@ importers:
       starlight-links-validator:
         specifier: ^0.18.0
         version: 0.18.0(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1)))
-      starlight-markdown-blocks:
-        specifier: ^0.1.0
-        version: 0.1.0(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1)))
       starlight-sidebar-topics:
         specifier: ^0.6.1
         version: 0.6.1(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1)))
@@ -2564,12 +2561,6 @@ packages:
     engines: {node: '>=18.17.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.32.0'
-
-  starlight-markdown-blocks@0.1.0:
-    resolution: {integrity: sha512-nPnT/eMNIysR+TZGDzNEf9U0NnED+wPgtuPQaoAwrvoyOoNvAPQtvwDTYw3YzoHL0scEaOIh3J0S04cTZ1qk2w==}
-    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
-    peerDependencies:
-      '@astrojs/starlight': '>=0.32'
 
   starlight-sidebar-topics@0.6.1:
     resolution: {integrity: sha512-kBOFUTJEVVeeZ3t0la8V+of0JyahAYGPT0xacXl/qZ6poBwqKu0mR2qPv7D/ZdUVTxGuQghT2AXo3qo0ygXwjA==}
@@ -6137,18 +6128,6 @@ snapshots:
       mdast-util-to-string: 4.0.0
       picomatch: 4.0.3
       terminal-link: 5.0.0
-      unist-util-visit: 5.0.0
-    transitivePeerDependencies:
-      - supports-color
-
-  starlight-markdown-blocks@0.1.0(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1))):
-    dependencies:
-      '@astrojs/starlight': 0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@types/mdast': 4.0.4
-      hastscript: 9.0.1
-      mdast-util-directive: 3.1.0
-      mdast-util-to-string: 4.0.0
-      unified: 11.0.5
       unist-util-visit: 5.0.0
     transitivePeerDependencies:
       - supports-color
