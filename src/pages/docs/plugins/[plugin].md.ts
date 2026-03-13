@@ -1,8 +1,8 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
+import { globalConfig } from "../../../config";
 
 const NPM_BASE = "https://www.npmjs.com/package/";
-const GITHUB_REPO = "https://github.com/NomicFoundation/hardhat";
 
 export const getStaticPaths = (async () => {
   const plugins = await getCollection("officialPlugins");
@@ -31,13 +31,9 @@ export function GET({ props }: { props: Props }) {
   const parts = [
     `# ${props.shortName}`,
     "",
-    props.description,
-    "",
-    "<--",
-    `npm: ${NPM_BASE}${props.name}`,
-
-    `Source: ${GITHUB_REPO}/tree/main/v-next/${props.shortName}`,
-    "-->",
+    `Description: ${props.description}`,
+    `Npm package: ${NPM_BASE}${props.name}`,
+    `Source code: ${globalConfig.hardhatRepoUrl}/tree/main/v-next/${props.shortName}`,
     "",
     props.readme.trim(),
     "",

@@ -171,17 +171,11 @@ export function filterGlossary(source: string): GlossaryEntry[] {
 /**
  * Formats a filtered glossary as an HTML comment preamble for a single .md file.
  */
-export function formatGlossaryPreamble(entries: GlossaryEntry[]): string {
+export function formatGlossaryPreamble(
+  entries: GlossaryEntry[],
+  indent: string,
+): string {
   if (entries.length === 0) return "";
-  const lines = entries.map((e) => `  - ${e.name}: ${e.description}`);
-  return `Components used in this page:\n${lines.join("\n")}`;
-}
-
-/**
- * Formats the full glossary as a blockquote for llms.txt.
- */
-export function formatFullGlossary(): string {
-  return componentGlossary
-    .map((e) => `> - \`${e.name}\`: ${e.description}`)
-    .join("\n");
+  const lines = entries.map((e) => `${indent}  - ${e.name}: ${e.description}`);
+  return `${indent}Components used in this page:\n${lines.join("\n")}`;
 }
