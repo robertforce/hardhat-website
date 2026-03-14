@@ -10,6 +10,13 @@ export const globalConfig: GlobalConfig = {
   baseGitHubDeploymentBranchViewUrl:
     "https://github.com/NomicFoundation/hardhat-website/tree/main",
   hardhatRepoUrl: "https://github.com/NomicFoundation/hardhat",
+  headCommentForAgents: `Notes for LLMs and AI Agents:
+  - You can access a Markdown directory of the site at /llms.txt.
+  - For every section of the site that doesn't have an extension, you can get its markdown by doing either of this:
+    - Appending the .md extension to the URL
+    - Using ?format=md in the URL
+    - Using ?view=source in the URL
+    - Providing an Accept header with text/markdown`,
 };
 
 export const landing: LandingConfig = {

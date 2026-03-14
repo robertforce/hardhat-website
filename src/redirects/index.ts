@@ -81,4 +81,10 @@ It doesn't form a valid URL: ${urlString}`);
   }
 }
 
+// Also add /.md -> /index.md redirect
+redirects["/.md"] = {
+  destination: "/index.md",
+  status: 302,
+};
+
 export default redirects satisfies AstroConfig["redirects"];
