@@ -62,7 +62,7 @@ How to resolve this error:
 It doesn't form a valid URL: ${urlString}`);
         }
 
-        destination = `${url.pathname}.md${url.hash}`;
+        destination = `${url.pathname}.md${url.search}${url.hash}`;
       }
 
       const fromMd = `${from}.md`;
