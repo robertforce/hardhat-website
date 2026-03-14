@@ -1,4 +1,4 @@
-export URL="https://hardhat.org"
+export URL="https://hardhat-website-git-agents-website-nomic-foundation.vercel.app"
 export ACCEPT_HEADER="Accept: text/markdown;q=1.0, application/json;q=0.9, text/plain;q=0.8, text/html;q=0.7, application/xml;q=0.6, */*;q=0.5"
 
 # By query parameter
