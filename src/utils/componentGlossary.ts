@@ -5,7 +5,11 @@ export interface GlossaryEntry {
   name: string;
   /** Human-readable description */
   description: string;
+  /** Whether this is a code modifier (e.g., `showLineNumbers`) */
+  isCodeModifier?: true;
 }
+
+const CODE_BLOCK_PATTERNS = ["```", "<Code", "<CodeWithClientSideRandomNumber"];
 
 export const componentGlossary: GlossaryEntry[] = [
   {
@@ -124,40 +128,46 @@ export const componentGlossary: GlossaryEntry[] = [
     name: "collapse={X-Y}",
     description:
       "Collapses line ranges in code blocks. Supports multiple ranges: `collapse={1-5, 12-14}`.",
+    isCodeModifier: true,
   },
   {
     pattern: "collapseStyle=",
     name: "collapseStyle=...",
     description:
-      "Style for collapsed sections: `github`, `collapsible-start`, `collapsible-end`, `collapsible-auto`.",
+      "Style for collapsed sections in code blocks: `github`, `collapsible-start`, `collapsible-end`, `collapsible-auto`.",
   },
   {
     pattern: "showLineNumbers",
     name: "showLineNumbers",
     description:
       "Shows line numbers in code blocks. Use `showLineNumbers=false` to disable.",
+    isCodeModifier: true,
   },
   {
     pattern: "startLineNumber=",
     name: "startLineNumber=N",
     description: "Sets the starting line number for code blocks.",
+    isCodeModifier: true,
   },
   {
     pattern: "title=",
     name: 'title="..."',
     description: "Sets a title/filename on the code block frame.",
+    isCodeModifier: true,
   },
   {
     pattern: "wrap",
     name: "wrap",
     description:
       "Enables word wrapping in code blocks. Use `wrap=false` to disable.",
+    isCodeModifier: true,
   },
   {
     pattern: "mark=",
     name: "mark={X} / ins={X} / del={X}",
     description:
-      'Line markers: highlight (`mark`), insert (`ins`), or delete (`del`) lines. Supports ranges like `{1, 4-8}`. Also works inline with strings: `"text"`, `ins="text"`, `del="text"`.',
+      'Line markers in code blocks: highlight (`mark`), insert (`ins`), or delete (`del`) lines. Supports ranges like `{1, 4-8}`. Also works inline with strings: `"text"`, `ins="text"`, `del="text"`.',
+    isCodeModifier: true,
   },
 ];
 
@@ -165,7 +175,25 @@ export const componentGlossary: GlossaryEntry[] = [
  * Returns only the glossary entries whose patterns appear in the given source.
  */
 export function filterGlossary(source: string): GlossaryEntry[] {
-  return componentGlossary.filter((entry) => source.includes(entry.pattern));
+  return componentGlossary.filter((entry) => {
+    const isPresent = source.includes(entry.pattern);
+
+    if (!isPresent) {
+      return false;
+    }
+
+    if (entry.isCodeModifier !== true) {
+      return true;
+    }
+
+    for (const codeBlockPattern of CODE_BLOCK_PATTERNS) {
+      if (source.includes(codeBlockPattern)) {
+        return true;
+      }
+    }
+
+    return false;
+  });
 }
 
 /**
