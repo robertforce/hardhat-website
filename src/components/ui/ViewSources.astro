@@ -20,7 +20,8 @@ const isPageEntryGeneratedByStarlight =
             <li class="view-page-source-item">
               <a
                 href={`${globalConfig.baseGitHubDeploymentBranchViewUrl}/${entry.filePath}`}
-                class="starlight-view-modes-switcher-a"
+                target="_blank"
+                aria-label="View page source on GitHub"
               >
                 <Icon name="seti:github" /> On GitHub
               </a>
@@ -29,7 +30,7 @@ const isPageEntryGeneratedByStarlight =
           <li class="view-page-source-item">
             <a
               href={`${currentPath}.md`}
-              class="starlight-view-modes-switcher-a"
+              aria-label="View this page in Markdown format"
             >
               <Icon name="seti:markdown" /> Markdown version
             </a>
@@ -67,9 +68,5 @@ const isPageEntryGeneratedByStarlight =
     margin-right: 0.2rem;
     height: 1rem;
     vertical-align: text-bottom;
-  }
-
-  .sl-container {
-    display: block;
   }
 </style>
