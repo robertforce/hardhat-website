@@ -10,24 +10,10 @@
     },
     {
       "source": "/",
-      "has": [
-        {
-          "type": "header",
-          "key": "Accept",
-          "value": "(?i).*text/markdown.*"
-        }
-      ],
       "headers": [{ "key": "Vary", "value": "Accept" }]
     },
     {
       "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).*)",
-      "has": [
-        {
-          "type": "header",
-          "key": "Accept",
-          "value": "(?i).*text/markdown.*"
-        }
-      ],
       "headers": [{ "key": "Vary", "value": "Accept" }]
     }
   ],
