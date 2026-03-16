@@ -93,33 +93,49 @@ The JSON file has the following structure:
         "count": 1
       },
       "functions": {
-        "sum": {
-          "min": 26408,
+        "divide": {
+          "min": 44316,
           "max": 44316,
-          "avg": 35362,
-          "median": 35362,
+          "avg": 44316,
+          "median": 44316,
+          "count": 1
+        },
+        "multiply(uint256,uint256)": {
+          "min": 44254,
+          "max": 44254,
+          "avg": 44254,
+          "median": 44254,
           "count": 2
         }
+        // ...
       }
     },
     "contracts/Counter.sol:Counter": {
       "sourceName": "contracts/Counter.sol",
       "contractName": "Counter",
       "deployment": {
-        "min": 212750,
+        "min": 234940,
         "max": 234940,
-        "avg": 223845,
-        "median": 223845,
-        "count": 2
+        "avg": 234940,
+        "median": 234940,
+        "count": 1
       },
       "functions": {
-        "inc": {
-          "min": 43482,
-          "max": 43482,
-          "avg": 43482,
-          "median": 43482,
+        "add(uint256)": {
+          "min": 43915,
+          "max": 43915,
+          "avg": 43915,
+          "median": 43915,
           "count": 1
+        },
+        "add(uint256,bool)": {
+          "min": 44284,
+          "max": 44554,
+          "avg": 44419,
+          "median": 44419,
+          "count": 2
         }
+        // ...
       }
     }
   }
