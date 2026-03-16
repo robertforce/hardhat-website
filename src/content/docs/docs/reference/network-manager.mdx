@@ -139,7 +139,7 @@ export default defineConfig({
 
 When you do this, you get most of the benefits of providing it as an option, except for the type-level extensions that a plugin can provide.
 
-If you provide a Chain Type both as an option and as part of your Network Config, Hardhat will validate that they're the same.
+If you provide a Chain Type both as an option and as part of your Network Config, the one provided in the `network.connect()` options will take precedence, and chain-type-dependent fields like `hardfork` will be re-resolved accordingly.
 
 
 ##### Changing the default Chain Type
