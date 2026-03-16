@@ -149,7 +149,7 @@ You can customize this with a [Type Extension](/docs/plugin-development/explanat
 
 ```ts ins={4-9,12}
 // hardhat.config.ts
-/// ... imports ...
+// ... imports ...
 
 import "hardhat/types/network";
 declare module "hardhat/types/network" {
@@ -160,14 +160,14 @@ declare module "hardhat/types/network" {
 
 export default defineConfig({
   defaultChainType: "op",
-  /// ... other config ...
+  // ... other config ...
   networks: {
     opHardhat: {},
   },
 });
 ```
 
-Note that the Type Extension and the config value must both be present and match, or your get a compilation error.
+Note that the Type Extension and the config value must both be present and match, or you'll get a compilation error.
 
 When you do that, the default Chain Type will be updated both at type-level and runtime. For example, this will worth the config above:
 
