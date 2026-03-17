@@ -126,6 +126,13 @@
       "authorUrl": "https://github.com/frangio",
       "description": "Hardhat plugin that adds ways to ignore Solidity warnings",
       "tags": ["Solidity", "Warnings"]
+    },
+    {
+      "name": "openscan-hardhat-plugin",
+      "author": "openscan-explorer",
+      "authorUrl": "https://github.com/openscan-explorer/hardhat-plugin",
+      "description": "Hardhat plugin to explore the hardhat network, blocks, txs, contracts, etc.",
+      "tags": ["Devtools", "Testing"]
     }
   ]
 }
