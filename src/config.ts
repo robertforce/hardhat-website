@@ -225,12 +225,19 @@ export const landing: LandingConfig = {
   },
 };
 
+// We import the GA_MEASUREMENT_ID from env variables using import.meta.env,
+// which is vite-specific, and not available to node:test.
+const GA_MEASUREMENT_ID =
+  "env" in import.meta
+    ? import.meta.env.GA_MEASUREMENT_ID
+    : "test-measurement-id";
+
 export const cookiePopup: CookiePopupConfig = {
   title: "Cookie Policy",
   text: "We use cookies to improve your experience on our website.",
   readMoreHref: "/privacy-policy.html",
   readMoreText: "Read More",
-  measurementId: import.meta.env.GA_MEASUREMENT_ID,
+  measurementId: GA_MEASUREMENT_ID,
 };
 
 export const pluginsConfig: PluginsConfig = {
