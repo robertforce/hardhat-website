@@ -7,6 +7,16 @@ import type {
 
 export const globalConfig: GlobalConfig = {
   url: "https://hardhat.org",
+  baseGitHubDeploymentBranchViewUrl:
+    "https://github.com/NomicFoundation/hardhat-website/tree/main",
+  hardhatRepoUrl: "https://github.com/NomicFoundation/hardhat",
+  headCommentForAgents: `Notes for LLMs and AI Agents:
+  - You can access a Markdown directory of the site at /llms.txt.
+  - For every section of the site that doesn't have an extension, you can get its markdown by doing either of this:
+    - Appending the .md extension to the URL
+    - Using ?format=md in the URL
+    - Using ?view=source in the URL
+    - Providing an Accept header with text/markdown`,
 };
 
 export const landing: LandingConfig = {
@@ -17,10 +27,8 @@ export const landing: LandingConfig = {
     canonicalUrl: globalConfig.url,
   },
   banner: {
-    // text: "Hardhat 3 is now production ready. Migrate now",
-    // href: "/docs",
-    text: "Please complete the 2026 Solidity Survey!",
-    href: "https://solidity.survey-research.net/solidity-survey",
+    text: "Hardhat 3 is now production ready. Migrate now",
+    href: "/docs",
   },
   header: {
     logo: {
@@ -43,7 +51,7 @@ export const landing: LandingConfig = {
       { label: "hardhat 2", url: "/hardhat2" },
     ],
     socials: [
-      { name: "github", url: "https://github.com/NomicFoundation/hardhat" },
+      { name: "github", url: globalConfig.hardhatRepoUrl },
       { name: "x", url: "https://twitter.com/HardhatHQ" },
       { name: "discord", url: "https://hardhat.org/discord" },
     ],
@@ -215,12 +223,19 @@ export const landing: LandingConfig = {
   },
 };
 
+// We import the GA_MEASUREMENT_ID from env variables using import.meta.env,
+// which is vite-specific, and not available to node:test.
+const GA_MEASUREMENT_ID =
+  "env" in import.meta
+    ? import.meta.env.GA_MEASUREMENT_ID
+    : "test-measurement-id";
+
 export const cookiePopup: CookiePopupConfig = {
   title: "Cookie Policy",
   text: "We use cookies to improve your experience on our website.",
   readMoreHref: "/privacy-policy.html",
   readMoreText: "Read More",
-  measurementId: import.meta.env.GA_MEASUREMENT_ID,
+  measurementId: GA_MEASUREMENT_ID,
 };
 
 export const pluginsConfig: PluginsConfig = {

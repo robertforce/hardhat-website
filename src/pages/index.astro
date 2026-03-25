@@ -19,6 +19,14 @@ import WhyHardhat from "../components/landing/WhyHardhat/WhyHardhat.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.ico" />
 
+    <Fragment
+      set:html={`
+<!--
+${globalConfig.headCommentForAgents}
+-->
+`}
+    />
+
     <!-- SEO Meta Tags -->
     <title>{landing.head.title}</title>
     <meta name="description" content={landing.head.description} />
@@ -31,6 +39,7 @@ import WhyHardhat from "../components/landing/WhyHardhat/WhyHardhat.astro";
 
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={landing.head.canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Preload Fonts -->
     <link
