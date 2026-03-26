@@ -1,0 +1,63 @@
+---
+title: Inline configuration for Solidity tests
+description: How to override fuzz and invariant test settings
+sidebar:
+  label: Inline configuration
+  order: 3
+---
+
+Hardhat lets you override fuzz and invariant test settings on a per-function basis using NatSpec comments. This is useful when different tests need different parameters. For example, running more fuzz iterations on a critical function, or increasing the depth of an invariant test.
+
+Inline overrides take precedence over the global settings defined in your [Solidity tests configuration](/docs/reference/configuration#solidity-tests-configuration).
+
+## Syntax
+
+Each override is a single line inside a NatSpec comment block, following the format `hardhat-config: <key> = <value>`:
+
+```solidity
+/// hardhat-config: fuzz.runs = 10000
+/// hardhat-config: fuzz.maxTestRejects = 500
+function testTransferFuzz(uint256 amount) public {
+  // ...
+}
+```
+
+Block comments are also supported:
+
+```solidity
+/**
+ * hardhat-config: invariant.runs = 100
+ * hardhat-config: invariant.depth = 50
+ * hardhat-config: invariant.failOnRevert = true
+ */
+function invariantBalanceAlwaysPositive() public {
+  // ...
+}
+```
+
+## Supported configuration keys
+
+| Key                         | Description                                                     |
+| --------------------------- | --------------------------------------------------------------- |
+| `fuzz.runs`                 | Number of fuzz iterations to run                                |
+| `fuzz.maxTestRejects`       | Maximum number of rejected inputs before aborting               |
+| `fuzz.showLogs`             | Whether to show console logs during fuzzing                     |
+| `fuzz.timeout`              | Timeout for the fuzz test                                       |
+| `invariant.runs`            | Number of invariant test runs                                   |
+| `invariant.depth`           | Number of calls per run to attempt to break the invariant       |
+| `invariant.failOnRevert`    | Whether to fail the invariant if a revert occurs                |
+| `invariant.callOverride`    | Whether to override unsafe external calls                       |
+| `invariant.timeout`         | Timeout for the invariant test                                  |
+| `allowInternalExpectRevert` | Allow expecting reverts at the same callstack depth as the test |
+
+## Foundry compatibility
+
+Hardhat also accepts the `forge-config:` prefix, kebab-case keys, and the `default` profile, so existing Foundry inline configuration works without changes:
+
+```solidity
+/// forge-config: default.fuzz.runs = 10000
+/// forge-config: fuzz.max-test-rejects = 500
+function testTransferFuzz(uint256 amount) public {
+  // ...
+}
+```
