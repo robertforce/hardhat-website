@@ -12,7 +12,7 @@ Inline overrides take precedence over the global settings defined in your [Solid
 
 ## Syntax
 
-Each override is a single line inside a NatSpec comment block, following the format `hardhat-config: <key> = <value>`:
+Each override is a single line inside a NatSpec comment (line `///` or block `/** */`), following the format `hardhat-config: <key> = <value>`:
 
 ```solidity
 /// hardhat-config: fuzz.runs = 10000
