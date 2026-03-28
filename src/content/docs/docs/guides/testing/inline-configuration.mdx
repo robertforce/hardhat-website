@@ -1,9 +1,9 @@
 ---
 title: Inline configuration for Solidity tests
-description: How to use inline comments to override a the solidity tests' configuration
+description: How to use inline comments to override the solidity tests' configuration
 sidebar:
-  label: Inline configuration
-  order: 3
+  label: Solidity tests inline config
+  order: 5
 ---
 
 Hardhat lets you override solidity test settings on a per-function basis using NatSpec comments. This is useful when different tests need different parameters. For example, running more fuzz iterations on a critical function, or increasing the depth of an invariant test.
@@ -12,7 +12,9 @@ Inline overrides take precedence over the global settings defined in your [Solid
 
 ## Syntax
 
-Each override is a single line inside a NatSpec comment (line `///` or block `/** */`), following the format `hardhat-config: <key> = <value>`:
+Each override is a single line inside a NatSpec comment (line `///` or block `/** */`), following the format `hardhat-config: <key> = <value>`.
+
+Keys can be written in camelCase, snake_case, or kebab-case:
 
 ```solidity
 /// hardhat-config: fuzz.runs = 10000
@@ -48,11 +50,24 @@ function invariantBalanceAlwaysPositive() public {
 | `invariant.failOnRevert`    | Whether to fail the invariant if a revert occurs                |
 | `invariant.callOverride`    | Whether to override unsafe external calls                       |
 | `invariant.timeout`         | Timeout for the invariant test                                  |
-| `allowInternalExpectRevert` | Allow expecting reverts at the same callstack depth as the test |
+
+### `allowInternalExpectRevert`
+
+By default, the `expectRevert` cheatcode only catches reverts from external calls, that is, calls at a lower depth than the test itself. If your test directly calls an internal function that reverts, `expectRevert` won't catch it and you'll see an error like `call didn't revert at a lower depth than cheatcode call depth`.
+
+Setting `allowInternalExpectRevert` to `true` allows `expectRevert` to work on calls at the same depth as the test:
+
+```solidity
+/// hardhat-config: allowInternalExpectRevert = true
+function testInternalRevert() public {
+  vm.expectRevert("some error");
+  this.myInternalHelper(); // reverts at the same call depth
+}
+```
 
 ## Foundry compatibility
 
-Hardhat also accepts the `forge-config:` prefix, kebab-case keys, and the `default` profile, so existing Foundry inline configuration works without changes:
+Hardhat also accepts the `forge-config:` prefix and the `default` profile, so existing Foundry inline configuration works without changes:
 
 ```solidity
 /// forge-config: default.fuzz.runs = 10000
@@ -61,3 +76,5 @@ function testTransferFuzz(uint256 amount) public {
   // ...
 }
 ```
+
+Omitting the profile is equivalent to using `default`.
