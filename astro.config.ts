@@ -6,11 +6,13 @@ import partytown from "@astrojs/partytown";
 import vercel from "@astrojs/vercel";
 import { setGlobalDispatcher, Agent } from "undici";
 import { unwatchFile, watchFile } from "node:fs";
-import { glob, utimes } from "node:fs/promises";
+import { glob, readFile, writeFile, utimes } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 
 import { globalConfig } from "./src/config";
 import redirects from "./src/redirects";
 import { officialPluginsList } from "./src/content/officialPluginList";
+import { sidebarTopics, sidebarTopicOptions } from "./src/sidebar";
 import path from "node:path";
 
 // We set this up to prefer IPv4 connections to IPv6 connections
@@ -48,7 +50,7 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/NomicFoundation/hardhat",
+          href: globalConfig.hardhatRepoUrl,
         },
         {
           icon: "x.com",
@@ -65,211 +67,7 @@ export default defineConfig({
         // While we use this multi-sidebar plugin, each item of the array of
         // sidebars is configured like a normal Starlight sidebar.
         // See: https://starlight.astro.build/guides/sidebar/
-        starlightSidebarTopics(
-          [
-            {
-              label: "Hardhat 3",
-              id: "hardhat",
-              link: "/docs/getting-started/",
-              items: [
-                {
-                  slug: "docs/getting-started",
-                },
-                {
-                  label: "Hardhat 3",
-                  autogenerate: {
-                    directory: "docs/hardhat3",
-                  },
-                },
-                {
-                  label: "Tutorial",
-                  collapsed: true,
-                  autogenerate: {
-                    directory: "docs/tutorial",
-                  },
-                },
-                {
-                  label: "Guides",
-                  items: [
-                    {
-                      label: "Writing Smart contracts",
-                      collapsed: true,
-                      autogenerate: {
-                        directory: "docs/guides/writing-contracts",
-                      },
-                    },
-                    {
-                      label: "Testing Smart contracts",
-                      collapsed: true,
-                      autogenerate: {
-                        directory: "docs/guides/testing",
-                      },
-                    },
-                    {
-                      label: "Deploying Smart contracts",
-                      collapsed: true,
-                      autogenerate: {
-                        directory: "docs/guides/deployment",
-                      },
-                    },
-                    { slug: "docs/guides/smart-contract-verification" },
-                    { slug: "docs/guides/configuration-variables" },
-                    { slug: "docs/guides/writing-tasks" },
-                    { slug: "docs/guides/writing-scripts" },
-                    { slug: "docs/guides/verbosity-levels" },
-                    { slug: "docs/guides/forking" },
-                    { slug: "docs/guides/hardhat-node" },
-                    { slug: "docs/guides/hardhat-console" },
-                    // { slug: "docs/guides/command-line-completion" },
-                    { slug: "docs/guides/getting-help" },
-                  ],
-                },
-                {
-                  label: "Cookbook",
-                  collapsed: true,
-                  autogenerate: {
-                    directory: "docs/cookbook",
-                  },
-                },
-                {
-                  label: "Reference",
-                  collapsed: true,
-                  items: [
-                    { slug: "docs/reference/configuration" },
-                    { slug: "docs/reference/network-manager" },
-                    { slug: "docs/reference/edr-simulated-networks" },
-                    { slug: "docs/reference/json-rpc-methods" },
-                    { slug: "docs/reference/artifacts" },
-                    { slug: "docs/reference/console-log" },
-                    {
-                      label: "Solidity test cheatcodes",
-                      collapsed: true,
-                      autogenerate: {
-                        directory: "docs/reference/cheatcodes",
-                      },
-                    },
-                    { slug: "docs/reference/stability-guarantees" },
-                    { slug: "docs/reference/nodejs-support" },
-                    { slug: "docs/reference/errors" },
-                  ],
-                },
-                {
-                  label: "Explanations",
-                  collapsed: true,
-                  autogenerate: {
-                    directory: "docs/explanations",
-                  },
-                },
-                {
-                  // /docs/plugins is a custom page, not generated by Starlight
-                  // don't use slug here
-                  label: "Plugins",
-                  items: [
-                    {
-                      label: "Official plugins",
-                      link: "/docs/plugins/official-plugins",
-                    },
-                    {
-                      label: "Community plugins",
-                      link: "/docs/plugins/community-plugins",
-                    },
-                    {
-                      label: "Plugin development docs",
-                      // We have to use the full URL here because this is
-                      // treated as a link to a different sidebar topic
-                      link: "https://hardhat.org/docs/plugin-development",
-                    },
-                  ],
-                },
-                { slug: "hardhat2" },
-              ],
-            },
-            {
-              label: "Hardhat Ignition",
-              id: "ignition",
-              link: "/ignition/docs",
-              items: [
-                { slug: "ignition/docs/getting-started" },
-                {
-                  label: "Guides",
-                  autogenerate: {
-                    directory: "ignition/docs/guides",
-                  },
-                },
-                {
-                  label: "Reference",
-                  autogenerate: {
-                    directory: "ignition/docs/reference",
-                  },
-                },
-                {
-                  label: "Explanations",
-                  autogenerate: {
-                    directory: "ignition/docs/explanations",
-                  },
-                },
-              ],
-            },
-            {
-              label: "Migrate from Hardhat 2",
-              id: "migrate-from-hardhat2",
-              link: "/docs/migrate-from-hardhat2/",
-              items: [
-                {
-                  slug: "docs/migrate-from-hardhat2",
-                },
-                {
-                  label: "Guides",
-                  autogenerate: {
-                    directory: "/docs/migrate-from-hardhat2/guides",
-                  },
-                },
-              ],
-            },
-            {
-              label: "Plugin development",
-              id: "plugin-development",
-              link: "/docs/plugin-development/",
-              items: [
-                { slug: "docs/plugin-development" },
-                {
-                  label: "Tutorial",
-                  autogenerate: {
-                    directory: "docs/plugin-development/tutorial",
-                  },
-                },
-                {
-                  label: "Guides",
-                  autogenerate: {
-                    directory: "docs/plugin-development/guides",
-                  },
-                },
-                {
-                  label: "Reference",
-                  autogenerate: {
-                    directory: "docs/plugin-development/reference",
-                  },
-                },
-                {
-                  label: "Explanations",
-                  autogenerate: {
-                    directory: "docs/plugin-development/explanations",
-                  },
-                },
-              ],
-            },
-          ],
-          {
-            topics: {
-              hardhat: [
-                "/docs/plugins/official-plugins",
-                "/docs/plugins/community-plugins",
-                "/docs/plugins/*",
-              ],
-            },
-            exclude: ["/hardhat-vscode"],
-          },
-        ),
+        starlightSidebarTopics(sidebarTopics, sidebarTopicOptions),
         starlightLinksValidator({
           exclude: Object.keys(redirects)
             .concat(officialPluginsList.map((p) => `/docs/plugins/${p.slug}`))
@@ -282,7 +80,10 @@ export default defineConfig({
       customCss: ["./src/styles/custom-starlight-theme.css"],
       components: {
         Sidebar: "./src/components/starlight-overrides/Sidebar.astro",
+        Head: "./src/components/starlight-overrides/Head.astro",
         Header: "./src/components/starlight-overrides/Header.astro",
+        TableOfContents:
+          "./src/components/starlight-overrides/TableOfContents.astro",
       },
     }),
     partytown({
@@ -290,6 +91,42 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
+    {
+      // The plugin @astrojs/sitemap doesn't generate entries for our .md files
+      // because it only does it for routes of `r.type === "page"`, and our
+      // .md files are not pages. We use a custom hook to fixup the sitemap.
+      name: "sitemap-md-urls",
+      hooks: {
+        "astro:build:done": async ({ dir, logger }) => {
+          const distPath = fileURLToPath(dir);
+          const mdFiles = await Array.fromAsync(
+            glob(path.join(distPath, "**", "*.md")),
+          );
+          const sitemapPath = path.join(distPath, "sitemap-0.xml");
+          let sitemap = await readFile(sitemapPath, "utf-8");
+          const siteUrl = globalConfig.url;
+          const existingUrls = new Set(
+            [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]),
+          );
+
+          const newFiles = [...mdFiles, path.join(distPath, "llms.txt")];
+
+          const newUrls = newFiles
+            .filter((f) => {
+              const relative = path.relative(distPath, f);
+              return !existingUrls.has(`${siteUrl}/${relative}`);
+            })
+            .map((f) => {
+              const relative = path.relative(distPath, f);
+              return `<url><loc>${siteUrl}/${relative}</loc></url>`;
+            })
+            .join("");
+          sitemap = sitemap.replace("</urlset>", newUrls + "</urlset>");
+          await writeFile(sitemapPath, sitemap);
+          logger.info(`Added ${newFiles.length} .md URLs to sitemap`);
+        },
+      },
+    },
   ],
   trailingSlash: "never",
   redirects,

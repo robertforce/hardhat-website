@@ -3,7 +3,6 @@ title: The Network Manager API
 description: How to use the Network Manager of Hardhat 3
 sidebar:
   label: Network Manager
-  order: 2
 tableOfContents:
   maxHeadingLevel: 5
 ---
@@ -140,63 +139,57 @@ export default defineConfig({
 
 When you do this, you get most of the benefits of providing it as an option, except for the type-level extensions that a plugin can provide.
 
-If you provide a Chain Type both as an option and as part of your Network Config, Hardhat will validate that they're the same.
+If you provide a Chain Type both as an option and as part of your Network Config, the one provided in the `network.connect()` options will take precedence, and chain-type-dependent fields like `hardfork` will be re-resolved accordingly.
 
-{
+##### Changing the default Chain Type
 
-// Commented out because of this issue: https://github.com/NomicFoundation/hardhat/issues/7700
+By default, the default Chain Type that's used when neither a Network Config nor the `network.connect()` options provide one is `generic`.
 
-// ##### Changing the default Chain Type
+You can customize this with a [Type Extension](/docs/plugin-development/explanations/type-extensions), and a config value. Like this:
 
-// By default, the default Chain Type that's used when neither a Network Config nor the `network.connect()` options provide one is `generic`.
+```ts ins={4-9,12}
+// hardhat.config.ts
+// ... imports ...
 
-// You can customize this with a [Type Extension](/docs/plugin-development/explanations/type-extension), and a config value. Like this:
-
-// ```ts ins={4-9,12}
-// // hardhat.config.ts
-// /// ... imports ...
-
-// import "hardhat/types/network";
-// declare module "hardhat/types/network" {
-// interface ChainTypeConfig {
-// defaultChainType: "op";
-// }
-// }
-
-// export default defineConfig({
-// defaultChainType: "op",
-// /// ... other config ...
-// networks: {
-// opHardhat: {},
-// },
-// });
-// ```
-
-// Note that the Type Extension and the config value must both be present and match, or your get a compilation error.
-
-// When you do that, the default Chain Type will be updated both at type-level and runtime. For example, this will worth the config above:
-
-// ```ts "publicClient.estimateL1Gas"
-// // scripts/example-op.ts
-// import { network } from "hardhat";
-
-// const { viem } = await network.connect();
-
-// const publicClient = await viem.getPublicClient();
-// const l1Gas = await publicClient.estimateL1Gas({
-// account: "0x1111111111111111111111111111111111111111",
-// to: "0x2222222222222222222222222222222222222222",
-// value: 1n,
-// });
-
-// console.log("l1Gas:", l1Gas);
-// ```
-
-// You can run it with:
-
-// <Run command="hardhat run scripts/example-op.ts" />
-
+import "hardhat/types/network";
+declare module "hardhat/types/network" {
+  interface ChainTypeConfig {
+    defaultChainType: "op";
+  }
 }
+
+export default defineConfig({
+  defaultChainType: "op",
+  // ... other config ...
+  networks: {
+    opHardhat: {},
+  },
+});
+```
+
+Note that the Type Extension and the config value must both be present and match, or you'll get a compilation error.
+
+When you do that, the default Chain Type will be updated both at type-level and runtime. For example, this will work with the config above:
+
+```ts "publicClient.estimateL1Gas"
+// scripts/example-op.ts
+import { network } from "hardhat";
+
+const { viem } = await network.connect();
+
+const publicClient = await viem.getPublicClient();
+const l1Gas = await publicClient.estimateL1Gas({
+  account: "0x1111111111111111111111111111111111111111",
+  to: "0x2222222222222222222222222222222222222222",
+  value: 1n,
+});
+
+console.log("l1Gas:", l1Gas);
+```
+
+You can run it with:
+
+<Run command="hardhat run scripts/example-op.ts" />
 
 ### The `network.createServer()` method
 

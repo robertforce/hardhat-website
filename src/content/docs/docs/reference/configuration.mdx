@@ -1,8 +1,6 @@
 ---
 title: Configuration
 description: Hardhat 3 configuration reference
-sidebar:
-  order: 1
 ---
 
 :::tip
@@ -126,7 +124,7 @@ export default defineConfig({
 
 The `networks` config field is an optional object where network names map to their configuration.
 
-There are two kinds of networks in Hardhat: in-memory simulated networks and [JSON-RPC](https://eth.wiki/json-rpc/API) based networks. You can use either of these by setting the `type` field in the network configuration to either `edr-simulated` or `http`, respectively.
+There are two kinds of networks in Hardhat: in-memory simulated networks and [JSON-RPC](https://ethereum.org/developers/docs/apis/json-rpc/) based networks. You can use either of these by setting the `type` field in the network configuration to either `edr-simulated` or `http`, respectively.
 
 Additionally, simulated networks can be used to test your contracts in different environments, such as Optimism or layer 1 Ethereum, by setting the `chainType` field to either `op` or `l1`, respectively.
 
@@ -255,7 +253,7 @@ If write access to a directory is needed, please make sure that it doesn't conta
 - `from`: The value of `msg.sender` in tests as hex string. Defaults to `0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38`.
 - `txOrigin`: The value of `tx.origin` in tests as hex string. Defaults to `0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38`.
 - `initialBalance`: The initial balance of the sender in tests. Defaults to `0xffffffffffffffffffffffff`.
-- `blockGasLimit`: The gas limit for each test case. Defaults to `9_223_372_036_854_775_807` (`i64::MAX`).
+- `gasLimit`: The gas limit for each test case. Defaults to `9_223_372_036_854_775_807` (`i64::MAX`).
 - `blockBaseFeePerGas`: The base fee per gas (in wei) in tests. Defaults to `0`.
 - `coinbase`: The value of `block.coinbase` in tests. Defaults to `0x0000000000000000000000000000000000000000`.
 - `blockTimestamp`: The value of `block.timestamp` in tests. Defaults to 1.

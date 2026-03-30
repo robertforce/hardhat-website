@@ -3,12 +3,11 @@ title: Solidity console.log() reference
 description: Reference documentation of Hardhat's Solidity console.log() functionality
 sidebar:
   label: Solidity console.log
-  order: 4
 ---
 
 Hardhat allows you to print logging messages and contract variables by calling `console.log()` when running your Solidity code in a simulated network or a Solidity test.
 
-To use it, simply import `hardhat/console.sol` and call it as if it were Node.js' [`console.log`](https://nodejs.org/api/console.html#consolelogdata-args). It implements the same formatting options, which in turn uses [`util.format`](https://nodejs.org/dist/latest-v12.x/docs/api/util.html#util_util_format_format_args).
+To use it, simply import `hardhat/console.sol` and call it as if it were Node.js' [`console.log`](https://nodejs.org/api/console.html#consolelogdata-args). It implements the same formatting options, which in turn uses [`util.format`](https://nodejs.org/api/util.html#utilformatformat-args).
 
 For example, this contract prints a formatted string when it's deployed:
 

@@ -27,8 +27,8 @@ importers:
         specifier: ^0.41.3
         version: 0.41.3
       '@nomicfoundation/hardhat-errors':
-        specifier: ^3.0.6
-        version: 3.0.6
+        specifier: ^3.0.8
+        version: 3.0.8
       '@types/tar-stream':
         specifier: ^3.1.4
         version: 3.1.4
@@ -65,9 +65,6 @@ importers:
       starlight-links-validator:
         specifier: ^0.18.0
         version: 0.18.0(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1)))
-      starlight-markdown-blocks:
-        specifier: ^0.1.0
-        version: 0.1.0(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1)))
       starlight-sidebar-topics:
         specifier: ^0.6.1
         version: 0.6.1(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1)))
@@ -770,11 +767,11 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nomicfoundation/hardhat-errors@3.0.6':
-    resolution: {integrity: sha512-3x+OVdZv7Rgy3z6os9pB6kiHLxs6q0PCXHRu+WLZflr44PG9zW+7V9o+ehrUqmmivlHcIFr3Qh4M2wZVuoCYww==}
+  '@nomicfoundation/hardhat-errors@3.0.8':
+    resolution: {integrity: sha512-gHAZDYb0e5joq+WecgC3ciz5OcgqUBgK2zLQmNoKSn/I52h3SH1stxXsY4dcVsj0OY4ZksqIRhJDKskHC5DvTA==}
 
-  '@nomicfoundation/hardhat-utils@3.0.3':
-    resolution: {integrity: sha512-XNoDJshvGR3l8/oQdNoLPLlcv+P+mGZBLixCyuO8Q0wTIyH/1+KYI77E+yvgTyw+GG4UmldFw9R3Hmnemk3KCA==}
+  '@nomicfoundation/hardhat-utils@4.0.1':
+    resolution: {integrity: sha512-9xxD6WXLn+kopd+hmF+XYcJJ38Gm06QmZxKf/fIJzlzs9FuNI6C7Lvdd4qHv8/3ReegIbpBCrzozaL2GISmNrA==}
 
   '@nomicfoundation/slang@1.2.0':
     resolution: {integrity: sha512-+04Z1RHbbz0ldDbHKQFOzveCdI9Rd3TZZu7fno5hHy3OsqTo9UK5Jgqo68wMvRovCO99POv6oCEyO7+urGeN8Q==}
@@ -1684,6 +1681,10 @@ packages:
     resolution: {integrity: sha512-6rxyATwPCkaFIL3JLqw8qXqMpIZ942pTX/tbQFkRsDGblS8tNGtlUauA/+mt6RUfqn/4MoEr+WDkYoIQbibWuQ==}
     engines: {node: '>=6.0.0'}
 
+  fast-equals@5.4.0:
+    resolution: {integrity: sha512-jt2DW/aNFNwke7AUd+Z+e6pz39KO5rzdbbFCg2sGafS4mk13MI7Z8O5z9cADNn5lhGODIgLwug6TZO2ctf7kcw==}
+    engines: {node: '>=6.0.0'}
+
   fast-fifo@1.3.2:
     resolution: {integrity: sha512-/d9sfos4yxzpwkDkuN7k2SqFKtYNmCTzgfEpz82x34IM9/zc8KGxQoXg1liNC/izpRM/MBdt44Nmx41ZWqk+FQ==}
 
@@ -2560,12 +2561,6 @@ packages:
     engines: {node: '>=18.17.1'}
     peerDependencies:
       '@astrojs/starlight': '>=0.32.0'
-
-  starlight-markdown-blocks@0.1.0:
-    resolution: {integrity: sha512-nPnT/eMNIysR+TZGDzNEf9U0NnED+wPgtuPQaoAwrvoyOoNvAPQtvwDTYw3YzoHL0scEaOIh3J0S04cTZ1qk2w==}
-    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
-    peerDependencies:
-      '@astrojs/starlight': '>=0.32'
 
   starlight-sidebar-topics@0.6.1:
     resolution: {integrity: sha512-kBOFUTJEVVeeZ3t0la8V+of0JyahAYGPT0xacXl/qZ6poBwqKu0mR2qPv7D/ZdUVTxGuQghT2AXo3qo0ygXwjA==}
@@ -3788,19 +3783,19 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
-  '@nomicfoundation/hardhat-errors@3.0.6':
+  '@nomicfoundation/hardhat-errors@3.0.8':
     dependencies:
-      '@nomicfoundation/hardhat-utils': 3.0.3
+      '@nomicfoundation/hardhat-utils': 4.0.1
     transitivePeerDependencies:
       - supports-color
 
-  '@nomicfoundation/hardhat-utils@3.0.3':
+  '@nomicfoundation/hardhat-utils@4.0.1':
     dependencies:
       '@streamparser/json-node': 0.0.22
       debug: 4.4.3
       env-paths: 2.2.1
       ethereum-cryptography: 2.2.1
-      fast-equals: 5.3.2
+      fast-equals: 5.4.0
       json-stream-stringify: 3.1.6
       rfdc: 1.4.1
       undici: 6.22.0
@@ -4751,6 +4746,8 @@ snapshots:
   fast-deep-equal@3.1.3: {}
 
   fast-equals@5.3.2: {}
+
+  fast-equals@5.4.0: {}
 
   fast-fifo@1.3.2: {}
 
@@ -6131,18 +6128,6 @@ snapshots:
       mdast-util-to-string: 4.0.0
       picomatch: 4.0.3
       terminal-link: 5.0.0
-      unist-util-visit: 5.0.0
-    transitivePeerDependencies:
-      - supports-color
-
-  starlight-markdown-blocks@0.1.0(@astrojs/starlight@0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1))):
-    dependencies:
-      '@astrojs/starlight': 0.36.0(astro@5.14.4(@types/node@24.7.1)(@vercel/functions@2.2.13)(rollup@4.52.4)(sass@1.93.2)(typescript@5.9.3)(yaml@2.8.1))
-      '@types/mdast': 4.0.4
-      hastscript: 9.0.1
-      mdast-util-directive: 3.1.0
-      mdast-util-to-string: 4.0.0
-      unified: 11.0.5
       unist-util-visit: 5.0.0
     transitivePeerDependencies:
       - supports-color

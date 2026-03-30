@@ -34,5 +34,7 @@ jobs:
           key: "community-plugins-downloads-${{ hashFiles('src/content/community-plugins.json') }}"
       - name: Lint
         run: pnpm lint
+      - name: Test
+        run: pnpm test
       - name: Build
         run: pnpm build

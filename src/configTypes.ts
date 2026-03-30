@@ -1,5 +1,8 @@
 export interface GlobalConfig {
   url: string;
+  baseGitHubDeploymentBranchViewUrl: string;
+  hardhatRepoUrl: string;
+  headCommentForAgents: string;
 }
 
 export interface LandingConfig {

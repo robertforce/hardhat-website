@@ -9,7 +9,7 @@ for (const error of errors) {
   for (const category of error.categories) {
     for (const errorDescriptor of category.errors) {
       redirects.push([
-        `hhe${errorDescriptor.code}`,
+        `/hhe${errorDescriptor.code}`,
         `/docs/reference/errors#${errorDescriptor.slug}`,
       ]);
     }

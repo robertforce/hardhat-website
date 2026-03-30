@@ -12,3 +12,9 @@ They are organized in different files, by category. In this order of priority (h
 ## Astro vs Vercel redirects
 
 Astro redirects are more limited, redirecting fixed URLs, and case insensitive. For more complex/general redirects, we need to use `vercel.json`'s redirects. We should keep those to the minimum, and only use them for redirects that are not covered by the `redirects` field in the Astro config.
+
+## Redirects to `.md` versions
+
+We automatically apply `.md` redirections to all the Astro redirections, otherwise the `.vercel.json` ones take priority and things like `/docs` end up redirecting to `/docs.md` instead of `/docs/getting-started.md`. The way we do this is that we add a redirect from `/docs.md` to `/docs/getting-started`, so that then the usual Astro redirection logic applies.
+
+There's an automatic test that can be run manually with `bash test/test-md-redirects.sh`. Make sure you set the right URL variable in the test file if you are using a deployment preview.
