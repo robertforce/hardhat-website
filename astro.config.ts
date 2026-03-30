@@ -116,6 +116,7 @@ export default defineConfig({
                     { slug: "docs/guides/configuration-variables" },
                     { slug: "docs/guides/writing-tasks" },
                     { slug: "docs/guides/writing-scripts" },
+                    { slug: "docs/guides/verbosity-levels" },
                     { slug: "docs/guides/forking" },
                     { slug: "docs/guides/hardhat-node" },
                     { slug: "docs/guides/hardhat-console" },

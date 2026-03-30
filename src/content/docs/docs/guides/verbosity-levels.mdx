@@ -1,0 +1,57 @@
+---
+title: Verbosity levels
+description: How to control the amount of output shown during test execution, script runs, and deployments
+---
+
+import Run from "@hh/Run.astro";
+
+The `--verbosity` (or `-v`) global option controls the amount of output shown during test execution, script runs, and deployments when using simulated networks.
+
+Default verbosity is **2**. Use `-v` (level 1), `-vv` (level 2), `-vvv` (level 3), etc.
+
+<Run command="hardhat test -vvv" />
+
+You can also use the long form:
+
+<Run command="hardhat test --verbosity 3" />
+
+:::note
+
+The `--verbosity` flag only produces output when using simulated networks. It does not apply to external networks that you connect to through HTTP, like mainnet, or tasks that don't involve network connections (e.g., `hardhat build`, `hardhat clean`).
+
+:::
+
+## For Solidity tests (`hardhat test`)
+
+Each level includes everything from the previous levels.
+
+| Level | What it adds                                                              |
+| ----- | ------------------------------------------------------------------------- |
+| 0     | Test names and pass/fail status only                                      |
+| 1     | Decoded logs for failing tests                                            |
+| 2     | Decoded logs for passing tests _(default)_                                |
+| 3     | Execution call traces for failing tests; stack traces always collected     |
+| 4     | Execution call traces for passing tests; setup traces for failing tests   |
+| 5     | Setup traces for passing tests                                            |
+
+## For TypeScript tests (`hardhat test`)
+
+TypeScript tests run against a Hardhat Network node. Verbosity controls the **RPC call trace** output printed to the console:
+
+| Level | What it shows                                                                |
+| ----- | ---------------------------------------------------------------------------- |
+| 0–2   | No call traces _(default)_                                                   |
+| 3     | Call traces for failing transactions only                                    |
+| 4     | Call traces for all transactions                                             |
+| 5     | All traces with no deduplication (shows estimations, repeated polling, etc.) |
+
+## For scripts and tasks (`hardhat run`, `hardhat ignition deploy`, etc.)
+
+Same RPC call trace behavior as TypeScript tests:
+
+| Level | What it shows                             |
+| ----- | ----------------------------------------- |
+| 0–2   | No call traces _(default)_                |
+| 3     | Call traces for failing transactions only |
+| 4     | Call traces for all transactions          |
+| 5     | All traces with no deduplication          |
