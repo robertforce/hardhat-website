@@ -39,17 +39,17 @@ function invariantBalanceAlwaysPositive() public {
 
 ## Supported configuration keys
 
-| Key                         | Description                                                     |
-| --------------------------- | --------------------------------------------------------------- |
-| `fuzz.runs`                 | Number of fuzz iterations to run                                |
-| `fuzz.maxTestRejects`       | Maximum number of rejected inputs before aborting               |
-| `fuzz.showLogs`             | Whether to show console logs during fuzzing                     |
-| `fuzz.timeout`              | Timeout for the fuzz test                                       |
-| `invariant.runs`            | Number of invariant test runs                                   |
-| `invariant.depth`           | Number of calls per run to attempt to break the invariant       |
-| `invariant.failOnRevert`    | Whether to fail the invariant if a revert occurs                |
-| `invariant.callOverride`    | Whether to override unsafe external calls                       |
-| `invariant.timeout`         | Timeout for the invariant test                                  |
+| Key                      | Description                                               |
+| ------------------------ | --------------------------------------------------------- |
+| `fuzz.runs`              | Number of fuzz iterations to run                          |
+| `fuzz.maxTestRejects`    | Maximum number of rejected inputs before aborting         |
+| `fuzz.showLogs`          | Whether to show console logs during fuzzing               |
+| `fuzz.timeout`           | Timeout for the fuzz test                                 |
+| `invariant.runs`         | Number of invariant test runs                             |
+| `invariant.depth`        | Number of calls per run to attempt to break the invariant |
+| `invariant.failOnRevert` | Whether to fail the invariant if a revert occurs          |
+| `invariant.callOverride` | Whether to override unsafe external calls                 |
+| `invariant.timeout`      | Timeout for the invariant test                            |
 
 ### `allowInternalExpectRevert`
 
