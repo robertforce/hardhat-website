@@ -1,0 +1,60 @@
+---
+title: Displaying execution traces
+description: How to control the amount of output shown during test execution, script runs, and deployments
+---
+
+import Run from "@hh/Run.astro";
+
+Hardhat can display execution traces of your contracts when running tests, scripts, and tasks. This can be helpful for debugging and understanding the behavior of your contracts.
+
+The `--verbosity` (or `-v`, `-vv`, `-vvv`, etc.) Global Option controls the amount of output shown during test execution, script runs, and deployments when using simulated networks.
+
+Higher verbosity levels show more information in the execution traces, and display traces for more types of operations.
+
+To try it out, run your tests with a higher verbosity level:
+
+<Run command="hardhat test -vvv" />
+
+You can also use the long form:
+
+<Run command="hardhat test --verbosity 3" />
+
+:::tip
+
+The default level is `2`, so using `-v` actually _reduces_ output (to level 1). Use `-vvv` or higher to see **more** output than the default.
+
+:::
+
+## Understanding the different verbosity levels
+
+The verbosity levels behave slightly differently for Solidity tests and TypeScript tests, scripts, and tasks, but you can expect similar results for most cases. Read this section to understand the details of what each level shows in different contexts.
+
+### Solidity tests
+
+Each level includes everything from the previous levels:
+
+| Level | What it adds                                                       |
+| ----- | ------------------------------------------------------------------ |
+| 0     | Test names and pass/fail status (failure details are always shown) |
+| 1     | Decoded logs for failing tests                                     |
+| 2     | Decoded logs for passing tests _(default)_                         |
+| 3     | Execution traces for failing tests; stack traces always collected  |
+| 4     | Execution traces for passing tests; setup traces for failing tests |
+| 5     | Setup traces for passing tests                                     |
+
+### TypeScript tests, scripts, and tasks
+
+In this case, the `--verbosity` flag controls which execution traces are shown for the different JSON-RPC calls made to your simulated network.
+
+:::note
+
+The `--verbosity` flag only produces output when using simulated networks. It does not apply to external networks that you connect to through HTTP, like Mainnet, or tasks that don't involve network connections (e.g., `hardhat build`, `hardhat clean`).
+
+:::
+
+| Level | What it shows                                                                              |
+| ----- | ------------------------------------------------------------------------------------------ |
+| 0 - 2 | No execution traces _(default)_                                                            |
+| 3     | Execution traces for failing transactions only                                             |
+| 4     | Execution traces for all transactions                                                      |
+| 5     | All execution traces with no deduplication (shows gas estimations, repeated polling, etc.) |
