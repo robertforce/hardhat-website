@@ -5,6 +5,29 @@ import type {
   StarlightSidebarTopicsUserOptions,
 } from "starlight-sidebar-topics";
 
+import fs from "fs";
+import path from "path";
+
+// We manually generate the list of directories of the cheatcodes folder, so
+// that we can control the order of the documents listed at the same level.
+// Otherwise they'll be shown at the top, and the folders later.
+const cheatchodesDirectories = fs
+  .globSync(
+    path.join(import.meta.dirname, "content/docs/docs/reference/cheatcodes/*"),
+  )
+  .filter((file) => fs.statSync(file).isDirectory())
+  .sort()
+  .map((file) => ({
+    label: path.basename(file),
+    autogenerate: {
+      directory: path.relative(
+        path.join(import.meta.dirname, "content/docs"),
+        file,
+      ),
+    },
+    collapsed: true,
+  }));
+
 export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
   {
     label: "Hardhat 3",
@@ -83,9 +106,11 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
           {
             label: "Solidity test cheatcodes",
             collapsed: true,
-            autogenerate: {
-              directory: "docs/reference/cheatcodes",
-            },
+            items: [
+              { slug: "docs/reference/cheatcodes/cheatcodes-overview" },
+              ...cheatchodesDirectories,
+              { slug: "docs/reference/cheatcodes/unsupported-cheatcodes" },
+            ],
           },
           { slug: "docs/reference/stability-guarantees" },
           { slug: "docs/reference/nodejs-support" },
