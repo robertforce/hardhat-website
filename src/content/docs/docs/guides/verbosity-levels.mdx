@@ -15,6 +15,12 @@ You can also use the long form:
 
 <Run command="hardhat test --verbosity 3" />
 
+:::tip
+
+Since the default level is 2, using `-v` actually _reduces_ output (to level 1). Use `-vvv` or higher to see **more** output than the default.
+
+:::
+
 :::note
 
 The `--verbosity` flag only produces output when using simulated networks. It does not apply to external networks that you connect to through HTTP, like mainnet, or tasks that don't involve network connections (e.g., `hardhat build`, `hardhat clean`).
@@ -27,16 +33,16 @@ Each level includes everything from the previous levels.
 
 | Level | What it adds                                                            |
 | ----- | ----------------------------------------------------------------------- |
-| 0     | Test names and pass/fail status only                                    |
+| 0     | Test names and pass/fail status (failure details are always shown)       |
 | 1     | Decoded logs for failing tests                                          |
 | 2     | Decoded logs for passing tests _(default)_                              |
 | 3     | Execution call traces for failing tests; stack traces always collected  |
 | 4     | Execution call traces for passing tests; setup traces for failing tests |
 | 5     | Setup traces for passing tests                                          |
 
-## For TypeScript tests (`hardhat test`)
+## For TypeScript tests, scripts, and tasks
 
-TypeScript tests run against a Hardhat Network node. Verbosity controls the **RPC call trace** output printed to the console:
+TypeScript tests, scripts (`hardhat run`), and tasks (`hardhat ignition deploy`, etc.) run against a Hardhat Network node. Verbosity controls the **RPC call trace** output printed to the console:
 
 | Level | What it shows                                                                |
 | ----- | ---------------------------------------------------------------------------- |
@@ -44,14 +50,3 @@ TypeScript tests run against a Hardhat Network node. Verbosity controls the **RP
 | 3     | Call traces for failing transactions only                                    |
 | 4     | Call traces for all transactions                                             |
 | 5     | All traces with no deduplication (shows estimations, repeated polling, etc.) |
-
-## For scripts and tasks (`hardhat run`, `hardhat ignition deploy`, etc.)
-
-Same RPC call trace behavior as TypeScript tests:
-
-| Level | What it shows                             |
-| ----- | ----------------------------------------- |
-| 0–2   | No call traces _(default)_                |
-| 3     | Call traces for failing transactions only |
-| 4     | Call traces for all transactions          |
-| 5     | All traces with no deduplication          |
