@@ -271,6 +271,8 @@ If write access to a directory is needed, please make sure that it doesn't conta
   - `dictionaryWeight`: Integer between 0 and 100. The weight of the dictionary. A higher dictionary weight will bias the fuzz inputs towards "interesting" values, e.g. boundary values like type(uint256).max or contract addresses from your environment. Defaults to 40.
   - `includeStorage`: The flag indicating whether to include values from storage. Defaults to true.
   - `includePushBytes`: The flag indicating whether to include push bytes values. Defaults to true.
+  - `showLogs`: The flag indicating whether to show console logs for fuzz tests. Defaults to false.
+  - `timeout`: Optional timeout in seconds for each test. Defaults to no timeout.
 - `invariant`: Optional invariant testing configuration object. If an invariant config setting is not set, but a corresponding fuzz config value is set, then the fuzz config value will be used.
   - `failurePersistDir`: Optional path where invariant failures are recorded and replayed if set.
   - `runs`: The number of runs that must execute for each invariant test group. Defaults to 256.
@@ -281,6 +283,7 @@ If write access to a directory is needed, please make sure that it doesn't conta
   - `includeStorage`: The flag indicating whether to include values from storage. Defaults to true.
   - `includePushBytes`: The flag indicating whether to include push bytes values. Defaults to true.
   - `shrinkRunLimit`: The maximum number of attempts to shrink a failed sequence. The shrink process is disabled if set to 0. Defaults to 5000.
+  - `timeout`: Optional timeout in seconds for each test. Defaults to no timeout.
 
 ## Toolbox options
 
