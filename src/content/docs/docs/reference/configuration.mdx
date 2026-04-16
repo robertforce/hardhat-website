@@ -93,6 +93,7 @@ The `solidity` config is an optional field that can be one of the following:
   - `settings`: An object with the same schema as the `settings` entry in the [Input JSON](https://docs.soliditylang.org/en/latest/using-the-compiler.html#input-description).
   - `preferWasm`: If true, forces Hardhat to use the WebAssembly (wasm) build of solc instead of a native binary. This can improve build reproducibility across platforms, at the cost of slower compilation times. This is automatically `true` for the compiler configuration objects in a `production` build profile if the version is lower than `0.8.31`; otherwise `false`.
   - `npmFilesToBuild`: A list of source names for which Hardhat should generate artifacts in addition to your project's own sources.
+  - `splitTestsCompilation`: A boolean that controls if the Solidity tests should be built independently from the contracts. Defaults to `false`.
   - `path`: An optional path to a local Solidity compiler. If provided, this will be used instead of downloading a solc version.
   - `toolVersionsInBuildInfo`: If `true`, the version of Hardhat is included in Build Info files. Defaults to `true` for the `production` Build Profile and `false` for all other profiles.
 - An object which describes multiple compilers and their respective configurations. It contains the following:
@@ -100,11 +101,13 @@ The `solidity` config is an optional field that can be one of the following:
   - `overrides`: An optional map of compiler configuration override objects. This maps file names to compiler configuration objects. The configuration objects don't include `toolVersionsInBuildInfo`.
   - `preferWasm`: See above.
   - `npmFilesToBuild`: See above.
+  - `splitTestsCompilation`: See above.
   - `toolVersionsInBuildInfo`: If `true`, the version of Hardhat is included in Build Info files. Defaults to `true` for the `production` Build Profile and `false` for all other profiles.
 - An object which describes multiple build profiles and their respective configurations. It contains the following:
-  - `profiles`: A map of Build Profile names to compiler configuration objects like either of the two above.
+  - `profiles`: A map of Build Profile names to compiler configuration objects like either of the two above, except for `splitTestsCompilation`.
   - `npmFilesToBuild`: See above.
   - `preferWasm`: See above. Defaults to `false`. It has lower priority than the `preferWasm` field in the compiler configuration or override objects.
+  - `splitTestsCompilation`: See above.
 
 #### Default EVM Version
 
