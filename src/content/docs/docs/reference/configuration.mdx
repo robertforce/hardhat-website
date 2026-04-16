@@ -58,7 +58,9 @@ export default defineConfig({
   },
   test: {
     solidity: {
-      timeout: 40000,
+      fuzz: {
+        runs: 256,
+      },
       // other solidity tests options
     },
   },
@@ -93,14 +95,16 @@ The `solidity` config is an optional field that can be one of the following:
   - `npmFilesToBuild`: A list of source names for which Hardhat should generate artifacts in addition to your project's own sources.
   - `splitTestsCompilation`: A boolean that controls if the Solidity tests should be built independently from the contracts. Defaults to `false`.
   - `path`: An optional path to a local Solidity compiler. If provided, this will be used instead of downloading a solc version.
+  - `toolVersionsInBuildInfo`: If `true`, the version of Hardhat is included in Build Info files. Defaults to `true` for the `production` Build Profile and `false` for all other profiles.
 - An object which describes multiple compilers and their respective configurations. It contains the following:
-  - `compilers`: A list of compiler configuration objects like the one above.
-  - `overrides`: An optional map of compiler configuration override objects. This maps file names to compiler configuration objects.
+  - `compilers`: A list of compiler configuration objects like the one above, except for `toolVersionsInBuildInfo`.
+  - `overrides`: An optional map of compiler configuration override objects. This maps file names to compiler configuration objects. The configuration objects don't include `toolVersionsInBuildInfo`.
   - `preferWasm`: See above.
   - `npmFilesToBuild`: See above.
   - `splitTestsCompilation`: See above.
+  - `toolVersionsInBuildInfo`: If `true`, the version of Hardhat is included in Build Info files. Defaults to `true` for the `production` Build Profile and `false` for all other profiles.
 - An object which describes multiple build profiles and their respective configurations. It contains the following:
-  - `profiles`: A map of build profile names to compiler configuration objects like the one above.
+  - `profiles`: A map of Build Profile names to compiler configuration objects like either of the two above, except for `splitTestsCompilation`.
   - `npmFilesToBuild`: See above.
   - `preferWasm`: See above. Defaults to `false`. It has lower priority than the `preferWasm` field in the compiler configuration or override objects.
   - `splitTestsCompilation`: See above.
@@ -156,7 +160,7 @@ The following options are specific to simulated networks:
 - `coinbase`: The address used as coinbase in new blocks. Default value: `"0xc014ba5ec014ba5ec014ba5ec014ba5ec014ba5e"`.
 - `forking`: An object that describes the forking configuration and can have the following fields:
   - `url`: a URL that points to a JSON-RPC node with state that you want to fork off. There's no default value for this field. It must be provided for the fork to work.
-  - `blockNumber`: an optional number to pin which block to fork from. If no value is provided, the latest block is used.
+  - `blockNumber`: an optional number or bigint to pin which block to fork from. If no value is provided, the latest block is used.
   - `enabled`: an optional boolean to switch on or off the fork functionality. Default value: `true` if `url` is set, `false` otherwise.
 - `hardfork`: This setting changes how the simulated network works, to mimic the target chain at a given hardfork. The available values depend on the `chainType`:
   - For `l1` and `generic` chain types: `"byzantium"`, `"constantinople"`, `"petersburg"`, `"istanbul"`, `"muirGlacier"`, `"berlin"`, `"london"`, `"arrowGlacier"`, `"grayGlacier"`, `"merge"`, `"shanghai"`, `"cancun"`, `"prague"`, and `"osaka"`. Default value: `"osaka"`.
