@@ -237,6 +237,17 @@ Calling `await network.createServer()` returns a `JsonRpcServer` object, which p
 
 To learn more about how to use this method, see the [Running a local development node guide](/docs/guides/hardhat-node#running-a-development-node-programmatically).
 
+## Gas configuration
+
+When a `NetworkConnection` is created, Hardhat sets up a chain of request handlers based on the [network configuration](/docs/reference/configuration#shared-network-options). For `eth_sendTransaction` requests, these handlers automatically populate the `gas` and `gasPrice` fields when they are missing from the transaction:
+
+1. **Gas price handler** — If `gasPrice` is `"auto"`, an EIP-1559 fee suggestion is computed (using `eth_feeHistory`), falling back to `eth_gasPrice` for non-EIP-1559 networks. If `gasPrice` is a fixed value, it is set as a legacy `gasPrice`.
+2. **Gas handler** — If `gas` is `"auto"`, the gas limit is estimated via `eth_estimateGas` and multiplied by `gasMultiplier`. If `gas` is a fixed value, it is used directly.
+
+These handlers only modify `eth_sendTransaction` requests. Other RPC calls like `eth_estimateGas` and `eth_gasPrice` are not affected. When a transaction already includes explicit gas values, the handlers leave them as-is.
+
+This works transparently with both the `hardhat-ethers` and `hardhat-viem` plugins.
+
 ## The `NetworkConnection<ChainTypeT>` object
 
 The `NetworkConnection` returned by `network.create()` provides the basic functionality to interact with the network, and can be extended through plugins.
