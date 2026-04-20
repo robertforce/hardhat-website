@@ -239,14 +239,13 @@ To learn more about how to use this method, see the [Running a local development
 
 ## Gas configuration
 
-When a `NetworkConnection` is created, Hardhat sets up a chain of request handlers based on the [network configuration](/docs/reference/configuration#shared-network-options). For `eth_sendTransaction` requests, these handlers automatically populate the transaction's gas limit and fee fields when they are missing:
+The [network configuration](/docs/reference/configuration#shared-network-options) includes three settings that control gas estimation and gas price calculation: `gas`, `gasMultiplier`, and `gasPrice`.
 
-1. **Fee handler** — If `gasPrice` is `"auto"`, Hardhat sets `maxFeePerGas` and `maxPriorityFeePerGas` (computed from `eth_feeHistory`) on EIP-1559 networks, or falls back to a legacy `gasPrice` (from `eth_gasPrice`) otherwise. If `gasPrice` is a fixed value, it is set as a legacy `gasPrice`.
-2. **Gas handler** — If `gas` is `"auto"`, the gas limit is estimated via `eth_estimateGas` and multiplied by `gasMultiplier`. If `gas` is a fixed value, it is used directly.
+These fields are supported by the `NetworkConnection`'s `provider` object, and the `@nomicfoundation/hardhat-viem` and `@nomicfoundation/hardhat-ethers` plugins.
 
-These handlers only modify `eth_sendTransaction` requests. Other RPC calls like `eth_estimateGas` and `eth_gasPrice` are not affected. When a transaction already includes explicit gas values, the handlers leave them as-is.
+They control the default gas-related fields used when sending transactions with a `Provider`, `Client`, `Wallet`, `Signer`, or contract object created by Hardhat.
 
-This works transparently with both the `hardhat-ethers` and `hardhat-viem` plugins.
+They do not affect `eth_estimateGas` and `eth_gasPrice` calls, nor transactions sent from Ethers objects that you construct directly (that is, not through the `NetworkConnection.ethers` helpers).
 
 ## The `NetworkConnection<ChainTypeT>` object
 
