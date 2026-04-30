@@ -237,6 +237,16 @@ Calling `await network.createServer()` returns a `JsonRpcServer` object, which p
 
 To learn more about how to use this method, see the [Running a local development node guide](/docs/guides/hardhat-node#running-a-development-node-programmatically).
 
+## Gas configuration
+
+The [network configuration](/docs/reference/configuration#shared-network-options) includes three settings that control gas estimation and gas price calculation: `gas`, `gasMultiplier`, and `gasPrice`.
+
+These fields are supported by the `NetworkConnection`'s `provider` object, and the `@nomicfoundation/hardhat-viem` and `@nomicfoundation/hardhat-ethers` plugins.
+
+They control the default gas-related fields used when sending transactions with a `Provider`, `Client`, `Wallet`, `Signer`, or contract object created by Hardhat.
+
+They do not affect `eth_estimateGas` and `eth_gasPrice` calls, nor transactions sent from Ethers objects that you construct directly (that is, not through the `NetworkConnection.ethers` helpers).
+
 ## The `NetworkConnection<ChainTypeT>` object
 
 The `NetworkConnection` returned by `network.create()` provides the basic functionality to interact with the network, and can be extended through plugins.
