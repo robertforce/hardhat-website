@@ -1,9 +1,17 @@
 ---
 import Default from "@astrojs/starlight/components/Head.astro";
 import { globalConfig } from "../../config";
+
+const markdownHref = `${Astro.url.pathname}.md`;
 ---
 
 <Default><slot /></Default>
+<link
+  rel="alternate"
+  type="text/markdown"
+  title="Markdown version"
+  href={markdownHref}
+/>
 <Fragment
   set:html={`
 <!--
