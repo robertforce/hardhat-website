@@ -7,6 +7,7 @@ sidebar:
 ---
 
 Hardhat provides three cheatcodes for EIP-712 hashing in Solidity tests:
+
 - [`eip712HashType`](/docs/reference/cheatcodes/utilities/eip712-hash-type)
 - [`eip712HashStruct`](/docs/reference/cheatcodes/utilities/eip712-hash-struct)
 - [`eip712HashTypedData`](/docs/reference/cheatcodes/utilities/eip712-hash-typed-data)
@@ -43,14 +44,14 @@ Given these struct definitions in `contracts/Eip712Types.sol`:
 
 ```solidity
 struct Person {
-    address wallet;
-    string name;
+  address wallet;
+  string name;
 }
 
 struct Mail {
-    Person from;
-    Person to;
-    string contents;
+  Person from;
+  Person to;
+  string contents;
 }
 ```
 
@@ -61,32 +62,37 @@ import "forge-std/Test.sol";
 import "../../contracts/Eip712Types.sol";
 
 interface IEip712Cheats {
-    function eip712HashType(string calldata) external pure returns (bytes32);
-    function eip712HashStruct(string calldata, bytes calldata) external pure returns (bytes32);
-    function eip712HashTypedData(string calldata) external pure returns (bytes32);
+  function eip712HashType(string calldata) external pure returns (bytes32);
+  function eip712HashStruct(
+    string calldata,
+    bytes calldata
+  ) external pure returns (bytes32);
+  function eip712HashTypedData(string calldata) external pure returns (bytes32);
 }
 
 contract Eip712Test is Test {
-    IEip712Cheats cheats = IEip712Cheats(address(vm));
+  IEip712Cheats cheats = IEip712Cheats(address(vm));
 
-    function testMailTypeHash() public view {
-        bytes32 expected = keccak256(bytes(
-            "Mail(Person from,Person to,string contents)"
-            "Person(address wallet,string name)"
-        ));
-        assertEq(cheats.eip712HashType("Mail"), expected);
-    }
+  function testMailTypeHash() public view {
+    bytes32 expected = keccak256(
+      bytes(
+        "Mail(Person from,Person to,string contents)"
+        "Person(address wallet,string name)"
+      )
+    );
+    assertEq(cheats.eip712HashType("Mail"), expected);
+  }
 
-    function testMailStructHash() public view {
-        Mail memory m = Mail({
-            from: Person({ wallet: address(0xA), name: "Alice" }),
-            to:   Person({ wallet: address(0xB), name: "Bob"   }),
-            contents: "hello"
-        });
+  function testMailStructHash() public view {
+    Mail memory m = Mail({
+      from: Person({ wallet: address(0xA), name: "Alice" }),
+      to: Person({ wallet: address(0xB), name: "Bob" }),
+      contents: "hello"
+    });
 
-        bytes32 hash = cheats.eip712HashStruct("Mail", abi.encode(m));
-        // hash now equals the standard EIP-712 struct hash for `m`.
-    }
+    bytes32 hash = cheats.eip712HashStruct("Mail", abi.encode(m));
+    // hash now equals the standard EIP-712 struct hash for `m`.
+  }
 }
 ```
 

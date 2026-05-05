@@ -6,8 +6,10 @@ description: eip712HashStruct cheatcode documentation
 ### Signature
 
 ```solidity
-function eip712HashStruct(string calldata typeName, bytes calldata abiEncodedData)
-    external pure returns (bytes32);
+function eip712HashStruct(
+  string calldata typeName,
+  bytes calldata abiEncodedData
+) external pure returns (bytes32);
 ```
 
 ### Description
