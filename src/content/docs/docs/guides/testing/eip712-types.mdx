@@ -73,7 +73,7 @@ interface IEip712Cheats {
 contract Eip712Test is Test {
   IEip712Cheats cheats = IEip712Cheats(address(vm));
 
-  function testMailTypeHash() public view {
+  function testMailTypeHash() public {
     bytes32 expected = keccak256(
       bytes(
         "Mail(Person from,Person to,string contents)"
@@ -83,7 +83,7 @@ contract Eip712Test is Test {
     assertEq(cheats.eip712HashType("Mail"), expected);
   }
 
-  function testMailStructHash() public view {
+  function testMailStructHash() public {
     Mail memory m = Mail({
       from: Person({ wallet: address(0xA), name: "Alice" }),
       to: Person({ wallet: address(0xB), name: "Bob" }),
