@@ -19,7 +19,7 @@
       ]
     },
     {
-      "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).*)",
+      "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).+)",
       "headers": [
         { "key": "Vary", "value": "Accept" },
         {
