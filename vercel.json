@@ -10,11 +10,23 @@
     },
     {
       "source": "/",
-      "headers": [{ "key": "Vary", "value": "Accept" }]
+      "headers": [
+        { "key": "Vary", "value": "Accept" },
+        {
+          "key": "Link",
+          "value": "</index.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
     },
     {
-      "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).*)",
-      "headers": [{ "key": "Vary", "value": "Accept" }]
+      "source": "/:path((?!.*\\.md$)(?!.*\\.html$)(?!.*\\.txt$).+)",
+      "headers": [
+        { "key": "Vary", "value": "Accept" },
+        {
+          "key": "Link",
+          "value": "</:path.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
     }
   ],
   "trailingSlash": false,
