@@ -14,7 +14,7 @@ function eip712HashStruct(
 
 ### Description
 
-Returns the EIP-712 **struct hash** for a registered struct name (e.g., `"Mail"`) and its `abi.encode`-d value.
+Returns the EIP-712 **struct hash** for a registered struct name (e.g. `"Mail"`) and its `abi.encode`-d value.
 
 This is **not** the final signable digest. To produce the digest that `ecrecover` expects, combine the struct hash with a domain separator: `keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash))`. Alternatively, use [`eip712HashTypedData`](/docs/reference/cheatcodes/utilities/eip712-hash-typed-data) to compute the complete digest in one call.
 
