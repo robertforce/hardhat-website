@@ -98,4 +98,4 @@ contract Eip712Test is Test {
 
 ## Duplicate struct names
 
-Each struct name must map to exactly one definition across the collected set. If two different structs share a name, the test run fails with error `HHE817`. To fix this, rename one of the structs or narrow your `include`/`exclude` globs. Identical definitions across multiple build infos are deduplicated silently.
+Each struct name must map to exactly one definition across the collected set. If two different structs share a name, the test run fails with error `HHE818`. To fix this, rename one of the structs or narrow your `include`/`exclude` globs. Identical definitions across multiple build infos are deduplicated silently.
