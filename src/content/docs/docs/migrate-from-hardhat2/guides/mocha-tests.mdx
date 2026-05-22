@@ -17,7 +17,7 @@ If you keep your tests as CommonJS, you can't `require("hardhat")` at the top le
 describe("suite", function () {
   let hre;
   before(async function () {
-    hre = await import("hardhat");
+    ({ default: hre } = await import("hardhat"));
   });
 
   it("some test", async function () {

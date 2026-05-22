@@ -90,7 +90,7 @@ You can't `require("hardhat")` at the top level of a `.cjs` file, because Hardha
 
 ```js
 async function main() {
-  const hre = await import("hardhat");
+  const { default: hre } = await import("hardhat");
   // use hre
 }
 
