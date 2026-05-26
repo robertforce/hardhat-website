@@ -194,6 +194,16 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
     ],
   },
   {
+    label: "Migrate from Foundry",
+    id: "migrate-from-foundry",
+    link: "/docs/migrate-from-foundry/",
+    items: [
+      {
+        slug: "docs/migrate-from-foundry",
+      },
+    ],
+  },
+  {
     label: "Plugin development",
     id: "plugin-development",
     link: "/docs/plugin-development/",

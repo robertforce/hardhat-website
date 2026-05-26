@@ -75,3 +75,6 @@ secp
 unwritable
 llm
 llms
+lockfiles
+gitmodules
+resumability
