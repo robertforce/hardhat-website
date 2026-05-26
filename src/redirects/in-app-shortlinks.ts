@@ -25,6 +25,5 @@ export default [
   ["/getting-started", "/docs/getting-started"],
   ["/foundry-compatibility", "/docs/reference/foundry-compatibility"],
   ["/migrate-from-hardhat2", "/docs/migrate-from-hardhat2"],
-  // Bump this target to a dedicated CommonJS→ESM guide once it lands.
-  ["/migrate-to-esm", "/docs/migrate-from-hardhat2/guides/mocha-tests#esm"],
+  ["/migrate-to-esm", "/docs/migrate-from-hardhat2/guides/migrate-to-esm"],
 ] satisfies Redirects;
