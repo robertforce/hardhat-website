@@ -5,8 +5,6 @@ sidebar:
   label: Overview
 ---
 
-import { TabItem, Tabs } from "@astrojs/starlight/components";
-import { Code } from "@astrojs/starlight/components";
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
 
@@ -64,24 +62,9 @@ Before making any changes, prepare your project so that installing and running H
     mv hardhat.config.js hardhat.config.old.js
     ```
 
-5.  **Make your project ESM**
+5.  **Convert your project to ESM**
 
-    {/* prettier-ignore */}
-    <Tabs syncKey="package-manager">
-      <TabItem label="npm" icon="npm">
-        <Code code="npm pkg set type=module" lang="sh" frame="terminal" />
-      </TabItem>
-      <TabItem label="pnpm" icon="pnpm">
-        <Code code="pnpm pkg set type=module" lang="sh" frame="terminal" />
-      </TabItem>
-      <TabItem label="Yarn" icon="seti:yarn">
-        <Code code={`# yarn doesn't have a command for this\nnpm pkg set type=module`} lang="sh" frame="terminal" />
-      </TabItem>
-    </Tabs>
-
-6.  **(Optional) Adapt your `tsconfig.json`**
-
-    If you have a `tsconfig.json` file, make sure that `compilerOptions.module` is set to an ESM-compatible value like `"node16"`.
+    Hardhat 3 requires your project to be an ES module. Follow the [ESM migration guide](/docs/migrate-from-hardhat2/guides/migrate-to-esm) to set `"type": "module"` in your `package.json`, update your `tsconfig.json` if you have one, and convert any files you need to.
 
 ## Setting up Hardhat 3
 
