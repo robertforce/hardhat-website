@@ -186,8 +186,8 @@ Foundry installs dependencies as git submodules under `lib/` and exposes them th
 2.  **Reconcile remappings**
 
     Hardhat 3 reads `remappings.txt` files automatically, including the ones inside npm packages and git submodules, so your existing entries keep working. Once a dependency is installed via npm, you can either:
-    - Update the remapping target to point at the npm package (e.g. `@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/`), or
-    - Remove the remapping and update your `import` statements to use the npm path directly.
+    - **Keep your existing imports** by updating the remapping target within `remappings.txt` to point at the npm package (e.g. `@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/`), or
+    - **Drop the remapping entirely** and rewrite your `import` statements to use the npm package path (e.g. `import "@openzeppelin/contracts/access/Ownable.sol"`) — Hardhat resolves npm imports natively, no remapping required.
 
     If your project relies on `forge`-generated remappings (no `remappings.txt` is checked in), install the [`@nomicfoundation/hardhat-foundry`](/docs/reference/foundry-compatibility#the-nomicfoundationhardhat-foundry-plugin) plugin and add it to your `plugins` array.
 
