@@ -154,6 +154,12 @@ Port the compiler settings and project layout from `foundry.toml` so Hardhat fin
     });
     ```
 
+    :::note
+
+    Setting `sources` to `./src` tells Hardhat where to find your contracts, but it doesn't make `import "src/Foo.sol"` resolve automatically the way Foundry does. If your code uses root-relative imports like that, see [Using absolute imports](/docs/cookbook/absolute-imports) — a one-line `remappings.txt` covers it.
+
+    :::
+
 3.  **Compile your contracts**
 
     Run the `build` task to verify that the config is working:
