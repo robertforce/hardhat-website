@@ -184,9 +184,9 @@ Foundry installs dependencies as git submodules under `lib/` and exposes them th
 
     If your project relies on `forge`-generated remappings (no `remappings.txt` is checked in), install the [`@nomicfoundation/hardhat-foundry`](/docs/reference/foundry-compatibility#the-nomicfoundationhardhat-foundry-plugin) plugin and add it to your `plugins` array.
 
-3.  **Remove `lib/` once everything builds**
+3.  **Optionally remove `lib/` once everything builds**
 
-    Re-run `hardhat build`. Once it succeeds, you can delete `lib/` and the corresponding `.gitmodules` entries.
+    Re-run `hardhat build` to confirm the npm-resolved dependencies work. If all of your dependencies have been migrated to npm, you can delete `lib/` and the corresponding `.gitmodules` entries.
 
 ## Migrating Solidity tests
 
