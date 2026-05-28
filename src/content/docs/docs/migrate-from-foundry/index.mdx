@@ -14,6 +14,9 @@ Hardhat 3 is a full replacement for Foundry: it runs Solidity tests, understands
 
 On top of that compatibility, Hardhat 3 brings capabilities Foundry doesn't:
 
+- **An extensible stack** — with a [plugin system](/docs/plugins/official-plugins)
+  and integration with the TypeScript ecosystem, you can bring your own opinions
+  to deployment, verification and other workflows.
 - **Dependencies managed with NPM** — Hardhat supports both git submodules and npm dependencies. You have the option to keep your existing `lib/` git submodules, and you can also install dependencies as npm packages to get lockfiles, semver, and native support for transitive dependencies.
 - **Multichain testing** — run the same Solidity tests against a simulated Ethereum L1 or OP Stack chain by switching the chain type, so you catch chain-specific behavior before you deploy.
 - **The right test for the job** — write fast Solidity unit tests for contract logic, exactly as you do today, and reach for TypeScript for integration tests (with viem or ethers) when you need to test against a full network, or to build custom scripts in a full-featured language.
