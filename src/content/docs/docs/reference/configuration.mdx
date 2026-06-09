@@ -292,6 +292,25 @@ If write access to a directory is needed, please make sure that it doesn't conta
   - `includePushBytes`: The flag indicating whether to include push bytes values. Defaults to true.
   - `shrinkRunLimit`: The maximum number of attempts to shrink a failed sequence. The shrink process is disabled if set to 0. Defaults to 5000.
 
+### Coverage configuration
+
+Hardhat has built-in [code coverage](/docs/guides/testing/code-coverage). You can use the `coverage` entry to configure it:
+
+```ts
+// hardhat.config.ts
+import { defineConfig } from "hardhat/config";
+
+export default defineConfig({
+  coverage: {
+    skipFiles: ["**/mocks/**", "contracts/Migrations.sol"],
+  },
+});
+```
+
+The following options are available for configuring coverage:
+
+- `skipFiles`: An array of glob patterns matching Solidity files to exclude from coverage during a `--coverage` run. A matching file is left uninstrumented, so it doesn't appear in the coverage report. Patterns are matched against each file's source name — its project-relative path as shown in the coverage report, e.g. `contracts/Migrations.sol` — not its absolute path. Supports `*`, `**`, and `?` wildcards. Defaults to `[]`.
+
 ## Toolbox options
 
 Hardhat provides two official toolboxes, each with a set of plugins meant to simplify setup: [`hardhat-toolbox-viem`](/docs/plugins/hardhat-toolbox-viem) and [`hardhat-toolbox-mocha-ethers`](/docs/plugins/hardhat-toolbox-mocha-ethers).
