@@ -19,6 +19,7 @@ export default [
   ["/docs", "/docs/getting-started"],
   ["/ignition", "/ignition/docs"],
   ["/ignition/docs", "/ignition/docs/getting-started"],
+  ["/hardhat-2-end-of-life", "/docs/reference/hardhat-2-end-of-life"],
   // This is a temporary workaround because the link validator can't
   // find the #hashes of plugins and fail
   [
