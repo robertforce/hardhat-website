@@ -9,13 +9,12 @@ import { TabItem, Tabs } from "@astrojs/starlight/components";
 import { Code } from "@astrojs/starlight/components";
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
+import RunRemote from "@hh/RunRemote.astro";
 
 :::tip
 If you use an AI coding agent, you can install our Foundry to Hardhat migration skill to have it aid your migration:
 
-```sh
-npx skills add nomicfoundation/hardhat-skills --skill migrate-foundry-to-hardhat
-```
+<RunRemote command="skills add nomicfoundation/hardhat-skills --skill migrate-foundry-to-hardhat" />
 
 :::
 
