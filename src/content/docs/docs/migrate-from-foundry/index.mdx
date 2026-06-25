@@ -9,6 +9,14 @@ import { TabItem, Tabs } from "@astrojs/starlight/components";
 import { Code } from "@astrojs/starlight/components";
 import Install from "@hh/Install.astro";
 import Run from "@hh/Run.astro";
+import RunRemote from "@hh/RunRemote.astro";
+
+:::tip
+If you use an AI coding agent, you can install our Foundry to Hardhat migration skill to have it aid your migration:
+
+<RunRemote command="skills add nomicfoundation/hardhat-skills --skill migrate-foundry-to-hardhat" />
+
+:::
 
 Hardhat 3 is a full replacement for Foundry: it runs Solidity tests, understands `remappings.txt`, and can build contracts laid out the way Foundry expects.
 
