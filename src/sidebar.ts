@@ -118,6 +118,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
           { slug: "docs/reference/stability-guarantees" },
           { slug: "docs/reference/nodejs-support" },
           { slug: "docs/reference/errors" },
+          { slug: "docs/reference/hardhat-2-end-of-life" },
         ],
       },
       {
@@ -190,6 +191,16 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
         autogenerate: {
           directory: "/docs/migrate-from-hardhat2/guides",
         },
+      },
+    ],
+  },
+  {
+    label: "Migrate from Foundry",
+    id: "migrate-from-foundry",
+    link: "/docs/migrate-from-foundry/",
+    items: [
+      {
+        slug: "docs/migrate-from-foundry",
       },
     ],
   },
