@@ -202,6 +202,12 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
       {
         slug: "docs/migrate-from-foundry",
       },
+      {
+        label: "Guides",
+        autogenerate: {
+          directory: "/docs/migrate-from-foundry/guides",
+        },
+      },
     ],
   },
   {
