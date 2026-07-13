@@ -66,6 +66,7 @@ For example, if you augment the `hardhat/types/network` module and then redeclar
 
 ```ts
 import "hardhat/types/network";
+
 declare module "hardhat/types/network" {
   export interface NetworkConnection {
     myProp: string;
@@ -95,36 +96,11 @@ This tells TypeScript to apply your type extensions without generating a runtime
 
 ### Writing a correct `type-extensions.ts` file
 
-Your `type-extensions.ts` file must follow these rules for `export type *` to work correctly:
+Your `type-extensions.ts` file should follow these rules for `export type *` to work correctly:
 
-- **No side effects.** The file must not execute any runtime code — only type-level declarations are allowed.
-- **No exported types.** Do not export any types. Only use `declare module` augmentations.
-- **Use `export {};` as the module marker.** Because the file has no imports, TypeScript treats it as a script rather than a module by default. Adding `export {};` forces module mode without introducing a runtime import. Alternatively, set [`"moduleDetection": "force"`](https://www.typescriptlang.org/tsconfig/#moduleDetection) in your `tsconfig.json`.
-
-A minimal `type-extensions.ts` looks like this:
-
-```ts
-export {};
-
-declare module "hardhat/types/network" {
-  export interface NetworkConnection {
-    myProp: string;
-  }
-}
-```
-
-If your plugin depends on another Hardhat plugin's type extensions, chain the re-export:
-
-```ts
-export {};
-export type * from "other-hardhat-plugin";
-
-declare module "hardhat/types/network" {
-  export interface NetworkConnection {
-    myProp: string;
-  }
-}
-```
+- **No side effects**: the file should not execute any runtime code.
+- **No exported types**: do not export any types, only use `declare module` augmentations.
+- **Use `export {};` as the module marker**: as the file has no imports, TypeScript treats it as a script rather than a module by default. Adding `export {};` forces module mode without introducing a runtime import. Alternatively, set [`"moduleDetection": "force"`](https://www.typescriptlang.org/tsconfig/#moduleDetection) in your `tsconfig.json`.
 
 ## Learn more
 
