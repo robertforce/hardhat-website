@@ -91,7 +91,7 @@ To make TypeScript aware of your type extensions, add a type-only re-export in y
 export type * from "./type-extensions.js";
 ```
 
-This tells TypeScript to apply your type extensions without generating a runtime `import` statement in the compiled JavaScript. The older `import "./type-extensions.js"` pattern also works but produces an unnecessary side-effect import in the compiled output.
+This tells TypeScript to apply your type extensions without generating a runtime `import` statement in the compiled JavaScript.
 
 ### Writing a correct `type-extensions.ts` file
 
