@@ -102,6 +102,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
           { slug: "docs/reference/network-manager" },
           { slug: "docs/reference/edr-simulated-networks" },
           { slug: "docs/reference/op-stack-support" },
+          { slug: "docs/reference/amsterdam-support" },
           { slug: "docs/reference/json-rpc-methods" },
           { slug: "docs/reference/artifacts" },
           { slug: "docs/reference/console-log" },
