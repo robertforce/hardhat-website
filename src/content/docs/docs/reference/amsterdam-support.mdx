@@ -62,9 +62,9 @@ Under [EIP-7708](https://eips.ethereum.org/EIPS/eip-7708), ETH transfers emit a 
 
 - **address**: the system address `0xfffffffffffffffffffffffffffffffffffffffe`
 - **topics[0]**: `keccak256("Transfer(address,address,uint256)")`
-- **topics[1]**: the sender, zero-padded to 32 bytes
-- **topics[2]**: the recipient, zero-padded to 32 bytes
-- **data**: the amount in wei, as a big-endian `uint256`
+- **topics[1]**: the sender
+- **topics[2]**: the recipient
+- **data**: the amount in wei
 
 This means plain ETH transfers — which previously produced no logs — now emit one. The following is a minimal script that sends 1 ETH and prints the resulting log using viem:
 
