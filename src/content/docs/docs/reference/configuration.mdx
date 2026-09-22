@@ -324,8 +324,6 @@ When using `profiles`, a `default` profile is always required.
 
 Profile names can contain letters, numbers, underscores, and dashes. They can't be `fuzz`, `invariant`, `isolate`, `evmVersion`, or `allowInternalExpectRevert`, as those would be ambiguous with [inline configuration](/docs/guides/testing/inline-configuration) keys.
 
-Like Build Profiles, each Test Profile is resolved independently: profiles don't inherit values from `default`.
-
 ### Coverage configuration
 
 Hardhat has built-in [code coverage](/docs/guides/testing/code-coverage). You can use the `coverage` entry to configure it:

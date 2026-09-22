@@ -38,6 +38,31 @@ function invariantBalanceAlwaysPositive() public {
 }
 ```
 
+## Scoping an override to a Test Profile
+
+An unprefixed override applies under every [Test Profile](/docs/guides/testing/test-profiles). To apply it under a single profile, prefix the key with the profile's name:
+
+```solidity
+/// hardhat-config: ci.fuzz.runs = 10000
+function testTransferFuzz(uint256 amount) public {
+  // ...
+}
+```
+
+Combine both forms on the same test to use different values. When its profile is selected, the prefixed override takes precedence over the unprefixed override for the same key:
+
+```solidity
+/// hardhat-config: fuzz.runs = 100
+/// hardhat-config: ci.fuzz.runs = 10000
+function testTransferFuzz(uint256 amount) public {
+  // ...
+}
+```
+
+This runs 10000 iterations under the `ci` profile, and 100 under any other.
+
+The order of the two lines doesn't matter, and the prefixes are matched exactly as your profiles are named. A prefix that doesn't name a declared profile is an error, so a typo fails whichever profile you run with.
+
 ## Supported configuration keys
 
 Keys with the `fuzz.`/`invariant.` prefix apply only to that test type; the rest apply to the test as a whole and work on both fuzz and invariant tests.
@@ -71,31 +96,6 @@ function testInternalRevert() public {
 }
 ```
 
-## Scoping an override to a Test Profile
-
-An unprefixed override applies under every [Test Profile](/docs/guides/testing/test-profiles). To apply it under a single profile, prefix the key with the profile's name:
-
-```solidity
-/// hardhat-config: ci.fuzz.runs = 10000
-function testTransferFuzz(uint256 amount) public {
-  // ...
-}
-```
-
-Combine both forms on the same test to use different values. When its profile is selected, the prefixed override takes precedence over the unprefixed override for the same key:
-
-```solidity
-/// hardhat-config: fuzz.runs = 100
-/// hardhat-config: ci.fuzz.runs = 10000
-function testTransferFuzz(uint256 amount) public {
-  // ...
-}
-```
-
-This runs 10000 iterations under the `ci` profile, and 100 under any other.
-
-The order of the two lines doesn't matter, and the prefixes are matched exactly as your profiles are named. A prefix that doesn't name a declared profile is an error, so a typo fails whichever profile you run with.
-
 ## Foundry compatibility
 
 Hardhat also accepts the `forge-config:` prefix, so you can keep using it:
@@ -108,4 +108,14 @@ function testTransferFuzz(uint256 amount) public {
 }
 ```
 
-Note that a `default.` prefix means "only under the `default` profile" in Hardhat, while in Foundry it means "under every profile". If you're migrating annotations from Foundry, read the [Foundry migration guide](/docs/migrate-from-foundry).
+The `default.` prefix is the one thing that changes meaning. In Foundry it applies under every profile, because profiles inherit from `default`. In Hardhat it applies only under the `default` profile, so drop it to keep the Foundry behavior:
+
+```solidity del={1} ins={2}
+/// forge-config: default.fuzz.runs = 10000
+/// forge-config: fuzz.runs = 10000
+function testTransferFuzz(uint256 amount) public {
+  // ...
+}
+```
+
+Annotations for other profiles, like `ci.fuzz.runs`, keep their meaning.
