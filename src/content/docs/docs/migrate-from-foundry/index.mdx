@@ -166,7 +166,23 @@ Port the compiler settings and project layout from `foundry.toml` so Hardhat fin
 
     :::
 
-3.  **Compile your contracts**
+3.  **Split your profiles into Build and Test Profiles**
+
+    Foundry uses a single profile to hold both compiler and test settings: a `[profile.ci]` section holds them together. Hardhat splits them in two, so each Foundry profile becomes two Hardhat profiles:
+    - Compiler settings go to a [Build Profile](/docs/guides/writing-contracts/build-profiles) under `solidity.profiles`, selected with `--build-profile`.
+    - Test settings go to a [Test Profile](/docs/guides/testing/test-profiles) under `test.solidity.profiles`, selected with `--test-profile`.
+
+    If you create both profiles for `ci`, select them together with:
+
+    <Run command="hardhat test --build-profile ci --test-profile ci" />
+
+    :::caution
+
+    Hardhat profiles don't inherit from each other. In Foundry, every profile is merged over `[profile.default]`, so a `[profile.ci]` that only sets `optimizer_runs` keeps everything else from `default`. In Hardhat, each profile is resolved on its own, you can share settings between profiles through shared data in your config file (i.e. a variable).
+
+    :::
+
+4.  **Compile your contracts**
 
     Run the `build` task to verify that the config is working:
 
@@ -256,6 +272,36 @@ Hardhat 3's Solidity testing is designed for compatibility with Foundry test sui
     ```
 
     See [the Solidity tests configuration reference](/docs/reference/configuration#solidity-tests-configuration) for the full list of options, including `from`, `txOrigin`, `blockTimestamp`, fork settings, and the `fsPermissions` allowlist that replaces Foundry's `fs_permissions`.
+
+    If you have more than one `foundry.toml` profile, port each one's test settings into [Test Profiles](/docs/guides/testing/test-profiles) under `test.solidity.profiles`, and select them with `--test-profile`. Hardhat profiles don't inherit from `default`, so share the settings they have in common through shared data in your config file:
+
+    ```ts
+    // hardhat.config.ts
+    import { defineConfig } from "hardhat/config";
+
+    const sharedTestSettings = {
+      isolate: true,
+    };
+
+    export default defineConfig({
+      test: {
+        solidity: {
+          profiles: {
+            default: {
+              ...sharedTestSettings,
+              fuzz: { runs: 256 },
+            },
+            ci: {
+              ...sharedTestSettings,
+              fuzz: { runs: 10_000 },
+            },
+          },
+        },
+      },
+    });
+    ```
+
+    If your tests use `forge-config:` annotations, they will keep working. Hardhat supports defaults for all profiles at the root rather than with a `default.` profile. Read the [inline configuration](/docs/guides/testing/inline-configuration) guide to see how they interact with Test Profiles.
 
 4.  **Enable `ffi` and filesystem access if your tests need them**
 
