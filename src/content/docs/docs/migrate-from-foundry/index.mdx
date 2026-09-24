@@ -301,7 +301,7 @@ Hardhat 3's Solidity testing is designed for compatibility with Foundry test sui
     });
     ```
 
-    If your tests use `forge-config:` annotations, they keep working. Read the [inline configuration](/docs/guides/testing/inline-configuration) guide to see how they interact with Test Profiles.
+    If your tests use `forge-config:` annotations, they will keep working. Hardhat supports defaults for all profiles at the root rather than with a `default.` profile. Read the [inline configuration](/docs/guides/testing/inline-configuration) guide to see how they interact with Test Profiles.
 
 4.  **Enable `ffi` and filesystem access if your tests need them**
 

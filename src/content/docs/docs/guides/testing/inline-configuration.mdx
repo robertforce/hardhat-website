@@ -76,8 +76,6 @@ function testTransferFuzz(uint256 amount) public {
 
 This runs 10000 iterations under the `ci` profile, and 100 under any other.
 
-The order of the two lines doesn't matter, and the prefixes are matched exactly as your profiles are named. A prefix that doesn't name a declared profile is an error, so a typo fails whichever profile you run with.
-
 ## Which directive applies
 
 Directives are applied in this order of priority:
@@ -142,7 +140,7 @@ function testTransferFuzz(uint256 amount) public {
 }
 ```
 
-The `default.` prefix is the one thing that changes meaning. In Foundry it applies under every profile, because profiles inherit from `default`. In Hardhat it applies only under the `default` profile, so drop it to keep the Foundry behavior:
+The `default.` prefix is the one thing that changes. In Foundry it applies under every profile, because profiles inherit from `default`. In Hardhat it applies only under the `default` profile, so remove `default` to keep the Foundry behavior:
 
 ```solidity del={1} ins={2}
 /// forge-config: default.fuzz.runs = 10000
@@ -151,5 +149,3 @@ function testTransferFuzz(uint256 amount) public {
   // ...
 }
 ```
-
-Annotations for other profiles, like `ci.fuzz.runs`, keep their meaning.
