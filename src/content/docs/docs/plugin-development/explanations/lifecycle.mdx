@@ -27,7 +27,7 @@ import { ArgumentType } from "hardhat/types/arguments";
 
 import "./type-extensions.js";
 
-const plugin = definePlugin({
+export default definePlugin({
   id: "hardhat-my-plugin",
   hookHandlers: {
     config: () => import("./hooks/config.js"),
