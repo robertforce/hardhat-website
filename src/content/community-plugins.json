@@ -148,6 +148,13 @@
       "authorUrl": "https://github.com/valerioleo",
       "description": "Regenerates deployoor's typed deployers after every compile: deploy with your own viem wallet and keep a JSON record per chain.",
       "tags": ["Deployment", "Testing", "viem", "TypeScript"]
+    },
+    {
+      "name": "hardhat-blockhertz",
+      "author": "Blockhertz",
+      "authorUrl": "https://blockhertz.com",
+      "description": "AI-powered smart contract security auditor — automatically scans Solidity contracts for vulnerabilities and gas optimizations using the Blockhertz AI API",
+      "tags": ["security", "audit", "AI", "solidity", "gas"]
     }
   ]
 }
