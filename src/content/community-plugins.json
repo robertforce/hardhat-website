@@ -155,6 +155,13 @@
       "authorUrl": "https://blockhertz.com",
       "description": "AI-powered smart contract security auditor — automatically scans Solidity contracts for vulnerabilities and gas optimizations using the Blockhertz AI API",
       "tags": ["security", "audit", "AI", "solidity", "gas"]
+    },
+    {
+      "name": "hardhat-gg-optimizer",
+      "author": "GGPAYCOIN",
+      "authorUrl": "https://github.com/GGPAYCOIN",
+      "description": "Gas optimization hints and Solidity vulnerability scanning after every compile, with safe auto-fixes",
+      "tags": ["Gas", "Security", "Optimization"]
     }
   ]
 }
